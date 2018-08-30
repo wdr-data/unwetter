@@ -1,2 +1,2 @@
-# unwetter
-Automatically notify newsroom about warnings from DWD
+# Unwetter
+Automatically notify newsroom about weather warnings from DWD
