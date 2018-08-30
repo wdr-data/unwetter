@@ -1,7 +1,7 @@
 #!/user/bin/env python3.6
 
-from zipfile import ZipFile
 from io import BytesIO
+from zipfile import ZipFile
 
 import iso8601
 import requests
