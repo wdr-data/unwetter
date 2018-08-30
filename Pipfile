@@ -5,6 +5,8 @@ name = "pypi"
 
 [packages]
 requests = "*"
+xmltodict = "*"
+"iso8601" = "*"
 
 [dev-packages]
 

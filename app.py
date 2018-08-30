@@ -3,7 +3,10 @@
 from zipfile import ZipFile
 from io import BytesIO
 
+import iso8601
 import requests
+import xmltodict
+
 
 DWD_URL = 'https://opendata.dwd.de/weather/alerts/cap/DISTRICT_EVENT_STAT/Z_CAP_C_EDZW_LATEST_PVW_STATUS_PREMIUMEVENT_DISTRICT_DE.zip'
 
@@ -20,8 +23,55 @@ def load_dwd_xml_events():
         for name in data_zip.namelist()
     ]
 
+def parse_xml(xml):
+    """
+    Parse event from XML to dictionary
+    """
+    xml_dict = xmltodict.parse(xml)['alert']
+    event = {}
+    fields = {
+        'identifier': 'id',
+        'sender': 'sender',
+        'sent': 'sent',
+        'status': 'status',
+        'msgType' : 'msg_type',
+    }
+    datetime_fields = ['sent']
+    for field_xml, field_json in fields.items():
+        event[field_json] = xml_dict.get(field_xml)
+        if field_json in datetime_fields and event[field_json]:
+            event[field_json] = iso8601.parse_date(event[field_json])
+
+    info_fields = {
+        'event': 'event',
+        'responseType': 'response_type',
+        'urgency': 'urgency',
+        'severity': 'severity',
+        'certainty': 'certainty',
+        'effective': 'effective',
+        'onset': 'onset',
+        'expires': 'expires',
+        'headline': 'headline',
+        'description': 'description',
+        'instruction': 'instruction',       
+    }
+
+    datetime_fields = ['effective', 'onset', 'expires']
+
+    for field_xml, field_json in info_fields.items():
+        event[field_json] = xml_dict['info'].get(field_xml)
+        if field_json in datetime_fields and event[field_json]:
+            event[field_json] = iso8601.parse_date(event[field_json])
+
+    if isinstance(xml_dict['info']['area'], dict):
+        xml_dict['info']['area'] = [xml_dict['info']['area']]
+    event['areas'] = [area['areaDesc'] for area in xml_dict['info']['area']]
+
+    return event
+
 def main():
-    pass
+    from pprint import pprint
+    pprint([parse_xml(event) for event in load_dwd_xml_events()])
 
 if __name__ == '__main__':
     main()
