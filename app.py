@@ -10,6 +10,24 @@ import xmltodict
 
 
 DWD_URL = 'https://opendata.dwd.de/weather/alerts/cap/DISTRICT_EVENT_STAT/Z_CAP_C_EDZW_LATEST_PVW_STATUS_PREMIUMEVENT_DISTRICT_DE.zip'
+STATE_IDS = {
+    1: 'SH',
+    2: 'HH',
+    3: 'NI',
+    4: 'HB',
+    5: 'NW',
+    6: 'HE',
+    7: 'RP',
+    8: 'BW',
+    9: 'BY',
+    10: 'SL',
+    11: 'BE',
+    12: 'BB',
+    13: 'MV',
+    14: 'SN',
+    15: 'ST',
+    16: 'TH',
+}
 
 mongo_client = MongoClient()
 mongo_db = mongo_client.unwetter
@@ -70,7 +88,27 @@ def parse_xml(xml):
 
     if isinstance(xml_dict['info']['area'], dict):
         xml_dict['info']['area'] = [xml_dict['info']['area']]
-    event['areas'] = [area['areaDesc'] for area in xml_dict['info']['area']]
+
+    states = set()
+    
+    for area in xml_dict['info']['area']:
+        if isinstance(area['geocode'], dict):
+            area['geocode'] = [area['geocode']]
+        for geocode in area['geocode']:
+            if geocode['valueName'] == 'WARNCELLID':
+                area['_warn_cell_id'] = geocode['value']
+                state_id = int(geocode['value'][1:3])
+                states.add(state_id)
+
+    event['areas'] = [
+        {
+            'name': area['areaDesc'],
+            'warn_cell_id': area['_warn_cell_id'],
+        } 
+        for area in xml_dict['info']['area']
+    ]
+
+    event['states'] = [STATE_IDS[state_id] for state_id in states]
 
     return event
 
