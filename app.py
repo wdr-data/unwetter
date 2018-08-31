@@ -4,11 +4,16 @@ from io import BytesIO
 from zipfile import ZipFile
 
 import iso8601
+from pymongo import MongoClient
 import requests
 import xmltodict
 
 
 DWD_URL = 'https://opendata.dwd.de/weather/alerts/cap/DISTRICT_EVENT_STAT/Z_CAP_C_EDZW_LATEST_PVW_STATUS_PREMIUMEVENT_DISTRICT_DE.zip'
+
+mongo_client = MongoClient()
+mongo_db = mongo_client.unwetter
+collection = mongo_db.events
 
 def load_dwd_xml_events():
     """
@@ -70,8 +75,16 @@ def parse_xml(xml):
     return event
 
 def main():
+
+    events = [parse_xml(event) for event in load_dwd_xml_events()]
+
     from pprint import pprint
-    pprint([parse_xml(event) for event in load_dwd_xml_events()])
+    
+    for event in events:
+        if collection.count_documents({'id': event['id']}):
+            continue
+        collection.insert_one(event)
+        pprint(event)
 
 if __name__ == '__main__':
     main()
