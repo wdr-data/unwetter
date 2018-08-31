@@ -40,7 +40,7 @@ app = Flask(__name__)
 try:
     MONGODB_URI = os.environ['MONGODB_URI']
     mongo_client = MongoClient(MONGODB_URI)
-    mongo_db = client.get_database()
+    mongo_db = mongo_client.get_database()
 except KeyError:
     mongo_db = MongoClient().unwetter
 
