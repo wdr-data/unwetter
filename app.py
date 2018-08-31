@@ -5,7 +5,7 @@ import os
 from zipfile import ZipFile
 
 from feedgen.feed import FeedGenerator 
-from flask import Flask
+from flask import Flask, Response
 import iso8601
 import pymongo
 from pymongo import MongoClient
@@ -180,7 +180,7 @@ def feed():
         fe.title(make_title(event))
         fe.description(make_description(event))
     
-    return fg.rss_str(pretty=True)
+    return Response(fg.rss_str(pretty=True), mimetype='application/rss+xml')
 
 @app.route('/test')
 def test():
