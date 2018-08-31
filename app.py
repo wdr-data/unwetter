@@ -37,8 +37,13 @@ STATE_IDS = {
 
 app = Flask(__name__)
 
-mongo_client = MongoClient(os.environ.get('MONGODB_URI'))
-mongo_db = mongo_client.unwetter
+try:
+    MONGODB_URI = os.environ['MONGODB_URI']
+    mongo_client = MongoClient(MONGODB_URI)
+    mongo_db = client.get_database()
+except KeyError:
+    mongo_db = MongoClient().unwetter
+
 collection = mongo_db.events
 
 def load_dwd_xml_events():
