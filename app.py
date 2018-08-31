@@ -12,6 +12,8 @@ from pymongo import MongoClient
 import requests
 import xmltodict
 
+from wina_template import WINA_TEMPLATE
+
 
 DWD_URL = 'https://opendata.dwd.de/weather/alerts/cap/DISTRICT_EVENT_STAT/Z_CAP_C_EDZW_LATEST_PVW_STATUS_PREMIUMEVENT_DISTRICT_DE.zip'
 SEVERITY_FILTER = ['Moderate', 'Severe', 'Extreme']  # Which degrees of severity to track
@@ -34,6 +36,7 @@ STATE_IDS = {
     15: 'ST',
     16: 'TH',
 }
+URL_BASE = 'https://unwetter-bot.herokuapp.com/'
 
 app = Flask(__name__)
 
@@ -155,7 +158,8 @@ Warnstufe: {severities[event['severity']]}
 Orte: {', '.join(area['name'] for area in event['areas'])}
 Gültig von {event['onset'].strftime('%d.%m.%Y %H:%M:%S')} bis {event['expires'].strftime('%d.%m.%Y %H:%M:%S') if event['expires'] else 'Nicht angegeben'}
 Warnmeldung: {event['description']}
-    '''.strip().replace('\n', '<br>')
+    '''.strip()
+
 
 @app.route('/feed.rss')
 def feed():
@@ -178,9 +182,21 @@ def feed():
         fe = fg.add_entry()
         fe.id(event['id'])
         fe.title(make_title(event))
-        fe.description(make_description(event))
+        fe.link(href=f'{URL_BASE}wina/{event["id"]}')
+        fe.description(make_description(event).replace('\n', '<br>'))
     
     return Response(fg.rss_str(pretty=True), mimetype='application/rss+xml')
+
+
+@app.route('/wina/<id>')
+def wina(id):
+    event = collection.find_one({'id': id})
+    sent = event['sent'].strftime('%Y%m%dT%H%M%S,000')  # 20180827T130547,000
+    wina = WINA_TEMPLATE.format(sent=sent, title=make_title(event), text=make_description(event))
+    r = Response(wina.encode('iso-8859-1', errors='xmlcharrefreplace'), mimetype='application/xml')
+    r.headers['Content-Type'] = "text/xml; charset=iso-8859-1"
+    return r
+
 
 @app.route('/test')
 def test():
