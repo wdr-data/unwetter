@@ -16,7 +16,7 @@ from wina_template import WINA_TEMPLATE
 
 
 DWD_URL = 'https://opendata.dwd.de/weather/alerts/cap/DISTRICT_EVENT_STAT/Z_CAP_C_EDZW_LATEST_PVW_STATUS_PREMIUMEVENT_DISTRICT_DE.zip'
-SEVERITY_FILTER = ['Moderate', 'Severe', 'Extreme']  # Which degrees of severity to track
+SEVERITY_FILTER = ['Minor', 'Moderate', 'Severe', 'Extreme']  # Which degrees of severity to track
 STATES_FILTER = ['NW', 'BY', 'BW']  # Which states to track
 STATE_IDS = {
     1: 'SH',
