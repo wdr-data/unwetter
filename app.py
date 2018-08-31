@@ -1,6 +1,7 @@
 #!/user/bin/env python3.6
 
 from io import BytesIO
+import os
 from zipfile import ZipFile
 
 from feedgen.feed import FeedGenerator 
@@ -36,7 +37,7 @@ STATE_IDS = {
 
 app = Flask(__name__)
 
-mongo_client = MongoClient()
+mongo_client = MongoClient(os.environ.get('MONGO_URI'))
 mongo_db = mongo_client.unwetter
 collection = mongo_db.events
 
