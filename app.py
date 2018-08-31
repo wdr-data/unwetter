@@ -3,13 +3,18 @@
 from io import BytesIO
 from zipfile import ZipFile
 
+from feedgen.feed import FeedGenerator 
+from flask import Flask
 import iso8601
+import pymongo
 from pymongo import MongoClient
 import requests
 import xmltodict
 
 
 DWD_URL = 'https://opendata.dwd.de/weather/alerts/cap/DISTRICT_EVENT_STAT/Z_CAP_C_EDZW_LATEST_PVW_STATUS_PREMIUMEVENT_DISTRICT_DE.zip'
+SEVERITY_FILTER = ['Moderate', 'Severe', 'Extreme']  # Which degrees of severity to track
+STATES_FILTER = ['NW', 'BY']  # Which states to track
 STATE_IDS = {
     1: 'SH',
     2: 'HH',
@@ -28,6 +33,8 @@ STATE_IDS = {
     15: 'ST',
     16: 'TH',
 }
+
+app = Flask(__name__)
 
 mongo_client = MongoClient()
 mongo_db = mongo_client.unwetter
@@ -118,7 +125,58 @@ def clear_db():
     """
     collection.drop()
 
-def main():
+def make_title(event):
+    if event['msg_type'] == 'Alert':
+        prefix = '🚨 Neue Meldung'
+    elif event['msg_type'] == 'Update':
+        prefix = '🔁 Meldung aktualsiert'
+    elif event['msg_type'] == 'Cancel':
+        prefix = '🚫 Meldung aufgehoben'
+    else:
+        prefix = '⁉️ Unbekannter Meldungstyp'
+    
+    return f'{prefix}: {event["headline"]}'     
+
+def make_description(event):
+    severities = {
+        'Minor': 'Wetterwarnung',
+        'Moderate': 'Markante Wetterwarnung',
+        'Severe': '🔴 Amtliche Unwetterwarnung',
+        'Extreme': '🔴 Amtliche Extreme Unwetterwarnung',
+    }
+    return f'''
+Warnstufe: {severities[event['severity']]} 
+Orte: {', '.join(area['name'] for area in event['areas'])}
+Gültig von {event['onset'].strftime('%d.%m.%Y %H:%M:%S')} bis {event['expires'].strftime('%d.%m.%Y %H:%M:%S') if event['expires'] else 'Nicht angegeben'}
+Warnmeldung: {event['description']}
+    '''.strip().replace('\n', '<br>')
+
+@app.route('/feed.rss')
+def feed():
+    update_db()
+    fg = FeedGenerator()
+    fg.title('Unwetter Testfeed')
+    fg.link( href='https://www.dwd.de/DE/wetter/warnungen/warnWetter_node.html', rel='alternate' )
+    fg.subtitle('This is a test feed!')
+    fg.language('de')
+    filter = { 
+        'severity': {'$in': SEVERITY_FILTER}, 
+    }
+    if len(STATES_FILTER) == 1: 
+        filter['states'] = STATES_FILTER[0]
+    else:
+        filter['$or'] = [{'states': state} for state in STATES_FILTER]
+    
+    # Iterate over the most recent 50 events matching filter
+    for event in collection.find(filter).sort([('sent', pymongo.DESCENDING)]).limit(50):
+        fe = fg.add_entry()
+        fe.id(event['id'])
+        fe.title(make_title(event))
+        fe.description(make_description(event))
+    
+    return fg.rss_str(pretty=True)
+
+def update_db():
     
     events = [parse_xml(event) for event in load_dwd_xml_events()]
 
@@ -131,4 +189,4 @@ def main():
         pprint(event)
 
 if __name__ == '__main__':
-    main()
+    update_db()

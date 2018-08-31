@@ -8,6 +8,8 @@ requests = "*"
 xmltodict = "*"
 "iso8601" = "*"
 pymongo = "*"
+feedgen = "*"
+flask = "*"
 
 [dev-packages]
 
