@@ -142,7 +142,7 @@ def make_title(event):
     if event['msg_type'] == 'Alert':
         prefix = '🚨 Neue Meldung'
     elif event['msg_type'] == 'Update':
-        prefix = '🔁 Meldung aktualsiert'
+        prefix = '🔁 Meldung aktualisiert'
     elif event['msg_type'] == 'Cancel':
         prefix = '🚫 Meldung aufgehoben'
     else:
