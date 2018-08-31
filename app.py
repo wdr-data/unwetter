@@ -49,6 +49,7 @@ except KeyError:
 
 collection = mongo_db.events
 
+
 def load_dwd_xml_events():
     """
     Load ZIP-file from DWD OpenData-API, unzip it, return list of events in XML
@@ -61,6 +62,7 @@ def load_dwd_xml_events():
         data_zip.read(name).decode('utf-8') 
         for name in data_zip.namelist()
     ]
+
 
 def parse_xml(xml):
     """
@@ -128,11 +130,13 @@ def parse_xml(xml):
 
     return event
 
+
 def clear_db():
     """
     Reset database
     """
     collection.drop()
+
 
 def make_title(event):
     if event['msg_type'] == 'Alert':
@@ -144,7 +148,8 @@ def make_title(event):
     else:
         prefix = '⁉️ Unbekannter Meldungstyp'
     
-    return f'{prefix}: {event["headline"]}'     
+    return f'{prefix}: {event["headline"]}'
+
 
 def make_description(event):
     severities = {
