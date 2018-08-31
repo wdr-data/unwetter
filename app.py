@@ -37,7 +37,7 @@ STATE_IDS = {
 
 app = Flask(__name__)
 
-mongo_client = MongoClient(os.environ.get('MONGO_URI'))
+mongo_client = MongoClient(os.environ.get('MONGODB_URI'))
 mongo_db = mongo_client.unwetter
 collection = mongo_db.events
 
@@ -176,6 +176,10 @@ def feed():
         fe.description(make_description(event))
     
     return fg.rss_str(pretty=True)
+
+@app.route('/test')
+def test():
+    return 'OK'
 
 def update_db():
     
