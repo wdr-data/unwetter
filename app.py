@@ -112,8 +112,14 @@ def parse_xml(xml):
 
     return event
 
-def main():
+def clear_db():
+    """
+    Reset database
+    """
+    collection.drop()
 
+def main():
+    
     events = [parse_xml(event) for event in load_dwd_xml_events()]
 
     from pprint import pprint
