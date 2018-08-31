@@ -170,9 +170,11 @@ Warnmeldung: {event['description']}
 def feed():
     update_db()
     fg = FeedGenerator()
+    fg.id('https://unwetter-bot.herokuapp.com/')
     fg.title('Unwetter Testfeed')
-    fg.link( href='https://www.dwd.de/DE/wetter/warnungen/warnWetter_node.html', rel='alternate' )
+    fg.link(href='https://www.dwd.de/DE/wetter/warnungen/warnWetter_node.html', rel='alternate')
     fg.subtitle('This is a test feed!')
+    fg.link(href='https://unwetter-bot.herokuapp.com/feed.rss', rel='self')
     fg.language('de')
     filter = { 
         'severity': {'$in': SEVERITY_FILTER}, 
