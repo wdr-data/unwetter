@@ -10,6 +10,7 @@ xmltodict = "*"
 pymongo = "*"
 feedgen = "*"
 flask = "*"
+gunicorn = "*"
 
 [dev-packages]
 
