@@ -216,7 +216,6 @@ def update_db():
     from pprint import pprint
     
     for event in events:
-        event['id'] += 'foo'
         if collection.count_documents({'id': event['id']}):
             continue
         collection.insert_one(event)
