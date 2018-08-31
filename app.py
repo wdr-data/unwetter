@@ -190,9 +190,7 @@ def feed():
         fe.link(href=f'{URL_BASE}wina/{event["id"]}')
         fe.description(make_description(event).replace('\n', '<br>'))
     
-    r = Response(fg.rss_str(pretty=True), mimetype='application/rss+xml')
-    r.headers['Content-Type'] = "text/xml; charset=utf-8"
-    return r
+    return Response(fg.rss_str(pretty=True), mimetype='application/rss+xml')
 
 
 @app.route('/wina/<id>')
