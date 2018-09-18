@@ -1,5 +1,6 @@
 #!/user/bin/env python3.6
 
+import logging
 import os
 
 import pymongo
@@ -17,7 +18,26 @@ except KeyError:
 collection = mongo_db.events
 
 
+def last_updated():
+    return collection.find_one({'id': '_last_updated'})['at']
+
+
 def update():
+
+    last_modified_dwd = dwd.last_modified()
+    last_updated_db = last_updated()
+
+    if not last_updated_db:
+        logging.info('No "_last_updated" timestamp found in DB, creating one now')
+        collection.insert_one({'id': '_last_updated', 'at': last_modified_dwd})
+    elif last_updated_db == last_modified_dwd:
+        logging.info('API has not been updated')
+        return
+    else:
+        logging.info('Updating DB')
+        collection.replace_one(
+            {'id': '_last_updated'}, {'id': '_last_updated', 'at': last_modified_dwd})
+
     events = [dwd.parse_xml(event) for event in dwd.load_dwd_xml_events()]
 
     from pprint import pprint

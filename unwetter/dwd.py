@@ -1,6 +1,7 @@
 #!/user/bin/env python3.6
 
 from io import BytesIO
+from datetime import datetime
 from zipfile import ZipFile
 
 import iso8601
@@ -28,6 +29,17 @@ STATE_IDS = {
     15: 'ST',
     16: 'TH',
 }
+
+
+def last_modified():
+    """
+    Checks when the last update was released
+    :return: A datetime object
+    """
+    return datetime.strptime(
+        requests.head(API_URL).headers['Last-Modified'],
+        '%a, %d %b %Y %H:%M:%S %Z',
+    )
 
 
 def load_dwd_xml_events():
