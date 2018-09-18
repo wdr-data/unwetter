@@ -1,4 +1,4 @@
-WINA_TEMPLATE = '''<?xml version="1.0" encoding="ISO-8859-1" standalone="no" ?>
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no" ?>
 <!DOCTYPE OPENMEDIA SYSTEM "ann_objects.dtd"><OPENMEDIA><OM_SERVER>WINA</OM_SERVER>
 <OM_OBJECT SystemID = "1fc8e208-b05a-4e83-a6b9-1ada17fcb0b5" ObjectID = "0000000100027073" DocumentURN = "urn:openmedia:1fc8e208-b05a-4e83-a6b9-1ada17fcb0b5:0000000100027073" DirectoryID = "0000000100006d66" InternalType = "1" TemplateID = "fffffffa00003bb5" TemplateType = "2" TemplateName = "WINA Meldung">
 <OM_HEADER><OM_FIELD FieldID = "1" FieldType = "3" FieldName = "Erstellt" IsEmpty = "no"><OM_DATETIME>20180827T130446,000</OM_DATETIME></OM_FIELD>
@@ -61,4 +61,4 @@ WINA_TEMPLATE = '''<?xml version="1.0" encoding="ISO-8859-1" standalone="no" ?>
 
 
 </OM_OBJECT>
-</OPENMEDIA>'''
+</OPENMEDIA>
