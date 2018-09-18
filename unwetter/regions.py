@@ -2,7 +2,7 @@
 
 import yaml
 
-with open('assets/regions.yml', 'r') as fp:
+with open('config/regions.yml', 'r') as fp:
     REGIONS = yaml.safe_load(fp.read())
 
 
