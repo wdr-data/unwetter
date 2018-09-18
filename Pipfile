@@ -11,6 +11,7 @@ pymongo = "*"
 feedgen = "*"
 flask = "*"
 gunicorn = "*"
+apscheduler = "*"
 
 [dev-packages]
 
