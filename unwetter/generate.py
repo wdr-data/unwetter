@@ -1,5 +1,7 @@
 #!/user/bin/env python3.6
 
+import os
+
 
 def title(event):
     if event['msg_type'] == 'Alert':
@@ -27,3 +29,8 @@ Orte: {', '.join(area['name'] for area in event['areas'])}
 Gültig von {event['onset'].strftime('%d.%m.%Y %H:%M:%S')} bis {event['expires'].strftime('%d.%m.%Y %H:%M:%S') if event['expires'] else 'Nicht angegeben'}
 Warnmeldung: {event['description']}
     '''.strip()
+
+
+def more_info_text():
+
+    return f'Infos zu dieser Meldung: {os.environ["WDR_PROJECT_INFO_URL"]}'

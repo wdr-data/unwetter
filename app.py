@@ -47,7 +47,10 @@ def wina(id):
     sent = event['sent'].strftime('%Y%m%dT%H%M%S,000')  # 20180827T130547,000
 
     wina_xml = WINA_TEMPLATE.format(
-        sent=sent, title=generate.title(event), text=generate.description(event))
+        sent=sent,
+        title=generate.title(event),
+        text=f'{generate.description(event)} \n {generate.more_info_text}'
+    )
 
     r = Response(
         wina_xml.encode('iso-8859-1', errors='xmlcharrefreplace'), mimetype='application/xml')
