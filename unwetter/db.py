@@ -1,6 +1,5 @@
 #!/user/bin/env python3.6
 
-import logging
 import os
 
 import pymongo
@@ -32,13 +31,13 @@ def update():
     last_updated_db = last_updated()
 
     if not last_updated_db:
-        logging.info('No "last_updated" timestamp found in DB, creating one now')
+        print('No "last_updated" timestamp found in DB, creating one now')
         collection_meta.insert_one({'id': 'last_updated', 'at': last_modified_dwd})
     elif last_updated_db == last_modified_dwd:
-        logging.info('API has not been updated')
+        print('API has not been updated')
         return
     else:
-        logging.info('Updating DB')
+        print('API has been updated, updating DB...')
         collection_meta.replace_one(
             {'id': 'last_updated'}, {'id': 'last_updated', 'at': last_modified_dwd})
 
