@@ -19,6 +19,9 @@ collection_meta = mongo_db.events_meta
 
 
 def last_updated():
+    """
+    :return: The datetime when the event database was last updated with new data from the API
+    """
     try:
         return collection_meta.find_one({'id': 'last_updated'})['at']
     except TypeError:
@@ -26,6 +29,9 @@ def last_updated():
 
 
 def update():
+    """
+    Download the latest events from the API and update the database, if necessary
+    """
 
     last_modified_dwd = dwd.last_modified()
     last_updated_db = last_updated()
@@ -53,6 +59,14 @@ def update():
 
 
 def query(severities, states, limit=50):
+    """
+
+    :param severities: List of severities allowed (eg. ['Severe', 'Extreme'])
+    :param states: List of states (eg. ['NW'])
+    :param limit: Number of results
+    :return: DB Cursor with the results
+    """
+
     filter = {
         'severity': {'$in': severities},
     }
