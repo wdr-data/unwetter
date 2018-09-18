@@ -84,3 +84,4 @@ def clear():
     Reset database
     """
     collection.drop()
+    collection_meta.drop()
