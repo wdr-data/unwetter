@@ -12,4 +12,16 @@ def best_match(districts):
     :param districts: List of district names
     :return: List of region names
     """
-    raise NotImplementedError
+    districts_set = set(districts)
+
+    def key_function(region):
+        size = len(region[1]['districts'])
+        not_covered = len(districts_set - set(region[1]['districts']))
+        return not_covered, size
+
+    match = sorted(REGIONS.items(), key=key_function)[0]
+    
+    not_covered = len(districts_set - set(match[1]['districts']))
+    relevance = (len(districts) - not_covered) / len(match[1]['districts'])
+
+    return match[0], relevance
