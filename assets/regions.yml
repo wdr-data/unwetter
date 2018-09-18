@@ -1,0 +1,64 @@
+---
+Ruhrgebiet:
+  districts:
+    - Stadt Düsseldorf
+    - Kreis Mettmann
+    - Stadt Mülheim an der Ruhr
+    - Stadt Duisburg
+    - Stadt Oberhausen
+    - Stadt Bottrop
+    - Stadt Essen
+    - Stadt Gelsenkirchen
+    - Stadt Herne
+    - Stadt Bochum
+    - Ennepe-Ruhr-Kreis
+    - Stadt Wuppertal
+
+Köln-Bonn:
+  districts:
+    - Stadt Köln
+    - Rhein-Erft-Kreis
+    - Rhein-Sieg-Kreis
+    - Bundesstadt Bonn
+    - Rheinisch-Bergischer Kreis
+
+Süden:
+  districts:
+    - Stadt Köln
+    - Rhein-Erft-Kreis
+    - Rhein-Sieg-Kreis
+    - Bundesstadt Bonn
+    - Rheinisch-Bergischer Kreis
+    - StädteRegion Aachen
+    - Kreis Düren
+    - Kreis Euskirchen
+    - Oberbergischer Kreis
+    - Kreis Olpe
+    - Kreis Siegen-Wittgenstein
+
+Niederrhein:
+  districts:
+    - Kreis Kleve
+    - Kreis Wesel
+    - Kreis Viersen
+    - Kreis Borken
+
+Münsterland:
+  districts:
+    - Stadt Münster
+    - Kreis Steinfurt
+    - Kreis Warendorf
+    - Kreis Coesfeld
+    - Kreis Borken
+    - Stadt Hamm
+
+Nordosten:
+  district:
+    - Kreis Minden-Lübbecke
+    - Kreis Herford
+    - Stadt Bielefeld
+    - Kreis Gütersloh
+    - Kreis Lippe
+    - Kreis Paderborn
+    - Kreis Höxter
+    - Kreis Warendorf

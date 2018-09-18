@@ -12,6 +12,7 @@ feedgen = "*"
 flask = "*"
 gunicorn = "*"
 apscheduler = "*"
+pyyaml = "*"
 
 [dev-packages]
 
