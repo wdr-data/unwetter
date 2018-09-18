@@ -20,7 +20,6 @@ app = Flask(__name__)
 
 @app.route('/feed.rss')
 def feed():
-    db.update()
     fg = FeedGenerator()
     fg.id('https://unwetter-bot.herokuapp.com/')
     fg.title('Unwetter Testfeed')
