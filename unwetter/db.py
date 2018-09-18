@@ -16,10 +16,14 @@ except KeyError:
     mongo_db = MongoClient().unwetter
 
 collection = mongo_db.events
+collection_meta = mongo_db.events_meta
 
 
 def last_updated():
-    return collection.find_one({'id': '_last_updated'})['at']
+    try:
+        return collection_meta.find_one({'id': 'last_updated'})['at']
+    except TypeError:
+        return None
 
 
 def update():
@@ -28,15 +32,15 @@ def update():
     last_updated_db = last_updated()
 
     if not last_updated_db:
-        logging.info('No "_last_updated" timestamp found in DB, creating one now')
-        collection.insert_one({'id': '_last_updated', 'at': last_modified_dwd})
+        logging.info('No "last_updated" timestamp found in DB, creating one now')
+        collection_meta.insert_one({'id': 'last_updated', 'at': last_modified_dwd})
     elif last_updated_db == last_modified_dwd:
         logging.info('API has not been updated')
         return
     else:
         logging.info('Updating DB')
-        collection.replace_one(
-            {'id': '_last_updated'}, {'id': '_last_updated', 'at': last_modified_dwd})
+        collection_meta.replace_one(
+            {'id': 'last_updated'}, {'id': 'last_updated', 'at': last_modified_dwd})
 
     events = [dwd.parse_xml(event) for event in dwd.load_dwd_xml_events()]
 
