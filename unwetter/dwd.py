@@ -8,6 +8,8 @@ import iso8601
 import requests
 import xmltodict
 
+from . import regions
+
 API_URL = 'https://opendata.dwd.de/weather/alerts/cap/' \
           'DISTRICT_EVENT_STAT/Z_CAP_C_EDZW_LATEST_PVW_STATUS_PREMIUMEVENT_DISTRICT_DE.zip'
 
@@ -96,8 +98,14 @@ def parse_xml(xml):
         if field_json in datetime_fields and event[field_json]:
             event[field_json] = iso8601.parse_date(event[field_json])
 
-    if isinstance(xml_dict['info']['area'], dict):
-        xml_dict['info']['area'] = [xml_dict['info']['area']]
+    for tag in ('area', 'parameter'):
+        if isinstance(xml_dict['info'][tag], dict):
+            xml_dict['info'][tag] = [xml_dict['info'][tag]]
+
+    event['parameters'] = {
+        param['valueName']: param['value']
+        for param in xml_dict['info']['parameter']
+    }
 
     states = set()
 
@@ -119,5 +127,7 @@ def parse_xml(xml):
     ]
 
     event['states'] = [STATE_IDS[state_id] for state_id in states]
+
+    event['regions'] = regions.best_match(area['name'] for area in event['areas'])
 
     return event
