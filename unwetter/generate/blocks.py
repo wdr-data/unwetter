@@ -37,6 +37,10 @@ def region_list(event):
     return ', '.join(qualify_region(region) for region in event['regions'])
 
 
+def area_list(event):
+    return ', '.join(area['name'] for area in event['areas'])
+
+
 def keywords(event):
     return f'{severities[event["severity"]]}, {region_list(event) or "Nicht NRW"}, ' \
            f'Technische Erprobung'
@@ -62,13 +66,13 @@ def dates(event):
     onset = event['onset']
     expires = event['expires']
     if not expires: 
-        return f'Ab {onset.strftime("%d.%m.%Y, %H:%M")} Uhr (kein Ende der Gültigkeit angegeben).' 
+        return f'ab {onset.strftime("%d.%m.%Y, %H:%M")} Uhr (kein Ende der Gültigkeit angegeben)'
     elif onset.date() == expires.date():
-        return f'Am {onset.strftime("%d.%m.%Y von %H:%M")} Uhr ' \
-               f'bis {expires.strftime("%H:%M")} Uhr.'
+        return f'am {onset.strftime("%d.%m.%Y von %H:%M")} Uhr ' \
+               f'bis {expires.strftime("%H:%M")} Uhr'
     else:
-        return f'Von {onset.strftime("%d.%m.%Y, %H:%M")} Uhr ' \
-               f'bis {expires.strftime("%d.%m.%Y, %H:%M")} Uhr.'
+        return f'von {onset.strftime("%d.%m.%Y, %H:%M")} Uhr ' \
+               f'bis {expires.strftime("%d.%m.%Y, %H:%M")} Uhr'
 
 
 def parameters(event):

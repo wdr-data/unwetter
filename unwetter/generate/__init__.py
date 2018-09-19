@@ -3,6 +3,7 @@
 import os
 
 from .blocks import *
+from .helpers import rreplace, upper_first
 
 
 def headline(event):
@@ -32,7 +33,7 @@ Warnstufe: {severities[event['severity']]}
 
 Regionale Zuordnung: {region_list(event)}
 
-Gültigkeit: {dates(event)}
+Gültigkeit: {dates(event).capitalize()}.
 
 Warnung vor: {parameters(event)}
 
@@ -53,3 +54,32 @@ Informationen und Kontakt: {os.environ["WDR_PROJECT_INFO_URL"]}
         text = text.replace(f'{optional} \n\n', '')
 
     return text
+
+
+def crawl(event):
+    prefix = 'aktualisierte' if event['msg_type'] == 'Update' else ''
+
+    if len(event['areas']) < 3:
+        location = area_list(event)
+    else:
+        location = region_list(event)
+
+    if not location:
+        location = area_list(event)
+
+    location = rreplace(location, ', ', ' und ', 1)
+
+    text = ' '.join(
+        word.capitalize() if word.isupper() else word
+        for word in event['event'].split()
+    ).replace('Schwer', 'schwer')
+
+    for lower_word in ('Heftig', 'Schwer', 'Starke'):
+        text = text.replace(lower_word, lower_word.lower())
+
+    text = upper_first(text)
+
+    the_crawl = f'{prefix} amtliche Unwetterwarnung des Deutschen Wetterdienstes für ' \
+                f'{location}. {text} möglich. Gültig {dates(event)}.'.strip()
+
+    return upper_first(the_crawl)
