@@ -32,5 +32,4 @@ Warnmeldung: {event['description']}
 
 
 def more_info_text():
-
     return f'Infos zu dieser Meldung: {os.environ["WDR_PROJECT_INFO_URL"]}'

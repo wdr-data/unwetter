@@ -3,16 +3,13 @@
 from feedgen.feed import FeedGenerator 
 from flask import Flask, Response
 
-from unwetter import db, generate
+from unwetter import db, generate, wina as wina_gen
 
 
 # Configuration
 SEVERITY_FILTER = ['Minor', 'Moderate', 'Severe', 'Extreme']  # Which degrees of severity to track
 STATES_FILTER = ['NW', 'BY', 'BW', 'SH']  # Which states to track
 
-
-with open('assets/wina_template.xml', 'r') as fp:
-    WINA_TEMPLATE = fp.read()
 
 URL_BASE = 'https://unwetter-bot.herokuapp.com/'
 app = Flask(__name__)
@@ -43,17 +40,7 @@ def feed():
 
 @app.route('/wina/<id>')
 def wina(id):
-    event = db.collection.find_one({'id': id})
-    sent = event['sent'].strftime('%Y%m%dT%H%M%S,000')  # 20180827T130547,000
-
-    wina_xml = WINA_TEMPLATE.format(
-        sent=sent,
-        title=generate.title(event),
-        text=f'{generate.description(event)} \n {generate.more_info_text()}'
-    )
-
-    r = Response(
-        wina_xml.encode('iso-8859-1', errors='xmlcharrefreplace'), mimetype='application/xml')
+    r = Response(wina_gen.from_id(id), mimetype='application/xml')
     r.headers['Content-Type'] = "text/xml; charset=iso-8859-1"
 
     return r
