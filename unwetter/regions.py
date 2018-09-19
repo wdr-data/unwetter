@@ -8,9 +8,10 @@ with open('config/regions.yml', 'r') as fp:
 
 def best_match(districts):
     """
-    Takes a list of districts and finds the region(s) that contains them all.
+    Takes a list of districts and finds the region(s) that contains them all and the coverage of
+    those regions
     :param districts: List of district names
-    :return: List of region names
+    :return: List of tuples of (region name, relevance)
     """
     districts_set = set(districts)
 
@@ -24,4 +25,10 @@ def best_match(districts):
     not_covered = len(districts_set - set(match[1]['districts']))
     relevance = (len(districts) - not_covered) / len(match[1]['districts'])
 
-    return match[0], relevance
+    if not_covered == 0:
+        return [(match[0], relevance)]
+    elif not_covered == len(districts):
+        print(f'Unkown districts "{list(districts)}"')
+        return []
+    else:
+        return [(match[0], relevance)] + best_match(districts_set - set(match[1]['districts']))
