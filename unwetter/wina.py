@@ -28,7 +28,7 @@ def from_id(id):
         text=generate.description(event).replace('\n', '&#xD;&#xA;'),
     )
 
-    return wina_xml.encode('iso-8859-1', errors='xmlcharrefreplace')
+    return wina_xml.encode('iso-8859-1', errors='ignore')
 
 
 def upload(ids):
