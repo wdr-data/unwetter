@@ -131,6 +131,6 @@ def parse_xml(xml):
 
     event['states'] = [STATE_IDS[state_id] for state_id in states]
 
-    event['regions'] = regions.best_match(area['name'] for area in event['areas'])
+    event['regions'] = regions.best_match([area['name'] for area in event['areas']])
 
     return event
