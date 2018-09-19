@@ -99,8 +99,11 @@ def parse_xml(xml):
             event[field_json] = iso8601.parse_date(event[field_json])
 
     for tag in ('area', 'parameter'):
-        if isinstance(xml_dict['info'][tag], dict):
-            xml_dict['info'][tag] = [xml_dict['info'][tag]]
+        try:
+            if isinstance(xml_dict['info'][tag], dict):
+                xml_dict['info'][tag] = [xml_dict['info'][tag]]
+        except KeyError:
+            xml_dict['info'][tag] = []
 
     event['parameters'] = {
         param['valueName']: param['value']
