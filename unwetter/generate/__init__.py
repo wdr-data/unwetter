@@ -35,6 +35,8 @@ Regionale Zuordnung: {region_list(event)}
 
 Gültigkeit: {dates(event).capitalize()}.
 
+Textvorschlag TV-Crawl: {crawl(event)}
+
 Warnung vor: {parameters(event)}
 
 Betroffene Kreise und Städte: {', '.join(area['name'] for area in event['areas'])}
