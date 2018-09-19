@@ -73,8 +73,10 @@ def description(event):
     """
     Return main body text
     """
-    return f'''
+    text = f'''
 {title(event)}
+
+Warnstufe: {severities[event['severity']]}
 
 Regionale Zuordnung: {region_list(event)}
 
@@ -82,9 +84,15 @@ Gültigkeit: {dates(event)}
 
 Warnung vor: {parameters(event)}
 
-Warnstufe: {severities[event['severity']]} 
-Orte: {', '.join(area['name'] for area in event['areas'])}
+Betroffene Kreise und Städte: {', '.join(area['name'] for area in event['areas'])}
 
 Warnmeldung: {event['description']}
+
+
 Infos zu dieser Meldung: {os.environ["WDR_PROJECT_INFO_URL"]}
     '''.strip()
+
+    text = text.replace('Regionale Zuordnung: \n', '')
+    text = text.replace('Warnung vor: \n', '')
+
+    return text
