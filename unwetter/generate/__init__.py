@@ -84,4 +84,6 @@ def crawl(event):
     the_crawl = f'{prefix} amtliche Unwetterwarnung des Deutschen Wetterdienstes für ' \
                 f'{location}. {text} möglich. Gültig {dates(event)}.'.strip()
 
+    the_crawl = the_crawl.replace(' (kein Ende der Gültigkeit angegeben)', '')
+
     return upper_first(the_crawl)
