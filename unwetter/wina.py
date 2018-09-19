@@ -19,7 +19,7 @@ def from_id(id):
     wina_xml = WINA_TEMPLATE.format(
         sent=sent,
         title=generate.title(event),
-        text=generate.description(event),
+        text=generate.description(event).replace('\n', '&#xD;&#xA;'),
     )
 
     return wina_xml.encode('iso-8859-1', errors='xmlcharrefreplace')
