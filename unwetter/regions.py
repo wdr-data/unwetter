@@ -3,7 +3,7 @@
 import yaml
 
 with open('config/regions.yml', 'r') as fp:
-    REGIONS = yaml.safe_load(fp.read())
+    REGIONS = {key: value for key, value in yaml.safe_load(fp.read()).items() if value.get('districts')}
 
 
 def best_match(districts):

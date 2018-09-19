@@ -1,7 +1,6 @@
 ---
 Ruhrgebiet:
   districts:
-    - Stadt Düsseldorf
     - Kreis Mettmann
     - Stadt Mülheim an der Ruhr
     - Stadt Duisburg
@@ -11,8 +10,14 @@ Ruhrgebiet:
     - Stadt Gelsenkirchen
     - Stadt Herne
     - Stadt Bochum
+    - Stadt Dortmund
+    - Stadt Hagen
+    - Stadt Hamm
     - Ennepe-Ruhr-Kreis
     - Stadt Wuppertal
+    - Kreis Recklinghausen
+    - Kreis Unna
+    - Kreis Wesel
 
 Köln-Bonn:
   districts:
@@ -42,6 +47,11 @@ Niederrhein:
     - Kreis Wesel
     - Kreis Viersen
     - Kreis Borken
+    - Stadt Krefeld
+    - Stadt Duisburg
+    - Rhein-Kreis Neuss
+    - Stadt Mönchengladbach
+    - Kreis Heinsberg
 
 Münsterland:
   districts:
@@ -62,3 +72,97 @@ Nordosten:
     - Kreis Paderborn
     - Kreis Höxter
     - Kreis Warendorf
+
+Sauerland:
+  districts:
+    - Kreis Soest
+    - Hochsauerlandkreis
+    - Märkischer Kreis
+    - Kreis Olpe
+
+Siegerland:
+  districts:
+    - Kreis Siegen-Wittgenstein
+
+Westfalen:
+  districts:
+    - Ennepe-Ruhr-Kreis
+    - Hochsauerlandkreis
+    - Märkischer Kreis
+    - Kreis Olpe
+    - Kreis Siegen-Wittgenstein
+    - Kreis Soest
+    - Kreis Unna
+    - Stadt Bochum
+    - Stadt Dortmund
+    - Stadt Hagen
+    - Stadt Hamm
+    - Stadt Herne
+    - Kreis Gütersloh
+    - Kreis Herford
+    - Kreis Höxter
+    - Kreis Minden-Lübbecke
+    - Kreis Paderborn
+    - Stadt Bielefeld
+    - Kreis Lippe
+    - Kreis Borken
+    - Kreis Coesfeld
+    - Kreis Recklinghausen
+    - Kreis Steinfurt
+    - Kreis Warendorf
+    - Stadt Bottrop
+    - Stadt Gelsenkirchen
+    - Stadt Münster
+
+Rheinland:
+  districts:
+    - StädteRegion Aachen
+    - Stadt Bonn
+    - Stadt Düsseldorf
+    - Stadt Duisburg
+    - Stadt Essen
+    - Stadt Köln
+    - Stadt Krefeld
+    - Stadt Leverkusen
+    - Stadt Mönchengladbach
+    - Stadt Mülheim an der Ruhr
+    - Stadt Oberhausen
+    - Stadt Remscheid
+    - Stadt Solingen
+    - Stadt Wuppertal
+    - Kreis Kleve
+    - Kreis Wesel
+    - Kreis Viersen
+    - Kreis Heinsberg
+    - Rhein-Kreis Neuss
+    - Kreis Mettmann
+    - Rhein-Erft-Kreis
+    - Oberbergischer Kreis
+    - Rheinisch-Bergischer Kreis
+    - Rhein-Sieg-Kreis
+    - Kreis Euskirchen
+    - Kreis Düren
+
+Ostwestfalen-Lippe:
+  districts:
+    - Kreis Minden-Lübbecke
+    - Kreis Herford
+    - Stadt Bielefeld
+    - Kreis Gütersloh
+    - Kreis Lippe
+    - Kreis Paderborn
+    - Kreis Höxter
+
+Bergisches Land:
+  districts:
+    - Stadt Wuppertal
+    - Stadt Remscheid
+    - Stadt Solingen
+    - Kreis Mettmann
+    - Stadt Leverkusen
+    - Oberbergischer Kreis
+    - Rheinisch-Bergischer Kreis
+    - Rhein-Sieg-Kreis
+
+Eifel:
+Soester Boerde:
