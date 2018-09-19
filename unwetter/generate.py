@@ -28,8 +28,5 @@ Warnstufe: {severities[event['severity']]}
 Orte: {', '.join(area['name'] for area in event['areas'])}
 Gültig von {event['onset'].strftime('%d.%m.%Y %H:%M:%S')} bis {event['expires'].strftime('%d.%m.%Y %H:%M:%S') if event['expires'] else 'Nicht angegeben'}
 Warnmeldung: {event['description']}
+Infos zu dieser Meldung: {os.environ["WDR_PROJECT_INFO_URL"]}
     '''.strip()
-
-
-def more_info_text():
-    return f'Infos zu dieser Meldung: {os.environ["WDR_PROJECT_INFO_URL"]}'
