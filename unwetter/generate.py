@@ -81,7 +81,7 @@ def dates(event):
     if not expires: 
         return f'Ab {onset.strftime("%d.%m.%Y, %H:%M")} Uhr (kein Ende der Gültigkeit angegeben).' 
     elif onset.date() == expires.date():
-        return f'Von {onset.strftime("%d.%m.%Y, %H:%M")} Uhr bis {expires.strftime("%H:%M")} Uhr.' 
+        return f'Am {onset.strftime("%d.%m.%Y von %H:%M")} Uhr bis {expires.strftime("%H:%M")} Uhr.'
     else:
         return f'Von {onset.strftime("%d.%m.%Y, %H:%M")} Uhr bis {expires.strftime("%d.%m.%Y, %H:%M")} Uhr.' 
 
