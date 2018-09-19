@@ -1,5 +1,10 @@
 #!/user/bin/env python3.6
 
+from ftplib import FTP_TLS
+from io import BytesIO
+import os
+import ssl
+
 from unwetter import db, generate
 
 
@@ -24,3 +29,26 @@ def from_id(id):
     )
 
     return wina_xml.encode('iso-8859-1', errors='xmlcharrefreplace')
+
+
+def upload(ids):
+    """
+    Uploads a WINA-XML file to a provided server via explicit FTP with TLS Protocol.
+    :param: ids: List of DWD IDs
+    :return: Status code
+    """
+
+    files = [BytesIO(from_id(id)) for id in ids]
+
+    ftps = FTP_TLS(
+        host=os.environ['NVS_FTP_URL'],
+        user=os.environ['NVS_FTP_USER'],
+        passwd=os.environ['NVS_FTP_PASS'],
+        context=ssl.create_default_context(),
+    )
+    ftps.prot_p()
+
+    for id, file in zip(ids, files):
+        print(ftps.storbinary(f'STOR {id}.xml', file))
+
+    print(ftps.quit())
