@@ -29,7 +29,7 @@ def feed():
     for event in db.query(SEVERITY_FILTER, STATES_FILTER):
         fe = fg.add_entry()
         fe.id(event['id'])
-        fe.title(generate.title(event))
+        fe.title(generate.headline(event))
         fe.link(href=f'{URL_BASE}wina/{event["id"]}')
         fe.description(generate.description(event).replace('\n', '<br>'))
 
