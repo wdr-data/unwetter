@@ -1,5 +1,8 @@
 ---
 Ruhrgebiet:
+  gender: das
+  cases:
+    genetiv: des Ruhrgebiets
   districts:
     - Kreis Mettmann
     - Stadt Mülheim an der Ruhr
@@ -19,7 +22,10 @@ Ruhrgebiet:
     - Kreis Unna
     - Kreis Wesel
 
-Köln-Bonn:
+Köln-Bonner Raum:
+  gender: der
+  cases:
+    genetiv: des Köln-Bonner Raums
   districts:
     - Stadt Köln
     - Rhein-Erft-Kreis
@@ -27,7 +33,10 @@ Köln-Bonn:
     - Bundesstadt Bonn
     - Rheinisch-Bergischer Kreis
 
-Süden:
+Süden von NRW:
+  gender: der
+  cases:
+    genetiv: des Südens von NRW
   districts:
     - Stadt Köln
     - Rhein-Erft-Kreis
@@ -42,6 +51,9 @@ Süden:
     - Kreis Siegen-Wittgenstein
 
 Niederrhein:
+  gender: der
+  cases:
+    genetiv: des Niederrheins
   districts:
     - Kreis Kleve
     - Kreis Wesel
@@ -54,6 +66,9 @@ Niederrhein:
     - Kreis Heinsberg
 
 Münsterland:
+  gender: das
+  cases:
+    genetiv: des Münsterlandes
   districts:
     - Stadt Münster
     - Kreis Steinfurt
@@ -62,7 +77,10 @@ Münsterland:
     - Kreis Borken
     - Stadt Hamm
 
-Nordosten:
+Nordosten von NRW:
+  gender: der
+  cases:
+    genetiv: des Nordostens von NRW
   districts:
     - Kreis Minden-Lübbecke
     - Kreis Herford
@@ -74,6 +92,9 @@ Nordosten:
     - Kreis Warendorf
 
 Sauerland:
+  gender: das
+  cases:
+    genetiv: des Sauerlandes
   districts:
     - Kreis Soest
     - Hochsauerlandkreis
@@ -81,10 +102,16 @@ Sauerland:
     - Kreis Olpe
 
 Siegerland:
+  gender: das
+  cases:
+    genetiv: des Siegerlandes
   districts:
     - Kreis Siegen-Wittgenstein
 
 Westfalen:
+  gender: False
+  cases:
+    genetiv: Westfalens
   districts:
     - Ennepe-Ruhr-Kreis
     - Hochsauerlandkreis
@@ -115,6 +142,9 @@ Westfalen:
     - Stadt Münster
 
 Rheinland:
+  gender: das
+  cases:
+    genetiv: des Rheinlandes
   districts:
     - StädteRegion Aachen
     - Stadt Bonn
@@ -144,6 +174,9 @@ Rheinland:
     - Kreis Düren
 
 Ostwestfalen-Lippe:
+  gender: False
+  cases:
+    genetiv: von Ostwestfalen-Lippe
   districts:
     - Kreis Minden-Lübbecke
     - Kreis Herford
@@ -154,6 +187,9 @@ Ostwestfalen-Lippe:
     - Kreis Höxter
 
 Bergisches Land:
+  gender: das
+  cases:
+    genetiv: des Bergischen Landes
   districts:
     - Stadt Wuppertal
     - Stadt Remscheid
@@ -164,6 +200,12 @@ Bergisches Land:
     - Rheinisch-Bergischer Kreis
     - Rhein-Sieg-Kreis
 
-Eifel: {}
+Eifel:
+  gender: die
+  cases:
+    genetiv: der Eifel
 
-Soester Boerde: {}
+Soester Boerde:
+  gender: die
+  cases:
+    genetiv: der Soester Boerde
