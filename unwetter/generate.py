@@ -56,7 +56,8 @@ def region_list(event):
 
 
 def keywords(event):
-    return f'{severities[event["severity"]]}, {region_list(event)}, Technische Erprobung'
+    return f'{severities[event["severity"]]}, {region_list(event) or "Nicht NRW"}, ' \
+           f'Technische Erprobung'
 
 
 def title(event):
