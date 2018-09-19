@@ -2,6 +2,8 @@
 
 import os
 
+from .regions import REGIONS
+
 
 severities = {
     'Minor': 'Wetterwarnung',
@@ -27,8 +29,30 @@ def headline(event):
     return f'DETAILS zur amtlichen UNWETTERWARNUNG für NORDRHEIN-WESTFALEN des DWD ({postfix})'
 
 
+def qualify_region(region_tuple):
+    name, relevance = region_tuple[:2]
+
+    if relevance < 0.2:
+        prefix = 'Einzelne Teile'
+    elif relevance < 0.6:
+        prefix = 'Teile'
+    elif relevance < 0.8:
+        prefix = 'Weite Teile'
+    elif relevance < 1.0:
+        prefix = 'Der Großteil'
+    else:
+        gender = REGIONS[name]['gender']
+        if gender:
+            return f'{gender.capitalize()} gesamte {name}'
+        else:
+            return f'Ganz {name}'
+
+    genetiv = REGIONS[name]['cases']['genetiv']
+    return f'{prefix} {genetiv}'
+
+
 def region_list(event):
-    return ', '.join(region[0] for region in event['regions'])
+    return ', '.join(qualify_region(region) for region in event['regions'])
 
 
 def keywords(event):
