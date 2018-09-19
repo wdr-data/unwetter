@@ -33,7 +33,7 @@ Warnstufe: {severities[event['severity']]}
 
 Regionale Zuordnung: {region_list(event)}
 
-Gültigkeit: {dates(event).capitalize()}.
+Gültigkeit: {upper_first(dates(event))}.
 
 Textvorschlag TV-Crawl: {crawl(event)}
 
