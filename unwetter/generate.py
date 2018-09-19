@@ -88,7 +88,7 @@ Betroffene Kreise und Städte: {', '.join(area['name'] for area in event['areas'
 
 Warnmeldung: {event['description']}
 
-Verhaltenshinweise: {event['instruction']}
+Verhaltenshinweise: {event['instruction'] or ''}
 
 Dieser Text basiert auf offiziellen Informationen des Deutschen Wetterdienstes:
 https://www.dwd.de/DE/wetter/warnungen_gemeinden/warnkarten/warnWetter_nrw_node.html?bundesland=nrw
