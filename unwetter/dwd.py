@@ -133,4 +133,7 @@ def parse_xml(xml):
 
     event['regions'] = regions.best_match([area['name'] for area in event['areas']])
 
+    if 'references' in xml_dict:
+        event['references'] = [ref.split(',')[1] for ref in xml_dict['references'].split(' ')]
+
     return event
