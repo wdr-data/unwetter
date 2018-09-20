@@ -12,15 +12,15 @@ def headline(event):
     Return text for headline
     """
     if event['msg_type'] == 'Alert':
-        postfix = 'Neue Meldung'
+        prefix = ''
     elif event['msg_type'] == 'Update':
-        postfix = 'Aktualisierung'
+        prefix = 'Aktualisierung: '
     elif event['msg_type'] == 'Cancel':
-        postfix = 'Meldung aufgehoben'
+        prefix = 'Meldung aufgehoben: '
     else:
-        postfix = 'Unbekannter Meldungstyp'
+        prefix = 'Unbekannter Meldungstyp - '
 
-    return f'DETAILS zur amtlichen UNWETTERWARNUNG für NORDRHEIN-WESTFALEN des DWD ({postfix})'
+    return f'{prefix}DETAILS zur amtlichen UNWETTERWARNUNG für NORDRHEIN-WESTFALEN des DWD'
 
 
 def describe_new_event(event):
@@ -47,7 +47,9 @@ TV-Crawl: {crawl(event)}
 Meldung des DWD: {event['description']}
 
 Hinweis: Textvorschläge für den TV-Crawl werden im WDR automatisch generiert.
----
+
+
++++ Über diese Meldung +++
 
 Diese Meldung basiert auf offiziellen Informationen des Deutschen Wetterdienstes:
 https://www.dwd.de/DE/wetter/warnungen_gemeinden/warnkarten/warnWetter_nrw_node.html?bundesland=nrw
@@ -79,7 +81,7 @@ def describe_update(event):
 
 {changes(event, old_event) if old_event else 'Unbekannt'}
 
----
++++ Details +++
 
 Warnstufe: {severities[event['severity']]}
 
@@ -101,7 +103,9 @@ TV-Crawl: {crawl(event)}
 Meldung des DWD: {event['description']}
 
 Hinweis: Textvorschläge für den TV-Crawl werden im WDR automatisch generiert.
----
+
+
++++ Über diese Meldung +++
 
 Diese Meldung basiert auf offiziellen Informationen des Deutschen Wetterdienstes:
 https://www.dwd.de/DE/wetter/warnungen_gemeinden/warnkarten/warnWetter_nrw_node.html?bundesland=nrw
