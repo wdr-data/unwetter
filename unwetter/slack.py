@@ -27,4 +27,4 @@ def send_to_slack(message, channel):  # testing channel: CCKQ5BX5G
         print(f'Message sent to Slack: {message}')
         
     else:
-print('Connection to Slack failed.')
+        print('Connection to Slack failed.')
