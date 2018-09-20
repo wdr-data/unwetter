@@ -103,9 +103,14 @@ def latest_reference(references):
     :return: A single event
     """
 
-    filter = {
-        'id': {'$in': references},
-    }
+    if len(references) > 1:
+        filter = {
+            'id': {'$in': references},
+        }
+    else:
+        filter = {
+            'id': references[0],
+        }
 
     try:
         return collection.find(filter).sort([('sent', pymongo.DESCENDING)]).limit(1)[0]
