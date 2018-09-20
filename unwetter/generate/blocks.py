@@ -1,7 +1,7 @@
 #!/user/bin/env python3.6
 
 from ..regions import REGIONS
-
+from .grammar import *
 
 severities = {
     'Minor': 'Wetterwarnung',
