@@ -42,6 +42,8 @@ Verhaltenshinweise: {event['instruction'] or ''}
 
 +++ Textvorschläge +++
 
+Tweet: {tweet(event)}
+
 TV-Crawl: {crawl(event)}
 
 Meldung des DWD: {event['description']}
@@ -97,6 +99,8 @@ Verhaltenshinweise: {event['instruction'] or ''}
 
 
 +++ Textvorschläge +++
+
+Tweet: {tweet(event)}
 
 TV-Crawl: {crawl(event)}
 
@@ -159,3 +163,46 @@ def crawl(event):
     the_crawl = the_crawl.replace(' (kein Ende der Gültigkeit angegeben)', '')
 
     return upper_first(the_crawl)
+
+
+def tweet(event):
+    prefix = 'aktualisierte' if event['msg_type'] == 'Update' else ''
+
+    text = ' '.join(
+        word.capitalize() if word.isupper() else word
+        for word in event['event'].split()
+    ).replace('Schwer', 'schwer')
+
+    for lower_word in ('Heftig', 'Schwer', 'Starke', 'Extrem'):
+        text = text.replace(lower_word, lower_word.lower())
+
+    text = upper_first(text)
+
+    areas = area_list(event)
+    areas = rreplace(areas, ', ', ' und ', 1)
+
+    regions_ = region_list(event)
+    regions_ = rreplace(regions_, ', ', ' und ', 1)
+
+    dates_ = dates(event)
+
+    candidates = [
+        '{prefix} amtliche #Unwetterwarnung des Deutschen Wetterdienstes für ' \
+        '{areas}. {text} möglich. Gültig {dates}. @DWD_presse',
+        '{prefix} amtliche Unwetterwarnung des Deutschen Wetterdienstes für ' \
+        '{areas}. {text} möglich. Gültig {dates}.',
+        '{prefix} amtliche #Unwetterwarnung des Deutschen Wetterdienstes für ' \
+        '{regions}. {text} möglich. Gültig {dates}. @DWD_presse',
+        '{prefix} amtliche Unwetterwarnung des Deutschen Wetterdienstes für ' \
+        '{regions}. {text} möglich. Gültig {dates}.',
+    ]
+
+    for candidate in candidates:
+        the_tweet = candidate.format(prefix=prefix, areas=areas, regions=regions_, text=text, dates=dates_)
+        the_tweet = the_tweet.replace(' (kein Ende der Gültigkeit angegeben)', '').strip()
+        if len(the_tweet) <= 280:
+            break
+    else:
+        the_tweet = 'Tweet konnte nicht generiert werden, da zu lang'
+
+    return upper_first(the_tweet)
