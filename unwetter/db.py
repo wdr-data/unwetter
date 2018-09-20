@@ -93,6 +93,20 @@ def query(severities, states, limit=50):
     return collection.find(filter).sort([('sent', pymongo.DESCENDING)]).limit(limit)
 
 
+def latest_reference(references):
+    """
+
+    :param references: List of IDs
+    :return: A single event
+    """
+
+    filter = {
+        'id': {'$in': references},
+    }
+
+    return collection.find(filter).sort([('sent', pymongo.DESCENDING)]).limit(1)[0]
+
+
 def clear():
     """
     Reset database
