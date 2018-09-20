@@ -87,20 +87,7 @@ def changes(event, old_event):
     text = ''
 
     if dates(old_event) != dates(event):
-        text += f'Gültigkeit: {dates(event)} (War "{dates(old_event)}")\n'
-
-    simple_fields = {
-        'certainty': 'Wahrscheinlichkeit',
-        'description': 'Beschreibung',
-        'event': 'Wetterphänomen',
-        'instruction': 'Verhaltenshinweise',
-        'severity': 'Warnstufe',
-    }
-
-    for field in simple_fields:
-        if old_event.get(field) != event.get(field):
-            text += f'{simple_fields[field]}: {event[field]} ' \
-                    f'(War "{old_event.get(field, "Nicht angegeben")}")\n'
+        text += f'Gültigkeit: {dates(event)} (zuvor "{dates(old_event)}")\n\n'
 
     if area_list(old_event) != area_list(event):
         areas_now = set(area['name'] for area in event['areas'])
@@ -115,6 +102,22 @@ def changes(event, old_event):
         if removed:
             text += f'Neue Kreise/Städte: {", ".join(removed)}\n'
 
-        text += f'Regionale Zuordnung: {region_list(event)} (War "{region_list(old_event)}")\n'
+        text += f'Regionale Zuordnung: {upper_first(region_list(event))} ' \
+                f'(zuvor: "{upper_first(region_list(old_event))}")\n\n'
+
+    simple_fields = {
+        'event': 'Wetterphänomen',
+        'severity': 'Warnstufe',
+        'certainty': 'Wahrscheinlichkeit',
+    }
+
+    for field in simple_fields:
+        if old_event.get(field) != event.get(field):
+            if field == 'severity':
+                text += f'{simple_fields[field]}: {severities[event[field]]} ' \
+                        f'(zuvor "{severities[old_event[field]]}")\n'
+            else:
+                text += f'{simple_fields[field]}: {event[field]} ' \
+                        f'(zuvor "{old_event.get(field, "Nicht angegeben")}")\n'
 
     return text
