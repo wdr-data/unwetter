@@ -22,6 +22,43 @@ Ruhrgebiet:
     - Kreis Unna
     - Kreis Wesel
 
+Westliches Ruhrgebiet:
+  gender: das
+  cases:
+    genetiv: des westlichen Ruhrgebiets
+  districts:
+    - Kreis Wesel
+    - Stadt Duisburg
+    - Stadt Oberhausen
+    - Stadt Mülheim an der Ruhr
+    - Stadt Bottrop
+    - Kreis Recklinghausen
+    - Stadt Gelsenkirchen
+    - Stadt Essen
+
+Östliches Ruhrgebiet:
+  gender: das
+  cases:
+    genetiv: des östlichen Ruhrgebiets
+  districts:
+    - Kreis Recklinghausen
+    - Stadt Herne
+    - Stadt Bochum
+    - Ennepe-Ruhr-Kreis
+    - Stadt Hagen
+    - Stadt Dortmund
+    - Kreis Unna
+    - Stadt Hamm
+
+Emscher-Lippe-Region:
+  gender: die
+  cases:
+    genetiv: der Emscher-Lippe-Region
+  districts:
+    - Stadt Bottrop
+    - Kreis Recklinghausen
+    - Stadt Gelsenkirchen
+
 Köln-Bonner Raum:
   gender: der
   cases:
@@ -65,6 +102,22 @@ Niederrhein:
     - Stadt Mönchengladbach
     - Kreis Heinsberg
 
+Niederrheinisches Tiefland:
+  gender: das
+  cases:
+    genetiv: des Niederrheinischen Tieflands
+  districts:
+    - Kreis Heinsberg 
+    - Kreis Viersen
+    - Rhein-Kreis Neuss
+    - Stadt Mönchengladbach
+    - Kreis Kleve
+    - Kreis Wesel
+    - Stadt Krefeld
+    - Stadt Duisburg
+    - Stadt Oberhausen
+    - Kreis Borken
+
 Münsterland:
   gender: das
   cases:
@@ -106,6 +159,17 @@ Siegerland:
   cases:
     genetiv: des Siegerlandes
   districts:
+    - Kreis Siegen-Wittgenstein
+
+Südestfalen:
+  gender: False
+  cases:
+    genetiv: Südwestfalens
+  districts:
+    - Hochsauerlandkreis
+    - Märkischer Kreis
+    - Kreis Olpe
+    - Kreis Soest
     - Kreis Siegen-Wittgenstein
 
 Westfalen:
@@ -200,12 +264,17 @@ Bergisches Land:
     - Rheinisch-Bergischer Kreis
     - Rhein-Sieg-Kreis
 
+Oberbergisches Land:
+  gender: das
+  cases:
+    genetiv: des Oberbergischen Landes
+  districts: 
+    - Rheinisch-Bergischer Kreis
+    - Oberbergischer Kreis
+    - Rhein-Sieg-Kreis
+    - Stadt Leverkusen
+
 Eifel:
   gender: die
   cases:
     genetiv: der Eifel
-
-Soester Boerde:
-  gender: die
-  cases:
-    genetiv: der Soester Boerde
