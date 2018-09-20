@@ -26,7 +26,7 @@ def feed():
     fg.language('de')
 
     # Iterate over the most recent 50 events matching filter
-    for event in db.query(SEVERITY_FILTER, STATES_FILTER):
+    for event in reversed(db.query(SEVERITY_FILTER, STATES_FILTER)):
         fe = fg.add_entry()
         fe.id(event['id'])
         fe.title(generate.headline(event))
