@@ -23,7 +23,7 @@ def qualify_region(region_tuple):
     elif relevance < 1.0:
         prefix = 'Der Großteil'
     else:
-        gender = REGIONS[name]['gender']
+        gender = REGIONS[name]['grammar']['gender']
         if gender:
             return f'{gender.capitalize()} gesamte {name}'
         else:

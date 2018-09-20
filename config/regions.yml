@@ -1,7 +1,7 @@
 ---
 Ruhrgebiet:
-  gender: das
-  cases:
+  grammar:
+    gender: das
     genitive: Ruhrgebiets
   districts:
     - Kreis Mettmann
@@ -23,8 +23,8 @@ Ruhrgebiet:
     - Kreis Wesel
 
 Westliches Ruhrgebiet:
-  gender: das
-  cases:
+  grammar:
+    gender: das
     genitive: westlichen Ruhrgebiets
   districts:
     - Kreis Wesel
@@ -37,8 +37,8 @@ Westliches Ruhrgebiet:
     - Stadt Essen
 
 Östliches Ruhrgebiet:
-  gender: das
-  cases:
+  grammar:
+    gender: das
     genitive: östlichen Ruhrgebiets
   districts:
     - Kreis Recklinghausen
@@ -51,8 +51,8 @@ Westliches Ruhrgebiet:
     - Stadt Hamm
 
 Emscher-Lippe-Region:
-  gender: die
-  cases:
+  grammar:
+    gender: die
     genitive: Emscher-Lippe-Region
   districts:
     - Stadt Bottrop
@@ -60,8 +60,8 @@ Emscher-Lippe-Region:
     - Stadt Gelsenkirchen
 
 Köln-Bonner Raum:
-  gender: der
-  cases:
+  grammar:
+    gender: der
     genitive: Köln-Bonner Raums
   districts:
     - Stadt Köln
@@ -71,8 +71,8 @@ Köln-Bonner Raum:
     - Rheinisch-Bergischer Kreis
 
 Süden von NRW:
-  gender: der
-  cases:
+  grammar:
+    gender: der
     genitive: Südens von NRW
   districts:
     - Stadt Köln
@@ -88,8 +88,8 @@ Süden von NRW:
     - Kreis Siegen-Wittgenstein
 
 Niederrhein:
-  gender: der
-  cases:
+  grammar:
+    gender: der
     genitive: Niederrheins
   districts:
     - Kreis Kleve
@@ -103,8 +103,8 @@ Niederrhein:
     - Kreis Heinsberg
 
 Niederrheinisches Tiefland:
-  gender: das
-  cases:
+  grammar:
+    gender: das
     genitive: Niederrheinischen Tieflands
   districts:
     - Kreis Heinsberg 
@@ -119,8 +119,8 @@ Niederrheinisches Tiefland:
     - Kreis Borken
 
 Münsterland:
-  gender: das
-  cases:
+  grammar:
+    gender: das
     genitive: Münsterlandes
   districts:
     - Stadt Münster
@@ -131,8 +131,8 @@ Münsterland:
     - Stadt Hamm
 
 Nordosten von NRW:
-  gender: der
-  cases:
+  grammar:
+    gender: der
     genitive: Nordostens von NRW
   districts:
     - Kreis Minden-Lübbecke
@@ -145,8 +145,8 @@ Nordosten von NRW:
     - Kreis Warendorf
 
 Sauerland:
-  gender: das
-  cases:
+  grammar:
+    gender: das
     genitive: Sauerlandes
   districts:
     - Kreis Soest
@@ -155,15 +155,15 @@ Sauerland:
     - Kreis Olpe
 
 Siegerland:
-  gender: das
-  cases:
+  grammar:
+    gender: das
     genitive: Siegerlandes
   districts:
     - Kreis Siegen-Wittgenstein
 
 Südwestfalen:
   gender: False
-  cases:
+  grammar:
     genitive: Südwestfalens
   districts:
     - Hochsauerlandkreis
@@ -174,7 +174,7 @@ Südwestfalen:
 
 Westfalen:
   gender: False
-  cases:
+  grammar:
     genitive: Westfalens
   districts:
     - Ennepe-Ruhr-Kreis
@@ -206,8 +206,8 @@ Westfalen:
     - Stadt Münster
 
 Rheinland:
-  gender: das
-  cases:
+  grammar:
+    gender: das
     genitive: Rheinlandes
   districts:
     - StädteRegion Aachen
@@ -239,7 +239,7 @@ Rheinland:
 
 Ostwestfalen-Lippe:
   gender: False
-  cases:
+  grammar:
     genitive: von Ostwestfalen-Lippe
   districts:
     - Kreis Minden-Lübbecke
@@ -251,8 +251,8 @@ Ostwestfalen-Lippe:
     - Kreis Höxter
 
 Bergisches Land:
-  gender: das
-  cases:
+  grammar:
+    gender: das
     genitive: Bergischen Landes
   districts:
     - Stadt Wuppertal
@@ -265,8 +265,8 @@ Bergisches Land:
     - Rhein-Sieg-Kreis
 
 Oberbergisches Land:
-  gender: das
-  cases:
+  grammar:
+    gender: das
     genitive: Oberbergischen Landes
   districts: 
     - Rheinisch-Bergischer Kreis
@@ -275,6 +275,6 @@ Oberbergisches Land:
     - Stadt Leverkusen
 
 Eifel:
-  gender: die
-  cases:
+  grammar:
+    gender: die
     genitive: Eifel

@@ -7,8 +7,9 @@ def genitive(region):
         'die': 'der',
         'das': 'des',
     }
-    if not region['gender']:
-        return region['cases']['genitive']
+    grammar = region['grammar']
+    if not grammar['gender']:
+        return grammar['genitive']
     else:
-        article = article_mapping[region['gender']]
-        return f'{article} {region["cases"]["genitive"]}'
+        article = article_mapping[grammar['gender']]
+        return f'{article} {grammar["genitive"]}'
