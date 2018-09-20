@@ -31,6 +31,7 @@ def feed():
         fe.id(event['id'])
         fe.title(generate.headline(event))
         fe.link(href=f'{URL_BASE}wina/{event["id"]}')
+        fe.published(event['sent'])
         fe.description(generate.description(event).replace('\n', '<br>'))
 
     r = Response(fg.rss_str(pretty=True), mimetype='application/rss+xml')
