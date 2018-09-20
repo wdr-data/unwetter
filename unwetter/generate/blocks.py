@@ -72,12 +72,13 @@ def dates(event):
     else:
         onset_date = onset.strftime("%d.%m.%Y")
 
-    if expires.date() == today:
-        expires_date = 'Heute'
-    elif expires.date() == today + timedelta(days=1):
-        expires_date = 'Morgen'
-    else:
-        expires_date = expires.strftime("%d.%m.%Y")
+    if expires:
+        if expires.date() == today:
+            expires_date = 'Heute'
+        elif expires.date() == today + timedelta(days=1):
+            expires_date = 'Morgen'
+        else:
+            expires_date = expires.strftime("%d.%m.%Y")
 
     if not expires: 
         return f'ab {onset_date}, {onset.strftime("%H:%M")} Uhr (kein Ende der Gültigkeit angegeben)'
