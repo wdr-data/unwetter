@@ -1,0 +1,17 @@
+---
+
+# Which degrees of severity to track
+# Possible values: Minor, Moderate, Severe, Extreme
+SEVERITY_FILTER:
+  - Minor
+  - Moderate
+  - Severe
+  - Extreme
+
+# Which states to track
+# Possible values: SH, HH, NI, HB, NW, HE, RP, BW, BY, SL, BE, BB, NV, SN, ST, TH
+STATES_FILTER:
+  - NW
+  - BY
+  - BW
+  - SH

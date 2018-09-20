@@ -4,11 +4,7 @@ from feedgen.feed import FeedGenerator
 from flask import Flask, Response
 
 from unwetter import db, generate, wina as wina_gen
-
-
-# Configuration
-SEVERITY_FILTER = ['Minor', 'Moderate', 'Severe', 'Extreme']  # Which degrees of severity to track
-STATES_FILTER = ['NW', 'BY', 'BW', 'SH']  # Which states to track
+from unwetter.config import SEVERITY_FILTER, STATES_FILTER
 
 
 URL_BASE = 'https://unwetter-bot.herokuapp.com/'
