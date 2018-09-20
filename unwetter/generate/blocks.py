@@ -2,6 +2,7 @@
 
 from ..regions import REGIONS
 from .grammar import *
+from .helpers import *
 
 severities = {
     'Minor': 'Wetterwarnung',
@@ -23,11 +24,7 @@ def qualify_region(region_tuple):
     elif relevance < 1.0:
         prefix = 'Der Großteil'
     else:
-        gender = REGIONS[name]['grammar']['gender']
-        if gender:
-            return f'{gender.capitalize()} gesamte {name}'
-        else:
-            return f'Ganz {name}'
+        return upper_first(definite_article(REGIONS[name], 'gesamte', 'ganz'))
 
     return f'{prefix} {genitive(REGIONS[name])}'
 

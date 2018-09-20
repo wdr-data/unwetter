@@ -26,6 +26,7 @@ Westliches Ruhrgebiet:
   grammar:
     gender: das
     genitive: westlichen Ruhrgebiets
+    definite_article: westliche Ruhrgebiet
   districts:
     - Kreis Wesel
     - Stadt Duisburg
@@ -40,6 +41,7 @@ Westliches Ruhrgebiet:
   grammar:
     gender: das
     genitive: östlichen Ruhrgebiets
+    definite_article: östliche Ruhrgebiet
   districts:
     - Kreis Recklinghausen
     - Stadt Herne
@@ -106,6 +108,7 @@ Niederrheinisches Tiefland:
   grammar:
     gender: das
     genitive: Niederrheinischen Tieflands
+    definite_article: Niederrheinische Tiefland
   districts:
     - Kreis Heinsberg 
     - Kreis Viersen
@@ -162,8 +165,8 @@ Siegerland:
     - Kreis Siegen-Wittgenstein
 
 Südwestfalen:
-  gender: False
   grammar:
+    gender: False
     genitive: Südwestfalens
   districts:
     - Hochsauerlandkreis
@@ -173,8 +176,8 @@ Südwestfalen:
     - Kreis Siegen-Wittgenstein
 
 Westfalen:
-  gender: False
   grammar:
+    gender: False
     genitive: Westfalens
   districts:
     - Ennepe-Ruhr-Kreis
@@ -238,8 +241,8 @@ Rheinland:
     - Kreis Düren
 
 Ostwestfalen-Lippe:
-  gender: False
   grammar:
+    gender: False
     genitive: von Ostwestfalen-Lippe
   districts:
     - Kreis Minden-Lübbecke
@@ -254,6 +257,7 @@ Bergisches Land:
   grammar:
     gender: das
     genitive: Bergischen Landes
+    definite_article: Bergische Land
   districts:
     - Stadt Wuppertal
     - Stadt Remscheid
@@ -268,6 +272,7 @@ Oberbergisches Land:
   grammar:
     gender: das
     genitive: Oberbergischen Landes
+    definite_article: Oberbergische Land
   districts: 
     - Rheinisch-Bergischer Kreis
     - Oberbergischer Kreis
