@@ -71,6 +71,7 @@ def update():
     
     return new_events
 
+
 def query(severities, states, limit=50):
     """
 
