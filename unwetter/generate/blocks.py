@@ -2,6 +2,7 @@
 
 from ..regions import REGIONS
 from .grammar import *
+from .helpers import upper_first
 
 severities = {
     'Minor': 'Wetterwarnung',
