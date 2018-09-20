@@ -16,15 +16,15 @@ def qualify_region(region_tuple):
     name, relevance = region_tuple[:2]
 
     if relevance < 0.2:
-        prefix = 'Einzelne Teile'
+        prefix = 'einzelne Teile'
     elif relevance < 0.6:
         prefix = 'Teile'
     elif relevance < 0.8:
-        prefix = 'Weite Teile'
+        prefix = 'weite Teile'
     elif relevance < 1.0:
-        prefix = 'Der Großteil'
+        prefix = 'der Großteil'
     else:
-        return upper_first(definite_article(REGIONS[name], 'gesamte', 'ganz'))
+        return definite_article(REGIONS[name], 'gesamte', 'ganz')
 
     return f'{prefix} {genitive(REGIONS[name])}'
 
