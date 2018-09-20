@@ -3,6 +3,8 @@
 import os
 
 import pymongo
+import pytz
+from bson import CodecOptions
 from pymongo import MongoClient
 
 from . import dwd
@@ -14,8 +16,15 @@ try:
 except KeyError:
     mongo_db = MongoClient().unwetter
 
-collection = mongo_db.events
-collection_meta = mongo_db.events_meta
+collection = mongo_db.events.with_options(codec_options=CodecOptions(
+    tz_aware=True,
+    tzinfo=pytz.timezone('Europe/Berlin'),
+))
+
+collection_meta = mongo_db.events_meta.with_options(codec_options=CodecOptions(
+    tz_aware=True,
+    tzinfo=pytz.timezone('Europe/Berlin'),
+))
 
 
 def last_updated():
