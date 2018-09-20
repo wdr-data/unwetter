@@ -107,7 +107,11 @@ def latest_reference(references):
         'id': {'$in': references},
     }
 
-    return collection.find(filter).sort([('sent', pymongo.DESCENDING)]).limit(1)[0]
+    try:
+        return collection.find(filter).sort([('sent', pymongo.DESCENDING)]).limit(1)[0]
+    except IndexError:
+        print(f'Could not find object for references')
+        return None
 
 
 def clear():

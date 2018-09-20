@@ -73,7 +73,7 @@ def describe_update(event):
 
 +++ Änderungen zur Meldung mit Agenturzeit {old_time} +++
 
-{changes(event, old_event)}
+{changes(event, old_event) if old_event else 'Unbekannt'}
 
 ---
 
