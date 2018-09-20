@@ -2,7 +2,7 @@
 Ruhrgebiet:
   gender: das
   cases:
-    genetiv: des Ruhrgebiets
+    genitive: Ruhrgebiets
   districts:
     - Kreis Mettmann
     - Stadt Mülheim an der Ruhr
@@ -25,7 +25,7 @@ Ruhrgebiet:
 Westliches Ruhrgebiet:
   gender: das
   cases:
-    genetiv: des westlichen Ruhrgebiets
+    genitive: westlichen Ruhrgebiets
   districts:
     - Kreis Wesel
     - Stadt Duisburg
@@ -39,7 +39,7 @@ Westliches Ruhrgebiet:
 Östliches Ruhrgebiet:
   gender: das
   cases:
-    genetiv: des östlichen Ruhrgebiets
+    genitive: östlichen Ruhrgebiets
   districts:
     - Kreis Recklinghausen
     - Stadt Herne
@@ -53,7 +53,7 @@ Westliches Ruhrgebiet:
 Emscher-Lippe-Region:
   gender: die
   cases:
-    genetiv: der Emscher-Lippe-Region
+    genitive: Emscher-Lippe-Region
   districts:
     - Stadt Bottrop
     - Kreis Recklinghausen
@@ -62,7 +62,7 @@ Emscher-Lippe-Region:
 Köln-Bonner Raum:
   gender: der
   cases:
-    genetiv: des Köln-Bonner Raums
+    genitive: Köln-Bonner Raums
   districts:
     - Stadt Köln
     - Rhein-Erft-Kreis
@@ -73,7 +73,7 @@ Köln-Bonner Raum:
 Süden von NRW:
   gender: der
   cases:
-    genetiv: des Südens von NRW
+    genitive: Südens von NRW
   districts:
     - Stadt Köln
     - Rhein-Erft-Kreis
@@ -90,7 +90,7 @@ Süden von NRW:
 Niederrhein:
   gender: der
   cases:
-    genetiv: des Niederrheins
+    genitive: Niederrheins
   districts:
     - Kreis Kleve
     - Kreis Wesel
@@ -105,7 +105,7 @@ Niederrhein:
 Niederrheinisches Tiefland:
   gender: das
   cases:
-    genetiv: des Niederrheinischen Tieflands
+    genitive: Niederrheinischen Tieflands
   districts:
     - Kreis Heinsberg 
     - Kreis Viersen
@@ -121,7 +121,7 @@ Niederrheinisches Tiefland:
 Münsterland:
   gender: das
   cases:
-    genetiv: des Münsterlandes
+    genitive: Münsterlandes
   districts:
     - Stadt Münster
     - Kreis Steinfurt
@@ -133,7 +133,7 @@ Münsterland:
 Nordosten von NRW:
   gender: der
   cases:
-    genetiv: des Nordostens von NRW
+    genitive: Nordostens von NRW
   districts:
     - Kreis Minden-Lübbecke
     - Kreis Herford
@@ -147,7 +147,7 @@ Nordosten von NRW:
 Sauerland:
   gender: das
   cases:
-    genetiv: des Sauerlandes
+    genitive: Sauerlandes
   districts:
     - Kreis Soest
     - Hochsauerlandkreis
@@ -157,14 +157,14 @@ Sauerland:
 Siegerland:
   gender: das
   cases:
-    genetiv: des Siegerlandes
+    genitive: Siegerlandes
   districts:
     - Kreis Siegen-Wittgenstein
 
 Südwestfalen:
   gender: False
   cases:
-    genetiv: Südwestfalens
+    genitive: Südwestfalens
   districts:
     - Hochsauerlandkreis
     - Märkischer Kreis
@@ -175,7 +175,7 @@ Südwestfalen:
 Westfalen:
   gender: False
   cases:
-    genetiv: Westfalens
+    genitive: Westfalens
   districts:
     - Ennepe-Ruhr-Kreis
     - Hochsauerlandkreis
@@ -208,7 +208,7 @@ Westfalen:
 Rheinland:
   gender: das
   cases:
-    genetiv: des Rheinlandes
+    genitive: Rheinlandes
   districts:
     - StädteRegion Aachen
     - Stadt Bonn
@@ -240,7 +240,7 @@ Rheinland:
 Ostwestfalen-Lippe:
   gender: False
   cases:
-    genetiv: von Ostwestfalen-Lippe
+    genitive: von Ostwestfalen-Lippe
   districts:
     - Kreis Minden-Lübbecke
     - Kreis Herford
@@ -253,7 +253,7 @@ Ostwestfalen-Lippe:
 Bergisches Land:
   gender: das
   cases:
-    genetiv: des Bergischen Landes
+    genitive: Bergischen Landes
   districts:
     - Stadt Wuppertal
     - Stadt Remscheid
@@ -267,7 +267,7 @@ Bergisches Land:
 Oberbergisches Land:
   gender: das
   cases:
-    genetiv: des Oberbergischen Landes
+    genitive: Oberbergischen Landes
   districts: 
     - Rheinisch-Bergischer Kreis
     - Oberbergischer Kreis
@@ -277,4 +277,4 @@ Oberbergisches Land:
 Eifel:
   gender: die
   cases:
-    genetiv: der Eifel
+    genitive: Eifel

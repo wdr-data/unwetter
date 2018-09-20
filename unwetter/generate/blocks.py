@@ -29,8 +29,7 @@ def qualify_region(region_tuple):
         else:
             return f'Ganz {name}'
 
-    genitive = REGIONS[name]['cases']['genitive']
-    return f'{prefix} {genitive}'
+    return f'{prefix} {genitive(REGIONS[name])}'
 
 
 def region_list(event):
