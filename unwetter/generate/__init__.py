@@ -148,7 +148,7 @@ def crawl(event):
         for word in event['event'].split()
     ).replace('Schwer', 'schwer')
 
-    for lower_word in ('Heftig', 'Schwer', 'Starke'):
+    for lower_word in ('Heftig', 'Schwer', 'Starke', 'Extrem'):
         text = text.replace(lower_word, lower_word.lower())
 
     text = upper_first(text)
