@@ -65,7 +65,11 @@ Informationen und Kontakt: {os.environ["WDR_PROJECT_INFO_URL"]}
 def describe_update(event):
 
     old_event = db.latest_reference(event['references'])
-    old_time = old_event['sent'].strftime("%d.%m.%Y, %H:%M:%S Uhr")
+
+    if old_event:
+        old_time = old_event['sent'].strftime("%d.%m.%Y, %H:%M:%S Uhr")
+    else:
+        old_time = 'Unbekannt'
 
     text = f'''
 {title(event)}
