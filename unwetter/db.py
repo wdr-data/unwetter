@@ -63,6 +63,9 @@ def update():
     new_events = []
 
     for event in events:
+        if event['status'] == 'Test':
+            continue
+
         if collection.count_documents({'id': event['id']}):
             continue
         collection.insert_one(event)
