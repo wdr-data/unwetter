@@ -6,7 +6,7 @@ Contains regular jobs like updating the DB
 
 from apscheduler.schedulers.blocking import BlockingScheduler
 
-from unwetter import db, slack, generate
+from unwetter import db, slack, generate, wina
 
 sched = BlockingScheduler()
 
@@ -19,8 +19,11 @@ def update_db():
     """
     print('Running update job')
     new_events = db.update()
+
     for event in new_events:
         slack.send_to_slack(generate.description(event))
+
+    wina.upload([event['id'] for event in new_events])
 
 
 sched.start()
