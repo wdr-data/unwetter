@@ -60,12 +60,16 @@ def update():
 
     from pprint import pprint
 
+    new_events = []
+
     for event in events:
         if collection.count_documents({'id': event['id']}):
             continue
         collection.insert_one(event)
+        new_events.append(event)
         pprint(event)
-
+    
+    return new_events
 
 def query(severities, states, limit=50):
     """
