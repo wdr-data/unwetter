@@ -22,6 +22,9 @@ def update_db():
     print('Running update job')
     new_events = db.update()
 
+    if not new_events:
+        return
+
     wina.upload([event['id'] for event in new_events])
 
     for event in new_events:
