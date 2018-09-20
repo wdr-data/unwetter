@@ -22,10 +22,7 @@ def headline(event):
     return f'DETAILS zur amtlichen UNWETTERWARNUNG für NORDRHEIN-WESTFALEN des DWD ({postfix})'
 
 
-def description(event):
-    """
-    Return main body text
-    """
+def describe_new_event(event):
     text = f'''
 {title(event)}
 
@@ -35,17 +32,23 @@ Regionale Zuordnung: {region_list(event)}
 
 Gültigkeit: {upper_first(dates(event))}.
 
-Textvorschlag TV-Crawl: {crawl(event)}
-
 Warnung vor: {parameters(event)}
 
 Betroffene Kreise und Städte: {', '.join(area['name'] for area in event['areas'])}
 
-Warnmeldung: {event['description']}
-
 Verhaltenshinweise: {event['instruction'] or ''}
 
-Dieser Text basiert auf offiziellen Informationen des Deutschen Wetterdienstes:
+
++++ Textvorschläge +++
+
+TV-Crawl: {crawl(event)}
+
+Meldung des DWD: {event['description']}
+
+Hinweis: Textvorschläge für den TV-Crawl werden im WDR automatisch generiert.
+---
+
+Diese Meldung basiert auf offiziellen Informationen des Deutschen Wetterdienstes:
 https://www.dwd.de/DE/wetter/warnungen_gemeinden/warnkarten/warnWetter_nrw_node.html?bundesland=nrw
 
 Die Bereitstellung dieser Information ist ein Projekt des Digitalen Wandels und wird aktiv weiterentwickelt.
@@ -56,6 +59,66 @@ Informationen und Kontakt: {os.environ["WDR_PROJECT_INFO_URL"]}
         text = text.replace(f'{optional} \n\n', '')
 
     return text
+
+
+def describe_update(event):
+
+    old_event = db.latest_reference(event['references'])
+    old_time = old_event['sent'].strftime("%d.%m.%Y, %H:%M:%S Uhr")
+
+    text = f'''
+{title(event)}
+
+
++++ Änderungen zur Meldung mit Agenturzeit {old_time} +++
+
+{changes(event, old_event)}
+
+---
+
+Warnstufe: {severities[event['severity']]}
+
+Regionale Zuordnung: {region_list(event)}
+
+Gültigkeit: {upper_first(dates(event))}.
+
+Warnung vor: {parameters(event)}
+
+Betroffene Kreise und Städte: {', '.join(area['name'] for area in event['areas'])}
+
+Verhaltenshinweise: {event['instruction'] or ''}
+
+
++++ Textvorschläge +++
+
+TV-Crawl: {crawl(event)}
+
+Meldung des DWD: {event['description']}
+
+Hinweis: Textvorschläge für den TV-Crawl werden im WDR automatisch generiert.
+---
+
+Diese Meldung basiert auf offiziellen Informationen des Deutschen Wetterdienstes:
+https://www.dwd.de/DE/wetter/warnungen_gemeinden/warnkarten/warnWetter_nrw_node.html?bundesland=nrw
+
+Die Bereitstellung dieser Information ist ein Projekt des Digitalen Wandels und wird aktiv weiterentwickelt.
+Informationen und Kontakt: {os.environ["WDR_PROJECT_INFO_URL"]}
+    '''.strip()
+
+    for optional in ['Regionale Zuordnung:', 'Warnung vor:', 'Verhaltenshinweise:']:
+        text = text.replace(f'{optional} \n\n', '')
+
+    return text
+
+
+def description(event):
+    """
+    Return main body text
+    """
+    if event['msg_type'] == 'Alert':
+        return describe_new_event(event)
+    else:
+        return describe_update(event)
 
 
 def crawl(event):

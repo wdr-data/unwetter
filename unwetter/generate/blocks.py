@@ -2,7 +2,6 @@
 
 from ..regions import REGIONS
 from .grammar import *
-from .helpers import *
 
 severities = {
     'Minor': 'Wetterwarnung',
@@ -76,3 +75,46 @@ def parameters(event):
         f'{param} ({value.replace("[", "").replace("]", "")})'
         for param, value in event['parameters'].items()
     )
+
+
+def changes(event, old_event):
+    """
+    Generate a list of changes between two events
+    :param event:
+    :param old_event:
+    :return: str
+    """
+    text = ''
+
+    if dates(old_event) != dates(event):
+        text += f'Gültigkeit: {dates(event)} (War "{dates(old_event)}")\n'
+
+    simple_fields = {
+        'certainty': 'Wahrscheinlichkeit',
+        'description': 'Beschreibung',
+        'event': 'Wetterphänomen',
+        'instruction': 'Verhaltenshinweise',
+        'severity': 'Warnstufe',
+    }
+
+    for field in simple_fields:
+        if old_event.get(field) != event.get(field):
+            text += f'{simple_fields[field]}: {event[field]} ' \
+                    f'(War "{old_event.get(field, "Nicht angegeben")}")\n'
+
+    if area_list(old_event) != area_list(event):
+        areas_now = set(area['name'] for area in event['areas'])
+        areas_before = set(area['name'] for area in old_event['areas'])
+
+        added = areas_now - areas_before
+        removed = areas_before - areas_now
+
+        if added:
+            text += f'Neue Kreise/Städte: {", ".join(added)}\n'
+
+        if removed:
+            text += f'Neue Kreise/Städte: {", ".join(removed)}\n'
+
+        text += f'Regionale Zuordnung: {region_list(event)} (War "{region_list(old_event)}")\n'
+
+    return text
