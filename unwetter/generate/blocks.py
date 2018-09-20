@@ -1,5 +1,7 @@
 #!/user/bin/env python3.6
 
+from datetime import datetime, timedelta
+
 from ..regions import REGIONS
 from .grammar import *
 from .helpers import upper_first
@@ -61,14 +63,30 @@ def title(event):
 def dates(event):
     onset = event['onset']
     expires = event['expires']
+    today = datetime.utcnow().date()
+
+    if onset.date() == today:
+        onset_date = 'Heute'
+    elif onset.date() == today + timedelta(days=1):
+        onset_date = 'Morgen'
+    else:
+        onset_date = onset.strftime("%d.%m.%Y")
+
+    if expires.date() == today:
+        expires_date = 'Heute'
+    elif expires.date() == today + timedelta(days=1):
+        expires_date = 'Morgen'
+    else:
+        expires_date = expires.strftime("%d.%m.%Y")
+
     if not expires: 
-        return f'ab {onset.strftime("%d.%m.%Y, %H:%M")} Uhr (kein Ende der Gültigkeit angegeben)'
+        return f'ab {onset_date}, {onset.strftime("%H:%M")} Uhr (kein Ende der Gültigkeit angegeben)'
     elif onset.date() == expires.date():
-        return f'am {onset.strftime("%d.%m.%Y von %H:%M")} Uhr ' \
+        return f'{onset_date}, von {onset.strftime("%H:%M")} Uhr ' \
                f'bis {expires.strftime("%H:%M")} Uhr'
     else:
-        return f'von {onset.strftime("%d.%m.%Y, %H:%M")} Uhr ' \
-               f'bis {expires.strftime("%d.%m.%Y, %H:%M")} Uhr'
+        return f'von {onset_date}, {onset.strftime("%H:%M")} Uhr ' \
+               f'bis {expires_date}, {expires.strftime("%H:%M")} Uhr'
 
 
 def parameters(event):
