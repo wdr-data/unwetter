@@ -2,6 +2,7 @@
 
 import os
 
+from .. import db
 from .blocks import *
 from .helpers import rreplace, upper_first
 
