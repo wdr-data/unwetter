@@ -46,16 +46,17 @@ def wina(id):
 @app.route('/slack/event', methods=['GET', 'POST'])
 def slack_event():
     data = request.json
-    
+
+    print('Headers:', request.headers)
+    print('Request data:', request.data)
+    print('Request JSON:', data)
+
     if not data:
         return ''
     
     if data.get('challenge'):
         return data.get('challenge')
 
-    print('Headers:', request.headers)
-    print('Request data:', request.data)
-    print('Request JSON:', data)
     return ''
 
 
