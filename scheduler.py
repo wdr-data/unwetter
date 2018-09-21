@@ -8,7 +8,7 @@ from time import sleep
 
 from apscheduler.schedulers.blocking import BlockingScheduler
 
-from unwetter import db, slack, generate, wina
+from unwetter import db, slack, wina
 from unwetter.config import SEVERITY_FILTER, STATES_FILTER
 
 
@@ -38,43 +38,7 @@ def update_db():
 
     for event in new_events:
         print(f'Sending event {event["id"]} to Slack')
-        slack.post_message(generate.description(event, short=True), [
-            {
-                "fallback": "Textvorschläge generieren",
-                "title": "Textvorschläge generieren",
-                "text": "Textvorschläge für Twitter und den TV-Crawl werden im WDR automatisch "
-                        "generiert.",
-                "callback_id": event['id'],
-                "color": "#3AA3E3",
-                "attachment_type": "default",
-                "actions": [
-                    {
-                        "name": "twitter",
-                        "text": ":bird: Twitter",
-                        "type": "button",
-                        "value": "twitter",
-                    },
-                    {
-                        "name": "crawl",
-                        "text": ":tv: TV-Crawl",
-                        "type": "button",
-                        "value": "crawl",
-                    },
-                    {
-                        "name": "dwd",
-                        "text": ":cloud: DWD Meldung",
-                        "type": "button",
-                        "value": "dwd",
-                    },
-                    {
-                        "name": "info",
-                        "text": ":question: Infos zum Projekt",
-                        "type": "button",
-                        "value": "info",
-                    },
-                ],
-            },
-        ])
+        slack.post_event(event)
         sleep(1)
 
 
