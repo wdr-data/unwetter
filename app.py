@@ -47,7 +47,7 @@ def wina(id):
 def slack_event():
     if request.args.get('challenge'):
         return request.args.get('challenge')
-    print(request.json)
+    print(request.data)
     return ''
 
 
