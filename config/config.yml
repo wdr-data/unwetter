@@ -12,6 +12,3 @@ SEVERITY_FILTER:
 # Possible values: SH, HH, NI, HB, NW, HE, RP, BW, BY, SL, BE, BB, NV, SN, ST, TH
 STATES_FILTER:
   - NW
-  - BY
-  - BW
-  - SH
