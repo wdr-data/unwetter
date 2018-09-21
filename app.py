@@ -48,6 +48,7 @@ def slack_event():
     data = request.json
 
     print('Headers:', request.headers)
+    print('Form:', request.form)
     print('Request data:', request.data)
     print('Request JSON:', data)
 
