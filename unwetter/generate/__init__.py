@@ -1,6 +1,7 @@
 #!/user/bin/env python3.6
 
 import os
+import re
 
 from .. import db
 from .blocks import *
@@ -124,14 +125,20 @@ Informationen und Kontakt: {os.environ["WDR_PROJECT_INFO_URL"]}
     return text
 
 
-def description(event):
+def description(event, short=False):
     """
     Return main body text
     """
     if event['msg_type'] == 'Alert':
-        return describe_new_event(event)
+        text = describe_new_event(event)
     else:
-        return describe_update(event)
+        text = describe_update(event)
+
+    if short:
+        # Delete generated texts
+        text = re.sub(r'\+\+\+ Textvorschläge \+\+\+.*?\+\+\+', '', flags=re.DOTALL)
+
+    return text
 
 
 def crawl(event):

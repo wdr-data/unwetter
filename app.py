@@ -74,6 +74,8 @@ def slack_event():
             response = 'Vorschlag Tweet:\n' + generate.tweet(db.by_id(id))
         elif action['name'] == 'crawl':
             response = 'Vorschlag TV-Crawl:\n' + generate.crawl(db.by_id(id))
+        elif action['name'] == 'dwd':
+            response = 'Offizielle Meldung des DWD:\n' + db.by_id(id)['description']
 
         if response:
             slack.post_message(response, private=user_id, channel=channel_id)
