@@ -27,6 +27,10 @@ collection_meta = mongo_db.events_meta.with_options(codec_options=CodecOptions(
 ))
 
 
+def by_id(id):
+    return collection.find_one({'id': id})
+
+
 def last_updated():
     """
     :return: The datetime when the event database was last updated with new data from the API

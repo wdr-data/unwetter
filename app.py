@@ -1,11 +1,9 @@
 #!/user/bin/env python3.6
 
-from flask import json
+from feedgen.feed import FeedGenerator
+from flask import Flask, Response, request, json
 
-from feedgen.feed import FeedGenerator 
-from flask import Flask, Response, request, jsonify
-
-from unwetter import db, generate, wina as wina_gen
+from unwetter import db, generate, wina as wina_gen, slack
 from unwetter.config import SEVERITY_FILTER, STATES_FILTER
 
 
@@ -61,6 +59,24 @@ def slack_event():
         data = json.loads(payload)
 
     print(data)
+
+    actions = data.get('actions')
+
+    if actions:
+        action = actions[0]
+        id = data['callback_id']
+        channel_id = data['channel']['id']
+        user_id = data['user']['id']
+
+        response = None
+
+        if action['name'] == 'twitter':
+            response = generate.tweet(db.by_id(id))
+        elif action['name'] == 'crawl':
+            response = generate.crawl(db.by_id(id))
+
+        if response:
+            slack.post_message(response, private=user_id, channel=channel_id)
 
     return ''
 
