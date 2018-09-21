@@ -1,5 +1,7 @@
 #!/user/bin/env python3.6
 
+from flask import json
+
 from feedgen.feed import FeedGenerator 
 from flask import Flask, Response, request, jsonify
 
@@ -45,18 +47,20 @@ def wina(id):
 
 @app.route('/slack/event', methods=['GET', 'POST'])
 def slack_event():
-    data = request.json
-
-    print('Headers:', request.headers)
-    print('Form:', request.form)
-    print('Request data:', request.data)
-    print('Request JSON:', data)
+    data = request.json or request.form
 
     if not data:
         return ''
-    
+
     if data.get('challenge'):
         return data.get('challenge')
+
+    payload = data.get('payload')
+
+    if payload:
+        data = json.loads(payload)
+
+    print(data)
 
     return ''
 
