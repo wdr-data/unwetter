@@ -3,8 +3,6 @@
 # Which degrees of severity to track
 # Possible values: Minor, Moderate, Severe, Extreme
 SEVERITY_FILTER:
-  - Minor
-  - Moderate
   - Severe
   - Extreme
 
