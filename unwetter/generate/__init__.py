@@ -1,7 +1,6 @@
 #!/user/bin/env python3.6
 
 import os
-import re
 
 from .. import db
 from .blocks import *
@@ -136,7 +135,7 @@ def description(event, short=False):
 
     if short:
         # Delete generated texts
-        text = re.sub(r'\+\+\+ Textvorschläge \+\+\+.*?\+\+\+', '+++', text, flags=re.DOTALL)
+        text = text.split('+++ Textvorschläge +++')[0].strip()
 
     return text
 

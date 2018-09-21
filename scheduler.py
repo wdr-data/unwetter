@@ -66,6 +66,12 @@ def update_db():
                         "type": "button",
                         "value": "dwd",
                     },
+                    {
+                        "name": "info",
+                        "text": ":question: Infos zum Projekt",
+                        "type": "button",
+                        "value": "info",
+                    },
                 ],
             },
         ])

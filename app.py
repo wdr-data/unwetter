@@ -1,5 +1,7 @@
 #!/user/bin/env python3.6
 
+import os
+
 from feedgen.feed import FeedGenerator
 from flask import Flask, Response, request, json
 
@@ -76,6 +78,14 @@ def slack_event():
             response = 'Vorschlag TV-Crawl:\n' + generate.crawl(db.by_id(id))
         elif action['name'] == 'dwd':
             response = 'Offizielle Meldung des DWD:\n' + db.by_id(id)['description']
+        elif action['name'] == 'info':
+            response = f'''
+Diese Meldung basiert auf offiziellen Informationen des Deutschen Wetterdienstes:
+https://www.dwd.de/DE/wetter/warnungen_gemeinden/warnkarten/warnWetter_nrw_node.html?bundesland=nrw
+
+Die Bereitstellung dieser Information ist ein Projekt des Digitalen Wandels und wird aktiv weiterentwickelt.
+Informationen und Kontakt: {os.environ["WDR_PROJECT_INFO_URL"]}
+            '''.strip()
 
         if response:
             slack.post_message(response, private=user_id, channel=channel_id)
