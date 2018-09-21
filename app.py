@@ -1,7 +1,7 @@
 #!/user/bin/env python3.6
 
 from feedgen.feed import FeedGenerator 
-from flask import Flask, Response
+from flask import Flask, Response, request, jsonify
 
 from unwetter import db, generate, wina as wina_gen
 from unwetter.config import SEVERITY_FILTER, STATES_FILTER
@@ -41,6 +41,12 @@ def wina(id):
     r.headers['Content-Type'] = "text/xml; charset=iso-8859-1"
 
     return r
+
+
+@app.route('/slack/event')
+def slack_event():
+    if request.args.get('challenge'):
+        return request.args.get('challenge')
 
 
 @app.route('/test')
