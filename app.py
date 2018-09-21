@@ -52,8 +52,10 @@ def slack_event():
     
     if data.get('challenge'):
         return data.get('challenge')
-    
-    print(data)
+
+    print('Headers:', request.headers)
+    print('Request data:', request.data)
+    print('Request JSON:', data)
     return ''
 
 
