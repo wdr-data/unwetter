@@ -11,12 +11,13 @@ channel = os.environ.get('SLACK_CHANNEL')
 slack_client = SlackClient(slack_token)
 
 
-def send_to_slack(message):
+def post_message(message, attachments):
     """
-    Send message to Slack on channel
+    Send message with attachments to Slack on channel
     """
     slack_client.api_call(
         'chat.postMessage',
         channel=channel,
         text=message,
+        attachments=attachments,
     )

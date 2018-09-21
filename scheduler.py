@@ -38,7 +38,29 @@ def update_db():
 
     for event in new_events:
         print(f'Sending event {event["id"]} to Slack')
-        slack.send_to_slack(generate.description(event))
+        slack.post_message(generate.description(event), [
+            {
+                "fallback": "Textvorschläge generieren",
+                "title": "Textvorschläge generieren",
+                "callback_id": event['id'],
+                "color": "#3AA3E3",
+                "attachment_type": "default",
+                "actions": [
+                    {
+                        "name": "twitter",
+                        "text": "Twitter",
+                        "type": "button",
+                        "value": "twitter",
+                    },
+                    {
+                        "name": "crawl",
+                        "text": "TV-Crawl",
+                        "type": "button",
+                        "value": "crawl",
+                    },
+                ],
+            },
+        ])
         sleep(1)
 
 
