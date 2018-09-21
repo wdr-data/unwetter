@@ -136,7 +136,7 @@ def description(event, short=False):
 
     if short:
         # Delete generated texts
-        text = re.sub(r'\+\+\+ Textvorschläge \+\+\+.*?\+\+\+', '', flags=re.DOTALL)
+        text = re.sub(r'\+\+\+ Textvorschläge \+\+\+.*?\+\+\+', '', text, flags=re.DOTALL)
 
     return text
 
