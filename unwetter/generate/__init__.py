@@ -48,7 +48,7 @@ TV-Crawl: {crawl(event)}
 
 Meldung des DWD: {event['description']}
 
-Hinweis: Textvorschläge für den TV-Crawl werden im WDR automatisch generiert.
+Hinweis: Textvorschläge für Twitter und den TV-Crawl werden im WDR automatisch generiert.
 
 
 +++ Über diese Meldung +++
@@ -106,7 +106,7 @@ TV-Crawl: {crawl(event)}
 
 Meldung des DWD: {event['description']}
 
-Hinweis: Textvorschläge für den TV-Crawl werden im WDR automatisch generiert.
+Hinweis: Textvorschläge für Twitter und den TV-Crawl werden im WDR automatisch generiert.
 
 
 +++ Über diese Meldung +++
