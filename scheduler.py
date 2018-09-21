@@ -48,13 +48,13 @@ def update_db():
                 "actions": [
                     {
                         "name": "twitter",
-                        "text": "Twitter",
+                        "text": ":bird: Twitter",
                         "type": "button",
                         "value": "twitter",
                     },
                     {
                         "name": "crawl",
-                        "text": "TV-Crawl",
+                        "text": ":tv: TV-Crawl",
                         "type": "button",
                         "value": "crawl",
                     },
