@@ -120,7 +120,7 @@ def changes(event, old_event):
             text += f'Neue Kreise/Städte: {", ".join(added)}\n'
 
         if removed:
-            text += f'Neue Kreise/Städte: {", ".join(removed)}\n'
+            text += f'Nicht mehr betroffene Kreise/Städte: {", ".join(removed)}\n'
 
         text += f'Regionale Zuordnung: {upper_first(region_list(event))} ' \
                 f'(zuvor: "{upper_first(region_list(old_event))}")\n\n'
