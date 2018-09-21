@@ -47,8 +47,8 @@ def wina(id):
 def slack_event():
     if request.args.get('challenge'):
         return request.args.get('challenge')
-    else:
-        return ''
+    print(request.json)
+    return ''
 
 
 @app.route('/test')
