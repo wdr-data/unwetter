@@ -43,7 +43,7 @@ def wina(id):
     return r
 
 
-@app.route('/slack/event')
+@app.route('/slack/event', methods=['GET', 'POST'])
 def slack_event():
     if request.args.get('challenge'):
         return request.args.get('challenge')
