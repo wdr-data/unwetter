@@ -10,3 +10,8 @@ SEVERITY_FILTER:
 # Possible values: SH, HH, NI, HB, NW, HE, RP, BW, BY, SL, BE, BB, NV, SN, ST, TH
 STATES_FILTER:
   - NW
+
+# Which urgency to track
+# Possible values: Future ("Vorabinformation") and Immediate ("Warnung")
+URGENCY_FILTER:
+  - Immediate
