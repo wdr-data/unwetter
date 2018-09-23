@@ -79,11 +79,12 @@ def update():
     return new_events
 
 
-def query(severities, states, limit=50):
+def query(severities, states, urgencies, limit=50):
     """
 
     :param severities: List of severities allowed (eg. ['Severe', 'Extreme'])
     :param states: List of states (eg. ['NW'])
+    :param urgency: List of urgencies (eg. ['Immediate'])
     :param limit: Number of results
     :return: DB Cursor with the results
     """
@@ -96,6 +97,11 @@ def query(severities, states, limit=50):
         filter['states'] = states[0]
     else:
         filter['$or'] = [{'states': state} for state in states]
+
+    if len(urgencies) == 1:
+        filter['urgency'] = urgencies[0]
+    else:
+        filter['$or'] = [{'urgency': urgency} for urgency in urgencies]
 
     return collection.find(filter).sort([('sent', pymongo.DESCENDING)]).limit(limit)
 
