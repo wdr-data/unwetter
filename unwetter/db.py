@@ -98,10 +98,9 @@ def query(severities, states, urgencies, limit=50):
     else:
         filter['$or'] = [{'states': state} for state in states]
 
-    if len(urgencies) == 1:
-        filter['urgency'] = urgencies[0]
-    else:
-        filter['$or'] = [{'urgency': urgency} for urgency in urgencies]
+    filter = {
+        'urgeny': {'$in': urgencies},
+    }
 
     return collection.find(filter).sort([('sent', pymongo.DESCENDING)]).limit(limit)
 
