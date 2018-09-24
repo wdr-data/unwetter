@@ -6,7 +6,7 @@ from feedgen.feed import FeedGenerator
 from flask import Flask, Response, request, json
 
 from unwetter import db, generate, wina as wina_gen, slack
-from unwetter.config import SEVERITY_FILTER, STATES_FILTER
+from unwetter.config import SEVERITY_FILTER, STATES_FILTER, URGENCY_FILTER
 
 
 URL_BASE = 'https://unwetter-bot.herokuapp.com/'
