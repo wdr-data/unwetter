@@ -9,7 +9,7 @@ from time import sleep
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 from unwetter import db, slack, wina
-from unwetter.config import SEVERITY_FILTER, STATES_FILTER
+from unwetter.config import SEVERITY_FILTER, STATES_FILTER, URGENCY_FILTER
 
 
 sched = BlockingScheduler()
