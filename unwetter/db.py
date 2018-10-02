@@ -84,7 +84,7 @@ def query(severities, states, urgencies, limit=50):
 
     :param severities: List of severities allowed (eg. ['Severe', 'Extreme'])
     :param states: List of states (eg. ['NW'])
-    :param urgency: List of urgencies (eg. ['Immediate'])
+    :param urgencies: List of urgencies (eg. ['Immediate'])
     :param limit: Number of results
     :return: DB Cursor with the results
     """
