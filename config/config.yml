@@ -5,6 +5,8 @@
 SEVERITY_FILTER:
   - Severe
   - Extreme
+  - Moderate
+  - Minor
 
 # Which states to track
 # Possible values: SH, HH, NI, HB, NW, HE, RP, BW, BY, SL, BE, BB, NV, SN, ST, TH
