@@ -79,17 +79,19 @@ def update():
     return new_events
 
 
-def query(severities, states, limit=50):
+def query(severities, states, urgencies, limit=50):
     """
 
     :param severities: List of severities allowed (eg. ['Severe', 'Extreme'])
     :param states: List of states (eg. ['NW'])
+    :param urgencies: List of urgencies (eg. ['Immediate'])
     :param limit: Number of results
     :return: DB Cursor with the results
     """
 
     filter = {
         'severity': {'$in': severities},
+        'urgency': {'$in': urgencies},
     }
 
     if len(states) == 1:

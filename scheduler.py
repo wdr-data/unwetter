@@ -9,7 +9,7 @@ from time import sleep
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 from unwetter import db, slack, wina
-from unwetter.config import SEVERITY_FILTER, STATES_FILTER
+from unwetter.config import SEVERITY_FILTER, STATES_FILTER, URGENCY_FILTER
 
 
 sched = BlockingScheduler()
@@ -24,10 +24,11 @@ def update_db():
     print('Running update job')
     new_events = db.update()
 
-    # Filter new_events by SEVERITY_FILTER and STATES_FILTER
+    # Filter new_events by SEVERITY_FILTER, URGENCY_FILTER and STATES_FILTER
     new_events = [
         e for e in new_events
         if e['severity'] in SEVERITY_FILTER 
+        and e['urgency'] in URGENCY_FILTER 
         and len(set(e['states']) - set(STATES_FILTER)) < len(e['states'])
     ]
 

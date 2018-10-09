@@ -6,7 +6,7 @@ from feedgen.feed import FeedGenerator
 from flask import Flask, Response, request, json
 
 from unwetter import db, generate, wina as wina_gen, slack
-from unwetter.config import SEVERITY_FILTER, STATES_FILTER
+from unwetter.config import SEVERITY_FILTER, STATES_FILTER, URGENCY_FILTER
 
 
 URL_BASE = 'https://unwetter-bot.herokuapp.com/'
@@ -24,7 +24,7 @@ def feed():
     fg.language('de')
 
     # Iterate over the most recent 50 events matching filter
-    for event in db.query(SEVERITY_FILTER, STATES_FILTER):
+    for event in db.query(SEVERITY_FILTER, STATES_FILTER, URGENCY_FILTER):
         fe = fg.add_entry(order='append')
         fe.id(event['id'])
         fe.title(generate.headline(event))
