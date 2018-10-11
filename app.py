@@ -93,7 +93,7 @@ def slack_event():
             ]
         elif action['name'] == 'send_tweet':
             message_ts = action['value']
-            start = datetime.utcfromtimestamp(message_ts)
+            start = datetime.utcfromtimestamp(int(message_ts))
             end = datetime.utcnow()
             elapsed = str(end - start)
             elapsed = elapsed.split('.')[0].replace('days', 'Tage').replace('day', 'Tag')
