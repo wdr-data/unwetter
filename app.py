@@ -92,22 +92,25 @@ def slack_event():
                 },
             ]
         elif action['name'] == 'send_tweet':
+            message_ts = action['value']
+            start = datetime.utcfromtimestamp(message_ts)
+            end = datetime.utcnow()
+            elapsed = str(end - start)
+            elapsed = elapsed.split('.')[0].replace('days', 'Tage').replace('day', 'Tag')
+
+            demo_handle = os.environ["TWITTER_DEMO_HANDLE"]
+
+            tweet = f'In {elapsed} informiert UWA dich über das Unwetter @{demo_handle}'
+
             try:
-                message_ts = action['value']
-                start = datetime.utcfromtimestamp(message_ts)
-                end = datetime.utcnow()
-                elapsed = str(end - start)
-                elapsed = elapsed.split('.')[0].replace('days', 'Tage').replace('day', 'Tag')
-
-                demo_handle = os.environ["TWITTER_DEMO_HANDLE"]
-
-                tweet = f'In {elapsed} informiert UWA dich über das Unwetter @{demo_handle}'
                 twitter.api.update_status(tweet)
 
                 response = 'Tweet gesendet :+1:'
                 user_id = None  # Send to everyone
             except:
                 response = 'Tweet senden fehlgeschlagen :thinking_face:'
+                raise
+
         elif action['name'] == 'crawl':
             response = 'Vorschlag TV-Crawl:\n' + generate.crawl(db.by_id(id))
         elif action['name'] == 'dwd':
