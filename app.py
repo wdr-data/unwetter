@@ -137,5 +137,11 @@ def test():
     return 'OK'
 
 
+@app.route('/demo/<id>')
+def demo(id):
+    slack.post_event(db.by_id(id))
+    return 'Wurde gesendet'
+
+
 if __name__ == '__main__':
     db.update()
