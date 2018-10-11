@@ -35,7 +35,7 @@ Gültigkeit: {upper_first(dates(event))}.
 
 Warnung vor: {parameters(event)}
 
-Betroffene Kreise und Städte: {', '.join(area['name'] for area in event['areas'])}
+Betroffene Kreise und Städte: {area_list(event)}
 
 Verhaltenshinweise: {event['instruction'] or ''}
 
@@ -93,7 +93,7 @@ Gültigkeit: {upper_first(dates(event))}.
 
 Warnung vor: {parameters(event)}
 
-Betroffene Kreise und Städte: {', '.join(area['name'] for area in event['areas'])}
+Betroffene Kreise und Städte: {area_list(event)}
 
 Verhaltenshinweise: {event['instruction'] or ''}
 

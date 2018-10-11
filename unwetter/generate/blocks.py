@@ -2,6 +2,8 @@
 
 from datetime import datetime, timedelta
 
+from ..config import STATES_FILTER
+from ..dwd import state_for_cell_id
 from ..regions import REGIONS
 from .grammar import *
 from .helpers import upper_first
@@ -35,8 +37,18 @@ def region_list(event):
     return ', '.join(qualify_region(region) for region in event['regions'])
 
 
-def area_list(event):
-    return ', '.join(area['name'] for area in event['areas'])
+def filter_areas(event):
+    return [
+        area for area in event['areas']
+        if state_for_cell_id(area['warn_cell_id']) in STATES_FILTER
+    ]
+
+
+def area_list(event, all=False):
+    return ', '.join(
+        area['name'] for area in
+        (event['areas'] if all else filter_areas(event))
+    )
 
 
 def keywords(event):
