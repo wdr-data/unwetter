@@ -193,13 +193,13 @@ def tweet(event):
     dates_ = dates(event)
 
     candidates = [
-        '{prefix} amtliche #Unwetterwarnung des Deutschen Wetterdienstes für ' \
+        '{prefix} amtliche #Unwetterwarnung des Deutschen Wetterdienstes für '
         '{areas}. {text} möglich. Gültig {dates}. @DWD_presse',
-        '{prefix} amtliche Unwetterwarnung des Deutschen Wetterdienstes für ' \
+        '{prefix} amtliche Unwetterwarnung des Deutschen Wetterdienstes für '
         '{areas}. {text} möglich. Gültig {dates}.',
-        '{prefix} amtliche #Unwetterwarnung des Deutschen Wetterdienstes für ' \
+        '{prefix} amtliche #Unwetterwarnung des Deutschen Wetterdienstes für '
         '{regions}. {text} möglich. Gültig {dates}. @DWD_presse',
-        '{prefix} amtliche Unwetterwarnung des Deutschen Wetterdienstes für ' \
+        '{prefix} amtliche Unwetterwarnung des Deutschen Wetterdienstes für '
         '{regions}. {text} möglich. Gültig {dates}.',
     ]
 
