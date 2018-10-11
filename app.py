@@ -64,8 +64,7 @@ def slack_event():
 
     actions = data.get('actions')
 
-    if actions:
-        action = actions[0]
+    for action in actions:
         id = data['callback_id']
         channel_id = data['channel']['id']
         user_id = data['user']['id']
