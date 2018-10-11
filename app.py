@@ -93,7 +93,8 @@ def slack_event():
             ]
         elif action['name'] == 'send_tweet':
             try:
-                twitter.api.update_status(generate.tweet(db.by_id(id)))
+                tweet = generate.tweet(db.by_id(id))
+                twitter.api.update_status(tweet.replace('@', ''))
                 response = 'Tweet gesendet :+1:'
                 user_id = None  # Send to everyone
             except:
