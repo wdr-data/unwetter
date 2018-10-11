@@ -118,8 +118,7 @@ def parse_xml(xml):
         for geocode in area['geocode']:
             if geocode['valueName'] == 'WARNCELLID':
                 area['_warn_cell_id'] = geocode['value']
-                state_id = int(geocode['value'][1:3])
-                states.add(state_id)
+                states.add(state_for_cell_id(geocode['value']))
 
     event['areas'] = [
         {
@@ -129,7 +128,7 @@ def parse_xml(xml):
         for area in xml_dict['info']['area']
     ]
 
-    event['states'] = [STATE_IDS[state_id] for state_id in states]
+    event['states'] = list(states)
 
     event['regions'] = regions.best_match([area['name'] for area in event['areas']])
 
@@ -137,3 +136,7 @@ def parse_xml(xml):
         event['references'] = [ref.split(',')[1] for ref in xml_dict['references'].split(' ')]
 
     return event
+
+
+def state_for_cell_id(warn_cell_id):
+    return STATE_IDS[int(str(warn_cell_id)[1:3])]
