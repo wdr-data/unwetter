@@ -109,6 +109,7 @@ def slack_event():
                 user_id = None  # Send to everyone
             except:
                 response = 'Tweet senden fehlgeschlagen :thinking_face:'
+                slack.post_message(response, private=user_id, channel=channel_id)
                 raise
 
         elif action['name'] == 'crawl':
