@@ -165,8 +165,10 @@ def crawl(event):
 
     text = upper_first(text)
 
-    the_crawl = f'{prefix} amtliche {warning} des Deutschen Wetterdienstes für ' \
-                f'{location}. {text} möglich. Gültig {dates(event)}.'.strip()
+    the_crawl = (f'{prefix} amtliche {warning} des Deutschen Wetterdienstes für '
+                 f'{location}. {text} möglich. Gültig {dates(event)}.'
+                 '[Weitere Infos (nächste TV-Sendung, NUR wenn weniger als 2h bis '
+                 'Sendungsbeginn), auf wdr.de und im Videotext auf S. 192.]').strip()
 
     the_crawl = the_crawl.replace(' (kein Ende der Gültigkeit angegeben)', '')
 
