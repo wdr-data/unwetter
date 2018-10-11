@@ -1,5 +1,5 @@
 #!/user/bin/env python3.6
-
+from datetime import datetime
 import os
 
 from feedgen.feed import FeedGenerator
@@ -86,15 +86,24 @@ def slack_event():
                             "name": "send_tweet",
                             "text": ":bird: Tweet senden",
                             "type": "button",
-                            "value": "send_tweet",
+                            "value": data['message_ts'],
                         },
                     ],
                 },
             ]
         elif action['name'] == 'send_tweet':
             try:
-                tweet = generate.tweet(db.by_id(id))
-                twitter.api.update_status(tweet.replace('@', ''))
+                message_ts = action['value']
+                start = datetime.utcfromtimestamp(message_ts)
+                end = datetime.utcnow()
+                elapsed = str(end - start)
+                elapsed = elapsed.split('.')[0].replace('days', 'Tage').replace('day', 'Tag')
+
+                demo_handle = os.environ["TWITTER_DEMO_HANDLE"]
+
+                tweet = f'In {elapsed} informiert UWA dich über das Unwetter @{demo_handle}'
+                twitter.api.update_status(tweet)
+
                 response = 'Tweet gesendet :+1:'
                 user_id = None  # Send to everyone
             except:
