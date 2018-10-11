@@ -5,7 +5,7 @@ import os
 from feedgen.feed import FeedGenerator
 from flask import Flask, Response, request, json
 
-from unwetter import db, generate, wina as wina_gen, slack
+from unwetter import db, generate, wina as wina_gen, slack, twitter
 from unwetter.config import SEVERITY_FILTER, STATES_FILTER, URGENCY_FILTER
 
 
@@ -70,9 +70,34 @@ def slack_event():
         user_id = data['user']['id']
 
         response = None
+        attachments = None
 
         if action['name'] == 'twitter':
             response = 'Vorschlag Tweet:\n' + generate.tweet(db.by_id(id))
+            attachments = [
+                {
+                    "fallback": "Aktionen",
+                    "title": "Aktionen",
+                    "callback_id": id,
+                    "color": "#3AA3E3",
+                    "attachment_type": "default",
+                    "actions": [
+                        {
+                            "name": "send_tweet",
+                            "text": ":bird: Tweet senden",
+                            "type": "button",
+                            "value": "send_tweet",
+                        },
+                    ],
+                },
+            ]
+        elif action['name'] == 'send_tweet':
+            try:
+                twitter.api.update_status(generate.tweet(db.by_id(id)))
+                response = 'Tweet gesendet :+1:'
+                user_id = None  # Send to everyone
+            except:
+                response = 'Tweet senden fehlgeschlagen :thinking_face:'
         elif action['name'] == 'crawl':
             response = 'Vorschlag TV-Crawl:\n' + generate.crawl(db.by_id(id))
         elif action['name'] == 'dwd':
@@ -87,7 +112,8 @@ Informationen und Kontakt: {os.environ["WDR_PROJECT_INFO_URL"]}
             '''.strip()
 
         if response:
-            slack.post_message(response, private=user_id, channel=channel_id)
+            slack.post_message(
+                response, private=user_id, channel=channel_id, attachments=attachments)
 
     return ''
 
