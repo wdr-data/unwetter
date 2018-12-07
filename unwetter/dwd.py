@@ -133,7 +133,7 @@ def parse_xml(xml):
                 area['_exclude_polygons'].append(geocode['value'])
 
         area['polygon'] = [parse_polygon(poly) for poly in area['polygon']]
-        area['_exclude_polygon'] = [parse_polygon(poly) for poly in area['_exclude_polygon']]
+        area['_exclude_polygons'] = [parse_polygon(poly) for poly in area['_exclude_polygons']]
 
     event['areas'] = [
         {
