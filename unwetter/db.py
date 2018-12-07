@@ -62,8 +62,6 @@ def update():
 
     events = [dwd.parse_xml(event) for event in dwd.load_dwd_xml_events()]
 
-    from pprint import pprint
-
     new_events = []
 
     for event in events:
@@ -74,8 +72,7 @@ def update():
             continue
         collection.insert_one(event)
         new_events.append(event)
-        pprint(event)
-    
+
     return new_events
 
 
