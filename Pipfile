@@ -17,7 +17,7 @@ pytz = "*"
 slackclient = "*"
 pyshp = "*"
 pillow = "*"
-shapely = "*"
+pyproj = "*"
 
 [dev-packages]
 

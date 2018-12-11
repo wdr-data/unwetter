@@ -5,6 +5,8 @@ import yaml
 with open('config/regions.yml', 'r') as fp:
     REGIONS = {key: value for key, value in yaml.safe_load(fp.read()).items() if value.get('districts')}
 
+DISTRICTS = sorted({district for region in REGIONS.values() for district in region['districts']})
+
 for name, region in REGIONS.items(): 
     region['name'] = name
 
