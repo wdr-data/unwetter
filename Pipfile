@@ -15,6 +15,9 @@ apscheduler = "*"
 pyyaml = "*"
 pytz = "*"
 slackclient = "*"
+pyshp = "*"
+pillow = "*"
+shapely = "*"
 
 [dev-packages]
 
