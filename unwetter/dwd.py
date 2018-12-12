@@ -167,7 +167,7 @@ def parse_xml(xml):
             'polygons': area['_polygons'],
             'exclude_polygons': area['_exclude_polygons'],
         }
-        for area in commune_areas
+        for area in poly_areas
     ]
 
     event['districts'] = []
