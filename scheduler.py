@@ -24,6 +24,9 @@ def update_db():
     print('Running update job')
     new_events = db.update()
 
+    if new_events is None:
+        return
+
     # Filter new_events by SEVERITY_FILTER, URGENCY_FILTER and STATES_FILTER
     new_events = [
         e for e in new_events
