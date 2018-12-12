@@ -1,11 +1,12 @@
 #!/user/bin/env python3.6
 
 import os
+from io import BytesIO
 
 from feedgen.feed import FeedGenerator
-from flask import Flask, Response, request, json
+from flask import Flask, Response, request, json, send_file
 
-from unwetter import db, generate, wina as wina_gen, slack
+from unwetter import db, generate, wina as wina_gen, slack, map
 from unwetter.config import SEVERITY_FILTER, STATES_FILTER, URGENCY_FILTER
 
 
@@ -43,6 +44,17 @@ def wina(id):
     r.headers['Content-Type'] = "text/xml; charset=iso-8859-1"
 
     return r
+
+
+@app.route('/map/<id>.png')
+def genmap(id):
+    img = map.draw_event(db.by_id(id))
+
+    bio = BytesIO()
+    img.save(bio, 'PNG')
+    bio.seek(0)
+
+    return send_file(bio, 'image/png')
 
 
 @app.route('/slack/event', methods=['GET', 'POST'])
