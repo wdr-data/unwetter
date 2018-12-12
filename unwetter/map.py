@@ -5882,15 +5882,15 @@ def draw_event(event):
     img = background_image.copy()
     draw = ImageDraw.Draw(img)
 
-    for area in event['areas']:
-        if state_for_cell_id(area['warn_cell_id']) not in STATES_FILTER:
+    for geo in event['geometry']:
+        if state_for_cell_id(geo['warn_cell_id']) not in STATES_FILTER:
             continue
 
-        for poly in area['polygons']:
+        for poly in geo['polygons']:
             projected = [to_image_coords(*project(lng, lat)) for lat, lng in poly]
             draw.polygon(projected, outline=None, fill="red")
 
-        for poly in area['exclude_polygons']:
+        for poly in geo['exclude_polygons']:
             projected = [to_image_coords(*project(lng, lat)) for lat, lng in poly]
             draw.polygon(projected, outline=None, fill="rgb(0, 50, 93)")
 
