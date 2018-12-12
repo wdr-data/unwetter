@@ -61,15 +61,15 @@ Emscher-Lippe-Region:
     - Kreis Recklinghausen
     - Stadt Gelsenkirchen
 
-Köln-Bonner Raum:
+Köln-Bundesstadt Bonner Raum:
   grammar:
     gender: der
-    genitive: Köln-Bonner Raums
+    genitive: Köln-Bundesstadt Bonner Raums
   districts:
     - Stadt Köln
     - Rhein-Erft-Kreis
     - Rhein-Sieg-Kreis
-    - Bonn
+    - Bundesstadt Bonn
     - Rheinisch-Bergischer Kreis
 
 Süden von NRW:
@@ -80,7 +80,7 @@ Süden von NRW:
     - Stadt Köln
     - Rhein-Erft-Kreis
     - Rhein-Sieg-Kreis
-    - Bonn
+    - Bundesstadt Bonn
     - Rheinisch-Bergischer Kreis
     - StädteRegion Aachen
     - Kreis Düren
@@ -214,7 +214,7 @@ Rheinland:
     genitive: Rheinlandes
   districts:
     - StädteRegion Aachen
-    - Bonn
+    - Bundesstadt Bonn
     - Stadt Düsseldorf
     - Stadt Duisburg
     - Stadt Essen

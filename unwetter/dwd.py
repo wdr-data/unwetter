@@ -9,9 +9,10 @@ import requests
 import xmltodict
 
 from . import regions
+from ..assets.districts import DISTRICTS
 
 API_URL = 'https://opendata.dwd.de/weather/alerts/cap/' \
-          'DISTRICT_EVENT_STAT/Z_CAP_C_EDZW_LATEST_PVW_STATUS_PREMIUMEVENT_DISTRICT_DE.zip'
+          'COMMUNEUNION_EVENT_STAT/Z_CAP_C_EDZW_LATEST_PVW_STATUS_PREMIUMEVENT_COMMUNEUNION_DE.zip'
 
 STATE_IDS = {
     1: 'SH',
@@ -60,6 +61,13 @@ def load_dwd_xml_events():
 
 def parse_polygon(polygon):
     return [[float(x) for x in pair.split(',')] for pair in polygon.split(' ')]
+
+
+def district_from_commune(area):
+    common_id = area['warn_cell_id'][-8:-3]
+    warn_cell_id = f'1{common_id}000'
+    name = DISTRICTS[warn_cell_id]
+    return name, warn_cell_id
 
 
 def parse_xml(xml):
@@ -116,34 +124,66 @@ def parse_xml(xml):
 
     states = set()
 
+    poly_areas = []
+    commune_areas = []
+
     for area in xml_dict['info']['area']:
         if isinstance(area['geocode'], dict):
             area['geocode'] = [area['geocode']]
 
-        area['polygon'] = area.get('polygon', [])
-        if isinstance(area['polygon'], str):
-            area['polygon'] = [area['polygon']]
+        area['_polygons'] = area.get('polygon', [])
+        if isinstance(area['_polygons'], str):
+            area['_polygons'] = [area['_polygons']]
 
         area['_exclude_polygons'] = []
         for geocode in area['geocode']:
             if geocode['valueName'] == 'WARNCELLID':
                 area['_warn_cell_id'] = geocode['value']
                 states.add(state_for_cell_id(geocode['value']))
+
             if geocode['valueName'] == 'EXCLUDE_POLYGON':
                 area['_exclude_polygons'].append(geocode['value'])
 
-        area['polygon'] = [parse_polygon(poly) for poly in area['polygon']]
+        area['_polygons'] = [parse_polygon(poly) for poly in area['_polygons']]
         area['_exclude_polygons'] = [parse_polygon(poly) for poly in area['_exclude_polygons']]
+
+        if area['areaDesc'] == 'polygonal event area':
+            poly_areas.append(area)
+        else:
+            commune_areas.append(area)
 
     event['areas'] = [
         {
             'name': area['areaDesc'],
-            'polygons': area['polygon'],
-            'exclude_polygons': area['_exclude_polygons'],
             'warn_cell_id': area['_warn_cell_id'],
         }
-        for area in xml_dict['info']['area']
+        for area in commune_areas
     ]
+
+    event['geometry'] = [
+        {
+            'polygons': area['_polygons'],
+            'exclude_polygons': area['_exclude_polygons'],
+        }
+        for area in commune_areas
+    ]
+
+    event['districts'] = []
+    found_districts = set()
+    for area in event['areas']:
+        name, warn_cell_id = district_from_commune(area)
+
+        if warn_cell_id in found_districts:
+            continue
+
+        found_districts.add(warn_cell_id)
+
+        event['districts'].append({
+            'name': name,
+            'warn_cell_id': warn_cell_id,
+        })
+
+    event['districts'] = sorted(event['districts'])
 
     event['states'] = list(states)
 
