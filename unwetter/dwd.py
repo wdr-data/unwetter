@@ -7,6 +7,7 @@ from zipfile import ZipFile
 import iso8601
 import requests
 import xmltodict
+import pytz
 
 from . import regions
 from .data.districts import DISTRICTS
@@ -42,7 +43,7 @@ def last_modified():
     return datetime.strptime(
         requests.head(API_URL).headers['Last-Modified'],
         '%a, %d %b %Y %H:%M:%S %Z',
-    )
+    ).replace(tzinfo=pytz.UTC)
 
 
 def load_dwd_xml_events():
