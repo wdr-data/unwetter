@@ -171,7 +171,11 @@ def parse_xml(xml):
     event['districts'] = []
     found_districts = set()
     for area in event['areas']:
-        name, warn_cell_id = district_from_commune(area)
+        try:
+            name, warn_cell_id = district_from_commune(area)
+        except KeyError:
+            # Some areas don't have a related district
+            continue
 
         if warn_cell_id in found_districts:
             continue
