@@ -3,6 +3,8 @@ from pyproj import Proj
 from PIL import Image, ImageDraw
 
 from assets.shapes import dwd as _dwd
+from .config import STATES_FILTER
+from .dwd import state_for_cell_id
 
 
 TEST = {
@@ -5881,6 +5883,9 @@ def draw_event(event):
     draw = ImageDraw.Draw(img)
 
     for area in event['areas']:
+        if state_for_cell_id(area['warn_cell_id']) not in STATES_FILTER:
+            continue
+
         for poly in area['polygons']:
             projected = [to_image_coords(*project(lng, lat)) for lat, lng in poly]
             draw.polygon(projected, outline=None, fill="red")
