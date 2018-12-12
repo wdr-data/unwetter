@@ -49,6 +49,9 @@ def update():
     last_modified_dwd = dwd.last_modified()
     last_updated_db = last_updated()
 
+    print('Last modified: ', last_modified_dwd)
+    print('Last updated: ', last_updated_db)
+
     if not last_updated_db:
         print('No "last_updated" timestamp found in DB, creating one now')
         collection_meta.insert_one({'id': 'last_updated', 'at': last_modified_dwd})
