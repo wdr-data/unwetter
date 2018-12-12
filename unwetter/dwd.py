@@ -9,7 +9,7 @@ import requests
 import xmltodict
 
 from . import regions
-from ..assets.districts import DISTRICTS
+from assets.districts import DISTRICTS
 
 API_URL = 'https://opendata.dwd.de/weather/alerts/cap/' \
           'COMMUNEUNION_EVENT_STAT/Z_CAP_C_EDZW_LATEST_PVW_STATUS_PREMIUMEVENT_COMMUNEUNION_DE.zip'
