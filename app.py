@@ -17,11 +17,11 @@ app = Flask(__name__)
 @app.route('/feed.rss')
 def feed():
     fg = FeedGenerator()
-    fg.id('https://unwetter-bot.herokuapp.com/')
+    fg.id(URL_BASE)
     fg.title('Unwetter Testfeed')
     fg.link(href='https://www.dwd.de/DE/wetter/warnungen/warnWetter_node.html', rel='alternate')
     fg.subtitle('This is a test feed!')
-    fg.link(href='https://unwetter-bot.herokuapp.com/feed.rss', rel='self')
+    fg.link(href=f'{URL_BASE}feed.rss', rel='self')
     fg.language('de')
 
     # Iterate over the most recent 50 events matching filter

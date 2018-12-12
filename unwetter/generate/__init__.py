@@ -7,6 +7,9 @@ from .blocks import *
 from .helpers import rreplace, upper_first
 
 
+URL_BASE = 'https://unwetter-bot.herokuapp.com/'
+
+
 def headline(event):
     """
     Return text for headline
@@ -30,6 +33,8 @@ def describe_new_event(event):
 Warnstufe: {severities[event['severity']]}
 
 Regionale Zuordnung: {region_list(event)}
+
+Karte: {URL_BASE}/map/{event.id}.png
 
 Gültigkeit: {upper_first(dates(event))}.
 
@@ -88,6 +93,8 @@ def describe_update(event):
 Warnstufe: {severities[event['severity']]}
 
 Regionale Zuordnung: {region_list(event)}
+
+Karte: {URL_BASE}/map/{event.id}.png
 
 Gültigkeit: {upper_first(dates(event))}.
 
