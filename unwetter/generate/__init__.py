@@ -145,7 +145,7 @@ def crawl(event):
 
     warning = 'Unwetterwarnung' if event['severity'] in ('Severe', 'Extreme') else 'Wetterwarnung'
 
-    if len(event['areas']) < 3:
+    if len(event['districts']) < 3:
         location = area_list(event)
     else:
         location = region_list(event)
