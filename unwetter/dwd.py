@@ -128,6 +128,8 @@ def parse_xml(xml):
     commune_areas = []
 
     for area in xml_dict['info']['area']:
+        area['geocode'] = area.get('geocode', [])
+
         if isinstance(area['geocode'], dict):
             area['geocode'] = [area['geocode']]
 
