@@ -4,9 +4,14 @@ import pyproj
 from shapely.geometry import MultiPolygon
 from shapely.ops import transform
 from PIL import Image, ImageDraw
+import yaml
 
 from .data.shapes import STATE_SHAPES
 from .config import STATES_FILTER
+
+
+with open('config/studios.yml', 'r') as fp:
+    STUDIOS = yaml.safe_load(fp.read())
 
 
 COLORS = {
@@ -14,6 +19,7 @@ COLORS = {
     'STATE': 'rgb(0, 50, 93)',
     'SURROUNDINGS': 'grey',
     'BORDERS': 'white',
+    'STUDIOS': 'white',
     'SEVERITIES': {
         'Minor': '#ffcc00',
         'Moderate': '#ff6600',
@@ -98,6 +104,28 @@ def draw_surroundings(img):
         draw.polygon(points, outline=None, fill=COLORS['SURROUNDINGS'])
 
 
+def draw_studios(img):
+    draw = ImageDraw.Draw(img)
+    point_radius = 14
+    border_radius = 8
+
+    for name, studio in STUDIOS.items():
+        coords = studio['coordinates']
+        point = to_image_coords(*target_projection(coords['lat'], coords['lon']))
+        draw.ellipse(
+            (point[0] - (point_radius + border_radius),
+             point[1] - (point_radius + border_radius),
+             point[0] + point_radius + border_radius,
+             point[1] + point_radius + border_radius),
+            fill='black')
+        draw.ellipse(
+            (point[0] - point_radius,
+             point[1] - point_radius,
+             point[0] + point_radius,
+             point[1] + point_radius),
+            fill=COLORS['STUDIOS'])
+
+
 def draw_borders(img, width=6):
     draw = ImageDraw.Draw(img)
 
@@ -134,5 +162,6 @@ def draw_event(event):
 
     draw_surroundings(img)
     draw_borders(img)
+    draw_studios(img)
 
     return img.resize((int(img_width * .4), int(img_height * .4)), resample=Image.LANCZOS)

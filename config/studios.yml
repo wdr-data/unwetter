@@ -1,0 +1,65 @@
+Bonn:
+  visible: False
+  coordinates:
+    lon: 50.702177
+    lat: 7.142187
+
+Aachen:
+  visible: True
+  coordinates:
+    lon: 50.769359
+    lat: 6.08504
+
+Bielefeld:
+  visible: True
+  coordinates:
+    lon: 52.013307
+    lat: 8.533790
+
+Dortmund:
+  visible: True
+  coordinates:
+    lon: 51.485184
+    lat: 7.457195
+
+Essen:
+  visible: False
+  coordinates:
+    lon: 51.455977
+    lat: 7.009068
+
+Köln:
+  visible: True
+  coordinates:
+    lon: 50.943025
+    lat: 6.951894
+
+Düsseldorf:
+  visible: True
+  coordinates:
+    lon: 51.217148
+    lat: 6.760199
+
+Siegen:
+  visible: True
+  coordinates:
+    lon: 50.875248
+    lat: 8.016940
+
+Wuppertal:
+  visible: False
+  coordinates:
+    lon: 51.255044
+    lat: 7.136721
+
+Münster:
+  visible: True
+  coordinates:
+    lon: 51.957880
+    lat: 7.675981
+
+Duisburg:
+  visible: False
+  coordinates:
+    lon: 51.439588
+    lat: 6.763344
