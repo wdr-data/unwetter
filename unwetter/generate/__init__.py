@@ -34,7 +34,7 @@ Warnstufe: {severities[event['severity']]}
 
 Regionale Zuordnung: {region_list(event)}
 
-Karte: {URL_BASE}/map/{event.id}.png
+Karte: {URL_BASE}/map/{event["id"]}.png
 
 Gültigkeit: {upper_first(dates(event))}.
 
@@ -94,7 +94,7 @@ Warnstufe: {severities[event['severity']]}
 
 Regionale Zuordnung: {region_list(event)}
 
-Karte: {URL_BASE}/map/{event.id}.png
+Karte: {URL_BASE}/map/{event["id"]}.png
 
 Gültigkeit: {upper_first(dates(event))}.
 
