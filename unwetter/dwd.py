@@ -189,7 +189,7 @@ def parse_xml(xml):
             'warn_cell_id': warn_cell_id,
         })
 
-    event['districts'] = sorted(event['districts'])
+    event['districts'] = sorted(event['districts'], key=lambda elem: elem['name'])
 
     event['states'] = list(states)
 
