@@ -98,7 +98,8 @@ Informationen und Kontakt: {os.environ["WDR_PROJECT_INFO_URL"]}
             '''.strip()
 
         if response:
-            slack.post_message(response, private=user_id, channel=channel_id)
+            slack.post_message(
+                response, private=user_id, channel=channel_id, thread_ts=data['original_message']['thread_ts'])
 
     return ''
 
