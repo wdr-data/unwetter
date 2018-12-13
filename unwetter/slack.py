@@ -1,6 +1,7 @@
 #!/user/bin/env python3.6
 
 import os
+from time import time
 
 from slackclient import SlackClient
 
@@ -21,7 +22,7 @@ def post_event(event):
         '', attachments=[
             {
                 'fallback': generate.title(event),
-                "color": COLORS['SEVERITIES'][event['severity']],
+                'color': COLORS['SEVERITIES'][event['severity']],
                 'title': generate.title(event),
                 'text': generate.dates(event),
                 'fields': [
@@ -32,15 +33,9 @@ def post_event(event):
                     },
                 ],
                 'image_url': generate.urls.map(event),
-                "callback_id": event['id'],
-                "actions": [
-                    {
-                        "name": "more_info",
-                        "text": "Mehr Infos",
-                        "type": "button",
-                        "value": "more_info",
-                    },
-            ]
+                'callback_id': event['id'],
+                'footer': 'Details zur Meldung im Thread',
+                'ts': int(time())
             }
         ]
     )
@@ -54,7 +49,37 @@ Regionale Zuordnung: {generate.region_list(event)}
 {instruction}
 {event['description']}
         '''.strip(),
-        thread_ts=thread_ts
+        thread_ts=thread_ts,
+        attachment=[
+            {
+                "fallback": "Textvorschläge",
+                "title": "Textvorschläge",
+                "text": "Von der UWA-Redaktion automatisch generierte Textvorschläge",
+                "callback_id": event['id'],
+                "color": "#ffffff",
+                "attachment_type": "default",
+                "actions": [
+                    {
+                        "name": "twitter",
+                        "text": ":bird: Twitter",
+                        "type": "button",
+                        "value": "twitter",
+                    },
+                    {
+                        "name": "crawl",
+                        "text": ":tv: TV-Crawl",
+                        "type": "button",
+                        "value": "crawl",
+                    },
+                    {
+                        "name": "info",
+                        "text": ":question: Infos zum Projekt",
+                        "type": "button",
+                        "value": "info",
+                    },
+                ],
+            },
+        ]
     )
 
 
