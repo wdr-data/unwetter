@@ -169,7 +169,7 @@ def draw_event(event):
 
     img.alpha_composite(overlay)
 
-    return overlay.resize((int(img_width * .5), int(img_height * .5)), resample=Image.LANCZOS)
+    return img.resize((int(img_width * .5), int(img_height * .5)), resample=Image.LANCZOS)
 
 
 background_image = draw_background()
