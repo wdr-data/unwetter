@@ -107,7 +107,7 @@ Informationen und Kontakt: {os.environ["WDR_PROJECT_INFO_URL"]}
 
 
 @app.route('/slack/command/show', methods=['POST'])
-def slack_event():
+def slack_command_show():
     data = request.form
 
     if not data:
