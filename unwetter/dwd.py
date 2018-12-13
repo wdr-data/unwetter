@@ -203,4 +203,4 @@ def parse_xml(xml):
 
 
 def state_for_cell_id(warn_cell_id):
-    return STATE_IDS[int(str(warn_cell_id)[1:3])]
+    return STATE_IDS[int(str(warn_cell_id)[-8:-6])]
