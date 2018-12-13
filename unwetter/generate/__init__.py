@@ -83,7 +83,7 @@ def describe_update(event):
     else:
         old_time = 'Unbekannt'
 
-    if event['mgs_type'] == 'Cancel' or event['response_type'] == 'AllClear':
+    if event['msg_type'] == 'Cancel' or event['response_type'] == 'AllClear':
         change_title = 'Aufhebung von'
         the_changes = ''
     else:
