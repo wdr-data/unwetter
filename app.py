@@ -48,9 +48,7 @@ def wina(id):
 
 @app.route('/map/<id>.png')
 def genmap(id):
-    from unwetter.data.test_events import frost
-    frost.event['severity'] = 'Extreme'
-    img = map.draw_event(frost.event)
+    img = map.draw_event(db.by_id(id))
 
     bio = BytesIO()
     img.save(bio, 'PNG')
