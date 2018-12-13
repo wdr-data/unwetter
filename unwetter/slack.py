@@ -5,9 +5,9 @@ from time import time
 
 from slackclient import SlackClient
 
-from unwetter import generate
+from . import db, generate
 from .map import COLORS
-from unwetter.generate import helpers
+from .generate import helpers
 
 # Set up Slack client
 # Based on https://www.fullstackpython.com/blog/build-first-slack-bot-python.html
@@ -18,13 +18,32 @@ CLIENT = SlackClient(SLACK_TOKEN)
 
 
 def post_event(event):
+
+    change_title = ''
+    the_changes = ''
+
+    if event['msg_type'] != 'Alert':
+        old_event = db.latest_reference(event['references'])
+
+        if old_event:
+            old_time = old_event['sent'].strftime("%d.%m.%Y, %H:%M:%S Uhr")
+        else:
+            old_time = 'Unbekannt'
+
+        if event['msg_type'] == 'Cancel' or event['response_type'] == 'AllClear':
+            change_title = f'Aufhebung der Meldung von {old_time}\n'
+            the_changes = ''
+        else:
+            change_title = f'Änderungen zur Meldung von {old_time}\n'
+            the_changes = 'Änderungen:\n\n' + (generate.changes(event, old_event) if old_event else 'Unbekannt') + '\n'
+
     response = post_message(
         '', attachments=[
             {
                 'fallback': generate.title(event),
                 'color': COLORS['SEVERITIES'][event['severity']],
                 'title': generate.title(event),
-                'text': generate.dates(event),
+                'text': f'{change_title}Gültig {generate.dates(event)}',
                 'fields': [
                     {
                         'title': generate.severities[event['severity']],
@@ -35,7 +54,7 @@ def post_event(event):
                 'image_url': generate.urls.map(event),
                 'callback_id': event['id'],
                 'footer': 'Details zur Meldung im Thread',
-                'ts': int(time())
+                'ts': int(event['sent'].timestamp())
             }
         ]
     )
@@ -43,8 +62,10 @@ def post_event(event):
     thread_ts = response['ts']
 
     instruction = helpers.pad('Verhaltenshinweise: {event["instruction"]}') if event['instruction'] else ''
+
     post_message(
         f'''
+{the_changes}
 Regionale Zuordnung: {generate.region_list(event)}
 {instruction}
 {event['description']}
