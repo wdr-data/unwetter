@@ -56,7 +56,7 @@ Regionale Zuordnung: {generate.region_list(event)}
                 "title": "Textvorschläge",
                 "text": "Von der UWA-Redaktion automatisch generierte Textvorschläge",
                 "callback_id": event['id'],
-                "color": "#ffffff",
+                "color": "#000000",
                 "attachment_type": "default",
                 "actions": [
                     {
