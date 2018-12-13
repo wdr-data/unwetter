@@ -50,7 +50,7 @@ Regionale Zuordnung: {generate.region_list(event)}
 {event['description']}
         '''.strip(),
         thread_ts=thread_ts,
-        attachment=[
+        attachments=[
             {
                 "fallback": "Textvorschläge",
                 "title": "Textvorschläge",
