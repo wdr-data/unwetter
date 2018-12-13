@@ -5,6 +5,7 @@ import os
 from slackclient import SlackClient
 
 from unwetter import generate
+from .map import COLORS
 
 # Set up Slack client
 # Based on https://www.fullstackpython.com/blog/build-first-slack-bot-python.html
@@ -15,6 +16,36 @@ CLIENT = SlackClient(SLACK_TOKEN)
 
 
 def post_event(event):
+    post_message(
+        '', [
+            {
+                'fallback': generate.title(event),
+                "color": COLORS['SEVERITIES'][event['severity']],
+                'title': generate.title(event),
+                'text': generate.dates(event),
+                'fields': [
+                    {
+                        'title': generate.severities[event['severity']],
+                        'value': f'Warnung vor {generate.parameters(event)}',
+                        'short': False,
+                    },
+                ],
+                'image_url': generate.urls.map(event),
+                "callback_id": event['id'],
+                "actions": [
+                    {
+                        "name": "more_info",
+                        "text": "Mehr Infos",
+                        "type": "button",
+                        "value": "more_info",
+                    },
+            ]
+            }
+        ]
+    )
+
+
+def post_event_old(event):
     post_message(generate.description(event, short=True), [
         {
             "fallback": "Textvorschläge generieren",

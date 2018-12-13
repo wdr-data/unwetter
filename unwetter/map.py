@@ -23,7 +23,7 @@ COLORS = {
     'SEVERITIES': {
         'Minor': '#ffcc00',
         'Moderate': '#ff6600',
-        'Severe': 'red',
+        'Severe': '#ff0000',
         'Extreme': '#cc3399',
     }
 }
