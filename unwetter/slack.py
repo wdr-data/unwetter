@@ -27,7 +27,7 @@ def post_event(event):
                 'fields': [
                     {
                         'title': generate.severities[event['severity']],
-                        'value': {generate.parameters(event)},
+                        'value': generate.parameters(event),
                         'short': False,
                     },
                 ],
