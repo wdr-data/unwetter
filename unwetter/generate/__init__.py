@@ -17,9 +17,12 @@ def headline(event):
     if event['msg_type'] == 'Alert':
         prefix = ''
     elif event['msg_type'] == 'Update':
-        prefix = 'Aktualisierung: '
+        if event['response_type'] == 'AllClear':
+            prefix = 'Vorzeitige Aufhebung: '
+        else:
+            prefix = 'Aktualisierung: '
     elif event['msg_type'] == 'Cancel':
-        prefix = 'Meldung aufgehoben: '
+        prefix = 'Meldung zurückgezogen: '
     else:
         prefix = 'Unbekannter Meldungstyp - '
 
