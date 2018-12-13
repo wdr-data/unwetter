@@ -63,9 +63,12 @@ def title(event):
     if event['msg_type'] == 'Alert':
         prefix = '🚨 Neue Meldung'
     elif event['msg_type'] == 'Update':
-        prefix = '🔁 Meldung aktualisiert'
+        if event['response_type'] == 'AllClear':
+            prefix = '🚫 Meldung vorzeitig aufgehoben'
+        else:
+            prefix = '🔁 Meldung aktualisiert'
     elif event['msg_type'] == 'Cancel':
-        prefix = '🚫 Meldung aufgehoben'
+        prefix = '🚫 Meldung zurückgezogen'
     else:
         prefix = '⁉️ Unbekannter Meldungstyp'
 

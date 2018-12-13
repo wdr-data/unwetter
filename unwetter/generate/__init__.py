@@ -80,14 +80,20 @@ def describe_update(event):
     else:
         old_time = 'Unbekannt'
 
+    if event['mgs_type'] == 'Cancel' or event['response_type'] == 'AllClear':
+        change_title = 'Aufhebung von'
+        the_changes = ''
+    else:
+        change_title = 'Änderungen zur'
+        the_changes = (changes(event, old_event) if old_event else 'Unbekannt') + '\n'
+
     text = f'''
 {title(event)}
 
 
-+++ Änderungen zur Meldung mit Agenturzeit {old_time} +++
++++ {change_title} Meldung mit Agenturzeit {old_time} +++
 
-{changes(event, old_event) if old_event else 'Unbekannt'}
-
+{the_changes}
 +++ Details +++
 
 Warnstufe: {severities[event['severity']]}
@@ -172,10 +178,19 @@ def crawl(event):
 
     text = upper_first(text)
 
-    the_crawl = (f'{prefix} amtliche {warning} des Deutschen Wetterdienstes für '
-                 f'{location}. {text} möglich. Gültig {dates(event)}.'
-                 '[Weitere Infos (nächste TV-Sendung, NUR wenn weniger als 2h bis '
-                 'Sendungsbeginn), auf wdr.de und im Videotext auf S. 192.]').strip()
+    if event['msg_type'] == 'Cancel':
+        the_crawl = (f'Amtliche {warning} des Deutschen Wetterdienstes für '
+                     f'{location} zurückgezogen.')
+
+    elif event['response_type'] == 'AllClear':
+        the_crawl = (f'Amtliche {warning} des Deutschen Wetterdienstes für '
+                     f'{location} vorzeitig aufgehoben.')
+
+    else:
+        the_crawl = (f'{prefix} amtliche {warning} des Deutschen Wetterdienstes für '
+                     f'{location}. {text} möglich. Gültig {dates(event)}.'
+                     '[Weitere Infos (nächste TV-Sendung, NUR wenn weniger als 2h bis '
+                     'Sendungsbeginn), auf wdr.de und im Videotext auf S. 192.]').strip()
 
     the_crawl = the_crawl.replace(' (kein Ende der Gültigkeit angegeben)', '')
 
@@ -205,16 +220,27 @@ def tweet(event):
 
     dates_ = dates(event)
 
-    candidates = [
-        '{prefix} amtliche #{warning} des Deutschen Wetterdienstes für '
-        '{areas}. {text} möglich. Gültig {dates}. @DWD_presse',
-        '{prefix} amtliche {warning} des Deutschen Wetterdienstes für '
-        '{areas}. {text} möglich. Gültig {dates}.',
-        '{prefix} amtliche #{warning} des Deutschen Wetterdienstes für '
-        '{regions}. {text} möglich. Gültig {dates}. @DWD_presse',
-        '{prefix} amtliche {warning} des Deutschen Wetterdienstes für '
-        '{regions}. {text} möglich. Gültig {dates}.',
-    ]
+    if event['msg_type'] == 'Cancel':
+        candidates = [
+            'Amtliche #{warning} des Deutschen Wetterdienstes für '
+            '{areas} zurückgezogen. @DWD_presse',
+        ]
+    elif event['response_type'] == 'AllClear':
+        candidates = [
+            'Amtliche #{warning} des Deutschen Wetterdienstes für '
+            '{areas} vorzeitig aufgehoben. @DWD_presse',
+        ]
+    else:
+        candidates = [
+            '{prefix} amtliche #{warning} des Deutschen Wetterdienstes für '
+            '{areas}. {text} möglich. Gültig {dates}. @DWD_presse',
+            '{prefix} amtliche {warning} des Deutschen Wetterdienstes für '
+            '{areas}. {text} möglich. Gültig {dates}.',
+            '{prefix} amtliche #{warning} des Deutschen Wetterdienstes für '
+            '{regions}. {text} möglich. Gültig {dates}. @DWD_presse',
+            '{prefix} amtliche {warning} des Deutschen Wetterdienstes für '
+            '{regions}. {text} möglich. Gültig {dates}.',
+        ]
 
     for candidate in candidates:
         the_tweet = candidate.format(
