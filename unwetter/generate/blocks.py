@@ -144,11 +144,14 @@ def changes(event, old_event):
         if removed:
             text += f'Nicht mehr betroffene Kreise/Städte: {", ".join(removed)}\n'
 
-        if not added and not removed and commune_list(old_event) != commune_list(event):
-            text += 'Änderung der betroffenen Gemeinden'
-        else:
+        if region_list(old_event) != region_list(event):
             text += f'Regionale Zuordnung: {upper_first(region_list(event))} ' \
                     f'(zuvor: "{upper_first(region_list(old_event))}")\n\n'
+        else:
+            text += f'Regionale Zuordnung unverändert: {upper_first(region_list(event))}\n\n'
+
+    elif commune_list(old_event) != commune_list(event):
+        text += 'Änderung der betroffenen Gemeinden\n\n'
 
     simple_fields = {
         'event': 'Wetterphänomen',
