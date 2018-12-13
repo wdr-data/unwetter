@@ -66,8 +66,8 @@ bbox = (
 
 dist_x = bbox[2] - bbox[0]
 dist_y = bbox[3] - bbox[1]
-img_width = int(dist_x / 100)
-img_height = int(dist_y / 100)
+img_width = int(dist_x / 150)
+img_height = int(dist_y / 150)
 ratio_x = img_width / dist_x
 ratio_y = img_height / dist_y
 
@@ -79,7 +79,7 @@ def to_image_coords(x, y):
 
 
 def draw_background():
-    img = Image.new("RGB", (img_width, img_height), COLORS['BACKGROUND'])
+    img = Image.new("RGBA", (img_width, img_height), COLORS['BACKGROUND'])
     draw = ImageDraw.Draw(img)
 
     for poly in states:
@@ -91,9 +91,6 @@ def draw_background():
             draw.polygon(points, outline=None, fill=COLORS['BACKGROUND'])
 
     return img
-
-
-background_image = draw_background()
 
 
 def draw_surroundings(img):
@@ -146,6 +143,16 @@ def draw_borders(img, width=6):
                     fill=COLORS['BORDERS'])
 
 
+def draw_overlay():
+    img = Image.new("RGBA", (img_width, img_height))
+
+    draw_surroundings(img)
+    draw_borders(img)
+    draw_studios(img)
+
+    return img
+
+
 def draw_event(event):
     img = background_image.copy()
     draw = ImageDraw.Draw(img)
@@ -160,8 +167,10 @@ def draw_event(event):
             projected = [to_image_coords(*target_projection(lng, lat)) for lat, lng in poly]
             draw.polygon(projected, outline=None, fill=COLORS['STATE'])
 
-    draw_surroundings(img)
-    draw_borders(img)
-    draw_studios(img)
+    img.alpha_composite(overlay)
 
-    return img.resize((int(img_width * .4), int(img_height * .4)), resample=Image.LANCZOS)
+    return overlay.resize((int(img_width * .5), int(img_height * .5)), resample=Image.LANCZOS)
+
+
+background_image = draw_background()
+overlay = draw_overlay()
