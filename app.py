@@ -113,7 +113,7 @@ def slack_command_show():
         return ''
 
     slack.post_event(db.by_id(data['text']))
-    return f'Sent event with ID {id}'
+    return f'Sent event with ID {data["text"]}'
 
 
 @app.route('/test')
