@@ -6,6 +6,7 @@ from slackclient import SlackClient
 
 from unwetter import generate
 from .map import COLORS
+from unwetter.generate import helpers
 
 # Set up Slack client
 # Based on https://www.fullstackpython.com/blog/build-first-slack-bot-python.html
@@ -16,8 +17,8 @@ CLIENT = SlackClient(SLACK_TOKEN)
 
 
 def post_event(event):
-    post_message(
-        '', [
+    response = post_message(
+        '', attachments=[
             {
                 'fallback': generate.title(event),
                 "color": COLORS['SEVERITIES'][event['severity']],
@@ -26,7 +27,7 @@ def post_event(event):
                 'fields': [
                     {
                         'title': generate.severities[event['severity']],
-                        'value': f'Warnung vor {generate.parameters(event)}',
+                        'value': {generate.parameters(event)},
                         'short': False,
                     },
                 ],
@@ -44,9 +45,23 @@ def post_event(event):
         ]
     )
 
+    thread_ts = response['ts']
+
+    instruction = helpers.pad('Verhaltenshinweise: {event["instruction"]}') if event['instruction'] else ''
+    post_message(
+        f'''
+Regionale Zuordnung: {generate.region_list(event)}
+{instruction}
+{event['description']}
+        '''.strip(),
+        thread_ts=thread_ts
+    )
+
+
+
 
 def post_event_old(event):
-    post_message(generate.description(event, short=True), [
+    post_message(generate.description(event, short=True), attachments=[
         {
             "fallback": "Textvorschläge generieren",
             "title": "Textvorschläge generieren",
@@ -85,24 +100,24 @@ def post_event_old(event):
     ])
 
 
-def post_message(message, attachments=None, private=None, channel=CHANNEL):
+def post_message(message, *, private=False, channel=CHANNEL, **kwargs):
     """
     Send message with attachments to Slack on channel. Set 'private' to a user ID to send a message
     that only that user can see. Set 'channel' to a specific ID to send in a channel different from
     the default channel.
     """
     if not private:
-        CLIENT.api_call(
+        return CLIENT.api_call(
             'chat.postMessage',
             channel=channel,
             text=message,
-            attachments=attachments,
+            **kwargs,
         )
     else:
-        CLIENT.api_call(
+        return CLIENT.api_call(
             'chat.postEphemeral',
             channel=channel,
             user=private,
             text=message,
-            attachments=attachments,
+            **kwargs,
         )

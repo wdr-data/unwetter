@@ -19,3 +19,7 @@ def upper_first(s):
         return s
 
     return s[0].upper() + s[1:]
+
+
+def pad(text):
+    return f'\n{text}\n'
