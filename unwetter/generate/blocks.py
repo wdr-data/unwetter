@@ -37,17 +37,17 @@ def region_list(event):
     return ', '.join(qualify_region(region) for region in event['regions'])
 
 
-def filter_areas(event):
+def filter_districts(event):
     return [
-        area for area in event['districts']
-        if state_for_cell_id(area['warn_cell_id']) in STATES_FILTER
+        district for district in event['districts']
+        if state_for_cell_id(district['warn_cell_id']) in STATES_FILTER
     ]
 
 
-def area_list(event, all=False):
+def district_list(event, all=False):
     return ', '.join(
-        area['name'] for area in
-        (event['districts'] if all else filter_areas(event))
+        district['name'] for district in
+        (event['districts'] if all else filter_districts(event))
     )
 
 
@@ -124,12 +124,12 @@ def changes(event, old_event):
     if dates(old_event) != dates(event):
         text += f'Gültigkeit: {dates(event)} (zuvor "{dates(old_event)}")\n\n'
 
-    if area_list(old_event) != area_list(event):
-        areas_now = set(area['name'] for area in event['districts'])
-        areas_before = set(area['name'] for area in old_event['districts'])
+    if district_list(old_event) != district_list(event):
+        districts_now = set(district['name'] for district in event['districts'])
+        districts_before = set(district['name'] for district in old_event['districts'])
 
-        added = areas_now - areas_before
-        removed = areas_before - areas_now
+        added = districts_now - districts_before
+        removed = districts_before - districts_now
 
         if added:
             text += f'Neue Kreise/Städte: {", ".join(added)}\n'

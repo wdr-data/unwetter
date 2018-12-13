@@ -64,8 +64,8 @@ def parse_polygon(polygon):
     return [[float(x) for x in pair.split(',')] for pair in polygon.split(' ')]
 
 
-def district_from_commune(area):
-    common_id = area['warn_cell_id'][-8:-3]
+def district_from_commune(commune):
+    common_id = commune['warn_cell_id'][-8:-3]
     warn_cell_id = f'1{common_id}000'
     name = DISTRICTS[warn_cell_id]
     return name, warn_cell_id

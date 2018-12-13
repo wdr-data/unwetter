@@ -43,7 +43,7 @@ Gültigkeit: {upper_first(dates(event))}.
 
 Warnung vor: {parameters(event)}
 
-Betroffene Kreise und Städte: {area_list(event)}
+Betroffene Kreise und Städte: {district_list(event)}
 
 Verhaltenshinweise: {event['instruction'] or ''}
 
@@ -109,7 +109,7 @@ Gültigkeit: {upper_first(dates(event))}.
 
 Warnung vor: {parameters(event)}
 
-Betroffene Kreise und Städte: {area_list(event)}
+Betroffene Kreise und Städte: {district_list(event)}
 
 Verhaltenshinweise: {event['instruction'] or ''}
 
@@ -162,12 +162,12 @@ def crawl(event):
     warning = 'Unwetterwarnung' if event['severity'] in ('Severe', 'Extreme') else 'Wetterwarnung'
 
     if len(event['districts']) < 3:
-        location = area_list(event)
+        location = district_list(event)
     else:
         location = region_list(event)
 
     if not location:
-        location = area_list(event)
+        location = district_list(event)
 
     location = rreplace(location, ', ', ' und ', 1)
 
@@ -215,8 +215,8 @@ def tweet(event):
 
     text = upper_first(text)
 
-    areas = area_list(event)
-    areas = rreplace(areas, ', ', ' und ', 1)
+    districts = district_list(event)
+    districts = rreplace(districts, ', ', ' und ', 1)
 
     regions_ = region_list(event)
     regions_ = rreplace(regions_, ', ', ' und ', 1)
@@ -236,9 +236,9 @@ def tweet(event):
     else:
         candidates = [
             '{prefix} amtliche #{warning} des Deutschen Wetterdienstes für '
-            '{areas}. {text} möglich. Gültig {dates}. @DWD_presse',
+            '{districts}. {text} möglich. Gültig {dates}. @DWD_presse',
             '{prefix} amtliche {warning} des Deutschen Wetterdienstes für '
-            '{areas}. {text} möglich. Gültig {dates}.',
+            '{districts}. {text} möglich. Gültig {dates}.',
             '{prefix} amtliche #{warning} des Deutschen Wetterdienstes für '
             '{regions}. {text} möglich. Gültig {dates}. @DWD_presse',
             '{prefix} amtliche {warning} des Deutschen Wetterdienstes für '
@@ -247,7 +247,12 @@ def tweet(event):
 
     for candidate in candidates:
         the_tweet = candidate.format(
-            prefix=prefix, warning=warning, areas=areas, regions=regions_, text=text, dates=dates_)
+            prefix=prefix,
+            warning=warning,
+            districts=districts,
+            regions=regions_,
+            text=text,
+            dates=dates_)
         the_tweet = the_tweet.replace(' (kein Ende der Gültigkeit angegeben)', '').strip()
         if len(the_tweet) <= 280:
             break
