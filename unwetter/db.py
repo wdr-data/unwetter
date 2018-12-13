@@ -7,7 +7,6 @@ import pytz
 from bson import CodecOptions
 from pymongo import MongoClient
 
-from . import dwd
 
 try:
     MONGODB_URI = os.environ['MONGODB_URI']
@@ -45,6 +44,8 @@ def update():
     """
     Download the latest events from the API and update the database, if necessary
     """
+    # Local import to prevent circular dependency
+    from . import dwd
 
     last_modified_dwd = dwd.last_modified()
     last_updated_db = last_updated()
@@ -73,6 +74,7 @@ def update():
 
         if collection.count_documents({'id': event['id']}):
             continue
+
         collection.insert_one(event)
         new_events.append(event)
 
@@ -118,11 +120,14 @@ def latest_reference(references):
             'id': references[0],
         }
 
-    try:
-        return collection.find(filter).sort([('sent', pymongo.DESCENDING)]).limit(1)[0]
-    except IndexError:
-        print(f'Could not find object for references')
-        return None
+    refs = collection.find(filter).sort([('sent', pymongo.DESCENDING)])
+
+    for ref in refs:
+        if ref['publish']:
+            return ref
+
+    print(f'Could not find object for references')
+    return None
 
 
 def clear():

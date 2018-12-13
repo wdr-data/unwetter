@@ -9,7 +9,8 @@ import requests
 import xmltodict
 import pytz
 
-from . import regions
+from . import regions, db
+from .generate.blocks import changes
 from .data.districts import DISTRICTS
 
 API_URL = 'https://opendata.dwd.de/weather/alerts/cap/' \
@@ -198,6 +199,12 @@ def parse_xml(xml):
 
     if 'references' in xml_dict:
         event['references'] = [ref.split(',')[1] for ref in xml_dict['references'].split(' ')]
+
+    if event['msg_type'] == 'Update':
+        old_event = db.latest_reference(event['references'])
+        event['publish'] = bool(changes(event, old_event))
+    else:
+        event['publish'] = True
 
     return event
 
