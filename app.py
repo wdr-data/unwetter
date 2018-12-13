@@ -48,7 +48,9 @@ def wina(id):
 
 @app.route('/map/<id>.png')
 def genmap(id):
-    img = map.draw_event(db.by_id(id))
+    from unwetter.data.test_events import frost
+    frost.event['severity'] = 'Extreme'
+    img = map.draw_event(frost.event)
 
     bio = BytesIO()
     img.save(bio, 'PNG')
@@ -102,6 +104,17 @@ Informationen und Kontakt: {os.environ["WDR_PROJECT_INFO_URL"]}
             slack.post_message(response, private=user_id, channel=channel_id)
 
     return ''
+
+
+@app.route('/slack/command/show', methods=['POST'])
+def slack_event():
+    data = request.form
+
+    if not data:
+        print('No Data :(')
+        return ''
+
+    slack.post_event(db.by_id(data['text']))
 
 
 @app.route('/test')
