@@ -37,7 +37,7 @@ def region_list(event):
     return ', '.join(qualify_region(region) for region in event['regions'])
 
 
-def filter_districts(event):
+def filter_areas(event):
     return [
         district for district in event['districts']
         if state_for_cell_id(district['warn_cell_id']) in STATES_FILTER
@@ -47,7 +47,14 @@ def filter_districts(event):
 def district_list(event, all=False):
     return ', '.join(
         district['name'] for district in
-        (event['districts'] if all else filter_districts(event))
+        (event['districts'] if all else filter_areas(event))
+    )
+
+
+def commune_list(event, all=False):
+    return ', '.join(
+        commune['name'] for commune in
+        (event['areas'] if all else filter_areas(event))
     )
 
 
@@ -137,8 +144,11 @@ def changes(event, old_event):
         if removed:
             text += f'Nicht mehr betroffene Kreise/Städte: {", ".join(removed)}\n'
 
-        text += f'Regionale Zuordnung: {upper_first(region_list(event))} ' \
-                f'(zuvor: "{upper_first(region_list(old_event))}")\n\n'
+        if not added and not removed and commune_list(old_event) != commune_list(event):
+            text += 'Änderung der betroffenen Gemeinden'
+        else:
+            text += f'Regionale Zuordnung: {upper_first(region_list(event))} ' \
+                    f'(zuvor: "{upper_first(region_list(old_event))}")\n\n'
 
     simple_fields = {
         'event': 'Wetterphänomen',
