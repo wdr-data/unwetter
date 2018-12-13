@@ -37,24 +37,31 @@ def region_list(event):
     return ', '.join(qualify_region(region) for region in event['regions'])
 
 
-def filter_areas(event):
+def filter_districts(event):
     return [
         district for district in event['districts']
         if state_for_cell_id(district['warn_cell_id']) in STATES_FILTER
     ]
 
 
+def filter_communes(event):
+    return [
+        commune for commune in event['areas']
+        if state_for_cell_id(commune['warn_cell_id']) in STATES_FILTER
+    ]
+
+
 def district_list(event, all=False):
     return ', '.join(
         district['name'] for district in
-        (event['districts'] if all else filter_areas(event))
+        (event['districts'] if all else filter_districts(event))
     )
 
 
 def commune_list(event, all=False):
     return ', '.join(
         commune['name'] for commune in
-        (event['areas'] if all else filter_areas(event))
+        (event['areas'] if all else filter_communes(event))
     )
 
 
