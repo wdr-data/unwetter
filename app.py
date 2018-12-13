@@ -8,20 +8,19 @@ from flask import Flask, Response, request, json, send_file
 
 from unwetter import db, generate, wina as wina_gen, slack, map
 from unwetter.config import SEVERITY_FILTER, STATES_FILTER, URGENCY_FILTER
+from unwetter.generate import urls
 
-
-URL_BASE = 'https://unwetter-bot.herokuapp.com/'
 app = Flask(__name__)
 
 
 @app.route('/feed.rss')
 def feed():
     fg = FeedGenerator()
-    fg.id(URL_BASE)
+    fg.id(urls.URL_BASE)
     fg.title('Unwetter Testfeed')
     fg.link(href='https://www.dwd.de/DE/wetter/warnungen/warnWetter_node.html', rel='alternate')
     fg.subtitle('This is a test feed!')
-    fg.link(href=f'{URL_BASE}feed.rss', rel='self')
+    fg.link(href=f'{urls.URL_BASE}feed.rss', rel='self')
     fg.language('de')
 
     # Iterate over the most recent 50 events matching filter
@@ -29,7 +28,7 @@ def feed():
         fe = fg.add_entry(order='append')
         fe.id(event['id'])
         fe.title(generate.headline(event))
-        fe.link(href=f'{URL_BASE}wina/{event["id"]}')
+        fe.link(href=urls.wina(event))
         fe.published(event['sent'])
         fe.description(generate.description(event).replace('\n', '<br>'))
 

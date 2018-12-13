@@ -5,9 +5,7 @@ import os
 from .. import db
 from .blocks import *
 from .helpers import rreplace, upper_first
-
-
-URL_BASE = 'https://unwetter-bot.herokuapp.com/'
+from . import urls
 
 
 def headline(event):
@@ -37,7 +35,7 @@ Warnstufe: {severities[event['severity']]}
 
 Regionale Zuordnung: {region_list(event)}
 
-Karte: {URL_BASE}map/{event["id"]}.png
+Karte: {urls.map(event)}
 
 Gültigkeit: {upper_first(dates(event))}.
 
@@ -103,7 +101,7 @@ Warnstufe: {severities[event['severity']]}
 
 Regionale Zuordnung: {region_list(event)}
 
-Karte: {URL_BASE}map/{event["id"]}.png
+Karte: {urls.map(event)}
 
 Gültigkeit: {upper_first(dates(event))}.
 
