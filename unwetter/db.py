@@ -64,15 +64,18 @@ def update():
         collection_meta.replace_one(
             {'id': 'last_updated'}, {'id': 'last_updated', 'at': last_modified_dwd})
 
-    events = [dwd.parse_xml(event) for event in dwd.load_dwd_xml_events()]
+    xmls = dwd.load_dwd_xml_events()
 
     new_events = []
 
-    for event in events:
-        if event['status'] == 'Test':
+    for id, xml in xmls.items():
+        if collection.count_documents({'id': id}):
+            print('Ignoring existing event with id', id)
             continue
 
-        if collection.count_documents({'id': event['id']}):
+        event = dwd.parse_xml(xml)
+
+        if event['status'] == 'Test':
             continue
 
         collection.insert_one(event)

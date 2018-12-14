@@ -2,6 +2,7 @@
 
 from io import BytesIO
 from datetime import datetime
+from os.path import splitext
 from zipfile import ZipFile
 
 import iso8601
@@ -54,10 +55,10 @@ def load_dwd_xml_events():
     data_zip.write(requests.get(API_URL).content)
     data_zip.seek(0)
     data_zip = ZipFile(data_zip)
-    return [
-        data_zip.read(name).decode('utf-8')
+    return {
+        splitext(name)[0]: data_zip.read(name).decode('utf-8')
         for name in data_zip.namelist()
-    ]
+    }
 
 
 def parse_polygon(polygon):
