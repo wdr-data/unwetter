@@ -9,7 +9,7 @@ from time import sleep
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 from unwetter import db, slack, wina
-from unwetter.config import SEVERITY_FILTER, STATES_FILTER, URGENCY_FILTER
+from unwetter.config import filter_event
 
 
 sched = BlockingScheduler()
@@ -28,20 +28,24 @@ def update_db():
         return
 
     # Filter new_events by SEVERITY_FILTER, URGENCY_FILTER and STATES_FILTER
-    new_events = [
-        e for e in new_events
-        if e['publish']
-        and e['severity'] in SEVERITY_FILTER
-        and e['urgency'] in URGENCY_FILTER 
-        and len(set(e['states']) - set(STATES_FILTER)) < len(e['states'])
-    ]
+    filtered = []
+    for event in new_events:
+        if filter_event(event) and event['has_changes']:
+            filtered.append(event)
+        else:
+            if event['msg_type'] == 'Alert':
+                continue
 
-    if not new_events:
+            latest_reference = db.latest_reference(event['references'])
+            if latest_reference and filter_event(latest_reference):
+                filtered.append(event)
+
+    if not filtered:
         return
 
-    wina.upload([event['id'] for event in new_events])
+    wina.upload([event['id'] for event in filtered])
 
-    for event in new_events:
+    for event in filtered:
         print(f'Sending event {event["id"]} to Slack')
         slack.post_event(event)
         sleep(1)

@@ -20,8 +20,10 @@ def post_event(event):
 
     change_title = ''
     the_changes = ''
+    event['special_type'] = generate.special_type(event)
 
-    if event['msg_type'] != 'Alert':
+    if event['msg_type'] != 'Alert' and event['special_type'] != 'UpdateAlert':
+
         old_event = db.latest_reference(event['references'])
 
         if old_event:

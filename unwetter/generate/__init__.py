@@ -123,7 +123,7 @@ def description(event, short=False):
     """
     Return main body text
     """
-    if event['msg_type'] == 'Alert':
+    if event['msg_type'] == 'Alert' or event['special_type'] == 'UpdateAlert':
         text = describe_new_event(event)
     else:
         text = describe_update(event)

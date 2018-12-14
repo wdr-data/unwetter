@@ -32,6 +32,10 @@ def by_id(id):
     return collection.find_one({'id': id})
 
 
+def by_ids(ids):
+    return collection.find({'id': {'$in': ids}})
+
+
 def last_updated():
     """
     :return: The datetime when the event database was last updated with new data from the API

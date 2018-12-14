@@ -6,7 +6,7 @@ from ..config import STATES_FILTER
 from ..dwd import state_for_cell_id
 from ..regions import REGIONS
 from .grammar import *
-from .helpers import upper_first
+from .helpers import upper_first, special_type
 
 severities = {
     'Minor': 'Wetterwarnung',
@@ -80,6 +80,7 @@ def title(event, variant='default'):
     prefixes = {
         'default': {
             'new_event': '🚨 Neue Meldung',
+            'event_relevant_again': '🚨 Erneut relevante Meldung',
             'cancelled_prematurely': '🚫 Meldung vorzeitig aufgehoben',
             'updated': '🔁 Meldung aktualisiert',
             'cancelled_wrong': '🚫 Meldung zurückgezogen',
@@ -87,6 +88,7 @@ def title(event, variant='default'):
         },
         'wina_headline': {
             'new_event': '',
+            'event_relevant_again': 'Erneut relevant: ',
             'cancelled_prematurely': 'Vorzeitige Aufhebung: ',
             'updated': 'Aktualisierung: ',
             'cancelled_wrong': 'Meldung zurückgezogen: ',
@@ -99,6 +101,10 @@ def title(event, variant='default'):
     elif event['msg_type'] == 'Update':
         if event['response_type'] == 'AllClear':
             prefix = prefixes[variant]['cancelled_prematurely']
+        elif event['special_type'] == 'ReAlert':
+            prefix = prefixes[variant]['event_relevant_again']
+        elif event['special_type'] == 'UpdateAlert':
+            prefix = prefixes[variant]['new_event']
         else:
             prefix = prefixes[variant]['updated']
     elif event['msg_type'] == 'Cancel':
