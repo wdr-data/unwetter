@@ -123,14 +123,13 @@ def latest_reference(references):
             'id': references[0],
         }
 
-    refs = collection.find(filter).sort([('sent', pymongo.DESCENDING)])
+    filter['has_changes'] = True
 
-    for ref in refs:
-        if ref['publish']:
-            return ref
-
-    print(f'Could not find object for references')
-    return None
+    try:
+        return collection.find(filter).sort([('sent', pymongo.DESCENDING)])[0]
+    except IndexError:
+        print(f'Could not find object for references')
+        return None
 
 
 def clear():

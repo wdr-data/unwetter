@@ -203,9 +203,9 @@ def parse_xml(xml):
     if event['msg_type'] == 'Update':
         old_event = db.latest_reference(event['references'])
         from .generate.blocks import changes  # Prevent circular dependency
-        event['publish'] = bool(changes(event, old_event))
+        event['has_changes'] = bool(changes(event, old_event))
     else:
-        event['publish'] = True
+        event['has_changes'] = True
 
     return event
 
