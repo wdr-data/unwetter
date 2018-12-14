@@ -171,9 +171,7 @@ def draw_event(event):
             draw.polygon(projected, outline=None, fill=COLORS['STATE'])
 
     img.alpha_composite(overlay)
-
     resized = img.resize((int(img_width * .5), int(img_height * .5)), resample=Image.CUBIC)
-    draw_logo(resized)
 
     return resized
 
