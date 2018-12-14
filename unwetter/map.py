@@ -15,11 +15,11 @@ with open('config/studios.yml', 'r') as fp:
 
 
 COLORS = {
-    'BACKGROUND': '#aaa',
-    'STATE': 'rgb(0, 50, 93)',
-    'SURROUNDINGS': 'grey',
+    'BACKGROUND': 'rgb(242, 238, 226)',
+    'STATE': '#81db51',
+    'SURROUNDINGS': 'rgb(242, 238, 226)',
     'BORDERS': 'white',
-    'STUDIOS': 'white',
+    'STUDIOS': 'rgba(44, 44, 44, 77)',
     'SEVERITIES': {
         'Minor': '#ffcc00',
         'Moderate': '#ff6600',
@@ -56,7 +56,7 @@ surroundings = MultiPolygon(surroundings)
 
 bbox = states.bounds
 
-img_padding = 10000  # in meters
+img_padding = 40000  # in meters
 bbox = (
     bbox[0] - img_padding,
     bbox[1] - img_padding,
@@ -66,15 +66,17 @@ bbox = (
 
 dist_x = bbox[2] - bbox[0]
 dist_y = bbox[3] - bbox[1]
-img_width = int(dist_x / 150)
-img_height = int(dist_y / 150)
-ratio_x = img_width / dist_x
-ratio_y = img_height / dist_y
+img_width_ = int(dist_x / 150)
+img_height_ = int(dist_y / 150)
+img_height = max(img_height_, img_width_)
+img_width = max(img_height_, img_width_)
+ratio_x = img_width_ / dist_x
+ratio_y = img_height_ / dist_y
 
 
 def to_image_coords(x, y):
-    px = int(img_width - ((bbox[2] - x) * ratio_x))
-    py = int((bbox[3] - y) * ratio_y)
+    px = int(img_width - ((bbox[2] - x) * ratio_x) + abs(img_width_ - img_width) / 2)
+    py = int((bbox[3] - y) * ratio_y + int(abs(img_height_ - img_height) / 2))
     return px, py
 
 
@@ -102,28 +104,19 @@ def draw_surroundings(img):
 
 
 def draw_studios(img):
-    draw = ImageDraw.Draw(img)
-    point_radius = 14
-    border_radius = 8
+    draw = ImageDraw.Draw(img, 'RGBA')
+    size = 15
 
     for name, studio in STUDIOS.items():
         coords = studio['coordinates']
         point = to_image_coords(*target_projection(coords['lat'], coords['lon']))
-        draw.ellipse(
-            (point[0] - (point_radius + border_radius),
-             point[1] - (point_radius + border_radius),
-             point[0] + point_radius + border_radius,
-             point[1] + point_radius + border_radius),
-            fill='black')
-        draw.ellipse(
-            (point[0] - point_radius,
-             point[1] - point_radius,
-             point[0] + point_radius,
-             point[1] + point_radius),
+        draw.rectangle(
+            [(point[0] - size, point[1] - size),
+             (point[0] + size, point[1] + size)],
             fill=COLORS['STUDIOS'])
 
 
-def draw_borders(img, width=6):
+def draw_borders(img, width=3):
     draw = ImageDraw.Draw(img)
 
     line_width = width
@@ -141,6 +134,16 @@ def draw_borders(img, width=6):
                      point[0] + point_radius,
                      point[1] + point_radius),
                     fill=COLORS['BORDERS'])
+
+
+logo = Image.open('assets/images/logo_facebook.png')
+logo = logo.resize((int(img_width * .07), int(img_height * .07)), resample=Image.CUBIC)
+
+
+def draw_logo(img):
+    padding = 30
+    img.paste(logo, (padding,
+                     img.height - logo.height - padding))
 
 
 def draw_overlay():
@@ -169,7 +172,10 @@ def draw_event(event):
 
     img.alpha_composite(overlay)
 
-    return img.resize((int(img_width * .5), int(img_height * .5)), resample=Image.CUBIC)
+    resized = img.resize((int(img_width * .5), int(img_height * .5)), resample=Image.CUBIC)
+    draw_logo(resized)
+
+    return resized
 
 
 background_image = draw_background()
