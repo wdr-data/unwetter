@@ -1,6 +1,7 @@
 #!/user/bin/env python3.6
 
 import os
+from functools import lru_cache
 
 import pymongo
 import pytz
@@ -26,6 +27,7 @@ collection_meta = mongo_db.events_meta.with_options(codec_options=CodecOptions(
 ))
 
 
+@lru_cache(maxsize=32)
 def by_id(id):
     return collection.find_one({'id': id})
 
@@ -107,7 +109,8 @@ def query(severities, states, urgencies, limit=50):
     return collection.find(filter).sort([('sent', pymongo.DESCENDING)]).limit(limit)
 
 
-def latest_reference(references):
+@lru_cache(maxsize=32)
+def latest_reference(references, ):
     """
 
     :param references: List of IDs
