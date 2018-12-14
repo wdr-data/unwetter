@@ -1,7 +1,6 @@
 #!/user/bin/env python3.6
 
 import os
-from time import time
 
 from slackclient import SlackClient
 
@@ -102,8 +101,6 @@ Regionale Zuordnung: {generate.region_list(event)}
             },
         ]
     )
-
-
 
 
 def post_event_old(event):
