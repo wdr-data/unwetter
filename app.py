@@ -27,7 +27,7 @@ def feed():
     for event in db.query(SEVERITY_FILTER, STATES_FILTER, URGENCY_FILTER):
         fe = fg.add_entry(order='append')
         fe.id(event['id'])
-        fe.title(generate.headline(event))
+        fe.title(generate.title(event, variant='wina_headline'))
         fe.link(href=urls.wina(event))
         fe.published(event['sent'])
         fe.description(generate.description(event).replace('\n', '<br>'))
