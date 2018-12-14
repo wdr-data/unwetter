@@ -70,23 +70,46 @@ def keywords(event):
            f'Technische Erprobung'
 
 
-def title(event):
+def title(event, variant='default'):
     """
     Return first sentence of main body text
+
+    variant can be 'default' or 'wina_headline'
     """
+
+    prefixes = {
+        'default': {
+            'new_event': '🚨 Neue Meldung',
+            'cancelled_prematurely': '🚫 Meldung vorzeitig aufgehoben',
+            'updated': '🔁 Meldung aktualisiert',
+            'cancelled_wrong': '🚫 Meldung zurückgezogen',
+            'unknown': '⁉️ Unbekannter Meldungstyp',
+        },
+        'wina_headline': {
+            'new_event': '',
+            'cancelled_prematurely': 'Vorzeitige Aufhebung: ',
+            'updated': 'Aktualisierung: ',
+            'cancelled_wrong': 'Meldung zurückgezogen: ',
+            'unknown': 'Unbekannter Meldungstyp - ',
+        }
+    }
+
     if event['msg_type'] == 'Alert':
-        prefix = '🚨 Neue Meldung'
+        prefix = prefixes[variant]['new_event']
     elif event['msg_type'] == 'Update':
         if event['response_type'] == 'AllClear':
-            prefix = '🚫 Meldung vorzeitig aufgehoben'
+            prefix = prefixes[variant]['cancelled_prematurely']
         else:
-            prefix = '🔁 Meldung aktualisiert'
+            prefix = prefixes[variant]['updated']
     elif event['msg_type'] == 'Cancel':
-        prefix = '🚫 Meldung zurückgezogen'
+        prefix = prefixes[variant]['cancelled_wrong']
     else:
-        prefix = '⁉️ Unbekannter Meldungstyp'
+        prefix = prefixes[variant]['unknown']
 
-    return f'{prefix}: {event["headline"]}'
+    if variant == 'default':
+        return f'{prefix}: {event["headline"]}'
+    elif variant == 'wina_headline':
+        return f'{prefix}DETAILS zur amtlichen UNWETTERWARNUNG für NORDRHEIN-WESTFALEN des DWD'
 
 
 def dates(event):

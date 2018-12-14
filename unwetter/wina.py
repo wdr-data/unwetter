@@ -24,7 +24,7 @@ def from_id(id):
 
     wina_xml = WINA_TEMPLATE.format(
         sent=escape(sent),
-        title=escape(generate.headline(event)),
+        title=escape(generate.title(event, variant='wina_headline')),
         keywords=escape(generate.keywords(event)),
         text=escape(generate.description(event)).replace('\n', '&#xD;&#xA;'),
     )

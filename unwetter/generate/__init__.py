@@ -8,25 +8,6 @@ from .helpers import rreplace, upper_first
 from . import urls
 
 
-def headline(event):
-    """
-    Return text for headline
-    """
-    if event['msg_type'] == 'Alert':
-        prefix = ''
-    elif event['msg_type'] == 'Update':
-        if event['response_type'] == 'AllClear':
-            prefix = 'Vorzeitige Aufhebung: '
-        else:
-            prefix = 'Aktualisierung: '
-    elif event['msg_type'] == 'Cancel':
-        prefix = 'Meldung zurückgezogen: '
-    else:
-        prefix = 'Unbekannter Meldungstyp - '
-
-    return f'{prefix}DETAILS zur amtlichen UNWETTERWARNUNG für NORDRHEIN-WESTFALEN des DWD'
-
-
 def describe_new_event(event):
     text = f'''
 {title(event)}
