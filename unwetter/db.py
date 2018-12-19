@@ -113,8 +113,7 @@ def query(severities, states, urgencies, limit=50):
     return collection.find(filter).sort([('sent', pymongo.DESCENDING)]).limit(limit)
 
 
-@lru_cache(maxsize=32)
-def latest_reference(references, ):
+def latest_reference(references):
     """
 
     :param references: List of IDs
