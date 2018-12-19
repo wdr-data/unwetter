@@ -79,7 +79,11 @@ def update():
             print('Ignoring existing event with id', id)
             continue
 
-        event = dwd.parse_xml(xml)
+        try:
+            event = dwd.parse_xml(xml)
+        except:
+            print('Failed to parse event with ID', id)
+            continue
 
         if event['status'] == 'Test':
             continue
