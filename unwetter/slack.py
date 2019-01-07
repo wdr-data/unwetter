@@ -36,7 +36,7 @@ def post_event(event):
             the_changes = ''
         else:
             change_title = f'Änderungen zur Meldung von {old_time}\n'
-            the_changes = 'Änderungen:\n\n' + (generate.changes(event, old_event) if old_event else 'Unbekannt') + '\n'
+            the_changes = '*Änderungen*:\n\n' + (generate.changes(event, old_event) if old_event else 'Unbekannt')
 
     response = post_message(
         '', attachments=[
@@ -67,10 +67,15 @@ def post_event(event):
     post_message(
         f'''
 {the_changes}
+*Details*
+
 Regionale Zuordnung: {generate.region_list(event)}
 {instruction}
 {event['description']}
+
+ID: {event['id']}
         '''.strip(),
+        mrkdwn=True,
         thread_ts=thread_ts,
         attachments=[
             {
