@@ -36,7 +36,7 @@ def post_event(event):
             the_changes = ''
         else:
             change_title = f'Änderungen zur Meldung von {old_time}\n'
-            the_changes = '*Änderungen*:\n\n' + (generate.changes(event, old_event) if old_event else 'Unbekannt')
+            the_changes = '*Änderungen:*\n\n' + (generate.changes(event, old_event) if old_event else 'Unbekannt')
 
     response = post_message(
         '', attachments=[
@@ -62,18 +62,16 @@ def post_event(event):
 
     thread_ts = response['ts']
 
-    instruction = helpers.pad('Verhaltenshinweise: {event["instruction"]}') if event['instruction'] else ''
+    instruction = helpers.pad('_Verhaltenshinweise_: {event["instruction"]}') if event['instruction'] else ''
 
     post_message(
         f'''
 {the_changes}
-*Details*
+*Details:*
 
-Regionale Zuordnung: {generate.region_list(event)}
+_Regionale Zuordnung_: {generate.region_list(event)}
 {instruction}
 {event['description']}
-
-ID: {event['id']}
         '''.strip(),
         mrkdwn=True,
         thread_ts=thread_ts,

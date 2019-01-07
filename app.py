@@ -84,9 +84,9 @@ def slack_event():
         response = None
 
         if action['name'] == 'twitter':
-            response = 'Vorschlag Tweet:\n' + generate.tweet(db.by_id(id))
+            response = '*Vorschlag Tweet*:\n' + generate.tweet(db.by_id(id))
         elif action['name'] == 'crawl':
-            response = 'Vorschlag TV-Crawl:\n' + generate.crawl(db.by_id(id))
+            response = '*Vorschlag TV-Crawl:*\n' + generate.crawl(db.by_id(id))
         elif action['name'] == 'dwd':
             response = 'Offizielle Meldung des DWD:\n' + db.by_id(id)['description']
         elif action['name'] == 'info':
@@ -96,11 +96,18 @@ https://www.dwd.de/DE/wetter/warnungen_gemeinden/warnkarten/warnWetter_nrw_node.
 
 Die Bereitstellung dieser Information ist ein Projekt des Digitalen Wandels und wird aktiv weiterentwickelt.
 Informationen und Kontakt: {os.environ["WDR_PROJECT_INFO_URL"]}
+
+Event ID: {data["callback_id"]}
             '''.strip()
 
         if response:
             slack.post_message(
-                response, private=user_id, channel=channel_id, thread_ts=data['original_message']['thread_ts'])
+                response,
+                mrkdwn=True,
+                private=user_id,
+                channel=channel_id,
+                thread_ts=data['original_message']['thread_ts']
+            )
 
     return ''
 
