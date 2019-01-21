@@ -78,7 +78,7 @@ def post_event(event):
 
     thread_ts = response['ts']
 
-    instruction = helpers.pad('_Verhaltenshinweise_: {event["instruction"]}') if event['instruction'] else ''
+    instruction = helpers.pad(f'_Verhaltenshinweise_: {event["instruction"]}') if event['instruction'] else ''
 
     post_message(
         f'''
