@@ -24,7 +24,6 @@ unwetter = {editable = true,path = "."}
 [dev-packages]
 pytest = "*"
 pytest-tap = "*"
-pipenv = "==2018.11.26"
 
 [requires]
 python_version = "3.6"
