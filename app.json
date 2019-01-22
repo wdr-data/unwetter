@@ -14,7 +14,7 @@
   "environments": {
     "test": {
       "scripts": {
-        "test-setup": "pipenv install --dev --system",
+        "test-setup": "pip install -r requirements.txt && pip install -r requirements-dev.txt",
         "test": "pytest --tap-stream"
       }
     }
