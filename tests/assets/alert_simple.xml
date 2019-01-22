@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alert xmlns="urn:oasis:names:tc:emergency:cap:1.2">
+  <identifier>2.49.0.1.276.0.DWD.PVW.1544539320000.938e4a06-3fa8-4d7d-984f-ddd1cc3cc149.DEU</identifier>
+  <sender>CAP@dwd.de</sender>
+  <sent>2018-12-11T15:42:00+01:00</sent>
+  <status>Actual</status>
+  <msgType>Alert</msgType>
+  <source>PVW</source>
+  <scope>Public</scope>
+  <code>id:2.49.0.1.276.0.DWD.PVW.1544539320000.938e4a06-3fa8-4d7d-984f-ddd1cc3cc149</code>
+  <info>
+    <language>de-DE</language>
+    <category>Met</category>
+    <event>LEICHTER SCHNEEFALL</event>
+    <responseType>None</responseType>
+    <urgency>Immediate</urgency>
+    <severity>Minor</severity>
+    <certainty>Likely</certainty>
+    <eventCode>
+      <valueName>PROFILE_VERSION</valueName>
+      <value>2.1</value>
+    </eventCode>
+    <eventCode>
+      <valueName>LICENSE</valueName>
+      <value>Geobasisdaten: Copyright Bundesamt für Kartographie und Geodäsie, Frankfurt am Main, 2013</value>
+    </eventCode>
+    <eventCode>
+      <valueName>II</valueName>
+      <value>70</value>
+    </eventCode>
+    <eventCode>
+      <valueName>GROUP</valueName>
+      <value>SNOWFALL</value>
+    </eventCode>
+    <eventCode>
+      <valueName>AREA_COLOR</valueName>
+      <value>255 255 0</value>
+    </eventCode>
+    <effective>2018-12-11T15:42:00+01:00</effective>
+    <onset>2018-12-11T20:00:00+01:00</onset>
+    <expires>2018-12-12T18:00:00+01:00</expires>
+    <senderName>DWD / Nationales Warnzentrum Offenbach</senderName>
+    <headline>Amtliche WARNUNG vor LEICHTEM SCHNEEFALL</headline>
+    <description>Es tritt im Warnzeitraum leichter Schneefall mit Mengen zwischen 2 cm und 6 cm auf. In Staulagen werden Mengen bis 12 cm erreicht. Verbreitet wird es glatt.</description>
+    <instruction/>
+    <web>http://www.wettergefahren.de</web>
+    <contact>Deutscher Wetterdienst</contact>
+    <parameter>
+      <valueName>Schneefall</valueName>
+      <value>2-6 [cm]</value>
+    </parameter>
+    <parameter>
+      <valueName>Staulagen</valueName>
+      <value>&lt;12 [cm]</value>
+    </parameter>
+    <area>
+      <areaDesc>polygonal event area</areaDesc>
+      <polygon>47.649516,13.088408 47.627731,13.095559 47.601428,13.06272 47.586558,13.064585 47.576588,13.041576 47.55744,13.055659 47.534852,13.031254 47.52382,13.04593 47.492017,13.047249 47.486669,13.027228 47.464132,13.000845 47.47773,12.98889 47.474182,12.972272 47.496918,12.908707 47.521878,12.88036 47.526766,12.857831 47.54564,12.847679 47.544968,12.81831 47.556333,12.794917 47.578914,12.779591 47.610268,12.807405 47.626943,12.799841 47.632935,12.780846 47.667687,12.754759 47.679113,12.733432 47.682056,12.695715 47.696414,12.715687 47.734419,12.719312 47.740619,12.760821 47.753541,12.787022 47.755585,12.814265 47.755222,12.848779 47.752606,12.883121 47.744824,12.894049 47.770173,12.928074 47.747996,12.935507 47.738255,12.914208 47.723851,12.905658 47.709598,12.930025 47.707376,12.987051 47.713147,12.998341 47.722716,13.017576 47.709452,13.048304 47.686952,13.07996 47.672822,13.076683 47.649516,13.088408 47.649516,13.088408</polygon>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Marktschellenberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>809172124</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Große Kreisstadt Bad Reichenhall</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>809172114</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Schneizlreuth</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>809172131</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Bayerisch Gmain</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>809172115</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Ramsau b. Berchtesgaden</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>809172129</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>gemeindefreies Gebiet Schellenberger Forst</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>809172454</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Schönau a. Königssee</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>809172132</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Berchtesgaden</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>809172116</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>gemeindefreies Gebiet Eck</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>809172452</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Bischofswiesen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>809172117</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+  </info>
+</alert>

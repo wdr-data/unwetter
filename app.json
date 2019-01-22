@@ -1,0 +1,22 @@
+{
+  "name": "unwetter-bot",
+  "description": "Automatically notify newsroom about weather warnings from DWD",
+  "repository": "https://github.com/wdr-data/unwetter",
+  "addons": ["mongolab:sandbox"],
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    },
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-locale"
+    }
+  ],
+  "environments": {
+    "test": {
+      "scripts": {
+        "test-setup": "pipenv install --dev --system",
+        "test": "pytest --tap-stream"
+      }
+    }
+  }
+}
