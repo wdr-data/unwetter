@@ -16,7 +16,7 @@ severities = {
 }
 
 
-def qualify_region(region_tuple):
+def qualify_region(region_tuple, accusative=False):
     name, relevance = region_tuple[:2]
 
     if relevance < 0.2:
@@ -26,15 +26,15 @@ def qualify_region(region_tuple):
     elif relevance < 0.8:
         prefix = 'weite Teile'
     elif relevance < 1.0:
-        prefix = 'der Großteil'
+        prefix = 'den Großteil' if accusative else 'der Großteil'
     else:
         return definite_article(REGIONS[name], 'gesamte', 'ganz')
 
     return f'{prefix} {genitive(REGIONS[name])}'
 
 
-def region_list(event):
-    return ', '.join(qualify_region(region) for region in event['regions'])
+def region_list(event, accusative=False):
+    return ', '.join(qualify_region(region, accusative=accusative) for region in event['regions'])
 
 
 def filter_districts(event):

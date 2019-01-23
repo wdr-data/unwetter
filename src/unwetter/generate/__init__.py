@@ -145,7 +145,7 @@ def crawl(event):
     if len(event['districts']) < 3:
         location = district_list(event)
     else:
-        location = region_list(event)
+        location = region_list(event, accusative=True)
 
     if not location:
         location = district_list(event)
@@ -199,7 +199,7 @@ def tweet(event):
     districts = district_list(event)
     districts = rreplace(districts, ', ', ' und ', 1)
 
-    regions_ = region_list(event)
+    regions_ = region_list(event, accusative=True)
     regions_ = rreplace(regions_, ', ', ' und ', 1)
 
     dates_ = dates(event)
