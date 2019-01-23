@@ -3,24 +3,15 @@
 """
 Contains regular jobs like updating the DB
 """
-import os
 from time import sleep
 
 from apscheduler.schedulers.blocking import BlockingScheduler
-import sentry_sdk
 
-from unwetter import db, slack, wina
+from unwetter import db, slack, wina, sentry
 from unwetter.config import filter_event
 
 
-sentry_sdk.init(
-    os.environ.get('SENTRY_DSN'),
-    release=os.environ.get('HEROKU_SLUG_COMMIT'),
-    tags={
-        'heroku-release':
-            f"{os.environ.get('HEROKU_APP_NAME')}@{os.environ.get('HEROKU_RELEASE_VERSION')}"
-    },
-)
+sentry.init()
 sched = BlockingScheduler()
 
 
