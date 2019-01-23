@@ -3,15 +3,17 @@
 """
 Contains regular jobs like updating the DB
 """
-
+import os
 from time import sleep
 
 from apscheduler.schedulers.blocking import BlockingScheduler
+import sentry_sdk
 
 from unwetter import db, slack, wina
 from unwetter.config import filter_event
 
 
+sentry_sdk.init(os.environ.get('SENTRY_DSN'))
 sched = BlockingScheduler()
 
 

@@ -20,6 +20,7 @@ pillow = "*"
 pyproj = "*"
 shapely = "*"
 unwetter = {editable = true,path = "."}
+sentry-sdk = "*"
 
 [dev-packages]
 pytest = "*"

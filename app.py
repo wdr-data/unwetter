@@ -5,11 +5,14 @@ from io import BytesIO
 
 from feedgen.feed import FeedGenerator
 from flask import Flask, Response, request, json, send_file
+import sentry_sdk
 
 from unwetter import db, generate, wina as wina_gen, slack, map
 from unwetter.config import SEVERITY_FILTER, STATES_FILTER, URGENCY_FILTER
 from unwetter.generate import urls
 
+
+sentry_sdk.init(os.environ.get('SENTRY_DSN'))
 app = Flask(__name__)
 
 
