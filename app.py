@@ -137,5 +137,11 @@ def test():
     return 'OK'
 
 
+@app.route('/error')
+@slack.report_errors
+def test():
+    raise Exception('AHHHHHHHH')
+
+
 if __name__ == '__main__':
     db.update()

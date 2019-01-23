@@ -57,4 +57,10 @@ def update_db():
         sleep(1)
 
 
+@sched.scheduled_job('interval', minutes=1)
+@slack.report_errors
+def raise_error():
+    raise Exception('AHHHHHHHH')
+
+
 sched.start()
