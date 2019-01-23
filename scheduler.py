@@ -13,7 +13,10 @@ from unwetter import db, slack, wina
 from unwetter.config import filter_event
 
 
-sentry_sdk.init(os.environ.get('SENTRY_DSN'))
+sentry_sdk.init(
+    os.environ.get('SENTRY_DSN'),
+    release=f"{os.environ.get('HEROKU_APP_NAME')}@{os.environ.get('HEROKU_RELEASE_VERSION')}"
+)
 sched = BlockingScheduler()
 
 
