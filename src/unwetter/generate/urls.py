@@ -1,5 +1,7 @@
+import os
 
-URL_BASE = 'https://unwetter-bot.herokuapp.com/'
+
+URL_BASE = f"https://{os.environ.get('HEROKU_APP_NAME')}.herokuapp.com/"
 
 
 def map(event):
