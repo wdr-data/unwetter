@@ -120,7 +120,14 @@ def query(severities, states, urgencies, limit=50):
     else:
         filter['$or'] = [{'states': state} for state in states]
 
-    return collection.find(filter).sort([('sent', pymongo.DESCENDING)]).limit(limit)
+    events = collection.find(filter).sort([('sent', pymongo.DESCENDING)]).limit(limit)
+
+    for event in events:
+        if 'special_type' not in event:
+            from . import dwd
+            event['special_type'] = dwd.special_type(event, by_ids(event['references']))
+
+    return events
 
 
 def clear():
