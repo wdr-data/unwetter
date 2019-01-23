@@ -188,7 +188,7 @@ def post_message(message, *, private=False, channel=CHANNEL, **kwargs):
 
 
 def report_errors(f):
-    @functools.wraps
+    @functools.wraps(f)
     def wrapper(*args, **kwds):
         try:
             f(*args, **kwds)
