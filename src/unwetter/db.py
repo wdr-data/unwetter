@@ -126,8 +126,7 @@ def query(severities, states, urgencies, limit=50):
         if 'special_type' not in event:
             from . import dwd
             event['special_type'] = dwd.special_type(event, by_ids(event.get('references', [])))
-
-    return events
+        yield event
 
 
 def clear():
