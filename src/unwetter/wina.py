@@ -18,7 +18,7 @@ def from_id(id):
     :param id: The DWD ID for the event to be processed
     :return: A byte string XML for use with OpenMedia
     """
-    event = db.collection.find_one({'id': id})
+    event = db.by_id(id)
     sent = event['sent'].strftime('%Y%m%dT%H%M%S,000')
 
     wina_xml = WINA_TEMPLATE.format(
