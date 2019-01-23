@@ -168,17 +168,23 @@ def changes(event, old_event):
         text += f'Gültigkeit: {dates(event)} (zuvor "{dates(old_event)}")\n\n'
 
     if district_list(old_event) != district_list(event):
-        districts_now = set(district['name'] for district in event['districts'])
-        districts_before = set(district['name'] for district in old_event['districts'])
+        districts_now = {
+            district['name'] for district in event['districts']
+            if state_for_cell_id(district['warn_cell_id']) in STATES_FILTER
+        }
+        districts_before = {
+            district['name'] for district in old_event['districts']
+            if state_for_cell_id(district['warn_cell_id']) in STATES_FILTER
+        }
 
         added = districts_now - districts_before
         removed = districts_before - districts_now
 
         if added:
-            text += f'Neue Kreise/Städte: {", ".join(added)}\n'
+            text += f'Neue Kreise/Städte: {", ".join(sorted(added))}\n'
 
         if removed:
-            text += f'Nicht mehr betroffene Kreise/Städte: {", ".join(removed)}\n'
+            text += f'Nicht mehr betroffene Kreise/Städte: {", ".join(sorted(removed))}\n'
 
         if region_list(old_event) != region_list(event):
             text += f'Regionale Zuordnung: {upper_first(region_list(event))} ' \
