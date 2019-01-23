@@ -139,7 +139,7 @@ def test():
 
 @app.route('/error')
 @slack.report_errors
-def test():
+def error():
     raise Exception('AHHHHHHHH')
 
 
