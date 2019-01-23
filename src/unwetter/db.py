@@ -33,7 +33,7 @@ def by_id(id):
 
     if 'special_type' not in event:
         from . import dwd
-        event['special_type'] = dwd.special_type(event, by_ids(event['references']))
+        event['special_type'] = dwd.special_type(event, by_ids(event.get('references', [])))
 
     return event
 
@@ -125,7 +125,7 @@ def query(severities, states, urgencies, limit=50):
     for event in events:
         if 'special_type' not in event:
             from . import dwd
-            event['special_type'] = dwd.special_type(event, by_ids(event['references']))
+            event['special_type'] = dwd.special_type(event, by_ids(event.get('references', [])))
 
     return events
 
