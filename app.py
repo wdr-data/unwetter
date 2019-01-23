@@ -26,7 +26,6 @@ def feed():
 
     # Iterate over the most recent 5 events matching filter
     for event in db.query(SEVERITY_FILTER, STATES_FILTER, URGENCY_FILTER, limit=5):
-        event['special_type'] = generate.special_type(event)
         fe = fg.add_entry(order='append')
         fe.id(event['id'])
         fe.title(generate.title(event, variant='wina_headline'))
