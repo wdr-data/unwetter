@@ -191,7 +191,7 @@ def report_errors(f):
     @functools.wraps(f)
     def wrapper(*args, **kwds):
         try:
-            f(*args, **kwds)
+            return f(*args, **kwds)
         except:
             exc = traceback.format_exc()
             post_message(f'```{exc}```', channel=ERROR_CHANNEL)
