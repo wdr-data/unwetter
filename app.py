@@ -14,7 +14,11 @@ from unwetter.generate import urls
 
 sentry_sdk.init(
     os.environ.get('SENTRY_DSN'),
-    release=f"{os.environ.get('HEROKU_APP_NAME')}@{os.environ.get('HEROKU_RELEASE_VERSION')}"
+    release=os.environ.get('HEROKU_SLUG_COMMIT'),
+    tags={
+        'heroku-release':
+            f"{os.environ.get('HEROKU_APP_NAME')}@{os.environ.get('HEROKU_RELEASE_VERSION')}"
+    },
 )
 app = Flask(__name__)
 
