@@ -52,8 +52,9 @@ def post_event(event):
                     for old_time, old_event in zip(old_times, old_events)) or '')
 
     response = post_message(
-        '', attachments=[
-            {
+        '', mrkdown=False,
+            attachments=[
+                {
                 'fallback': generate.title(event),
                 'color': COLORS['SEVERITIES'][event['severity']],
                 'title': generate.title(event),
@@ -68,9 +69,9 @@ def post_event(event):
                 'image_url': generate.urls.map(event),
                 'callback_id': event['id'],
                 'footer': 'Details zur Meldung im Thread',
-                'ts': int(event['sent'].timestamp())
-            }
-        ]
+                'ts': int(event['sent'].timestamp()),
+                }
+            ]
     )
 
     thread_ts = response['ts']
