@@ -1,7 +1,5 @@
 #!/user/bin/env python3.6
-import functools
 import os
-import traceback
 
 from slackclient import SlackClient
 
@@ -14,7 +12,6 @@ from .generate import helpers
 
 SLACK_TOKEN = os.environ.get('SLACK_BOT_TOKEN')
 CHANNEL = os.environ.get('SLACK_CHANNEL')
-ERROR_CHANNEL = os.environ.get('SLACK_CHANNEL_ERRORS')
 CLIENT = SlackClient(SLACK_TOKEN)
 
 
@@ -185,18 +182,3 @@ def post_message(message, *, private=False, channel=CHANNEL, **kwargs):
             text=message,
             **kwargs,
         )
-
-
-def report_errors(f):
-    @functools.wraps(f)
-    def wrapper(*args, **kwds):
-        try:
-            return f(*args, **kwds)
-        except:
-            exc = traceback.format_exc()
-            post_message(f'```{exc}```', channel=ERROR_CHANNEL)
-            raise
-
-    wrapper.__name__ = f.__name__
-
-    return wrapper

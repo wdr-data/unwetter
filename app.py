@@ -17,7 +17,6 @@ app = Flask(__name__)
 
 
 @app.route('/feed.rss')
-@slack.report_errors
 def feed():
     fg = FeedGenerator()
     fg.id(urls.URL_BASE)
@@ -42,7 +41,6 @@ def feed():
 
 
 @app.route('/wina/<id>')
-@slack.report_errors
 def wina(id):
     r = Response(wina_gen.from_id(id), mimetype='application/xml')
     r.headers['Content-Type'] = "text/xml; charset=iso-8859-1"
@@ -51,7 +49,6 @@ def wina(id):
 
 
 @app.route('/map/<id>.png')
-@slack.report_errors
 def genmap(id):
     img = map.draw_event(db.by_id(id))
 
@@ -63,7 +60,6 @@ def genmap(id):
 
 
 @app.route('/slack/event', methods=['GET', 'POST'])
-@slack.report_errors
 def slack_event():
     data = request.json or request.form
 
@@ -119,7 +115,6 @@ Event ID: {data["callback_id"]}
 
 
 @app.route('/slack/command/show', methods=['POST'])
-@slack.report_errors
 def slack_command_show():
     data = request.form
 
@@ -132,13 +127,11 @@ def slack_command_show():
 
 
 @app.route('/test')
-@slack.report_errors
 def test():
     return 'OK'
 
 
 @app.route('/error')
-@slack.report_errors
 def error():
     raise Exception('AHHHHHHHH')
 

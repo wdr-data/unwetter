@@ -18,7 +18,6 @@ sched = BlockingScheduler()
 
 
 @sched.scheduled_job('interval', minutes=1)
-@slack.report_errors
 def update_db():
     """
     You should not do actual work in the scheduler.
@@ -58,7 +57,6 @@ def update_db():
 
 
 @sched.scheduled_job('interval', minutes=1)
-@slack.report_errors
 def raise_error():
     raise Exception('AHHHHHHHH')
 
