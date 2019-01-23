@@ -194,8 +194,7 @@ def report_errors(f):
             f(*args, **kwds)
         except:
             exc = traceback.format_exc()
-            print('Caught exception', exc)
-            post_message(exc, channel=ERROR_CHANNEL)
+            post_message(f'```{exc}```', channel=ERROR_CHANNEL)
             raise
 
     wrapper.__name__ = f.__name__
