@@ -14,7 +14,7 @@ from .generate import helpers
 
 SLACK_TOKEN = os.environ.get('SLACK_BOT_TOKEN')
 CHANNEL = os.environ.get('SLACK_CHANNEL')
-ERROR_CHANNEL = os.environ.get('SLACK_CHANNEL_ERROR')
+ERROR_CHANNEL = os.environ.get('SLACK_CHANNEL_ERRORS')
 CLIENT = SlackClient(SLACK_TOKEN)
 
 
