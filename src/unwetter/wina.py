@@ -21,8 +21,6 @@ def from_id(id):
     event = db.collection.find_one({'id': id})
     sent = event['sent'].strftime('%Y%m%dT%H%M%S,000')
 
-    event['special_type'] = generate.special_type(event)
-
     wina_xml = WINA_TEMPLATE.format(
         sent=escape(sent),
         title=escape(generate.title(event, variant='wina_headline')),

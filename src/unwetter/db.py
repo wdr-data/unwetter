@@ -33,7 +33,7 @@ def by_id(id):
 
 
 def by_ids(ids):
-    return collection.find({'id': {'$in': ids}})
+    return collection.find({'id': {'$in': ids}}) if ids else []
 
 
 def last_updated():
@@ -115,31 +115,6 @@ def query(severities, states, urgencies, limit=50):
         filter['$or'] = [{'states': state} for state in states]
 
     return collection.find(filter).sort([('sent', pymongo.DESCENDING)]).limit(limit)
-
-
-def latest_reference(references):
-    """
-
-    :param references: List of IDs
-    :return: A single event
-    """
-
-    if len(references) > 1:
-        filter = {
-            'id': {'$in': references},
-        }
-    else:
-        filter = {
-            'id': references[0],
-        }
-
-    filter['has_changes'] = True
-
-    try:
-        return collection.find(filter).sort([('sent', pymongo.DESCENDING)])[0]
-    except IndexError:
-        print(f'Could not find object for references')
-        return None
 
 
 def clear():

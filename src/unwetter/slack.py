@@ -20,23 +20,37 @@ def post_event(event):
 
     change_title = ''
     the_changes = ''
-    event['special_type'] = generate.special_type(event)
 
     if event['msg_type'] != 'Alert' and event['special_type'] != 'UpdateAlert':
 
-        old_event = db.latest_reference(event['references'])
+        old_events = db.by_ids(event['references'])
 
-        if old_event:
+        if len(old_events) == 1:
+            old_event = old_events[0]
             old_time = old_event['sent'].strftime("%d.%m.%Y, %H:%M:%S Uhr")
-        else:
-            old_time = 'Unbekannt'
 
-        if event['msg_type'] == 'Cancel' or event['response_type'] == 'AllClear':
-            change_title = f'Aufhebung der Meldung von {old_time}\n'
-            the_changes = ''
+            if event['msg_type'] == 'Cancel' or event['response_type'] == 'AllClear':
+                change_title = f'Aufhebung der Meldung von {old_time}\n'
+                the_changes = ''
+            else:
+                change_title = f'Änderungen zur Meldung von {old_time}\n'
+                the_changes = '*Änderungen:*\n\n' + (generate.changes(event, old_event)
+                                                     if old_event else 'Unbekannt')
         else:
-            change_title = f'Änderungen zur Meldung von {old_time}\n'
-            the_changes = '*Änderungen:*\n\n' + (generate.changes(event, old_event) if old_event else 'Unbekannt')
+            old_times = [
+                old_event['sent'].strftime("%d.%m.%Y, %H:%M:%S Uhr")
+                for old_event in old_events
+            ]
+
+            if event['msg_type'] == 'Cancel' or event['response_type'] == 'AllClear':
+                change_title = f'Aufhebung der Meldungen von {", ".join(old_times)}\n'
+                the_changes = ''
+            else:
+                change_title = (f'Zusammenführung und Aktualisierung zur Meldungen von '
+                                f'{", ".join(old_times)}\n')
+                the_changes = ('\n\n'.join(
+                    f'*Änderungen zu {old_time}*:\n{generate.changes(event, old_event)}'
+                    for old_time, old_event in zip(old_times, old_events)) or '')
 
     response = post_message(
         '', attachments=[

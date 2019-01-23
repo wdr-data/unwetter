@@ -6,7 +6,7 @@ from ..config import STATES_FILTER
 from ..dwd import state_for_cell_id
 from ..regions import REGIONS
 from .grammar import *
-from .helpers import upper_first, special_type
+from .helpers import upper_first
 
 severities = {
     'Minor': 'Wetterwarnung',

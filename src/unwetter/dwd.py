@@ -10,8 +10,9 @@ import requests
 import xmltodict
 import pytz
 
-from . import regions, db
+from . import regions, db, config
 from .data.districts import DISTRICTS
+
 
 API_URL = 'https://opendata.dwd.de/weather/alerts/cap/' \
           'COMMUNEUNION_EVENT_STAT/Z_CAP_C_EDZW_LATEST_PVW_STATUS_PREMIUMEVENT_COMMUNEUNION_DE.zip'
@@ -201,14 +202,29 @@ def parse_xml(xml):
         event['references'] = [ref.split(',')[1] for ref in xml_dict['references'].split(' ')]
 
     if event['msg_type'] == 'Update':
-        old_event = db.latest_reference(event['references'])
+        old_events = db.by_ids(event['references'])
         from .generate.blocks import changes  # Prevent circular dependency
-        event['has_changes'] = bool(changes(event, old_event))
-    else:
-        event['has_changes'] = True
+
+        event['has_changes'] = {
+            old_event.id: bool(changes(event, old_event))
+            for old_event in old_events
+        }
+
+        event['special_type'] = special_type(event, old_events)
 
     return event
 
 
 def state_for_cell_id(warn_cell_id):
     return STATE_IDS[int(str(warn_cell_id)[-8:-6])]
+
+
+def special_type(event, references):
+    if event['msg_type'] != 'Update':
+        return
+
+    if not config.filter_event(event):
+        return
+
+    if all(not config.filter_event(ref) for ref in references):
+        return 'UpdateAlert'
