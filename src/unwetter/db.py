@@ -29,7 +29,13 @@ collection_meta = mongo_db.events_meta.with_options(codec_options=CodecOptions(
 
 @lru_cache(maxsize=32)
 def by_id(id):
-    return collection.find_one({'id': id})
+    event = collection.find_one({'id': id})
+
+    if 'special_type' not in event:
+        from . import dwd
+        event['special_type'] = dwd.special_type(event, by_ids(event['references']))
+
+    return event
 
 
 def by_ids(ids):
