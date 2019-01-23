@@ -60,8 +60,8 @@ def post_event(event):
                 'text': f'{change_title}Gültig {generate.dates(event)}',
                 'fields': [
                     {
-                        'title': f"~Foo~ *bar*",
-                        'value': f"~Foo~ *bar* _foobar_",
+                        'title': generate.severities[event['severity']],
+                        'value': generate.parameters(event),
                         'short': False,
                     },
                 ],
