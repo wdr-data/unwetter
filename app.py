@@ -121,7 +121,14 @@ def slack_command_show():
         print('No Data :(')
         return ''
 
-    slack.post_event(db.by_id(data['text']))
+    event = db.by_id(data['text'])
+
+    if not event:
+        return f'No event found with ID {data["text"]}'
+
+    slack.post_message(f'Sending test event with ID {data["text"]}')
+    slack.post_event(event)
+
     return f'Sent event with ID {data["text"]}'
 
 
