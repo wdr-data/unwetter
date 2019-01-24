@@ -31,7 +31,8 @@ def update_db():
     filtered = []
     for event in new_events:
         if (filter_event(event)
-                and (event['msg_type'] == 'Alert' or any(event['has_changes'].values()))):
+                and (event['msg_type'] == 'Alert'
+                     or any(t['changed'] for t in event['has_changes']))):
             filtered.append(event)
         else:
             if event['msg_type'] == 'Alert':
@@ -39,7 +40,8 @@ def update_db():
 
             old_events = db.by_ids(event['references'])
             if any(filter_event(old_event) and
-                   (old_event['msg_type'] == 'Alert' or any(old_event['has_changes'].values()))
+                   (old_event['msg_type'] == 'Alert'
+                    or any(t['changed'] for t in event['has_changes']))
                    for old_event in old_events):
                 filtered.append(event)
 

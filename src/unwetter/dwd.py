@@ -205,10 +205,13 @@ def parse_xml(xml):
         old_events = db.by_ids(event['references'])
         from .generate.blocks import changes  # Prevent circular dependency
 
-        event['has_changes'] = {
-            old_event.id: bool(changes(event, old_event))
+        event['has_changes'] = [
+            {
+                'id': old_event['id'],
+                'changed': bool(changes(event, old_event)),
+            }
             for old_event in old_events
-        }
+        ]
 
         event['special_type'] = special_type(event, old_events)
 
