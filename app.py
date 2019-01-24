@@ -81,16 +81,21 @@ def slack_event():
         id = data['callback_id']
         channel_id = data['channel']['id']
         user_id = data['user']['id']
-
+        event = db.by_id(id)
         response = None
 
         if action['name'] == 'twitter':
-            response = '*Vorschlag Tweet*:\n' + generate.tweet(db.by_id(id))
+            response = '*Vorschlag Tweet*:\n' + generate.tweet(event)
         elif action['name'] == 'crawl':
-            response = '*Vorschlag TV-Crawl:*\n' + generate.crawl(db.by_id(id))
+            response = '*Vorschlag TV-Crawl:*\n' + generate.crawl(event)
         elif action['name'] == 'dwd':
-            response = 'Offizielle Meldung des DWD:\n' + db.by_id(id)['description']
+            response = 'Offizielle Meldung des DWD:\n' + event['description']
         elif action['name'] == 'info':
+            if 'references' in event:
+                references = f'Referenzen: {", ".join(event["references"])}'
+            else:
+                references = ''
+
             response = f'''
 Diese Meldung basiert auf offiziellen Informationen des Deutschen Wetterdienstes:
 https://www.dwd.de/DE/wetter/warnungen_gemeinden/warnkarten/warnWetter_nrw_node.html?bundesland=nrw
@@ -99,6 +104,8 @@ Die Bereitstellung dieser Information ist ein Projekt des Digitalen Wandels und 
 Informationen und Kontakt: {os.environ["WDR_PROJECT_INFO_URL"]}
 
 Event ID: {data["callback_id"]}
+
+{references}
             '''.strip()
 
         if response:
