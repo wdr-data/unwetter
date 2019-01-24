@@ -194,7 +194,7 @@ def parse_xml(xml):
 
     event['districts'] = sorted(event['districts'], key=lambda elem: elem['name'])
 
-    event['states'] = list(states)
+    event['states'] = sorted(states)
 
     event['regions'] = regions.best_match([area['name'] for area in event['districts']])
 
