@@ -39,7 +39,7 @@ def by_id(id):
 
 
 def by_ids(ids):
-    return collection.find({'id': {'$in': ids}}) if ids else []
+    return collection.find({'id': {'$in': ids}})
 
 
 def last_updated():
