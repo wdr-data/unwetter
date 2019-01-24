@@ -26,7 +26,7 @@ def post_event(event):
 
         if len(old_events) == 1:
             old_event = old_events[0]
-            old_time = old_event['sent'].strftime("%d.%m.%Y, %H:%M:%S Uhr")
+            old_time = generate.local_time(old_event['sent']).strftime("%d.%m.%Y, %H:%M:%S Uhr")
 
             if event['msg_type'] == 'Cancel' or event['response_type'] == 'AllClear':
                 change_title = f'Aufhebung der Meldung von {old_time}\n'
@@ -37,7 +37,7 @@ def post_event(event):
                                                      if old_event else 'Unbekannt')
         else:
             old_times = [
-                old_event['sent'].strftime("%d.%m.%Y, %H:%M:%S Uhr")
+                generate.local_time(old_event['sent']).strftime("%d.%m.%Y, %H:%M:%S Uhr")
                 for old_event in old_events
             ]
 

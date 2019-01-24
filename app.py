@@ -3,6 +3,7 @@
 import os
 from io import BytesIO
 
+import pytz
 from feedgen.feed import FeedGenerator
 from flask import Flask, Response, request, json, send_file
 
@@ -31,7 +32,7 @@ def feed():
         fe.id(event['id'])
         fe.title(generate.title(event, variant='wina_headline'))
         fe.link(href=urls.wina(event))
-        fe.published(event['sent'])
+        fe.published(event['sent'].replace(tzinfo=pytz.UTC))
         fe.description(generate.description(event).replace('\n', '<br>'))
 
     r = Response(fg.rss_str(pretty=True), mimetype='application/rss+xml')

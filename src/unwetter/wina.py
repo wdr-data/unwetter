@@ -19,7 +19,7 @@ def from_id(id):
     :return: A byte string XML for use with OpenMedia
     """
     event = db.by_id(id)
-    sent = event['sent'].strftime('%Y%m%dT%H%M%S,000')
+    sent = generate.local_time(event['sent']).strftime('%Y%m%dT%H%M%S,000')
 
     wina_xml = WINA_TEMPLATE.format(
         sent=escape(sent),

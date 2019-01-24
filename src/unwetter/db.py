@@ -4,27 +4,17 @@ import os
 from functools import lru_cache
 
 import pymongo
-import pytz
-from bson import CodecOptions
-from pymongo import MongoClient
 
 
 try:
     MONGODB_URI = os.environ['MONGODB_URI']
-    mongo_client = MongoClient(MONGODB_URI)
+    mongo_client = pymongo.MongoClient(MONGODB_URI)
     mongo_db = mongo_client.get_database()
 except KeyError:
-    mongo_db = MongoClient().unwetter
+    mongo_db = pymongo.MongoClient().unwetter
 
-collection = mongo_db.events.with_options(codec_options=CodecOptions(
-    tz_aware=True,
-    tzinfo=pytz.timezone('Europe/Berlin'),
-))
-
-collection_meta = mongo_db.events_meta.with_options(codec_options=CodecOptions(
-    tz_aware=True,
-    tzinfo=pytz.timezone('Europe/Berlin'),
-))
+collection = mongo_db.events
+collection_meta = mongo_db.events_meta
 
 
 @lru_cache(maxsize=32)

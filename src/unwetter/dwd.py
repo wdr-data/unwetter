@@ -45,7 +45,7 @@ def last_modified():
     return datetime.strptime(
         requests.head(API_URL).headers['Last-Modified'],
         '%a, %d %b %Y %H:%M:%S %Z',
-    ).replace(tzinfo=pytz.UTC)
+    )
 
 
 def load_dwd_xml_events():
@@ -90,7 +90,7 @@ def parse_xml(xml):
     for field_xml, field_json in fields.items():
         event[field_json] = xml_dict.get(field_xml)
         if field_json in datetime_fields and event[field_json]:
-            event[field_json] = iso8601.parse_date(event[field_json])
+            event[field_json] = iso8601.parse_date(event[field_json]).astimezone(pytz.utc)
 
     info_fields = {
         'event': 'event',
@@ -111,7 +111,7 @@ def parse_xml(xml):
     for field_xml, field_json in info_fields.items():
         event[field_json] = xml_dict['info'].get(field_xml)
         if field_json in datetime_fields and event[field_json]:
-            event[field_json] = iso8601.parse_date(event[field_json])
+            event[field_json] = iso8601.parse_date(event[field_json]).astimezone(pytz.utc)
 
     for tag in ('area', 'parameter'):
         try:

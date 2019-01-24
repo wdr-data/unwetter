@@ -6,7 +6,7 @@ from ..config import STATES_FILTER
 from ..dwd import state_for_cell_id
 from ..regions import REGIONS
 from .grammar import *
-from .helpers import upper_first
+from .helpers import upper_first, local_time
 
 severities = {
     'Minor': 'Wetterwarnung',
@@ -123,9 +123,9 @@ def title(event, variant='default'):
 
 
 def dates(event):
-    onset = event['onset']
-    expires = event['expires']
-    today = datetime.utcnow().date()
+    onset = local_time(event['onset'])
+    expires = local_time(event['expires'])
+    today = local_time(datetime.utcnow()).date()
 
     if onset.date() == today:
         onset_date = 'Heute'
