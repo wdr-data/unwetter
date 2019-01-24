@@ -25,6 +25,7 @@ sentry-sdk = "*"
 [dev-packages]
 pytest = "*"
 pytest-tap = "*"
+mongomock = "*"
 
 [requires]
 python_version = "3.6"

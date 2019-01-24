@@ -1,0 +1,6625 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alert xmlns="urn:oasis:names:tc:emergency:cap:1.2">
+  <identifier>2.49.0.1.276.0.DWD.PVW.1548219660000.14f787fa-b31e-4990-ae14-57b0a7a5640e.DEU</identifier>
+  <sender>CAP@dwd.de</sender>
+  <sent>2019-01-23T06:01:00+01:00</sent>
+  <status>Actual</status>
+  <msgType>Update</msgType>
+  <source>PVW</source>
+  <scope>Public</scope>
+  <code>id:2.49.0.1.276.0.DWD.PVW.1548219660000.14f787fa-b31e-4990-ae14-57b0a7a5640e</code>
+  <references>CAP@dwd.de,2.49.0.1.276.0.DWD.PVW.1548216540000.7a0bd0e9-05c9-4376-a220-fad5580d6212.DEU,2019-01-23T05:09:00+01:00</references>
+  <info>
+    <language>de-DE</language>
+    <category>Met</category>
+    <event>GLÄTTE</event>
+    <responseType>None</responseType>
+    <urgency>Immediate</urgency>
+    <severity>Minor</severity>
+    <certainty>Likely</certainty>
+    <eventCode>
+      <valueName>PROFILE_VERSION</valueName>
+      <value>2.1</value>
+    </eventCode>
+    <eventCode>
+      <valueName>LICENSE</valueName>
+      <value>Geobasisdaten: Copyright Bundesamt für Kartographie und Geodäsie, Frankfurt am Main, 2013</value>
+    </eventCode>
+    <eventCode>
+      <valueName>II</valueName>
+      <value>84</value>
+    </eventCode>
+    <eventCode>
+      <valueName>GROUP</valueName>
+      <value>GLAZE</value>
+    </eventCode>
+    <eventCode>
+      <valueName>GROUP</valueName>
+      <value>FROST</value>
+    </eventCode>
+    <eventCode>
+      <valueName>AREA_COLOR</valueName>
+      <value>255 255 0</value>
+    </eventCode>
+    <effective>2019-01-23T06:01:00+01:00</effective>
+    <onset>2019-01-23T06:01:00+01:00</onset>
+    <expires>2019-01-23T12:00:00+01:00</expires>
+    <senderName>DWD / Nationales Warnzentrum Offenbach</senderName>
+    <headline>Amtliche WARNUNG vor GLÄTTE</headline>
+    <description>Es muss mit Glätte durch geringfügigen Schneefall gerechnet werden.</description>
+    <instruction/>
+    <web>http://www.wettergefahren.de</web>
+    <contact>Deutscher Wetterdienst</contact>
+    <parameter>
+      <valueName>Glätteursache</valueName>
+      <value>geringfügiger Schneefall</value>
+    </parameter>
+    <area>
+      <areaDesc>polygonal event area</areaDesc>
+      <polygon>49.203377,7.346945 49.213793,7.390089 49.263598,7.422212 49.269221,7.448388 49.282455,7.430194 49.295732,7.405821 49.309474,7.408545 49.321336,7.437998 49.324421,7.451867 49.326578,7.450012 49.334112,7.435034 49.333809,7.424625 49.353456,7.438554 49.354834,7.441857 49.36538,7.456928 49.378127,7.480953 49.386058,7.486605 49.404054,7.474824 49.415141,7.46394 49.419268,7.420288 49.423337,7.423215 49.435604,7.460863 49.456317,7.44969 49.47324,7.46031 49.479343,7.472596 49.48756,7.480866 49.496735,7.478172 49.5211,7.469829 49.522577,7.474548 49.528716,7.473496 49.534875,7.486318 49.549904,7.486374 49.558253,7.509522 49.563988,7.492885 49.576704,7.485231 49.577923,7.487383 49.597866,7.47352 49.607943,7.484034 49.644261,7.461233 49.64306,7.465925 49.623758,7.488339 49.624661,7.503976 49.642776,7.5145 49.644203,7.513301 49.660843,7.528723 49.66068,7.508857 49.675984,7.489862 49.678969,7.52024 49.707645,7.522931 49.708305,7.526472 49.721263,7.523414 49.744345,7.516761 49.754477,7.532289 49.756731,7.529327 49.778107,7.513478 49.803397,7.531671 49.803991,7.536141 49.80202,7.547574 49.805597,7.542816 49.835549,7.541259 49.826618,7.557324 49.838752,7.565493 49.8539,7.565602 49.860043,7.537227 49.872752,7.539443 49.89211,7.542208 49.896012,7.545074 49.908108,7.580793 49.912661,7.586716 49.92599,7.617922 49.948302,7.597715 49.966812,7.563889 49.971927,7.565289 49.980721,7.581275 49.989933,7.619926 49.992221,7.624969 50.001045,7.610702 50.013285,7.602766 50.026611,7.622266 50.036896,7.610233 50.037481,7.609876 50.048382,7.638323 50.064291,7.63371 50.083218,7.665782 50.092424,7.645692 50.085049,7.624447 50.095374,7.606896 50.100883,7.597586 50.102435,7.600556 50.117197,7.63853 50.119667,7.655656 50.12598,7.641531 50.140025,7.638228 50.153679,7.652934 50.15714,7.645816 50.170865,7.665861 50.175918,7.670661 50.20042,7.673315 50.204542,7.673938 50.201559,7.686658 50.204632,7.678716 50.205708,7.679241 50.208948,7.684309 50.211392,7.677148 50.214415,7.672308 50.219182,7.677565 50.217631,7.68898 50.229216,7.685503 50.226371,7.702342 50.223296,7.717917 50.231134,7.734232 50.241135,7.712585 50.23994,7.687638 50.268688,7.703032 50.269676,7.710624 50.284698,7.722682 50.276795,7.705361 50.300724,7.704868 50.28285,7.739372 50.273843,7.738509 50.292709,7.754016 50.307129,7.755705 50.308461,7.751944 50.321685,7.721358 50.324793,7.712327 50.335352,7.694454 50.348644,7.695645 50.351352,7.697426 50.359933,7.690059 50.368213,7.68696 50.379522,7.705011 50.382224,7.719537 50.392109,7.715403 50.397861,7.716823 50.40104,7.717963 50.407727,7.744595 50.429512,7.733327 50.436193,7.736712 50.438367,7.731635 50.445372,7.707406 50.463293,7.705323 50.480266,7.70863 50.485297,7.726818 50.496152,7.737739 50.499247,7.73819 50.505713,7.736606 50.506419,7.733489 50.507236,7.729671 50.514012,7.721617 50.523159,7.730185 50.538947,7.741628 50.546175,7.725757 50.551841,7.729618 50.558131,7.732483 50.561918,7.713247 50.58686,7.728224 50.609453,7.768358 50.61539,7.762832 50.618945,7.776451 50.627847,7.770992 50.642959,7.736664 50.64758,7.742423 50.648908,7.739583 50.655094,7.739968 50.67434,7.753411 50.682691,7.736566 50.693979,7.749279 50.702442,7.755331 50.709345,7.74307 50.719469,7.749677 50.731257,7.743749 50.739708,7.74468 50.738618,7.753106 50.755981,7.767991 50.748129,7.797663 50.768708,7.82415 50.769407,7.833792 50.777621,7.82984 50.770084,7.785082 50.78683,7.752859 50.799668,7.74899 50.810933,7.76542 50.820429,7.761864 50.841043,7.789261 50.845103,7.762744 50.867102,7.748388 50.879668,7.75856 50.902641,7.758405 50.915676,7.73621 50.929553,7.775961 50.940444,7.786209 50.950619,7.792071 50.979658,7.780592 50.989362,7.803732 51.004175,7.825332 51.072818,7.824611 51.074795,7.81852 51.107689,7.818375 51.12899,7.829774 51.147413,7.796962 51.151757,7.806534 51.206842,7.796507 51.230045,7.770239 51.259314,7.813002 51.270234,7.779456 51.263307,7.751523 51.286652,7.730446 51.291538,7.763681 51.316626,7.759662 51.318335,7.77275 51.331924,7.796606 51.344257,7.796155 51.352069,7.827126 51.37995,7.854119 51.389111,7.84598 51.396502,7.863161 51.392416,7.89232 51.426078,7.890301 51.458173,7.864137 51.478507,7.838403 51.517291,7.834014 51.52855,7.840333 51.552265,7.84287 51.578713,7.827305 51.59481,7.871012 51.59565,7.911137 51.613763,7.911537 51.638481,7.943716 51.675169,7.966595 51.674262,7.997436 51.691096,7.973098 51.699985,7.945647 51.706512,7.922449 51.703667,7.890809 51.717543,7.888581 51.729942,7.835439 51.739589,7.813373 51.757208,7.816587 51.779299,7.795105 51.813871,7.793568 51.802698,7.845302 51.802424,7.8857 51.828568,7.889421 51.857464,7.879077 51.875622,7.857475 51.897574,7.878697 51.911955,7.910901 51.931291,7.918376 51.957914,7.904792 51.9685,7.87846 51.979909,7.866823 52.001853,7.877043 51.999812,7.851146 52.007901,7.800879 52.03653,7.790461 52.048049,7.800254 52.062978,7.754007 52.06259,7.724692 52.098596,7.755222 52.104152,7.795139 52.094157,7.816472 52.094619,7.850464 52.116056,7.843902 52.12655,7.815223 52.159879,7.771055 52.178022,7.722653 52.176255,7.700508 52.198051,7.685007 52.206501,7.653392 52.254364,7.681008 52.271833,7.651277 52.321464,7.614105 52.341461,7.60355 52.343027,7.549634 52.368005,7.542702 52.381349,7.572668 52.400773,7.582689 52.420802,7.604074 52.430676,7.57178 52.458527,7.586052 52.473623,7.608904 52.457026,7.667518 52.456219,7.684865 52.433368,7.702596 52.400857,7.714051 52.392485,7.746742 52.381014,7.780452 52.370901,7.8135 52.3686,7.841798 52.380471,7.891727 52.365413,7.923458 52.36392,7.936979 52.334147,7.949824 52.324438,7.963489 52.303994,7.987496 52.302337,7.934302 52.288387,7.932983 52.271939,7.955513 52.259735,7.925427 52.233818,7.926699 52.222456,7.921687 52.198116,7.90519 52.179759,7.928652 52.171157,7.974332 52.171631,8.016757 52.160083,8.004963 52.115694,8.008697 52.116023,7.971708 52.105738,7.959055 52.091802,7.899959 52.083228,7.884864 52.050624,7.916342 52.036092,7.980938 52.049974,7.993509 52.068593,8.03182 52.06765,8.058417 52.057475,8.097306 52.07204,8.133993 52.074131,8.175352 52.087602,8.199912 52.085733,8.222079 52.073817,8.25097 52.04499,8.260185 52.010824,8.24386 51.994756,8.288239 51.967707,8.313669 51.940688,8.331991 51.926894,8.318456 51.930961,8.297953 51.895804,8.314682 51.885787,8.307919 51.875923,8.270083 51.842702,8.218616 51.791002,8.256749 51.776582,8.25525 51.770226,8.278965 51.754224,8.301655 51.726613,8.319216 51.722905,8.350679 51.716818,8.383625 51.719927,8.402781 51.721349,8.468426 51.685476,8.478867 51.684986,8.445748 51.666047,8.420009 51.632074,8.412722 51.642383,8.372589 51.64595,8.329473 51.640078,8.275939 51.642379,8.256083 51.626057,8.217348 51.606494,8.201339 51.591471,8.205012 51.571327,8.234764 51.547129,8.241544 51.523058,8.237221 51.512713,8.241756 51.522924,8.299976 51.507916,8.307474 51.511073,8.350365 51.474854,8.368606 51.478,8.389374 51.45593,8.402864 51.439728,8.394704 51.420081,8.409927 51.408319,8.392329 51.396885,8.365083 51.37533,8.372757 51.354679,8.351534 51.316857,8.370531 51.288127,8.37348 51.280935,8.402975 51.262483,8.404459 51.266205,8.43 51.235557,8.442242 51.206299,8.424083 51.202251,8.441491 51.182813,8.453594 51.185501,8.477655 51.16285,8.469709 51.143367,8.437831 51.131264,8.401106 51.104149,8.368609 51.092786,8.340974 51.102768,8.281433 51.103867,8.237373 51.09202,8.22251 51.051586,8.241554 51.04816,8.228769 51.022045,8.214876 51.020338,8.188557 51.002674,8.21215 50.98055,8.218246 50.945758,8.211819 50.947767,8.183249 50.95889,8.152533 50.946908,8.124422 50.971867,8.083711 50.96488,8.070645 50.949755,8.042321 50.929888,8.057333 50.918643,8.04532 50.897938,8.056905 50.900838,8.098892 50.877941,8.127564 50.862136,8.082782 50.85749,8.051761 50.81562,8.047127 50.80034,8.049139 50.794598,8.079213 50.778403,8.075766 50.763995,8.039268 50.746097,8.011021 50.733056,8.028511 50.723275,8.007648 50.710501,8.019857 50.69667,8.027787 50.688404,8.005399 50.675917,7.98215 50.659868,8.003453 50.656967,8.016879 50.651663,8.019044 50.634097,8.012006 50.63154,8.021201 50.627337,8.017388 50.609093,8.009757 50.596928,7.976444 50.58751,8.000441 50.57942,7.991032 50.566724,8.008266 50.547916,8.005846 50.54457,7.996417 50.527393,7.986092 50.525338,7.99469 50.527625,7.974894 50.515954,7.956701 50.510571,7.982971 50.495333,7.98194 50.496836,7.968747 50.487973,7.959997 50.473505,7.958734 50.471699,7.96013 50.463199,7.962114 50.454411,7.946175 50.442319,7.940474 50.439172,7.939039 50.436379,7.953936 50.417392,7.959671 50.411495,7.939378 50.396723,7.946338 50.394089,7.938412 50.38723,7.917128 50.381704,7.916798 50.371753,7.897566 50.368939,7.901692 50.365447,7.905361 50.359175,7.90627 50.353833,7.901738 50.354762,7.912607 50.349303,7.903691 50.347806,7.897231 50.331282,7.924222 50.337345,7.944554 50.330868,7.947606 50.328103,7.935441 50.323028,7.899684 50.314925,7.90513 50.317831,7.888723 50.300629,7.885306 50.297686,7.901345 50.28653,7.890433 50.28144,7.905111 50.272787,7.913289 50.260871,7.886793 50.248587,7.8796 50.244024,7.876526 50.228688,7.887415 50.228917,7.891121 50.222511,7.88895 50.217617,7.888322 50.202713,7.905573 50.200399,7.907566 50.180745,7.883002 50.159165,7.90029 50.156865,7.89506 50.153597,7.869864 50.149074,7.87013 50.131242,7.876893 50.12037,7.869063 50.118983,7.908616 50.103005,7.923027 50.097236,7.913166 50.086413,7.883423 50.077775,7.86746 50.047451,7.871414 50.031636,7.83896 50.006379,7.85833 49.984468,7.864059 49.978494,7.867655 49.95615,7.888476 49.94673,7.870619 49.949057,7.849187 49.943066,7.846271 49.935116,7.868754 49.93042,7.897608 49.921358,7.864804 49.921834,7.855512 49.913441,7.832926 49.911361,7.834869 49.890435,7.88359 49.882025,7.862458 49.867127,7.878091 49.882202,7.920434 49.877564,7.934091 49.86251,7.954592 49.855311,7.932727 49.838295,7.935804 49.832603,7.924545 49.838516,7.899991 49.811766,7.892341 49.792847,7.864439 49.787638,7.870832 49.772329,7.855095 49.765227,7.860603 49.756317,7.868782 49.741207,7.875229 49.732627,7.912088 49.727773,7.907979 49.726125,7.91465 49.712977,7.892457 49.696968,7.89343 49.681392,7.906698 49.670289,7.891281 49.660364,7.923691 49.664924,7.946151 49.654848,7.912716 49.64626,7.909564 49.642455,7.910491 49.645465,7.924856 49.632224,7.964922 49.623205,7.970009 49.60914,7.948535 49.605705,7.943524 49.602562,7.938084 49.588339,7.938278 49.596436,7.968477 49.589932,7.974277 49.579182,7.971357 49.565015,7.94779 49.557199,7.966667 49.53348,7.957632 49.528207,7.957627 49.494154,7.955285 49.488041,7.966415 49.484266,7.950298 49.472269,7.952162 49.460966,7.95169 49.44217,7.962807 49.430699,7.982165 49.399803,8.027513 49.404152,8.05985 49.398656,8.067053 49.378381,8.051869 49.377024,8.053606 49.381536,8.081224 49.392228,8.099286 49.381101,8.122933 49.400713,8.13276 49.392007,8.148094 49.385053,8.197623 49.379803,8.223526 49.358588,8.217949 49.333806,8.227225 49.323307,8.251798 49.310939,8.314663 49.310556,8.31764 49.308674,8.317041 49.294838,8.318807 49.287786,8.30647 49.260421,8.315308 49.259849,8.329427 49.240119,8.33668 49.220374,8.327799 49.21858,8.351001 49.209806,8.347217 49.203562,8.339764 49.185671,8.341596 49.18276,8.379572 49.155821,8.371912 49.145066,8.371532 49.129391,8.367452 49.104401,8.361073 49.087664,8.350758 49.079854,8.340504 49.048034,8.308894 49.00412,8.29231 48.998252,8.288639 48.989194,8.27791 48.981212,8.262979 48.966275,8.232633 48.971625,8.227754 48.97759,8.16474 48.989222,8.092949 48.998557,8.067771 49.015289,8.041974 49.018218,8.023436 49.028822,7.996068 49.026546,7.976507 49.043067,7.964487 49.057707,7.931647 49.044771,7.907335 49.04786,7.890013 49.033125,7.867636 49.055316,7.814909 49.058149,7.783945 49.05544,7.775156 49.04748,7.768955 49.044148,7.736639 49.055848,7.731519 49.057546,7.69599 49.045171,7.675636 49.050649,7.651168 49.055123,7.631667 49.072824,7.630821 49.081391,7.605892 49.083813,7.553863 49.102197,7.529763 49.105844,7.522711 49.14589,7.497239 49.167747,7.493818 49.162694,7.461077 49.184041,7.444267 49.179312,7.410672 49.175168,7.381294 49.157728,7.363507 49.188207,7.321139 49.203377,7.346945 49.203377,7.346945</polygon>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Lippetal</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805974024</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Manubach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807339036</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Lippstadt</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805974028</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Wilgartswiesen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340057</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Weselberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340055</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Waldfischbach-Burgalben</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340054</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Vinningen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340053</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Trulben</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340052</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Thaleischweiler-Fröschen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340051</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Steinalben</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340050</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Spirkelbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340049</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Schweix</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340048</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Schwanheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340047</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Soest</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805974040</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Schönau (Pfalz)</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340045</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Schmalenberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340044</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Schindhard</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340043</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Schauerberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340042</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Warstein</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805974044</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Saalstadt</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340041</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Ruppertsweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340040</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Rumbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340039</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Rodalben</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340038</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Möhnesee</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805974032</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Petersberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340037</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Obersimten</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340036</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Nünschweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340035</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Nothweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340034</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Niederschlettenbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340033</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Münchweiler an der Rodalb</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340032</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Eschbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337022</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Essingen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337023</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Wickede (Ruhr)</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805974056</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Edenkoben</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337020</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Edesheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337021</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Dierbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337018</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Dörrenbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337019</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Dernbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337017</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Weiler bei Bingen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807339063</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Bornheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337014</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Waldalgesheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807339062</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Burrweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337015</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Welver</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805974048</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Böchingen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337012</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Böllenborn</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337013</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Trechtingshausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807339058</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Böbingen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337011</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Werl</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805974052</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Birkenhördt</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337008</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Birkweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337009</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Barbelroth</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337006</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Billigheim-Ingenheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337007</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Bad Bergzabern</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337005</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Altdorf</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337002</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Albersweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337001</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Oberheimbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807339045</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Oberdiebach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807339044</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Niederheimbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807339040</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Eulenbis</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335006</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Glanbrücken</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336030</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Münchweiler am Klingbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337054</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Fischbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335007</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Niederhorbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337055</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Enkenbach-Alsenborn</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335004</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Maikammer</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337052</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Erzenhausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335005</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Ginsweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336029</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Bann</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335002</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Knöringen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337050</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Leinsweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337051</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Kleinfischlingen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337048</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Föckelberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336025</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Klingenmünster</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337049</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Kapsweyer</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337046</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Eßweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336023</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Kirrweiler (Pfalz)</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337047</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Insheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337044</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Elzweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336021</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Kapellen-Drusweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337045</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Ilbesheim bei Landau in der Pfalz</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337042</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Einöllen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336019</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Impflingen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337043</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Heuchelheim-Klingen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337040</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hochstadt (Pfalz)</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337041</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Deimberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336014</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Herxheim bei Landau/Pfalz</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337038</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Elbingen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143501</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Herxheimweyher</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337039</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Buborn</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336012</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Mähren</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143502</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hainfeld</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337036</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Cronenberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336013</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hergersweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337037</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Großfischlingen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337035</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Gommersheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337032</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Bosenbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336009</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Gossersweiler-Stein</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337033</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Göcklingen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337031</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Gleisweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337028</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Aschbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336005</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Gleiszellen-Gleishorbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337029</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Frankweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337026</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Freimersheim (Pfalz)</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337027</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Eußerthal</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337024</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Adenbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336001</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Flemlingen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337025</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Knittelsheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807334014</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Ramstein-Miesenbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335038</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Merzweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336062</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Kuhardt</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807334015</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Diethardt</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141502</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Jockgrim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807334012</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Kreuztal</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805970024</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Lohnweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336060</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Weyher in der Pfalz</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337084</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Kandel</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807334013</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Queidersbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335037</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Medard</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336061</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Otterbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335034</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Lauterecken</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336058</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Walsheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337082</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hördt</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807334011</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Otterberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335035</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Wernersberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337083</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Hagenbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807334008</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Waldhambach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337080</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hatzenbühl</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807334009</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Olsbrücken</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335033</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Langweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336057</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Waldrohrbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337081</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Freisbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807334006</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Niedermohr</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335030</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Völkersweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337078</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Oberarnbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335031</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Vorderweidenthal</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337079</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Erlenbach bei Kandel</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807334004</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Freudenberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805970016</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Neuhemsbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335028</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Steinfeld</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337076</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Freckenfeld</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807334005</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Niederkirchen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335029</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Kreimbach-Kaulbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336053</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Venningen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337077</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Berg (Pfalz)</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807334002</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Mehlingen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335026</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Silz</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337074</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Mittelbrunn</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335027</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Hilchenbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805970020</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Mackenbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335024</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Jettenbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336048</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Schweighofen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337072</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Bellheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807334001</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Mehlbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335025</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Kappeln</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336049</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Siebeldingen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337073</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Landstuhl</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335022</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Horschbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336046</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Sankt Martin</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337070</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Linden</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335023</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Schweigen-Rechtenbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337071</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Siegen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805970040</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Kottweiler-Schwanden</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335020</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Rohrbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337068</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Krickenbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335021</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Lorch</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>806439010</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hoppstädten</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336045</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Roschbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337069</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Kindsbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335018</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hinzweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336042</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Rhodt unter Rietburg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337066</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Kollweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335019</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hohenöllen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336043</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Rinnthal</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337067</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hütschenhausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335016</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Herren-Sulzbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336040</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Ramberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337064</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Katzweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335017</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Ranschbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337065</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hirschhorn/Pfalz</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335014</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Heinzenhausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336038</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Pleisweiler-Oberhofen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337062</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hochspeyer</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335015</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hauptstuhl</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335012</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hefersweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336036</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Oberschlettenbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337060</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Heiligenmoschel</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335013</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Offenbach an der Queich</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337061</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Frankenstein</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335010</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Oberhausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337058</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Gerhardsbrunn</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335011</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hausweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336035</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Oberotterbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337059</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Neunkirchen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805970036</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Niederotterbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337056</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Frankelbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335009</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Grumbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336033</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Sankt Julian</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336095</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Gaugrehweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333023</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Falkenstein</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333020</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Finkenbach-Gersweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333021</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Rutsweiler an der Lauter</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336090</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Dörrmoschel</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333016</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Relsberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336086</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Dielkirchen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333014</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Rothselberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336087</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Zeiskam</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807334036</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Reipoltskirchen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336085</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Dannenfels</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333013</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Winden</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807334034</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Weingarten (Pfalz)</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807334032</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Bisterschied</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333008</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Westheim (Pfalz)</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807334033</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Börrstadt</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333009</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Steinweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807334030</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Vollmersweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807334031</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Bayerfeld-Steckweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333004</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Odenbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336074</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Scheibenhardt</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807334027</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Offenbach-Hundheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336075</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Alsenz</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333003</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Rheinzabern</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807334024</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Waldleiningen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335048</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Oberweiler im Tal</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336072</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Rülzheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807334025</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Weilerbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335049</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Oberweiler-Tiefenbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336073</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Neupotz</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807334022</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Sulzbachtal</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335046</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Ottersheim bei Landau</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807334023</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Trippstadt</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335047</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Oberstaufenbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336071</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Minfeld</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807334020</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Steinwenden</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335044</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Niederstaufenbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336068</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Neuburg am Rhein</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807334021</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Stelzenberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335045</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Nußbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336069</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Lustadt</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807334018</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Schneckenhausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335042</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Neunkirchen am Potzberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336066</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Schwedelbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335043</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Leimersheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807334016</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Rodenbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335040</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Schallodenbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335041</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Nerzweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336065</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Rosenkopf</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340223</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Obermoschel</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333054</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Rieschweiler-Mühlbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340222</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Oberndorf</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333055</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Herzebrock-Clarholz</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805754020</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Riedelberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340221</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Reifenberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340220</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Oberhausen an der Appel</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333053</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Obernheim-Kirchenarnbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340219</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Mauschbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340218</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Niedermoschel</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333051</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Harsewinkel</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805754016</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Maßweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340217</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Münchweiler an der Alsenz</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333048</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Krähenberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340216</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Münsterappel</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333049</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Knopp-Labach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340215</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Kleinsteinhausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340214</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Kleinbundenbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340213</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Hornbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340211</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Frankeneck</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807332018</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Lohnsfeld</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333042</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Großsteinhausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340210</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Mannweiler-Cölln</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333043</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Großbundenbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340209</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Esthal</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807332016</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Dietrichingen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340208</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Dellfeld</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340207</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Elmstein</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807332014</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Contwig</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340206</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Bottenbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340205</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Kalkofen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333036</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Biedershausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340204</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Katzenbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333037</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Imsweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333034</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Battweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340202</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Finnentrop</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805966012</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Althornbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340201</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Wiesweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336104</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Wolfstein</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336105</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Imsbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333033</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Höringen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333030</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Welchweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807336103</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Gundersweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333028</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Gonbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333027</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Attendorn</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805966004</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Gehrweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333024</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Gerbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333025</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Olpe</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805966024</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Würzweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333084</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Winterborn</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333083</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Wenden</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805966028</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Versmold</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805754048</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Wartenberg-Rohrbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333080</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Unkenbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333078</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Waldgrehweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333079</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Kirchhundem</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805966016</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Teschenmoschel</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333077</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Lennestadt</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805966020</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Weidenthal</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807332048</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Sitters</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333072</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Stahlberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333073</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Sippersfeld</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333071</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Schönborn</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333068</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Schweisweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333069</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Sankt Alban</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333066</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Schiersfeld</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333067</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Ruppertsecken</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333065</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Winterbach (Pfalz)</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340228</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Neidenfels</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807332037</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Ransweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333061</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Wiesbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340227</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Lindenberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807332034</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Walshausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340226</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Wallhalben</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340225</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Lambrecht (Pfalz)</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807332032</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Schmitshausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340224</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Balve</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805962008</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Bad Sobernheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133501</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Schopp</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335204</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Sembach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335205</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Langwieden</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335202</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Martinshöhe</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335203</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Neuenrade</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805962048</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Reichsthal</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333202</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Seelen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333203</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Plettenberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805962052</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Rathskirchen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333201</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Arnsberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805958004</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Eslohe (Sauerland)</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805958016</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Schmallenberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805958040</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Sundern (Sauerland)</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805958044</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Meschede</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805958032</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Bundenthal</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340502</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Bruchweiler-Bärenbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340501</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Ahlen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805570004</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Beelen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805570012</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Beckum</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805570008</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Ennigerloh</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805570020</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Oelde</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805570028</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Sassenberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805570036</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Ostbevern</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805570032</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Warendorf</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805570052</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Annweiler am Trifels</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807337501</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Wadersloh</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805570048</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Pirmasens</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807317000</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Neustadt an der Weinstraße</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807316000</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Boden</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143005</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Bannberscheid</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143003</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hopsten</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805566020</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Ibbenbüren</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805566028</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Reichenbach-Steegen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807335501</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Lengerich</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805566040</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Lienen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805566044</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hübingen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143036</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Rockenhausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333502</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Winnweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807333503</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Kadenbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143039</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Lotte</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805566048</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Holler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143033</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Horbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143034</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Helferskirchen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143028</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Herschbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143029</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Mettingen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805566056</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Großholbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143024</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hartenfels</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143025</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Heilberscheid</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143026</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Heiligenroth</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143027</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Gackenbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143020</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Girod</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143021</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Goddert</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143022</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Freilingen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143018</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Landau in der Pfalz</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807313000</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Ebernhahn</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143012</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Eitelborn</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143013</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Wörth am Rhein</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807334501</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Recke</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805566072</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Daubach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143008</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Dernbach (Westerwald)</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143010</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Buch</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141019</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Siershahn</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143070</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Bornich</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141016</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Rückeroth</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143064</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Dachsenhausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141023</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Ruppach-Goldhausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143065</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Schenkelberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143066</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Charlottenberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141021</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Selters (Westerwald)</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143067</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Ötzingen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143060</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Quirnbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143061</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Ransbach-Baumbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143062</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Berg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141009</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Tecklenburg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805566088</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Becheln</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141008</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Nordhofen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143056</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Bogel</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141015</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Oberelbert</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143057</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Westerkappeln</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805566092</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Bettendorf</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141012</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Attenhausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141003</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Niederelbert</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143053</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Nomborn</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143055</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Montabaur</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143048</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Moschheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143049</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Bad Ems</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141006</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Nentershausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143051</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Auel</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141004</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Maxsain</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143046</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Mogendorf</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143047</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Leuterod</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143042</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Kaiserslautern</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807312000</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Dichtelbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807140027</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Damscheid</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807140025</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Himmighofen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141055</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Eschbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141040</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Gemmerich</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141047</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Geisig</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141046</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Ehr</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141035</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Wölferlingen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143085</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Dornholzhausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141033</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Weroth</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143080</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Wirges</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143081</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Eppenrod</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141038</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Endlichhofen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141037</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Argenthal</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807140003</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Dienethal</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141027</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Untershausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143077</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Dessighofen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141026</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Vielbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143078</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Dausenau</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141025</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Welschneudorf</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143079</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Dahlheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141024</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Stahlhofen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143072</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Dörscheid</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141031</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Staudt</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143073</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Dörnberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141030</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Steinefrenz</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143074</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Steinen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143075</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Lollschied</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141082</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Lipporn</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141080</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Misselberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141087</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Miehlen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141085</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Marienfels</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141084</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Lierschied</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141079</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Lautert</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141078</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Laurenburg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141077</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Kasdorf</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141067</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Isselbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141064</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Kemmenau</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141071</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Kehlbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141070</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Kaub</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141069</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Ellern (Hunsrück)</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807140035</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Holzappel</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141059</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hömberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141058</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hunzel</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141063</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Horhausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141062</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Erbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807140037</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Reitzenhain</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141115</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Reichenberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141114</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Prath</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141112</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Roth</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141118</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Rettershain</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141116</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Oelsberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141107</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Oberwies</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141106</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Oberwallmenach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141105</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Pohl</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141111</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hainau</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141110</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Liebshausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807140085</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Patersberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141109</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Nochern</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141099</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Niederwallmenach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141097</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Obernhof</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141103</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Oberbachheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141100</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Nassau</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141091</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Niederbachheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141094</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Nastätten</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141092</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Rheinböllen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807140125</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Winden</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141139</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Weyer</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141138</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Oberwesel</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807140112</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Weisel</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141136</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Zimmerschied</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141141</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Perscheid</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807140116</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Winterwerb</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141140</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Singhofen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141129</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Niederburg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807140104</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Seelbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141128</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Weinähr</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141135</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Sulzbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141132</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Sauerthal</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141122</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Sankt Goarshausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141121</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Mörschbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807140096</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Ruppertshofen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141120</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Schweighausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141127</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Guckheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143228</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Urbar</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807140155</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Hachenburg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143229</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Härtlingen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143230</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hahn bei Marienberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143231</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Großseifen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143227</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Ettinghausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143220</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Ewighausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143221</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Fehl-Ritzhausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143222</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Gehlert</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143223</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Dreisbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143216</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Enspel</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143219</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Brandscheid</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143213</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Dreifelden</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143215</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Berod bei Wallmerod</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143208</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Bilkheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143210</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Bölsberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143211</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Astert</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143204</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Atzelgift</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143205</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Bad Marienberg (Westerwald)</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143206</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Bellingen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143207</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Ailertchen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143200</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Alpenrod</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143202</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Sankt Goar</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807140133</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Arnshöfen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143203</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Luckenbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143260</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Burgsponheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133019</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Marzhausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143261</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Merkelbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143262</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Breitenheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133017</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Meudt</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143263</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Daxweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133023</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Limbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143257</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Daubach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133022</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Linden</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143258</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Dalberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133021</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Lochum</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143259</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Callbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133020</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Kundert</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143252</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Becherbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133011</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Langenbach bei Kirburg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143253</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Langenhahn</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143254</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Bärweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133009</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Arzbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807141201</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Lautzenbrücken</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143255</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Kirburg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143248</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Braunweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133015</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Kölbingen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143249</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Boos</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133014</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Bockenau</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133013</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Kuhnhöfen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143251</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Altenbamberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133003</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Allenfeld</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133002</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Abtweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133001</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Kaden</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143247</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Heuzert</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143240</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Bad Kreuznach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133006</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Höhn</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143242</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Auen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133005</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Argenschwang</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133004</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Heimborn</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143236</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hergenroth</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143238</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Herschbach (Oberwesterwald)</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143239</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hahn am See</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143232</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Halbs</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143233</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hardt</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143234</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hattert</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143235</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Jeckenbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133051</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Stahlhofen am Wiesensee</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143293</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Ippenschied</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133050</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Steinebach an der Wied</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143294</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Elkenroth</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132025</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hundsbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133049</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Elben</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132024</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hüffelsheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133048</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Rotenhain</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143288</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Langenthal</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133055</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Rothenbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143289</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Fensdorf</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132030</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Salz</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143290</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Kirschroth</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133053</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Derschen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132019</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Daaden</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132018</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hargesheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133040</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Norken</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143280</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Oberahr</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143281</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hochstätten</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133045</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Dickendorf</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132020</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hergenfeld</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133044</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Nister</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143276</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Mittelhof</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132011</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Guldental</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133035</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Nisterau</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143277</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Gebroth</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133033</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Nistertal</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143279</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hallgarten</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133039</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Niederahr</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143273</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Niedersayn</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143275</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Brachbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132012</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Gutenberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133036</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Duchroth</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133027</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Müschenbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143269</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Alsdorf</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132002</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Dorsheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133026</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Neunkhausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143270</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Dörrebach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133025</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Desloch</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133024</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Mörlen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143264</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Mörsbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143265</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Betzdorf</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132006</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Feilbingert</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133030</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Eckenroth</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133028</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Kausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132059</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Rehborn</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133083</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Rehbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133082</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Raumbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133081</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Kirchen (Sieg)</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132063</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Rümmelsheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133087</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Roxheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133086</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Roth</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133085</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Reiffelbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133084</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Zehnhausen bei Wallmerod</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143316</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Oberstreit</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133075</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Herdorf</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132050</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Oberhausen an der Nahe</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133074</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Nußbaum</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133072</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Willmenrod</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143312</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hövels</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132054</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Odernheim am Glan</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133076</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Westerburg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143308</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Monzingen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133067</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Grünebach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132042</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Merxheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133066</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Wied</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143310</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Meisenheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133065</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Meddersheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133064</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Wallmerod</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143304</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Norheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133071</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Weidenhahn</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143305</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Niederhausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133070</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Harbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132045</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Weltersburg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143307</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Münchwald</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133068</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Unnau</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143300</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Limbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133059</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Lettweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133058</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Lauschied</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133057</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Gebhardshain</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132039</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Stockhausen-Illfurth</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143297</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Stockum-Püschen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143298</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Friesenhagen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132037</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Mandel</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133061</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Streithausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807143299</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Friedewald</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132036</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Löllbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133060</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Winterbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133115</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Windesheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133114</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Weinsheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133112</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Rosenheim (Landkreis Altenkirchen)</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132095</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Rüdesheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133117</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Winterburg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133116</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Waldböckelheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133107</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Traisen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133105</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Katzwinkel (Sieg)</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132080</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Weiler bei Monzingen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133111</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Warmsroth</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133110</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Wallhausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133109</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Waldlaubersheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133108</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Niederdreisbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132075</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Spabrücken</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133099</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Sommerloch</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133098</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Nauroth</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132073</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Mudersbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132072</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Nisterberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132079</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Stromberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133103</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Staudernheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133102</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Sponheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133101</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Niederfischbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132076</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Spall</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133100</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Schöneberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133091</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Malberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132066</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Schmittweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133090</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Schloßböckelheim</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133089</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Sankt Katharinen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133088</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Molzhain</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132071</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Seibersbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133095</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Schweppenhausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133093</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Mauden</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132068</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Schweinschied</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807133092</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Weitefeld</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132113</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Steinebach/Sieg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132107</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Selbach (Sieg)</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132105</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Wallmenroth</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132111</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Steineroth</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132108</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Scheuerfeld</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132098</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Schutzbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807132101</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Breitscheid</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807339007</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Merzalben</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340031</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Lug</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340030</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Ludwigswinkel</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340029</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Lemberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340028</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Bacharach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807339003</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Leimen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340027</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Kröppen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340026</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Horbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340025</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Höhfröschen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340024</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Höheischweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340023</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Höheinöd</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340022</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hirschthal</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340021</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hinterweidenthal</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340020</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hilst</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340019</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hettenhausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340018</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Herschberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340017</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hermersberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340016</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Heltersberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340015</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hauenstein</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340014</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Bad Sassendorf</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805974008</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Geiselberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340012</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Fischbach bei Dahn</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340011</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Erlenbach bei Dahn</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340010</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Erfweiler</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340009</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Ense</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>805974012</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Eppenbrunn</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340008</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Donsieders</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340007</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Dimbach</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340006</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Darstein</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340005</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Stadt Dahn</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340004</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Clausen</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340003</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Busenberg</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340002</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Bobenthal</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>807340001</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+  </info>
+</alert>
