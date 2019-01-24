@@ -124,7 +124,7 @@ def title(event, variant='default'):
 
 def dates(event):
     onset = local_time(event['onset'])
-    expires = local_time(event['expires'])
+    expires = event['expires'] and local_time(event['expires'])
     today = local_time(datetime.utcnow()).date()
 
     if onset.date() == today:
