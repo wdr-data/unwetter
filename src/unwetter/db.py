@@ -5,6 +5,8 @@ from functools import lru_cache
 
 import pymongo
 
+from . import sentry
+
 
 try:
     MONGODB_URI = os.environ['MONGODB_URI']
@@ -77,8 +79,9 @@ def update():
 
         try:
             event = dwd.parse_xml(xml)
-        except:
+        except Exception as e:
             print('Failed to parse event with ID', id)
+            sentry.sentry_sdk.capture_exception(e)
             continue
 
         if event['status'] == 'Test':
