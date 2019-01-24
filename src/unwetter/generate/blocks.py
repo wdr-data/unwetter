@@ -84,6 +84,7 @@ def title(event, variant='default'):
             'cancelled_prematurely': '🚫 Meldung vorzeitig aufgehoben',
             'updated': '🔁 Meldung aktualisiert',
             'cancelled_wrong': '🚫 Meldung zurückgezogen',
+            'irrelevant': '🚫 Meldung nicht mehr relevant',
             'unknown': '⁉️ Unbekannter Meldungstyp',
         },
         'wina_headline': {
@@ -92,6 +93,7 @@ def title(event, variant='default'):
             'cancelled_prematurely': 'Vorzeitige Aufhebung: ',
             'updated': 'Aktualisierung: ',
             'cancelled_wrong': 'Meldung zurückgezogen: ',
+            'irrelevant': 'Meldung nicht mehr relevant: ',
             'unknown': 'Unbekannter Meldungstyp - ',
         }
     }
@@ -105,6 +107,8 @@ def title(event, variant='default'):
             prefix = prefixes[variant]['event_relevant_again']
         elif event['special_type'] == 'UpdateAlert':
             prefix = prefixes[variant]['new_event']
+        elif event['special_type'] == 'Irrelevant':
+            prefix = prefixes[variant]['irrelevant']
         else:
             prefix = prefixes[variant]['updated']
     elif event['msg_type'] == 'Cancel':

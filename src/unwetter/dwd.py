@@ -224,6 +224,8 @@ def special_type(event, references):
         return
 
     if not config.filter_event(event):
+        if any(config.filter_event(ref) for ref in references):
+            return 'Irrelevant'
         return
 
     if all(not config.filter_event(ref) for ref in references):
