@@ -202,7 +202,7 @@ def parse_xml(xml):
         event['references'] = [ref.split(',')[1] for ref in xml_dict['references'].split(' ')]
 
     if event['msg_type'] == 'Update':
-        old_events = db.by_ids(event['references'])
+        old_events = list(db.by_ids(event['references']))
         from .generate.blocks import changes  # Prevent circular dependency
 
         event['has_changes'] = [
