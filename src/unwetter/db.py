@@ -122,6 +122,31 @@ def query(severities, states, urgencies, limit=50):
         yield event
 
 
+def load_published(limit=50):
+    """
+    Get `limit` events marked published
+
+    :param limit: Number of results
+    :return: DB curser with results
+    """
+
+    filter = {
+        'published': True,
+    }
+
+    return collection.find(filter).sort([('sent', pymongo.DESCENDING)]).limit(limit)
+
+
+def publish(ids):
+    '''
+    Create and Set Key `published` = True
+    :param ids: List of ids
+    '''
+
+    collection.update_many({"id": {"$in": ids}}, {"$set": {"published": True}})
+
+
+
 def clear():
     """
     Reset database

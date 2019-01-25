@@ -55,5 +55,7 @@ def update_db():
         slack.post_event(event)
         sleep(1)
 
+    db.update(filtered)
+
 
 sched.start()
