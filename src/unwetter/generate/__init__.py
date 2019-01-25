@@ -2,7 +2,7 @@
 
 import os
 
-from .. import db, config
+from .. import db
 from .blocks import *
 from .helpers import rreplace, upper_first
 from . import urls
