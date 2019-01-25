@@ -54,7 +54,7 @@ Informationen und Kontakt: {os.environ["WDR_PROJECT_INFO_URL"]}
 
 
 def describe_update(event):
-    old_events = [config.filter_event(event) for event in db.by_ids(event['references'])]
+    old_events = [event for event in db.by_ids(event['references']) if config.filter_event(event)]
     change_details = []
 
     for old_event in old_events:

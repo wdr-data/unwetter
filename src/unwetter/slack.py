@@ -22,7 +22,7 @@ def post_event(event):
 
     if event['msg_type'] != 'Alert' and event['special_type'] != 'UpdateAlert':
 
-        old_events = [config.filter_event(event) for event in db.by_ids(event['references'])]
+        old_events = [event for event in db.by_ids(event['references']) if config.filter_event(event)]
 
         if len(old_events) == 1:
             old_event = old_events[0]
