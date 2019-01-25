@@ -2,7 +2,7 @@
 
 import os
 
-from .. import db
+from .. import db, config
 from .blocks import *
 from .helpers import rreplace, upper_first
 from . import urls
@@ -54,7 +54,7 @@ Informationen und Kontakt: {os.environ["WDR_PROJECT_INFO_URL"]}
 
 
 def describe_update(event):
-    old_events = db.by_ids(event['references'])
+    old_events = [config.filter_event(event) for event in db.by_ids(event['references'])]
     change_details = []
 
     for old_event in old_events:
@@ -63,6 +63,9 @@ def describe_update(event):
         if event['msg_type'] == 'Cancel' or event['response_type'] == 'AllClear':
             change_title = 'Aufhebung von'
             the_changes = ''
+        elif event['special_type'] == 'Irrelevant':
+            change_title = 'Aufhebung von'
+            the_changes = (changes(event, old_event) if old_event else 'Unbekannt')
         else:
             change_title = 'Änderungen zur'
             the_changes = (changes(event, old_event) if old_event else 'Unbekannt') + '\n'
