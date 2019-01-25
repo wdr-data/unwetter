@@ -10,21 +10,33 @@ from . import urls
 
 def describe_new_event(event):
     text = f'''
++++ Allgemeine Information +++
+BETA-TEST: Diese Meldung ist automatisch generiert und nutzt offizielle Informationen des DWD.
+Die Eilmeldung des DWD erreicht OpenMedia in der Regel wenige Minuten nach dieser Meldung.
+Die aufgeführten Informationen dürfen als zusätzliche Quelle zur Abwicklung des Unwetter-Workflows genutzt werden.
+Mehr Infos zum Projekt:
+{os.environ["WDR_PROJECT_INFO_URL"]}
+-----
+
 {title(event)}
 
++++ Details +++
+
 Warnstufe: {severities[event['severity']]}
+
+Gültigkeit: {upper_first(dates(event))}.
 
 Regionale Zuordnung: {region_list(event)}
 
 Karte: {urls.map(event)}
 
-Gültigkeit: {upper_first(dates(event))}.
+Meldung des DWD: {event['description']}
+
+Verhaltenshinweise: {event['instruction'] or ''}
 
 Warnung vor: {parameters(event)}
 
 Betroffene Kreise und Städte: {district_list(event)}
-
-Verhaltenshinweise: {event['instruction'] or ''}
 
 
 +++ Textvorschläge +++
@@ -33,9 +45,7 @@ Tweet: {tweet(event)}
 
 TV-Crawl: {crawl(event)}
 
-Meldung des DWD: {event['description']}
-
-Hinweis: Textvorschläge für Twitter und den TV-Crawl werden im WDR automatisch generiert.
+Hinweis: Textvorschläge werden nach redaktionellen Vorgaben automatisch generiert.
 
 
 +++ Über diese Meldung +++
