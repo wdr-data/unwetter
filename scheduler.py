@@ -48,14 +48,14 @@ def update_db():
     if not filtered:
         return
 
+    db.publish([event['id'] for event in filtered])
+
     wina.upload([event['id'] for event in filtered])
 
     for event in filtered:
         print(f'Sending event {event["id"]} to Slack')
         slack.post_event(event)
         sleep(1)
-
-    db.update(filtered)
 
 
 sched.start()
