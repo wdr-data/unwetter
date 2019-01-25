@@ -93,7 +93,7 @@ def title(event, variant='default'):
             'cancelled_prematurely': 'Vorzeitige Aufhebung: ',
             'updated': 'Aktualisierung: ',
             'cancelled_wrong': 'Meldung zurückgezogen: ',
-            'irrelevant': 'Meldung nicht mehr relevant: ',
+            'irrelevant': 'Aufhebung: ',
             'unknown': 'Unbekannter Meldungstyp - ',
         }
     }

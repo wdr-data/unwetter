@@ -48,6 +48,8 @@ def update_db():
     if not filtered:
         return
 
+    db.publish([event['id'] for event in filtered])
+
     wina.upload([event['id'] for event in filtered])
 
     for event in filtered:

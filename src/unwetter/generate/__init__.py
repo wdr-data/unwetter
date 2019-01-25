@@ -10,21 +10,33 @@ from . import urls
 
 def describe_new_event(event):
     text = f'''
++++ Allgemeine Information +++
+BETA-TEST: Diese Meldung ist automatisch generiert und nutzt offizielle Informationen des DWD.
+Die Eilmeldung des DWD erreicht OpenMedia in der Regel wenige Minuten nach dieser Meldung.
+Die aufgeführten Informationen dürfen als zusätzliche Quelle zur Abwicklung des Unwetter-Workflows genutzt werden.
+Mehr Infos zum Projekt:
+{os.environ["WDR_PROJECT_INFO_URL"]}
+-----
+
 {title(event)}
 
++++ Details +++
+
 Warnstufe: {severities[event['severity']]}
+
+Gültigkeit: {upper_first(dates(event))}.
 
 Regionale Zuordnung: {region_list(event)}
 
 Karte: {urls.map(event)}
 
-Gültigkeit: {upper_first(dates(event))}.
+Meldung des DWD: {event['description']}
+
+Verhaltenshinweise: {event['instruction'] or ''}
 
 Warnung vor: {parameters(event)}
 
 Betroffene Kreise und Städte: {district_list(event)}
-
-Verhaltenshinweise: {event['instruction'] or ''}
 
 
 +++ Textvorschläge +++
@@ -33,9 +45,7 @@ Tweet: {tweet(event)}
 
 TV-Crawl: {crawl(event)}
 
-Meldung des DWD: {event['description']}
-
-Hinweis: Textvorschläge für Twitter und den TV-Crawl werden im WDR automatisch generiert.
+Hinweis: Textvorschläge werden nach redaktionellen Vorgaben automatisch generiert.
 
 
 +++ Über diese Meldung +++
@@ -54,7 +64,7 @@ Informationen und Kontakt: {os.environ["WDR_PROJECT_INFO_URL"]}
 
 
 def describe_update(event):
-    old_events = db.by_ids(event['references'])
+    old_events = [event for event in db.by_ids(event['references']) if event.get('published')]
     change_details = []
 
     for old_event in old_events:
@@ -63,6 +73,9 @@ def describe_update(event):
         if event['msg_type'] == 'Cancel' or event['response_type'] == 'AllClear':
             change_title = 'Aufhebung von'
             the_changes = ''
+        elif event['special_type'] == 'Irrelevant':
+            change_title = 'Aufhebung von'
+            the_changes = (changes(event, old_event) if old_event else 'Unbekannt')
         else:
             change_title = 'Änderungen zur'
             the_changes = (changes(event, old_event) if old_event else 'Unbekannt') + '\n'
@@ -76,23 +89,33 @@ def describe_update(event):
     all_changes = f'\n{joined}\n' if change_details else ''
 
     text = f'''
++++ Allgemeine Information +++
+BETA-TEST: Diese Meldung ist automatisch generiert und nutzt offizielle Informationen des DWD.
+Die Eilmeldung des DWD erreicht OpenMedia in der Regel wenige Minuten nach dieser Meldung.
+Die aufgeführten Informationen dürfen als zusätzliche Quelle zur Abwicklung des Unwetter-Workflows genutzt werden.
+Mehr Infos zum Projekt:
+{os.environ["WDR_PROJECT_INFO_URL"]}
+-----
+
 {title(event)}
 {all_changes}
 +++ Details +++
 
 Warnstufe: {severities[event['severity']]}
 
+Gültigkeit: {upper_first(dates(event))}.
+
 Regionale Zuordnung: {region_list(event)}
 
 Karte: {urls.map(event)}
 
-Gültigkeit: {upper_first(dates(event))}.
+Meldung des DWD: {event['description']}
+
+Verhaltenshinweise: {event['instruction'] or ''}
 
 Warnung vor: {parameters(event)}
 
 Betroffene Kreise und Städte: {district_list(event)}
-
-Verhaltenshinweise: {event['instruction'] or ''}
 
 
 +++ Textvorschläge +++
@@ -101,9 +124,7 @@ Tweet: {tweet(event)}
 
 TV-Crawl: {crawl(event)}
 
-Meldung des DWD: {event['description']}
-
-Hinweis: Textvorschläge für Twitter und den TV-Crawl werden im WDR automatisch generiert.
+Hinweis: Textvorschläge werden nach redaktionellen Vorgaben automatisch generiert.
 
 
 +++ Über diese Meldung +++

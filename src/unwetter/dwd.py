@@ -215,6 +215,8 @@ def parse_xml(xml):
 
         event['special_type'] = special_type(event, old_events)
 
+    event['published'] = False
+
     return event
 
 
@@ -227,9 +229,9 @@ def special_type(event, references):
         return
 
     if not config.filter_event(event):
-        if any(config.filter_event(ref) for ref in references):
+        if any(ref.get('published') for ref in references):
             return 'Irrelevant'
         return
 
-    if all(not config.filter_event(ref) for ref in references):
+    if all(not ref.get('published') for ref in references):
         return 'UpdateAlert'

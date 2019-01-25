@@ -3,7 +3,7 @@ import os
 
 from slackclient import SlackClient
 
-from . import db, generate
+from . import db, generate, config
 from .map import COLORS
 from .generate import helpers
 
@@ -22,7 +22,7 @@ def post_event(event):
 
     if event['msg_type'] != 'Alert' and event['special_type'] != 'UpdateAlert':
 
-        old_events = list(db.by_ids(event['references']))
+        old_events = [event for event in db.by_ids(event['references']) if event.get('published')]
 
         if len(old_events) == 1:
             old_event = old_events[0]
@@ -31,6 +31,10 @@ def post_event(event):
             if event['msg_type'] == 'Cancel' or event['response_type'] == 'AllClear':
                 change_title = f'Aufhebung der Meldung von {old_time}\n'
                 the_changes = ''
+            elif event['special_type'] == 'Irrelevant':
+                change_title = f'Aufhebung der Meldung von {old_time}\n'
+                the_changes = '*Änderungen:*\n\n' + (generate.changes(event, old_event)
+                                                     if old_event else 'Unbekannt')
             else:
                 change_title = f'Änderungen zur Meldung von {old_time}\n'
                 the_changes = '*Änderungen:*\n\n' + (generate.changes(event, old_event)
@@ -44,6 +48,12 @@ def post_event(event):
             if event['msg_type'] == 'Cancel' or event['response_type'] == 'AllClear':
                 change_title = f'Aufhebung der Meldungen von {", ".join(old_times)}\n'
                 the_changes = ''
+            elif event['special_type'] == 'Irrelevant':
+                change_title = (f'Aufhebung der Meldungen von '
+                                f'{", ".join(old_times)}\n')
+                the_changes = ('\n\n'.join(
+                    f'*Änderungen zu {old_time}*:\n{generate.changes(event, old_event)}'
+                    for old_time, old_event in zip(old_times, old_events)) or '')
             else:
                 change_title = (f'Zusammenführung und Aktualisierung zur Meldungen von '
                                 f'{", ".join(old_times)}\n')
