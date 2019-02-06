@@ -89,7 +89,8 @@ def update():
 
         new_events.append(event)
 
-    collection.insert_many(new_events)
+    if new_events:
+        collection.insert_many(new_events)
 
     return new_events
 
