@@ -31,16 +31,13 @@ def update_db():
     filtered = []
     for event in new_events:
         if filter_event(event):
-            if event['msg_type'] == 'Alert' or any(t['changed'] for t in event['has_changes']):
+            if event['msg_type'] in ['Alert', 'Cancel']:
                 filtered.append(event)
 
-            elif all(not t['changed'] for t in event['has_changes']):
+            elif not any(t['changed'] for t in event['has_changes']):
                 continue
 
             elif any(t['changed'] for t in event['has_changed']):
-                filtered.append(event)
-
-            elif event['msg_type'] == 'Cancel':
                 filtered.append(event)
 
             else:
@@ -56,7 +53,7 @@ def update_db():
                 if any(old_event['published'] for old_event in old_events):
                     filtered.append(event)
 
-                elif all(not old_event['published'] for old_event in old_events):
+                elif not any(old_event['published'] for old_event in old_events):
                     continue
 
                 else:
