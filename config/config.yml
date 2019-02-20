@@ -15,3 +15,4 @@ STATES_FILTER:
 # Possible values: Future ("Vorabinformation") and Immediate ("Warnung")
 URGENCY_FILTER:
   - Immediate
+  - Future
