@@ -37,7 +37,7 @@ def update_db():
             elif not any(t['changed'] for t in event['has_changes']):
                 continue
 
-            elif any(t['changed'] for t in event['has_changed']):
+            elif any(t['changed'] for t in event['has_changes']):
                 filtered.append(event)
 
             else:
