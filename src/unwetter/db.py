@@ -87,8 +87,10 @@ def update():
         if event['status'] == 'Test':
             continue
 
-        collection.insert_one(event)
         new_events.append(event)
+
+    if new_events:
+        collection.insert_many(new_events)
 
     return new_events
 
