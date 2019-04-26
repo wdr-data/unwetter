@@ -40,15 +40,28 @@ def upload(ids):
 
     files = [BytesIO(from_id(id)) for id in ids]
 
-    ftps = FTP_TLS(
-        host=os.environ['NVS_FTP_URL'],
-        user=os.environ['NVS_FTP_USER'],
-        passwd=os.environ['NVS_FTP_PASS'],
-        context=ssl.create_default_context(),
-    )
-    ftps.prot_p()
+    logins = [
+        ('NVS_FTP_URL', 'NVS_FTP_USER', 'NVS_FTP_PASS'),
+        ('NVS_FTP_URL_SECONDARY', 'NVS_FTP_USER_SECONDARY', 'NVS_FTP_PASS_SECONDARY'),
+    ]
 
-    for id, file in zip(ids, files):
-        print(ftps.storbinary(f'STOR {id}.xml', file))
+    for url, user, passw in logins:
 
-    print(ftps.quit())
+        try:
+            ftps = FTP_TLS(
+                host=os.environ[url],
+                user=os.environ[user],
+                passwd=os.environ[passw],
+                context=ssl.create_default_context(),
+            )
+        except KeyError:
+            print(f'Environment variable {url}, {user}, {passw} for ftp connection not found')
+            continue
+
+        ftps.prot_p()
+
+        for id, file in zip(ids, files):
+            file.seek(0)
+            print(ftps.storbinary(f'STOR {id}.xml', file))
+
+        print(ftps.quit())
