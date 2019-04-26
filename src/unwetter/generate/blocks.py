@@ -66,8 +66,7 @@ def commune_list(event, all=False):
 
 
 def keywords(event):
-    return f'{severities[event["severity"]]}, {region_list(event) or "Nicht NRW"}, ' \
-           f'Technische Erprobung'
+    return f'{severities[event["severity"]]}, {region_list(event) or "Nicht NRW"}'
 
 
 def title(event, variant='default'):
