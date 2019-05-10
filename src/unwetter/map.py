@@ -3,7 +3,7 @@ from functools import partial
 import pyproj
 from shapely.geometry import MultiPolygon
 from shapely.ops import transform
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 import yaml
 
 from .data.shapes import STATE_SHAPES
@@ -160,17 +160,23 @@ def draw_event(event):
     img = background_image.copy()
     draw = ImageDraw.Draw(img)
 
-    for geo in event['geometry']:
+    if event:
+        for geo in event['geometry']:
 
-        for poly in geo['polygons']:
-            projected = [to_image_coords(*target_projection(lng, lat)) for lat, lng in poly]
-            draw.polygon(projected, outline=None, fill=COLORS['SEVERITIES'][event['severity']])
+            for poly in geo['polygons']:
+                projected = [to_image_coords(*target_projection(lng, lat)) for lat, lng in poly]
+                draw.polygon(projected, outline=None, fill=COLORS['SEVERITIES'][event['severity']])
 
-        for poly in geo['exclude_polygons']:
-            projected = [to_image_coords(*target_projection(lng, lat)) for lat, lng in poly]
-            draw.polygon(projected, outline=None, fill=COLORS['STATE'])
+            for poly in geo['exclude_polygons']:
+                projected = [to_image_coords(*target_projection(lng, lat)) for lat, lng in poly]
+                draw.polygon(projected, outline=None, fill=COLORS['STATE'])
 
-    img.alpha_composite(overlay)
+            img.alpha_composite(overlay)
+    else:
+        img.alpha_composite(overlay)
+        fnt = ImageFont.truetype('assets/fonts/VT323-Regular.ttf', 300)
+        draw.text((200, img_height / 2 - 150), "Event not found", font=fnt, fill=(0, 0, 0, 255))
+
     resized = img.resize((int(img_width * .5), int(img_height * .5)), resample=Image.CUBIC)
 
     return resized
