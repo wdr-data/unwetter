@@ -170,11 +170,13 @@ def draw_event(event):
             for poly in geo['exclude_polygons']:
                 projected = [to_image_coords(*target_projection(lng, lat)) for lat, lng in poly]
                 draw.polygon(projected, outline=None, fill=COLORS['STATE'])
-    else:
-        fnt = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 40)
-        draw.text((10, 60), "Event not found in database", font=fnt, fill=(255, 255, 255, 255))
 
-    img.alpha_composite(overlay)
+            img.alpha_composite(overlay)
+    else:
+        img.alpha_composite(overlay)
+        fnt = ImageFont.truetype('assets/fonts/VT323-Regular.ttf', 300)
+        draw.text((200, img_height / 2 - 150), "Event not found", font=fnt, fill=(0, 0, 0, 255))
+
     resized = img.resize((int(img_width * .5), int(img_height * .5)), resample=Image.CUBIC)
 
     return resized
