@@ -2,6 +2,7 @@
 
 import os
 from io import BytesIO
+from datetime import datetime
 
 import pytz
 from feedgen.feed import FeedGenerator
@@ -164,6 +165,34 @@ def test():
 @app.route('/error')
 def error():
     raise Exception('AHHHHHHHH')
+
+
+@app.route('/api/v1/events/current', methods=['GET'])
+def api_v1_current_events():
+    now = datetime.now()
+
+    filter = {
+        'expires': {'$gte': now},
+    }
+
+    results = db.query(
+        ['Minor', 'Moderate', 'Severe', 'Extreme'],
+        STATES_FILTER,
+        ['Immediate'],
+        filter=filter,
+    )
+
+    results = list(results)
+
+    for result in results:
+        del result['_id']
+        for field in ('sent', 'effective', 'onset', 'expires'):
+            result[field] = result[field].timestamp()
+
+    if results:
+        return json.dumps(results)
+    else:
+        return json.dumps([])
 
 
 if __name__ == '__main__':

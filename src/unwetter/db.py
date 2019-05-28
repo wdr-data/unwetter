@@ -95,7 +95,7 @@ def update():
     return new_events
 
 
-def query(severities, states, urgencies, limit=50):
+def query(severities, states, urgencies, limit=50, filter=None):
     """
 
     :param severities: List of severities allowed (eg. ['Severe', 'Extreme'])
@@ -105,10 +105,13 @@ def query(severities, states, urgencies, limit=50):
     :return: DB Cursor with the results
     """
 
-    filter = {
+    if not filter:
+        filter = {}
+
+    filter.update({
         'severity': {'$in': severities},
         'urgency': {'$in': urgencies},
-    }
+    })
 
     if len(states) == 1:
         filter['states'] = states[0]
