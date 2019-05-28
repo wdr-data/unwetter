@@ -29,7 +29,7 @@ COLORS = {
 }
 
 
-target_projection = pyproj.Proj(init='epsg:25832')
+target_projection = pyproj.Proj(init='epsg:3857')
 project = partial(
     pyproj.transform,
     pyproj.Proj(init='epsg:4326'),  # source coordinate system
@@ -56,7 +56,7 @@ surroundings = MultiPolygon(surroundings)
 
 bbox = states.bounds
 
-img_padding = 40000  # in meters
+img_padding = 75000  # in meters
 bbox = (
     bbox[0] - img_padding,
     bbox[1] - img_padding,
@@ -136,21 +136,12 @@ def draw_borders(img, width=3):
                     fill=COLORS['BORDERS'])
 
 
-logo = Image.open('assets/images/logo_facebook.png')
-logo = logo.resize((int(img_width * .07), int(img_height * .07)), resample=Image.CUBIC)
-
-
-def draw_logo(img):
-    padding = 30
-    img.paste(logo, (padding,
-                     img.height - logo.height - padding))
-
 
 def draw_overlay():
     img = Image.new("RGBA", (img_width, img_height))
 
     draw_surroundings(img)
-    draw_borders(img)
+    # draw_borders(img)
     draw_studios(img)
 
     return img
@@ -177,7 +168,7 @@ def draw_event(event):
         fnt = ImageFont.truetype('assets/fonts/VT323-Regular.ttf', 300)
         draw.text((200, img_height / 2 - 150), "Event not found", font=fnt, fill=(0, 0, 0, 255))
 
-    resized = img.resize((int(img_width * .5), int(img_height * .5)), resample=Image.CUBIC)
+    resized = img #.resize((int(img_width * .5), int(img_height * .5)), resample=Image.CUBIC)
 
     return resized
 
