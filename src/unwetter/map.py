@@ -121,7 +121,10 @@ def severity_key(event):
         'Extreme': 3,
     }
 
-    return mapped.get(event['severity'], 100)
+    try:
+        return mapped.get(event['severity'], 100)
+    except:
+        return 1000
 
 
 def generate_map(events):
