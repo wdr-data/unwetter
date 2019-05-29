@@ -29,7 +29,7 @@ const Events: React.FC<RouteComponentProps> = () => {
     <div className={styles.configurator}>
       <Grid container spacing={3}>
         <Grid item xs={6}>
-          <Paper className={styles.paper}>
+          <Paper className={classNames(styles.paper, styles.marginBottom)}>
             <TextField
               label="Datum"
               margin="normal"
@@ -49,6 +49,8 @@ const Events: React.FC<RouteComponentProps> = () => {
               onChange={changeTimeHandler}
             />
             <br />
+          </Paper>
+          <Paper className={styles.paper}>
             <TextField label="Titel" margin="normal" /> <br />
             <TextField label="Untertitel" margin="normal" /> <br />
           </Paper>

@@ -9,6 +9,12 @@
 .paper {
   padding: 4 * $unit;
   position: relative;
+
+  button {
+    margin: {
+      right: 4 * $unit;
+    }
+  }
 }
 
 .image {
@@ -16,8 +22,5 @@
 
   max: {
     width: 100%;
-  }
-
-  margin: {
   }
 }
