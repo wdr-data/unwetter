@@ -80,7 +80,10 @@ def resize(img):
 
 
 background_image = resize(Image.open('assets/images/bg_square.png').convert("RGBA"))
-overlay = resize(Image.open('assets/images/overlay_square.png').convert("RGBA"))
+studios = resize(Image.open('assets/images/overlay_square.png').convert("RGBA"))
+mask = resize(Image.open('assets/images/mask_square.png').convert("RGBA"))
+overlay = mask.copy()
+overlay.alpha_composite(studios)
 
 
 def generate_base_map():
