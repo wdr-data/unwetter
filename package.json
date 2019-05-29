@@ -2,7 +2,7 @@
   "name": "dummy",
   "version": "0.1.0",
   "scripts": {
-    "heroku-postbuild": "yarn --cwd website install && yarn --cwd website build"
+    "heroku-postbuild": "yarn --cwd website install && yarn --cwd website run react-scripts build"
   },
   "cacheDirectories": [
     "website/node_modules"
