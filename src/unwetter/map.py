@@ -129,25 +129,15 @@ def severity_key(event):
 
 def generate_map(events):
     from datetime import datetime
-    start = datetime.now()
-
-    img = background_image.copy()
-    print('bg', datetime.now() - start)
-
 
     event_img = Image.new("RGBA", (img_width, img_height))
-    print('created event image', datetime.now() - start)
     draw = ImageDraw.Draw(event_img)
-    print('created event draw', datetime.now() - start)
 
     for event in sorted(events, key=severity_key):
         draw_event(event, draw)
-        print('drew event', datetime.now() - start)
 
+    img = background_image.copy()
     img.alpha_composite(resize(event_img))
-    print('first composite/resize', datetime.now() - start)
-
     img.alpha_composite(overlay)
-    print('second composite', datetime.now() - start)
 
     return img
