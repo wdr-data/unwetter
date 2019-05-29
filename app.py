@@ -169,10 +169,15 @@ def error():
 
 @app.route('/api/v1/events/current', methods=['GET'])
 def api_v1_current_events():
-    now = datetime.now()
+    at = request.args.get("at")
+
+    if not at:
+        at = datetime.now()
+    else:
+        at = datetime.utcfromtimestamp(int(at))
 
     filter = {
-        'expires': {'$gte': now},
+        'expires': {'$gte': at},
     }
 
     results = db.query(
