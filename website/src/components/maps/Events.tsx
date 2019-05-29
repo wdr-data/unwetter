@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useRef, useLayoutEffect } from "react";
 import Button from "@material-ui/core/es/Button";
 import Paper from "@material-ui/core/es/Paper";
 import TextField from "@material-ui/core/es/TextField";
@@ -12,8 +12,11 @@ import styles from "./Events.module.scss";
 import { useFormField } from "../hooks/form";
 
 const Events: React.FC<RouteComponentProps> = () => {
-  const [date, changeDateHandler] = useFormField("");
-  const [time, changeTimeHandler] = useFormField("");
+  const [date, changeDateHandler, setDate] = useFormField("");
+  const [time, changeTimeHandler, setTime] = useFormField("");
+
+  const dateRef = useRef<HTMLInputElement>();
+  const timeRef = useRef<HTMLInputElement>();
 
   const [events, setEvents] = useState([]);
 
@@ -23,7 +26,29 @@ const Events: React.FC<RouteComponentProps> = () => {
     setEvents(
       await (await fetch(`/api/v1/events/current?at=${timestamp}`)).json()
     );
-  }, [date, time]);
+  }, [date, time, setEvents]);
+
+  useLayoutEffect(() => {
+    if (dateRef.current && timeRef.current) {
+      const now = moment();
+      const dateString = now.format("YYYY-MM-DD");
+      const timeString = now.format("hh:mm");
+
+      dateRef.current.value = dateString;
+      setDate(dateString);
+
+      timeRef.current.value = timeString;
+      setTime(timeString);
+
+      const fetchEvents = async () => {
+        const timestamp = now.format("X");
+        setEvents(
+          await (await fetch(`/api/v1/events/current?at=${timestamp}`)).json()
+        );
+      };
+      fetchEvents();
+    }
+  }, [setDate, setTime]);
 
   return (
     <div className={styles.configurator}>
@@ -34,6 +59,7 @@ const Events: React.FC<RouteComponentProps> = () => {
               label="Datum"
               margin="normal"
               type="date"
+              inputRef={dateRef}
               InputLabelProps={{
                 shrink: true
               }}
@@ -43,6 +69,7 @@ const Events: React.FC<RouteComponentProps> = () => {
               label="Zeit"
               margin="normal"
               type="time"
+              inputRef={timeRef}
               InputLabelProps={{
                 shrink: true
               }}
