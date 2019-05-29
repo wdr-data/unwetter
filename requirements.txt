@@ -5,7 +5,7 @@ certifi==2019.3.9
 chardet==3.0.4
 click==7.0
 feedgen==0.7.0
-flask==1.0.2
+flask==1.0.3
 gunicorn==19.9.0
 idna==2.8
 iso8601==0.1.12
@@ -20,13 +20,13 @@ pyshp==2.1.0
 python-dateutil==2.8.0
 pytz==2019.1
 pyyaml==5.1
-requests==2.21.0
-sentry-sdk==0.7.12
+requests==2.22.0
+sentry-sdk==0.8.0
 shapely==1.6.4.post2
 six==1.12.0
 slackclient==1.3.1
 tzlocal==1.5.1
-urllib3==1.24.2
+urllib3==1.25.3
 websocket-client==0.54.0
-werkzeug==0.15.2
+werkzeug==0.15.4
 xmltodict==0.12.0
