@@ -31,23 +31,15 @@ project = partial(
     TARGET_PROJECTION
 )
 
-
 states = []  # fill with polys, then convert to multi-polygon
-surroundings = []
 
 # Create projected copy
 for name, shape in STATE_SHAPES.items():
-
-    projected = transform(project, shape)
-
     if name in STATES_FILTER:
+        projected = transform(project, shape)
         states.extend(projected.geoms)
-    else:
-        surroundings.extend(projected.geoms)
 
 states = MultiPolygon(states)
-surroundings = MultiPolygon(surroundings)
-
 
 bbox = states.bounds
 
