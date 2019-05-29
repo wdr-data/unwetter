@@ -18,7 +18,7 @@
     "test": {
       "scripts": {
         "test-setup": "pip install -r requirements-dev.txt",
-        "test": "pytest --tap-stream"
+        "test": "pytest --tap-stream --ignore=website"
       }
     }
   }
