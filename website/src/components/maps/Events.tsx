@@ -9,11 +9,10 @@ import moment from "moment";
 
 import { RouteComponentProps } from "@reach/router";
 
-import styles from "./Configurator.module.scss";
+import styles from "./Events.module.scss";
 import { useFormField } from "../hooks/form";
-import { async } from "q";
 
-const Configurator: React.FC<RouteComponentProps> = () => {
+const Events: React.FC<RouteComponentProps> = () => {
   const [date, changeDateHandler] = useFormField("");
   const [time, changeTimeHandler] = useFormField("");
 
@@ -78,4 +77,4 @@ const Configurator: React.FC<RouteComponentProps> = () => {
   );
 };
 
-export default Configurator;
+export default Events;

@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/es/Typography";
 import { Router, RouteComponentProps } from "@reach/router";
 
 import styles from "./App.module.scss";
-import Configurator from "./maps/Configurator";
+import Events from "./maps/Events";
 
 const App: React.FC = () => {
   return (
@@ -19,7 +19,7 @@ const App: React.FC = () => {
         </Toolbar>
       </AppBar>
       <Router>
-        <Configurator path="/events/*" />
+        <Events path="/events/*" />
       </Router>
     </>
   );
