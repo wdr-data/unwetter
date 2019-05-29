@@ -15,10 +15,10 @@ TARGET_HEIGHT = 1080
 
 COLORS = {
     'SEVERITIES': {
-        'Minor': '#ffcc00b0',
-        'Moderate': '#ff6600b0',
-        'Severe': '#ff0000b0',
-        'Extreme': '#cc3399b0',
+        'Minor': '#ffcc00a0',
+        'Moderate': '#ff6600a0',
+        'Severe': '#ff0000a0',
+        'Extreme': '#cc3399a0',
     }
 }
 
