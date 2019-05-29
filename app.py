@@ -48,15 +48,31 @@ def wina(id):
     return r
 
 
-@app.route('/map/<id>.png')
-def genmap(id):
-    img = map.draw_event(db.by_id(id))
-
+def send_pil(img):
     bio = BytesIO()
     img.save(bio, 'PNG')
     bio.seek(0)
 
     return send_file(bio, 'image/png')
+
+
+@app.route('/map/<id>.png')
+def map_single(id):
+    img = map.generate_map([db.by_id(id)])
+    return send_pil(img)
+
+
+@app.route('/map')
+def map_multi():
+    ids = request.args.getlist('id')
+    img = map.generate_map(db.by_ids(ids))
+    return send_pil(img)
+
+
+@app.route('/basemap')
+def map_base():
+    img = map.generate_base_map()
+    return send_pil(img)
 
 
 @app.route('/slack/event', methods=['GET', 'POST'])
