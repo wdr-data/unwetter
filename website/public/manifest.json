@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "UWA",
+  "name": "Unwetter Warn-Assistent",
   "icons": [
     {
       "src": "favicon.ico",
