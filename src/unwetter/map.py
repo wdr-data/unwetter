@@ -22,7 +22,7 @@ COLORS = {
     }
 }
 
-ERROR_FONT = ImageFont.truetype('assets/fonts/VT323-Regular.ttf', 300)
+ERROR_FONT = ImageFont.truetype('assets/fonts/VT323-Regular.ttf', 150)
 
 TARGET_PROJECTION = pyproj.Proj(init='epsg:3857')
 project = partial(
@@ -93,18 +93,14 @@ def generate_base_map():
     return img
 
 def draw_event(event, draw):
-    if event:
-        for geo in event['geometry']:
-            for poly in geo['polygons']:
-                projected = [to_image_coords(*TARGET_PROJECTION(lng, lat)) for lat, lng in poly]
-                draw.polygon(projected, outline=None, fill=COLORS['SEVERITIES'][event['severity']])
+    for geo in event['geometry']:
+        for poly in geo['polygons']:
+            projected = [to_image_coords(*TARGET_PROJECTION(lng, lat)) for lat, lng in poly]
+            draw.polygon(projected, outline=None, fill=COLORS['SEVERITIES'][event['severity']])
 
-            for poly in geo['exclude_polygons']:
-                projected = [to_image_coords(*TARGET_PROJECTION(lng, lat)) for lat, lng in poly]
-                draw.polygon(projected, outline=None, fill='rgba(0, 0, 0, 0)')
-
-    else:
-        draw.text((200, img_height / 2 - 150), "Event not found", font=ERROR_FONT, fill='black')
+        for poly in geo['exclude_polygons']:
+            projected = [to_image_coords(*TARGET_PROJECTION(lng, lat)) for lat, lng in poly]
+            draw.polygon(projected, outline=None, fill='rgba(0, 0, 0, 0)')
 
 
 def severity_key(event):
@@ -116,10 +112,7 @@ def severity_key(event):
         'Extreme': 3,
     }
 
-    try:
-        return mapped.get(event['severity'], 100)
-    except:
-        return 1000
+    return mapped.get(event['severity'], 100)
 
 
 def generate_map(events):
@@ -128,11 +121,17 @@ def generate_map(events):
     event_img = Image.new("RGBA", (img_width, img_height))
     draw = ImageDraw.Draw(event_img)
 
-    for event in sorted(events, key=severity_key):
-        draw_event(event, draw)
-
     img = background_image.copy()
-    img.alpha_composite(resize(event_img))
-    img.alpha_composite(overlay)
+
+    try:
+        for event in sorted(events, key=severity_key):
+            draw_event(event, draw)
+
+        img.alpha_composite(resize(event_img))
+    except TypeError:
+        draw = ImageDraw.Draw(img)
+        draw.text((90, TARGET_HEIGHT / 2 - 80), "Event not found", font=ERROR_FONT, fill='black')
+    else:
+        img.alpha_composite(overlay)
 
     return img
