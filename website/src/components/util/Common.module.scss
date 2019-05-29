@@ -1,0 +1,11 @@
+@import "../../util/variables";
+
+.white {
+  color: white;
+}
+
+.marginBottom {
+  margin: {
+    bottom: 4 * $unit;
+  }
+}

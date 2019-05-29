@@ -2,10 +2,11 @@
 
 import os
 from io import BytesIO
+from datetime import datetime
 
 import pytz
 from feedgen.feed import FeedGenerator
-from flask import Flask, Response, request, json, send_file
+from flask import Flask, Response, request, json, send_file, send_from_directory
 
 from unwetter import db, generate, wina as wina_gen, slack, map, sentry
 from unwetter.config import SEVERITY_FILTER, STATES_FILTER, URGENCY_FILTER
@@ -13,7 +14,7 @@ from unwetter.generate import urls
 
 
 sentry.init()
-app = Flask(__name__)
+app = Flask(__name__, static_folder='website/build')
 
 
 @app.route('/feed.rss')
@@ -164,6 +165,50 @@ def test():
 @app.route('/error')
 def error():
     raise Exception('AHHHHHHHH')
+
+
+@app.route('/api/v1/events/current', methods=['GET'])
+def api_v1_current_events():
+    at = request.args.get("at")
+
+    if not at:
+        at = datetime.now()
+    else:
+        at = datetime.utcfromtimestamp(int(at))
+
+    filter = {
+        'expires': {'$gte': at},
+    }
+
+    results = db.query(
+        ['Minor', 'Moderate', 'Severe', 'Extreme'],
+        STATES_FILTER,
+        ['Immediate'],
+        filter=filter,
+    )
+
+    results = list(results)
+
+    for result in results:
+        del result['_id']
+        for field in ('sent', 'effective', 'onset', 'expires'):
+            result[field] = result[field].timestamp()
+
+    if results:
+        return json.dumps(results)
+    else:
+        return json.dumps([])
+
+
+# Serve React App
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve(path):
+    full_path = os.path.join(app.static_folder, path)
+    if path != '' and os.path.exists(full_path):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, 'index.html')
 
 
 if __name__ == '__main__':

@@ -1,0 +1,26 @@
+@import "../../util/variables";
+@import "../util/Common.module";
+
+.configurator {
+  flex-grow: 1;
+  margin: 8 * $unit;
+}
+
+.paper {
+  padding: 4 * $unit;
+  position: relative;
+
+  button {
+    margin: {
+      right: 4 * $unit;
+    }
+  }
+}
+
+.image {
+  display: block;
+
+  max: {
+    width: 100%;
+  }
+}
