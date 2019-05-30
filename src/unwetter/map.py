@@ -115,12 +115,12 @@ def draw_text(draw, text, corner, size):
     spacing = int(size / 5)
 
     calc_size = draw.textsize(text, font=font, spacing=spacing)
-    y_offset = int(img_height * .054)
+    y_offset = int(img_height * .054) + spacing
 
     x0 = 0 if align == 'left' else img_width - calc_size[0] - spacing * 2
-    y0 = y_offset if corner.startswith('n') else img_height - calc_size[1] - y_offset - spacing
+    y0 = y_offset - spacing if corner.startswith('n') else img_height - calc_size[1] - y_offset - spacing * 2
     x1 = calc_size[0] + spacing * 2 if align == 'left' else img_width
-    y1 = y_offset + calc_size[1] + spacing if corner.startswith('n') else img_height - y_offset
+    y1 = y_offset + calc_size[1] + spacing * 2 if corner.startswith('n') else img_height - y_offset + spacing
 
     draw.rectangle(((x0, y0), (x1, y1)), fill=COLORS['WDRA_TEXT_BACKGROUND'])
 
