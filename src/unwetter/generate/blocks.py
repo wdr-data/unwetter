@@ -132,9 +132,9 @@ def dates(event):
     today = local_time(datetime.utcnow()).date()
 
     if onset.date() == today:
-        onset_date = f'Heute ({expires.strftime("%d.%m.%y")})'
+        onset_date = f'Heute ({onset.strftime("%d.%m.%y")})'
     elif onset.date() == today + timedelta(days=1):
-        onset_date = f'Morgen ({expires.strftime("%d.%m.%y")})'
+        onset_date = f'Morgen ({onset.strftime("%d.%m.%y")})'
     else:
         onset_date = onset.strftime("%d.%m.%y")
 
