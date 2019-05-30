@@ -50,7 +50,7 @@ const Events: React.FC<RouteComponentProps> = () => {
     if (dateRef.current && timeRef.current) {
       const now = moment();
       const dateString = now.format("YYYY-MM-DD");
-      const timeString = now.format("hh:mm");
+      const timeString = now.format("HH:mm");
 
       dateRef.current.value = dateString;
       setDate(dateString);
