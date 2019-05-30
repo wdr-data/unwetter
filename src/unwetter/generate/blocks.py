@@ -66,7 +66,12 @@ def commune_list(event, all=False):
 
 
 def keywords(event):
-    return f'{severities[event["severity"]]}, {region_list(event) or "Nicht NRW"}'
+    # f'{severities[event["severity"]]}, {region_list(event) or "Nicht NRW"}'
+    parameter_keys = ', '.join(
+        f'{param}' for param, value in event['parameters'].items()
+    )
+
+    return f'Unwetter, UWA, Warnung, {parameter_keys}'
 
 
 def title(event, variant='default'):
