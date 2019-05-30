@@ -33,7 +33,7 @@ Warnstufe: {severities[event['severity']]}
 
 Warnung vor: {parameters(event)}
 
-Verhaltenshinweise: {event['instruction'] or 'Nicht angegeben.'}
+Verhaltenshinweise: {event['instruction'] or ''}
 
 
 +++ Textvorschläge +++
@@ -117,7 +117,7 @@ Warnstufe: {severities[event['severity']]}
 
 Warnung vor: {parameters(event)}
 
-Verhaltenshinweise: {event['instruction'] or 'Nicht angegeben.'}
+Verhaltenshinweise: {event['instruction'] or ''}
 
 
 +++ Textvorschläge +++
