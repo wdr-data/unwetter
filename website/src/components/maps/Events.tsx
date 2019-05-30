@@ -44,7 +44,7 @@ const Events: React.FC<RouteComponentProps> = () => {
         size
       })
     );
-  }, [date, time, events, text, corner, size]);
+  }, [date, time, text, corner, size]);
 
   useLayoutEffect(() => {
     if (dateRef.current && timeRef.current) {
