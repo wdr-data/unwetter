@@ -66,7 +66,11 @@ def map_single(id):
 @app.route('/map')
 def map_multi():
     ids = request.args.getlist('id')
-    img = map.generate_map(db.by_ids(ids))
+    text = request.args.get('text')
+    corner = request.args.get('corner', 'se')
+    size = int(request.args.get('size', 50))
+
+    img = map.generate_map(db.by_ids(ids), text=text, text_corner=corner, text_size=size)
     return send_pil(img)
 
 
@@ -178,6 +182,7 @@ def api_v1_current_events():
 
     filter = {
         'expires': {'$gte': at},
+        'effective': {'$lte': at},
     }
 
     results = db.query(

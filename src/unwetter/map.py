@@ -1,4 +1,5 @@
 from functools import partial
+from math import tan, radians
 
 import pyproj
 from shapely.geometry import MultiPolygon
@@ -19,10 +20,11 @@ COLORS = {
         'Moderate': '#ff6600a0',
         'Severe': '#ff0000a0',
         'Extreme': '#cc3399a0',
-    }
+    },
+    'WDRA_TEXT_BACKGROUND': '#00335dcc',
 }
 
-ERROR_FONT = ImageFont.truetype('assets/fonts/VT323-Regular.ttf', 150)
+FONT_ERROR = ImageFont.truetype('assets/fonts/VT323-Regular.ttf', 150)
 
 TARGET_PROJECTION = pyproj.Proj(init='epsg:3857')
 project = partial(
@@ -95,6 +97,7 @@ def generate_base_map():
 
     return img
 
+
 def draw_event(event, draw):
     for geo in event['geometry']:
         for poly in geo['polygons']:
@@ -105,6 +108,35 @@ def draw_event(event, draw):
             projected = [to_image_coords(*TARGET_PROJECTION(lng, lat)) for lat, lng in poly]
             draw.polygon(projected, outline=None, fill='rgba(0, 0, 0, 0)')
 
+
+def draw_text(draw, text, corner, size):
+    align = 'left' if corner.endswith('w') else 'right'
+    font = ImageFont.truetype('assets/fonts/WDR Sans Bold.ttf', size=size)
+    spacing = int(size / 5)
+
+    calc_size = draw.textsize(text, font=font, spacing=spacing)
+    y_offset = int(img_height * .054)
+
+    x0 = 0 if align == 'left' else img_width - calc_size[0] - spacing * 2
+    y0 = y_offset if corner.startswith('n') else img_height - calc_size[1] - y_offset - spacing
+    x1 = calc_size[0] + spacing * 2 if align == 'left' else img_width
+    y1 = y_offset + calc_size[1] + spacing if corner.startswith('n') else img_height - y_offset
+
+    draw.rectangle(((x0, y0), (x1, y1)), fill=COLORS['WDRA_TEXT_BACKGROUND'])
+
+    triangle_offset = tan(radians(15)) * (y1 - y0)
+    x2 = x1 + triangle_offset if align == 'left' else x0 - triangle_offset
+    y2 = y1  # if align == 'left' else y0
+
+    if align == 'left':
+        draw.polygon(((x1, y0), (x1, y1), (x2, y2)), fill=COLORS['WDRA_TEXT_BACKGROUND'])
+    else:
+        draw.polygon(((x0, y0), (x0, y1), (x2, y2)), fill=COLORS['WDRA_TEXT_BACKGROUND'])
+
+    x = spacing if align == 'left' else img_width - calc_size[0] - spacing
+    y = y_offset if corner.startswith('n') else img_height - calc_size[1] - spacing - y_offset
+
+    draw.text((x, y), text, align='left', fill='white', font=font, spacing=spacing)
 
 def severity_key(event):
 
@@ -118,9 +150,7 @@ def severity_key(event):
     return mapped.get(event['severity'], 100)
 
 
-def generate_map(events):
-    from datetime import datetime
-
+def generate_map(events, *, text=None, text_corner='se', text_size=50):
     event_img = Image.new("RGBA", (img_width, img_height))
     draw = ImageDraw.Draw(event_img)
 
@@ -133,8 +163,14 @@ def generate_map(events):
         img.alpha_composite(resize(event_img))
     except TypeError:
         draw = ImageDraw.Draw(img)
-        draw.text((90, TARGET_HEIGHT / 2 - 80), "Event not found", font=ERROR_FONT, fill='black')
+        draw.text((90, TARGET_HEIGHT / 2 - 80), "Event not found", font=FONT_ERROR, fill='black')
     else:
         img.alpha_composite(overlay)
+
+    if text:
+        text_img = Image.new("RGBA", (img_height, img_width))
+        draw = ImageDraw.Draw(text_img)
+        draw_text(draw, text, text_corner, text_size)
+        img.alpha_composite(resize(text_img))
 
     return img

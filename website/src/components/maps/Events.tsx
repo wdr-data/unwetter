@@ -5,6 +5,7 @@ import TextField from "@material-ui/core/es/TextField";
 import Grid from "@material-ui/core/es/Grid";
 import classNames from "classnames";
 import moment from "moment";
+import queryString from "query-string";
 
 import { RouteComponentProps } from "@reach/router";
 
@@ -14,6 +15,10 @@ import { useFormField } from "../hooks/form";
 const Events: React.FC<RouteComponentProps> = () => {
   const [date, changeDateHandler, setDate] = useFormField("");
   const [time, changeTimeHandler, setTime] = useFormField("");
+
+  const [text, changeTextHandler] = useFormField("Hallo Welt");
+  const [corner, changeCornerHandler] = useFormField("se");
+  const [size, changeSizeHandler] = useFormField("50");
 
   const dateRef = useRef<HTMLInputElement>();
   const timeRef = useRef<HTMLInputElement>();
@@ -27,6 +32,13 @@ const Events: React.FC<RouteComponentProps> = () => {
       await (await fetch(`/api/v1/events/current?at=${timestamp}`)).json()
     );
   }, [date, time, setEvents]);
+
+  const mapQuery = queryString.stringify({
+    id: events.map((ev: any) => ev.id),
+    text,
+    corner,
+    size
+  });
 
   useLayoutEffect(() => {
     if (dateRef.current && timeRef.current) {
@@ -78,15 +90,32 @@ const Events: React.FC<RouteComponentProps> = () => {
             <br />
           </Paper>
           <Paper className={styles.paper}>
-            <TextField label="Titel" margin="normal" /> <br />
-            <TextField label="Untertitel" margin="normal" /> <br />
+            <TextField
+              label="Text"
+              margin="normal"
+              multiline
+              onChange={changeTextHandler}
+            />{" "}
+            <br />
+            <TextField
+              label="Ecke"
+              margin="normal"
+              onChange={changeCornerHandler}
+            />{" "}
+            <br />
+            <TextField
+              label="Größe"
+              margin="normal"
+              onChange={changeSizeHandler}
+            />{" "}
+            <br />
           </Paper>
         </Grid>
         <Grid item xs={6}>
           <Paper className={styles.paper}>
             <img
               className={classNames(styles.image, styles.marginBottom)}
-              src={`/map?id=${events.map((ev: any) => ev.id).join("&id=")}`}
+              src={`/map?${mapQuery}`}
               alt="Map of the event"
             />
             <Button color="secondary" variant="contained" onClick={refreshMap}>
