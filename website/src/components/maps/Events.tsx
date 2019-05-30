@@ -3,6 +3,8 @@ import Button from "@material-ui/core/es/Button";
 import Paper from "@material-ui/core/es/Paper";
 import TextField from "@material-ui/core/es/TextField";
 import Grid from "@material-ui/core/es/Grid";
+import Select from "@material-ui/core/es/Select";
+import MenuItem from "@material-ui/core/es/MenuItem";
 import classNames from "classnames";
 import moment from "moment";
 import queryString from "query-string";
@@ -16,9 +18,11 @@ const Events: React.FC<RouteComponentProps> = () => {
   const [date, changeDateHandler, setDate] = useFormField("");
   const [time, changeTimeHandler, setTime] = useFormField("");
 
-  const [text, changeTextHandler] = useFormField("Hallo Welt");
+  const [text, changeTextHandler] = useFormField("");
   const [corner, changeCornerHandler] = useFormField("se");
-  const [size, changeSizeHandler] = useFormField("50");
+  const [size, changeSizeHandler] = useFormField("100");
+
+  const [mapQuery, setMapQuery] = useState("");
 
   const dateRef = useRef<HTMLInputElement>();
   const timeRef = useRef<HTMLInputElement>();
@@ -28,17 +32,19 @@ const Events: React.FC<RouteComponentProps> = () => {
   const refreshMap = useCallback(async () => {
     const m = moment(`${date}T${time}`, "");
     const timestamp = m.format("X");
-    setEvents(
-      await (await fetch(`/api/v1/events/current?at=${timestamp}`)).json()
+    const events = await (await fetch(
+      `/api/v1/events/current?at=${timestamp}`
+    )).json();
+    setEvents(events);
+    setMapQuery(
+      queryString.stringify({
+        id: events.map((ev: any) => ev.id),
+        text,
+        corner,
+        size
+      })
     );
-  }, [date, time, setEvents]);
-
-  const mapQuery = queryString.stringify({
-    id: events.map((ev: any) => ev.id),
-    text,
-    corner,
-    size
-  });
+  }, [date, time, events, text, corner, size]);
 
   useLayoutEffect(() => {
     if (dateRef.current && timeRef.current) {
@@ -88,6 +94,9 @@ const Events: React.FC<RouteComponentProps> = () => {
               onChange={changeTimeHandler}
             />
             <br />
+            <Button color="secondary" variant="contained" onClick={refreshMap}>
+              Refresh
+            </Button>
           </Paper>
           <Paper className={styles.paper}>
             <TextField
@@ -95,20 +104,30 @@ const Events: React.FC<RouteComponentProps> = () => {
               margin="normal"
               multiline
               onChange={changeTextHandler}
-            />{" "}
+            />
             <br />
-            <TextField
+            <Select
               label="Ecke"
               margin="normal"
               onChange={changeCornerHandler}
-            />{" "}
+              value={corner}
+            >
+              <MenuItem value="nw">Oben Links</MenuItem>
+              <MenuItem value="sw">Unten Links</MenuItem>
+              <MenuItem value="se">Unten Rechts</MenuItem>
+            </Select>
             <br />
             <TextField
               label="Größe"
               margin="normal"
+              type="number"
+              defaultValue={size}
               onChange={changeSizeHandler}
-            />{" "}
+            />
             <br />
+            <Button color="secondary" variant="contained" onClick={refreshMap}>
+              Refresh
+            </Button>
           </Paper>
         </Grid>
         <Grid item xs={6}>
@@ -118,16 +137,12 @@ const Events: React.FC<RouteComponentProps> = () => {
               src={`/map?${mapQuery}`}
               alt="Map of the event"
             />
-            <Button color="secondary" variant="contained" onClick={refreshMap}>
-              Refresh
-            </Button>
-            <Button color="primary" variant="contained">
-              Download
-            </Button>
+            <a href={`/map?${mapQuery}`} download>
+              <Button color="primary" variant="contained">
+                Download
+              </Button>
+            </a>
           </Paper>
-        </Grid>
-        <Grid item xs={12}>
-          <Paper className={styles.paper}>foo</Paper>
         </Grid>
       </Grid>
     </div>
