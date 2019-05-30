@@ -25,7 +25,7 @@ Karten-Grafik Download:
 {urls.map(event)}
 
 
-+++ Lage +++
++++ Wetterlage +++
 
 Warnstufe: {severities[event['severity']]}
 
@@ -33,7 +33,7 @@ Warnstufe: {severities[event['severity']]}
 
 Warnung vor: {parameters(event)}
 
-Verhaltenshinweise: {event['instruction'] or ''}
+Verhaltenshinweise: {event['instruction'] or 'Nicht angegeben.'}
 
 
 +++ Textvorschläge +++
@@ -56,11 +56,12 @@ Telefon DWD: 069-8062-6900
 
 
 +++ Allgemeine Information +++
-Die aufgeführten Informationen dürfen als zusätzliche Quelle zur Abwicklung des Unwetter-Workflows genutzt werden.
+Die aufgeführten Informationen dürfen als Quelle zur Abwicklung des Unwetter-Workflows genutzt werden.
 
-Die Bereitstellung dieser Information erfolgt durch den Unwetter-Warnassistenten (UWA), ein Produkt des Newsrooms, und wird aktiv weiterentwickelt.
-Kontakt und mehr Informationen: {os.environ["WDR_PROJECT_INFO_URL"]}
-    '''.strip()
+Die Bereitstellung dieser Information erfolgt durch den Unwetter-Warnassistenten (UWA), ein Produkt des Newsrooms. 
+Der UWA wird aktiv weiterentwickelt.
+Kontakt und weitere Informationen: {os.environ["WDR_PROJECT_INFO_URL"]}
+'''.strip()
 
     for optional in ['Regionale Zuordnung:', 'Warnung vor:', 'Verhaltenshinweise:']:
         text = text.replace(f'{optional} \n\n', '')
@@ -108,7 +109,7 @@ Karten-Grafik Download:
 {urls.map(event)}
 
 
-+++ Lage +++
++++ Wetterlage +++
 
 Warnstufe: {severities[event['severity']]}
 
@@ -116,7 +117,7 @@ Warnstufe: {severities[event['severity']]}
 
 Warnung vor: {parameters(event)}
 
-Verhaltenshinweise: {event['instruction'] or ''}
+Verhaltenshinweise: {event['instruction'] or 'Nicht angegeben.'}
 
 
 +++ Textvorschläge +++
@@ -139,11 +140,12 @@ Telefon DWD: 069-8062-6900
 
 
 +++ Allgemeine Information +++
-Die aufgeführten Informationen dürfen als zusätzliche Quelle zur Abwicklung des Unwetter-Workflows genutzt werden.
+Die aufgeführten Informationen dürfen als Quelle zur Abwicklung des Unwetter-Workflows genutzt werden.
 
-Die Bereitstellung dieser Information erfolgt durch den Unwetter-Warnassistenten (UWA), ein Produkt des Newsrooms, und wird aktiv weiterentwickelt.
-Kontakt und mehr Informationen: {os.environ["WDR_PROJECT_INFO_URL"]}
-    '''.strip()
+Die Bereitstellung dieser Information erfolgt durch den Unwetter-Warnassistenten (UWA), ein Produkt des Newsrooms. 
+Der UWA wird aktiv weiterentwickelt.
+Kontakt und weitere Informationen: {os.environ["WDR_PROJECT_INFO_URL"]}
+'''.strip()
 
     for optional in ['Regionale Zuordnung:', 'Warnung vor:', 'Verhaltenshinweise:']:
         text = text.replace(f'{optional} \n\n', '')
