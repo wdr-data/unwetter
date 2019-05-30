@@ -228,21 +228,21 @@ def tweet(event):
     if event['msg_type'] == 'Cancel':
         candidates = [
             'Amtliche #{warning} des Deutschen Wetterdienstes für '
-            '{areas} zurückgezogen. @DWD_presse',
+            '{areas} zurückgezogen.',
         ]
     elif event['response_type'] == 'AllClear':
         candidates = [
             'Amtliche #{warning} des Deutschen Wetterdienstes für '
-            '{areas} vorzeitig aufgehoben. @DWD_presse',
+            '{areas} vorzeitig aufgehoben.',
         ]
     else:
         candidates = [
             '{prefix} amtliche #{warning} des Deutschen Wetterdienstes für '
-            '{districts}. {text} möglich. Gültig {dates}. @DWD_presse',
+            '{districts}. {text} möglich. Gültig {dates}.',
             '{prefix} amtliche {warning} des Deutschen Wetterdienstes für '
             '{districts}. {text} möglich. Gültig {dates}.',
             '{prefix} amtliche #{warning} des Deutschen Wetterdienstes für '
-            '{regions}. {text} möglich. Gültig {dates}. @DWD_presse',
+            '{regions}. {text} möglich. Gültig {dates}.',
             '{prefix} amtliche {warning} des Deutschen Wetterdienstes für '
             '{regions}. {text} möglich. Gültig {dates}.',
         ]
