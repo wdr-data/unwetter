@@ -1,0 +1,10 @@
+{
+  "name": "dummy",
+  "version": "0.1.0",
+  "scripts": {
+    "heroku-postbuild": "yarn --cwd website install --dev && yarn --cwd website build"
+  },
+  "cacheDirectories": [
+    "website/node_modules"
+  ]
+}
