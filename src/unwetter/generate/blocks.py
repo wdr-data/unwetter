@@ -196,7 +196,7 @@ def changes(event, old_event):
             text += f'Regionale Zuordnung unverändert: {upper_first(region_list(event))}\n\n'
 
     elif commune_list(old_event) != commune_list(event):
-        text += 'Änderung der betroffenen Gemeinden\n\n'
+        text += 'Regionale Zuordnung: Änderung der betroffenen Gemeinden\n\n'
 
     simple_fields = {
         'event': 'Wetterphänomen',
