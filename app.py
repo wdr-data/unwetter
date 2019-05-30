@@ -196,6 +196,7 @@ def api_v1_current_events():
 
     for result in results:
         del result['_id']
+        del result['geometry']
         for field in ('sent', 'effective', 'onset', 'expires'):
             result[field] = result[field].timestamp()
 

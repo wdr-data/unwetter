@@ -10,52 +10,58 @@ from . import urls
 
 def describe_new_event(event):
     text = f'''
-+++ Allgemeine Information +++
-BETA-TEST: Diese Meldung ist automatisch generiert und nutzt offizielle Informationen des DWD.
-Die Eilmeldung des DWD erreicht OpenMedia in der Regel wenige Minuten nach dieser Meldung.
-Die aufgeführten Informationen dürfen als zusätzliche Quelle zur Abwicklung des Unwetter-Workflows genutzt werden.
-Mehr Infos zum Projekt:
-{os.environ["WDR_PROJECT_INFO_URL"]}
------
-
 {title(event)}
 
-+++ Details +++
 
-Warnstufe: {severities[event['severity']]}
++++ Gültigkeit +++
 
-Gültigkeit: {upper_first(dates(event))}.
+{upper_first(dates(event))}.
 
 Regionale Zuordnung: {region_list(event)}
 
-Karte: {urls.map(event)}
+Betroffene Kreise und Städte: {district_list(event)}
 
-Meldung des DWD: {event['description']}
+Karten-Grafik Download:
+{urls.map(event)}
 
-Verhaltenshinweise: {event['instruction'] or ''}
+
++++ Wetterlage +++
+
+Warnstufe: {severities[event['severity']]}
+
+{event['description']}
 
 Warnung vor: {parameters(event)}
 
-Betroffene Kreise und Städte: {district_list(event)}
+Verhaltenshinweise: {event['instruction'] or ''}
 
 
 +++ Textvorschläge +++
 
-Tweet: {tweet(event)}
+TWEET: {tweet(event)}
 
-TV-Crawl: {crawl(event)}
+TV-CRAWL: {crawl(event)}
 
 Hinweis: Textvorschläge werden nach redaktionellen Vorgaben automatisch generiert.
 
 
-+++ Über diese Meldung +++
++++ DWD +++
+Die Eilmeldung des DWD erreicht OpenMedia in der Regel wenige Minuten nach dieser Meldung.
+(In einigen Fällen, z.B. kurze Gültigkeit und/oder kleines Gebiet, kann eine Meldung des DWD entfallen!)
 
-Diese Meldung basiert auf offiziellen Informationen des Deutschen Wetterdienstes:
+Website des Deutschen Wetterdienstes:
 https://www.dwd.de/DE/wetter/warnungen_gemeinden/warnkarten/warnWetter_nrw_node.html?bundesland=nrw
 
-Die Bereitstellung dieser Information ist ein Projekt des Digitalen Wandels und wird aktiv weiterentwickelt.
-Informationen und Kontakt: {os.environ["WDR_PROJECT_INFO_URL"]}
-    '''.strip()
+Telefon DWD: 069-8062-6900
+
+
++++ Allgemeine Information +++
+Die aufgeführten Informationen dürfen als Quelle zur Abwicklung des Unwetter-Workflows genutzt werden.
+
+Die Bereitstellung dieser Information erfolgt durch den Unwetter-Warnassistenten (UWA), ein Produkt des Newsrooms. 
+Der UWA wird aktiv weiterentwickelt.
+Kontakt und weitere Informationen: {os.environ["WDR_PROJECT_INFO_URL"]}
+'''.strip()
 
     for optional in ['Regionale Zuordnung:', 'Warnung vor:', 'Verhaltenshinweise:']:
         text = text.replace(f'{optional} \n\n', '')
@@ -68,7 +74,7 @@ def describe_update(event):
     change_details = []
 
     for old_event in old_events:
-        old_time = local_time(old_event['sent']).strftime("%d.%m.%Y, %H:%M:%S Uhr")
+        old_time = local_time(old_event['sent']).strftime("%H:%M %d.%m.%y")
 
         if event['msg_type'] == 'Cancel' or event['response_type'] == 'AllClear':
             change_title = 'Aufhebung von'
@@ -89,52 +95,57 @@ def describe_update(event):
     all_changes = f'\n{joined}\n' if change_details else ''
 
     text = f'''
-+++ Allgemeine Information +++
-BETA-TEST: Diese Meldung ist automatisch generiert und nutzt offizielle Informationen des DWD.
-Die Eilmeldung des DWD erreicht OpenMedia in der Regel wenige Minuten nach dieser Meldung.
-Die aufgeführten Informationen dürfen als zusätzliche Quelle zur Abwicklung des Unwetter-Workflows genutzt werden.
-Mehr Infos zum Projekt:
-{os.environ["WDR_PROJECT_INFO_URL"]}
------
-
 {title(event)}
 {all_changes}
-+++ Details +++
++++ Gültigkeit +++
 
-Warnstufe: {severities[event['severity']]}
-
-Gültigkeit: {upper_first(dates(event))}.
+{upper_first(dates(event))}.
 
 Regionale Zuordnung: {region_list(event)}
 
-Karte: {urls.map(event)}
+Betroffene Kreise und Städte: {district_list(event)}
 
-Meldung des DWD: {event['description']}
+Karten-Grafik Download:
+{urls.map(event)}
 
-Verhaltenshinweise: {event['instruction'] or ''}
+
++++ Wetterlage +++
+
+Warnstufe: {severities[event['severity']]}
+
+{event['description']}
 
 Warnung vor: {parameters(event)}
 
-Betroffene Kreise und Städte: {district_list(event)}
+Verhaltenshinweise: {event['instruction'] or ''}
 
 
 +++ Textvorschläge +++
 
-Tweet: {tweet(event)}
+TWEET: {tweet(event)}
 
-TV-Crawl: {crawl(event)}
+TV-CRAWL: {crawl(event)}
+
 
 Hinweis: Textvorschläge werden nach redaktionellen Vorgaben automatisch generiert.
 
++++ DWD +++
+Die Eilmeldung des DWD erreicht OpenMedia in der Regel wenige Minuten nach dieser Meldung.
+(In einigen Fällen, z.B. kurze Gültigkeit und/oder kleines Gebiet, kann eine Meldung des DWD entfallen!)
 
-+++ Über diese Meldung +++
-
-Diese Meldung basiert auf offiziellen Informationen des Deutschen Wetterdienstes:
+Website des Deutschen Wetterdienstes:
 https://www.dwd.de/DE/wetter/warnungen_gemeinden/warnkarten/warnWetter_nrw_node.html?bundesland=nrw
 
-Die Bereitstellung dieser Information ist ein Projekt des Digitalen Wandels und wird aktiv weiterentwickelt.
-Informationen und Kontakt: {os.environ["WDR_PROJECT_INFO_URL"]}
-    '''.strip()
+Telefon DWD: 069-8062-6900
+
+
++++ Allgemeine Information +++
+Die aufgeführten Informationen dürfen als Quelle zur Abwicklung des Unwetter-Workflows genutzt werden.
+
+Die Bereitstellung dieser Information erfolgt durch den Unwetter-Warnassistenten (UWA), ein Produkt des Newsrooms. 
+Der UWA wird aktiv weiterentwickelt.
+Kontakt und weitere Informationen: {os.environ["WDR_PROJECT_INFO_URL"]}
+'''.strip()
 
     for optional in ['Regionale Zuordnung:', 'Warnung vor:', 'Verhaltenshinweise:']:
         text = text.replace(f'{optional} \n\n', '')
@@ -228,21 +239,21 @@ def tweet(event):
     if event['msg_type'] == 'Cancel':
         candidates = [
             'Amtliche #{warning} des Deutschen Wetterdienstes für '
-            '{areas} zurückgezogen. @DWD_presse',
+            '{areas} zurückgezogen.',
         ]
     elif event['response_type'] == 'AllClear':
         candidates = [
             'Amtliche #{warning} des Deutschen Wetterdienstes für '
-            '{areas} vorzeitig aufgehoben. @DWD_presse',
+            '{areas} vorzeitig aufgehoben.',
         ]
     else:
         candidates = [
             '{prefix} amtliche #{warning} des Deutschen Wetterdienstes für '
-            '{districts}. {text} möglich. Gültig {dates}. @DWD_presse',
+            '{districts}. {text} möglich. Gültig {dates}.',
             '{prefix} amtliche {warning} des Deutschen Wetterdienstes für '
             '{districts}. {text} möglich. Gültig {dates}.',
             '{prefix} amtliche #{warning} des Deutschen Wetterdienstes für '
-            '{regions}. {text} möglich. Gültig {dates}. @DWD_presse',
+            '{regions}. {text} möglich. Gültig {dates}.',
             '{prefix} amtliche {warning} des Deutschen Wetterdienstes für '
             '{regions}. {text} möglich. Gültig {dates}.',
         ]

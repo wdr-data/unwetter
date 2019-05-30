@@ -66,7 +66,12 @@ def commune_list(event, all=False):
 
 
 def keywords(event):
-    return f'{severities[event["severity"]]}, {region_list(event) or "Nicht NRW"}'
+    # f'{severities[event["severity"]]}, {region_list(event) or "Nicht NRW"}'
+    parameter_keys = ', '.join(
+        f'{param}' for param, value in event['parameters'].items()
+    )
+
+    return f'Unwetter, UWA, Warnung, {parameter_keys}'
 
 
 def title(event, variant='default'):
@@ -127,19 +132,19 @@ def dates(event):
     today = local_time(datetime.utcnow()).date()
 
     if onset.date() == today:
-        onset_date = 'Heute'
+        onset_date = f'Heute ({onset.strftime("%d.%m.%y")})'
     elif onset.date() == today + timedelta(days=1):
-        onset_date = 'Morgen'
+        onset_date = f'Morgen ({onset.strftime("%d.%m.%y")})'
     else:
-        onset_date = onset.strftime("%d.%m.%Y")
+        onset_date = onset.strftime("%d.%m.%y")
 
     if expires:
         if expires.date() == today:
-            expires_date = 'Heute'
+            expires_date = f'Heute ({expires.strftime("%d.%m.%y")})'
         elif expires.date() == today + timedelta(days=1):
-            expires_date = 'Morgen'
+            expires_date = f'Morgen ({expires.strftime("%d.%m.%y")})'
         else:
-            expires_date = expires.strftime("%d.%m.%Y")
+            expires_date = expires.strftime("%d.%m.%y")
 
     if not expires: 
         return f'ab {onset_date}, {onset.strftime("%H:%M")} Uhr (kein Ende der Gültigkeit angegeben)'
@@ -196,7 +201,7 @@ def changes(event, old_event):
             text += f'Regionale Zuordnung unverändert: {upper_first(region_list(event))}\n\n'
 
     elif commune_list(old_event) != commune_list(event):
-        text += 'Änderung der betroffenen Gemeinden\n\n'
+        text += 'Regionale Zuordnung: Änderung der betroffenen Gemeinden\n\n'
 
     simple_fields = {
         'event': 'Wetterphänomen',

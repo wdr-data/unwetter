@@ -117,9 +117,9 @@ def draw_text(draw, text, corner, size):
     calc_size = draw.textsize(text, font=font, spacing=spacing)
     y_offset = int(img_height * .054) + spacing
 
-    x0 = 0 if align == 'left' else img_width - calc_size[0] - spacing * 2
+    x0 = 0 if align == 'left' else img_width - calc_size[0] - spacing * 3
     y0 = y_offset - spacing if corner.startswith('n') else img_height - calc_size[1] - y_offset - spacing * 2
-    x1 = calc_size[0] + spacing * 2 if align == 'left' else img_width
+    x1 = calc_size[0] + spacing * 3 if align == 'left' else img_width
     y1 = y_offset + calc_size[1] + spacing * 2 if corner.startswith('n') else img_height - y_offset + spacing
 
     draw.rectangle(((x0, y0), (x1, y1)), fill=COLORS['WDRA_TEXT_BACKGROUND'])
@@ -133,7 +133,7 @@ def draw_text(draw, text, corner, size):
     else:
         draw.polygon(((x0, y0), (x0, y1), (x2, y2)), fill=COLORS['WDRA_TEXT_BACKGROUND'])
 
-    x = spacing if align == 'left' else img_width - calc_size[0] - spacing
+    x = spacing * 2 if align == 'left' else img_width - calc_size[0] - spacing * 2
     y = y_offset if corner.startswith('n') else img_height - calc_size[1] - spacing - y_offset
 
     draw.text((x, y), text, align='left', fill='white', font=font, spacing=spacing)
