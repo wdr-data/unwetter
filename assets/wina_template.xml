@@ -13,7 +13,7 @@
 <OM_FIELD FieldID = "13" FieldType = "1" FieldName = "Anchor" IsEmpty = "no"><OM_STRING>Bot, Unwetter</OM_STRING></OM_FIELD>
 <OM_FIELD FieldID = "14" FieldType = "1" FieldName = "Klartext" IsEmpty = "no"><OM_STRING>{text}</OM_STRING></OM_FIELD>
 <OM_FIELD FieldID = "15" FieldType = "1" FieldName = "FormattedText" IsEmpty = "no"><OM_STRING></OM_STRING></OM_FIELD>
-<OM_FIELD FieldID = "16" FieldType = "1" FieldName = "Kategorie" IsEmpty = "no"><OM_STRING>TESTHINWEIS</OM_STRING></OM_FIELD>
+<OM_FIELD FieldID = "16" FieldType = "1" FieldName = "Kategorie" IsEmpty = "no"><OM_STRING>Unwetterwarnung</OM_STRING></OM_FIELD>
 <OM_FIELD FieldID = "20" FieldType = "2" FieldName = "Object type" IsEmpty = "no"><OM_INT32>7</OM_INT32></OM_FIELD>
 <OM_FIELD FieldID = "22" FieldType = "2" FieldName = "UpdateUser" IsEmpty = "no"><OM_INT32>18408</OM_INT32></OM_FIELD>
 <OM_FIELD FieldID = "28" FieldType = "3" FieldName = "Last time modifed" IsEmpty = "yes"><OM_DATETIME></OM_DATETIME></OM_FIELD>
