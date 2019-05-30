@@ -68,7 +68,7 @@ def describe_update(event):
     change_details = []
 
     for old_event in old_events:
-        old_time = local_time(old_event['sent']).strftime("%d.%m.%Y, %H:%M:%S Uhr")
+        old_time = local_time(old_event['sent']).strftime("%H:%M %d.%m.%y")
 
         if event['msg_type'] == 'Cancel' or event['response_type'] == 'AllClear':
             change_title = 'Aufhebung von'
