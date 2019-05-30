@@ -11,7 +11,7 @@ const App: React.FC = () => {
   return (
     <>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar className={styles.appBar}>
           <Typography className={styles.white} variant="h6">
             UWA Dashboard
           </Typography>
