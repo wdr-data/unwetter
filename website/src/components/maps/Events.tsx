@@ -27,7 +27,7 @@ const Events: React.FC<RouteComponentProps> = () => {
   const dateRef = useRef<HTMLInputElement>();
   const timeRef = useRef<HTMLInputElement>();
 
-  const [events, setEvents] = useState([]);
+  const [, setEvents] = useState([]);
 
   const refreshMap = useCallback(async () => {
     const m = moment(`${date}T${time}`, "");
