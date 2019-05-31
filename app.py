@@ -186,7 +186,7 @@ def api_v1_current_events():
     }
 
     results = db.query(
-        ['Moderate', 'Severe', 'Extreme'],
+        ['Minor', 'Moderate', 'Severe', 'Extreme'],
         STATES_FILTER,
         ['Immediate'],
         filter=filter,
@@ -200,6 +200,7 @@ def api_v1_current_events():
     filteredResults = []
 
     for result in results:
+
         for other in results:
             if result['id'] in other.get('references', []):
                 break
@@ -217,6 +218,10 @@ def api_v1_current_events():
                 break
 
         else:
+
+            if result['severity'] == 'Minor':
+                continue
+
             del result['_id']
             del result['geometry']
             for field in ('sent', 'effective', 'onset', 'expires'):
