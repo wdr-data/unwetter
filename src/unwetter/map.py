@@ -79,11 +79,17 @@ mask = resize(Image.open('assets/images/mask_square.png').convert("RGBA"))
 logo_wdra = resize(Image.open('assets/images/logo_wdra_square.png').convert("RGBA"))
 
 legend_nw = resize(Image.open('assets/images/legend_nw_square.png').convert("RGBA"))
+legend_se = resize(Image.open('assets/images/legend_se_square.png').convert("RGBA"))
 
 overlay = mask.copy()
 overlay.alpha_composite(studios)
 overlay.alpha_composite(logo_wdra)
-overlay.alpha_composite(legend_nw)
+
+overlay_nw = overlay.copy()
+overlay_se = overlay.copy()
+
+overlay_nw.alpha_composite(legend_nw)
+overlay_se.alpha_composite(legend_se)
 
 
 def generate_base_map():
@@ -168,7 +174,10 @@ def generate_map(events, *, text=None, text_corner='se', text_size=50):
         draw = ImageDraw.Draw(img)
         draw.text((90, TARGET_HEIGHT / 2 - 80), "Event not found", font=FONT_ERROR, fill='black')
     else:
-        img.alpha_composite(overlay)
+        if text_corner.startswith('n'):
+            img.alpha_composite(overlay_se)
+        else:
+            img.alpha_composite(overlay_nw)
 
     if text:
         text_img = Image.new("RGBA", (img_height, img_width))
