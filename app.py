@@ -2,7 +2,7 @@
 
 import os
 from io import BytesIO
-from datetime import datetime
+from datetime import datetime, timezone
 
 import pytz
 from feedgen.feed import FeedGenerator
@@ -220,7 +220,7 @@ def api_v1_current_events():
             del result['_id']
             del result['geometry']
             for field in ('sent', 'effective', 'onset', 'expires'):
-                result[field] = result[field].timestamp()
+                result[field] = result[field].replace(tzinfo=timezone.utc).timestamp()
 
             filteredResults.append(result)
 
