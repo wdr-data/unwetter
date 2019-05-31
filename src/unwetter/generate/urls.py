@@ -10,3 +10,7 @@ def map(event):
 
 def wina(event):
     return f'{URL_BASE}wina/{event["id"]}'
+
+
+def events(event):
+    return f'{URL_BASE}events/?id={event["id"]}'

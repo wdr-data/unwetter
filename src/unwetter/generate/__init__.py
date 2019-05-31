@@ -22,7 +22,7 @@ Regionale Zuordnung: {region_list(event)}
 Betroffene Kreise und Städte: {district_list(event)}
 
 Karten-Grafik Download:
-{urls.map(event)}
+{urls.events(event)}
 
 
 +++ Wetterlage +++
@@ -106,7 +106,7 @@ Regionale Zuordnung: {region_list(event)}
 Betroffene Kreise und Städte: {district_list(event)}
 
 Karten-Grafik Download:
-{urls.map(event)}
+{urls.events(event)}
 
 
 +++ Wetterlage +++

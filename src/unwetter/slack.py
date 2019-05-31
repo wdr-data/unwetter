@@ -5,7 +5,7 @@ from slackclient import SlackClient
 
 from . import db, generate, config
 from .map import COLORS
-from .generate import helpers
+from .generate import helpers, urls
 
 # Set up Slack client
 # Based on https://www.fullstackpython.com/blog/build-first-slack-bot-python.html
@@ -94,6 +94,7 @@ def post_event(event):
 *Details:*
 
 _Regionale Zuordnung_: {generate.region_list(event)}
+ Download Karte: {urls.events(event)}
 {instruction}
 {event['description']}
         '''.strip(),

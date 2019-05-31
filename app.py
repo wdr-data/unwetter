@@ -2,7 +2,7 @@
 
 import os
 from io import BytesIO
-from datetime import datetime
+from datetime import datetime, timezone
 
 import pytz
 from feedgen.feed import FeedGenerator
@@ -194,16 +194,42 @@ def api_v1_current_events():
 
     results = list(results)
 
-    for result in results:
-        del result['_id']
-        del result['geometry']
-        for field in ('sent', 'effective', 'onset', 'expires'):
-            result[field] = result[field].timestamp()
-
-    if results:
-        return json.dumps(results)
-    else:
+    if not results:
         return json.dumps([])
+
+    filteredResults = []
+
+    for result in results:
+
+        for other in results:
+            if result['id'] in other.get('references', []):
+                break
+
+            filter = {
+                'references': result['id'],
+                '$or': [
+                    {'expires': {'$lte': at}},
+                    {'msg_type': 'Cancel'}
+                ]
+            }
+
+            double_check = db.collection.find(filter).limit(1)
+            if double_check.count():
+                break
+
+        else:
+
+            if result['severity'] == 'Minor':
+                continue
+
+            del result['_id']
+            del result['geometry']
+            for field in ('sent', 'effective', 'onset', 'expires'):
+                result[field] = result[field].replace(tzinfo=timezone.utc).timestamp()
+
+            filteredResults.append(result)
+
+    return json.dumps(sorted(filteredResults, key=map.severity_key, reverse=True))
 
 
 # Serve React App
