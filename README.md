@@ -4,12 +4,15 @@ Automatically notify newsroom about weather warnings from DWD
 
 ## Map generation
 
-The map design and source images are proprietary. To make your own design, do the following steps:
+The WDR Sans fonts, map design and source images are proprietary and not licensed under the MIT license. To make your own design, do the following steps:
 
-1. Start a local development Flask instance using `FLASK_APP=app FLASK_ENV=development pipenv run flask run`
-2. Navigate to http://127.0.0.1:5000/basemap to get a black/white map template
-3. Use the template to create your own map design
-4. Replace the files in `assets/images`
+1. Optional: Edit `config.yaml` to select the desired state(s)
+2. Start a local development Flask instance using `FLASK_APP=app FLASK_ENV=development pipenv run flask run`
+3. Navigate to http://127.0.0.1:5000/basemap to get a black/white map template
+4. Use the template to create your own map design
+5. Replace the files in `assets/images`
+6. Replace the WDR Sans fonts in `assets/fonts`
+7. Update the font import and drawing in `src/unwetter/map.py:draw_text`
 
 ## Deployment
 
