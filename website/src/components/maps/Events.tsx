@@ -29,7 +29,7 @@ const Events: React.FC<RouteComponentProps> = () => {
   const [time, changeTimeHandler, setTime] = useFormField("");
 
   const [text, changeTextHandler, setText] = useFormField("");
-  const [corner, changeCornerHandler] = useFormField("se");
+  const [corner, changeCornerHandler] = useFormField("sw");
   const [size, changeSizeHandler] = useFormField("100");
 
   const [mapQuery, setMapQuery] = useState("");
@@ -152,7 +152,7 @@ const Events: React.FC<RouteComponentProps> = () => {
     <div className={styles.configurator}>
       <Grid container spacing={3}>
         <Grid item xs={6}>
-          <Paper className={classNames(styles.paper, styles.marginBottom)}>
+          <Paper className={styles.paper}>
             <TextField
               label="Datum"
               margin="normal"
@@ -214,7 +214,7 @@ const Events: React.FC<RouteComponentProps> = () => {
                     defaultValue={size}
                     onChange={changeSizeHandler}
                   />
-                  <FormHelperText>Größe</FormHelperText>
+                  <FormHelperText>Schriftgröße</FormHelperText>
                 </FormControl>
               </Grid>
             </Grid>
