@@ -29,6 +29,7 @@ import { RouteComponentProps } from "@reach/router";
 
 import styles from "./Events.module.scss";
 import { useFormField } from "../hooks/form";
+import { Typography } from "@material-ui/core";
 
 const Events: React.FC<RouteComponentProps> = () => {
   const [date, changeDateHandler, setDate] = useFormField("");
@@ -330,6 +331,12 @@ const Events: React.FC<RouteComponentProps> = () => {
             </a>
           </Paper>
         </Grid>
+        <Grid item xs={12}>
+          <Paper className={styles.paper}>
+              <Typography variant="h6" component="h1">Unwetter-Warnassistent</Typography>
+              <Typography>Ein Produkt des Newsrooms, entwicktelt vom HackingStudio 🚀 — <a href="https://www.wdr.de/k/uwa">Informationen &amp; Kontakt</a></Typography>
+          </Paper>
+          </Grid>
       </Grid>
       <Snackbar
         anchorOrigin={{
