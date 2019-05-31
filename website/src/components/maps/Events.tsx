@@ -6,6 +6,7 @@ import React, {
   useEffect
 } from "react";
 import Button from "@material-ui/core/es/Button";
+import Checkbox from "@material-ui/core/es/Checkbox";
 import Paper from "@material-ui/core/es/Paper";
 import TextField from "@material-ui/core/es/TextField";
 import FormHelperText from "@material-ui/core/es/FormHelperText";
@@ -14,6 +15,11 @@ import Grid from "@material-ui/core/es/Grid";
 import Select from "@material-ui/core/es/Select";
 import Snackbar from "@material-ui/core/es/Snackbar";
 import SnackbarContent from "@material-ui/core/es/SnackbarContent";
+import Table from "@material-ui/core/es/Table";
+import TableBody from "@material-ui/core/es/TableBody";
+import TableCell from "@material-ui/core/es/TableCell";
+import TableHead from "@material-ui/core/es/TableHead";
+import TableRow from "@material-ui/core/TableRow";
 import MenuItem from "@material-ui/core/es/MenuItem";
 import classNames from "classnames";
 import moment from "moment";
@@ -42,15 +48,59 @@ const Events: React.FC<RouteComponentProps> = () => {
   const timeRef = useRef<HTMLInputElement>();
   const textRef = useRef<HTMLTextAreaElement>();
 
-  const [, setEvents] = useState<any[]>([]);
+  const [events, setEvents] = useState<any[]>([]);
+  const [filteredEvents, setFilteredEvents] = useState<any[]>([]);
+
+  const isSelected = useCallback(
+    event => filteredEvents.findIndex(fev => fev === event) !== -1,
+    [filteredEvents]
+  );
+
+  const toggleEvent = useCallback(
+    event => {
+      let filteredEventsNew;
+
+      if (isSelected(event)) {
+        filteredEventsNew = filteredEvents.filter(fev => fev !== event);
+      } else {
+        filteredEventsNew = filteredEvents.concat([event]);
+      }
+
+      setFilteredEvents(filteredEventsNew);
+
+      setMapQuery(
+        queryString.stringify({
+          id: filteredEventsNew.map((ev: any) => ev.id),
+          text,
+          corner,
+          size
+        })
+      );
+    },
+    [filteredEvents, isSelected, text, corner, size]
+  );
 
   const refreshMap = useCallback(async () => {
+    setMapQuery(
+      queryString.stringify({
+        id: filteredEvents.map((ev: any) => ev.id),
+        text,
+        corner,
+        size
+      })
+    );
+  }, [filteredEvents, text, corner, size]);
+
+  const refreshEvents = useCallback(async () => {
     const m = moment(`${date}T${time}`, "");
     const timestamp = m.format("X");
     const events = await (await fetch(
       `/api/v1/events/current?at=${timestamp}`
     )).json();
+
     setEvents(events);
+    setFilteredEvents(events);
+
     setMapQuery(
       queryString.stringify({
         id: events.map((ev: any) => ev.id),
@@ -93,6 +143,7 @@ const Events: React.FC<RouteComponentProps> = () => {
         )).json()) as any[];
 
         setEvents(events);
+        setFilteredEvents(events);
 
         // Draw initial map
         let localText;
@@ -174,7 +225,11 @@ const Events: React.FC<RouteComponentProps> = () => {
               onChange={changeTimeHandler}
             />
             <br />
-            <Button color="secondary" variant="contained" onClick={refreshMap}>
+            <Button
+              color="secondary"
+              variant="contained"
+              onClick={refreshEvents}
+            >
               Refresh
             </Button>
           </Paper>
@@ -222,6 +277,43 @@ const Events: React.FC<RouteComponentProps> = () => {
             <Button color="secondary" variant="contained" onClick={refreshMap}>
               Refresh
             </Button>
+          </Paper>
+          <Paper className={styles.paper}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell padding="checkbox">Sichtbar</TableCell>
+                  <TableCell>Titel</TableCell>
+                  <TableCell>Gültigkeit</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {events.map(event => {
+                  const isItemSelected = isSelected(event);
+                  return (
+                    <TableRow
+                      hover
+                      onClick={() => toggleEvent(event)}
+                      role="checkbox"
+                      tabIndex={-1}
+                      key={event.id}
+                      selected={isItemSelected}
+                    >
+                      <TableCell padding="checkbox">
+                        <Checkbox checked={isItemSelected} />
+                      </TableCell>
+                      <TableCell scope="row" padding="none">
+                        {event.headline}
+                      </TableCell>
+                      <TableCell>
+                        {moment.unix(event.onset).format("HH:mm")} -{" "}
+                        {moment.unix(event.expires).format("HH:mm")}
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
           </Paper>
         </Grid>
         <Grid item xs={6}>
