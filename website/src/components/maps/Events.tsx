@@ -334,7 +334,7 @@ const Events: React.FC<RouteComponentProps> = () => {
         <Grid item xs={12}>
           <Paper className={styles.paper}>
               <Typography variant="h6" component="h1">Unwetter-Warnassistent</Typography>
-              <Typography>Ein Produkt des Newsrooms, entwicktelt vom HackingStudio 🚀 — <a href="https://www.wdr.de/k/uwa">Informationen &amp; Kontakt</a></Typography>
+              <Typography>Ein Produkt des Newsrooms, entwicktelt vom HackingStudio <span role="img" aria-label="Rakete">🚀</span> — <a href="https://www.wdr.de/k/uwa">Informationen &amp; Kontakt</a></Typography>
           </Paper>
           </Grid>
       </Grid>
