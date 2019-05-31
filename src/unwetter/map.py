@@ -78,9 +78,12 @@ studios = resize(Image.open('assets/images/overlay_square.png').convert("RGBA"))
 mask = resize(Image.open('assets/images/mask_square.png').convert("RGBA"))
 logo_wdra = resize(Image.open('assets/images/logo_wdra_square.png').convert("RGBA"))
 
+legend_nw = resize(Image.open('assets/images/legend_nw_square.png').convert("RGBA"))
+
 overlay = mask.copy()
 overlay.alpha_composite(studios)
 overlay.alpha_composite(logo_wdra)
+overlay.alpha_composite(legend_nw)
 
 
 def generate_base_map():
