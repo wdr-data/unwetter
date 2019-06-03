@@ -36,6 +36,7 @@ const Events: React.FC<RouteComponentProps> = () => {
 
   const [mapQuery, setMapQuery] = useState("");
   const [mapLoading, setMapLoading] = useState(true);
+  const [eventsLoading, setEventsLoading] = useState(false);
   const [initialLoadingComplete, setInitialLoadingComplete] = useState(false);
 
   const [eventNotFoundOpen, setEventNotFoundOpen] = React.useState(false);
@@ -97,6 +98,7 @@ const Events: React.FC<RouteComponentProps> = () => {
   ]);
 
   const refreshEvents = useCallback(async () => {
+    setEventsLoading(true);
     const m = moment(`${date}T${time}`, "");
     const timestamp = m.format("X");
     const events = await (await fetch(
@@ -105,6 +107,7 @@ const Events: React.FC<RouteComponentProps> = () => {
 
     setEvents(events);
     setFilteredEvents(events);
+    setEventsLoading(false);
     doMapRefresh(events);
   }, [date, time, doMapRefresh]);
 
@@ -136,6 +139,7 @@ const Events: React.FC<RouteComponentProps> = () => {
     setTime(timeString);
 
     const fetchEvents = async () => {
+      setEventsLoading(true);
       const timestamp = now.format("X");
       const events = (await (await fetch(
         `/api/v1/events/current?at=${timestamp}`
@@ -143,6 +147,7 @@ const Events: React.FC<RouteComponentProps> = () => {
 
       setEvents(events);
       setFilteredEvents(events);
+      setEventsLoading(false);
 
       // Draw initial map
       let localText = "Bitte\nText\neinfügen";
@@ -226,6 +231,7 @@ const Events: React.FC<RouteComponentProps> = () => {
             >
               Anwenden
             </Button>
+            {eventsLoading ? <Loader /> : <></>}
           </Paper>
           <Paper className={styles.paper}>
             <Typography variant="h5">Tafeltext anpassen</Typography>
