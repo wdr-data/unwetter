@@ -324,7 +324,11 @@ const Events: React.FC<RouteComponentProps> = () => {
               src={`/map?${mapQuery}`}
               alt="Map of the event"
             />
-            <a href={`/map?${mapQuery}`} download>
+            <a
+              href={`/map?${mapQuery}`}
+              download
+              className={styles.downloadButton}
+            >
               <Button color="primary" variant="contained">
                 Download
               </Button>
