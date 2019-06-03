@@ -207,6 +207,11 @@ const Events: React.FC<RouteComponentProps> = () => {
       <Grid container spacing={3}>
         <Grid item xs={6}>
           <Paper className={styles.paper}>
+            <Typography variant="h5">Zeitpunkt der Meldung</Typography>
+            <Typography variant="subtitle1">
+              Zeigt alle Meldungen des DWD zum ausgewähltem Zeitpunkt mit Stufe
+              2, 3 oder 4 auf der Karte an
+            </Typography>
             <TextField
               label="Datum"
               margin="normal"
@@ -233,10 +238,14 @@ const Events: React.FC<RouteComponentProps> = () => {
               variant="contained"
               onClick={refreshEvents}
             >
-              Refresh
+              Anwenden
             </Button>
           </Paper>
           <Paper className={styles.paper}>
+            <Typography variant="h5">Tafeltext anpassen</Typography>
+            <Typography variant="subtitle1">
+              Text bitte sinnvoll umbrechen und ausrichten
+            </Typography>
             <Grid container spacing={2}>
               <Grid item xs={9}>
                 <FormControl fullWidth>
@@ -278,10 +287,14 @@ const Events: React.FC<RouteComponentProps> = () => {
             </Grid>
             <br />
             <Button color="secondary" variant="contained" onClick={refreshMap}>
-              Refresh
+              Anwenden
             </Button>
           </Paper>
           <Paper className={styles.paper}>
+            <Typography variant="h5">Meldungen</Typography>
+            <Typography variant="subtitle1">
+              Einzelne Meldungen können aus der Karte ausgeschlossen werden
+            </Typography>
             <Table>
               <TableHead>
                 <TableRow>
@@ -339,10 +352,19 @@ const Events: React.FC<RouteComponentProps> = () => {
         </Grid>
         <Grid item xs={12}>
           <Paper className={styles.paper}>
-              <Typography variant="h6" component="h1">Unwetter-Warnassistent</Typography>
-              <Typography>Ein Produkt des Newsrooms, entwickelt vom HackingStudio <span role="img" aria-label="Rakete">🚀</span> — <a href="https://www.wdr.de/k/uwa">Informationen &amp; Kontakt</a></Typography>
+            <Typography variant="h6" component="h1">
+              Unwetter-Warnassistent
+            </Typography>
+            <Typography>
+              Ein Produkt des Newsrooms, entwickelt vom HackingStudio{" "}
+              <span role="img" aria-label="Rakete">
+                🚀
+              </span>{" "}
+              —{" "}
+              <a href="https://www.wdr.de/k/uwa">Informationen &amp; Kontakt</a>
+            </Typography>
           </Paper>
-          </Grid>
+        </Grid>
       </Grid>
       <Snackbar
         anchorOrigin={{
