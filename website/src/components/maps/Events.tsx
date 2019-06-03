@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useCallback,
-  useRef,
-  useLayoutEffect,
-  useEffect
-} from "react";
+import React, { useState, useCallback, useRef, useLayoutEffect } from "react";
 import Button from "@material-ui/core/es/Button";
 import Checkbox from "@material-ui/core/es/Checkbox";
 import Paper from "@material-ui/core/es/Paper";
@@ -44,7 +38,6 @@ const Events: React.FC<RouteComponentProps> = () => {
   const [mapLoading, setMapLoading] = useState(true);
   const [initialLoadingComplete, setInitialLoadingComplete] = useState(false);
 
-  const [linkedEventId, setLinkedEventId] = useState("");
   const [eventNotFoundOpen, setEventNotFoundOpen] = React.useState(false);
 
   const dateRef = useRef<HTMLInputElement>();
@@ -115,70 +108,68 @@ const Events: React.FC<RouteComponentProps> = () => {
     doMapRefresh(events);
   }, [date, time, doMapRefresh]);
 
-  // Querystring parsing
-  useEffect(() => {
-    const qs = queryString.parse(window.location.search);
-
-    if (qs && qs.id && typeof qs.id === "string") {
-      setLinkedEventId(qs.id);
-    }
-  }, [setLinkedEventId]);
-
   // Initial page setup
   useLayoutEffect(() => {
     if (initialLoadingComplete) {
       return;
     }
-    if (dateRef.current && timeRef.current) {
-      const now = moment();
-      const dateString = now.format("YYYY-MM-DD");
-      const timeString = now.format("HH:mm");
 
-      dateRef.current.value = dateString;
-      setDate(dateString);
-
-      timeRef.current.value = timeString;
-      setTime(timeString);
-
-      const fetchEvents = async () => {
-        const timestamp = now.format("X");
-        const events = (await (await fetch(
-          `/api/v1/events/current?at=${timestamp}`
-        )).json()) as any[];
-
-        setEvents(events);
-        setFilteredEvents(events);
-
-        // Draw initial map
-        let localText = "Bitte\nText\neinfügen";
-
-        if (linkedEventId && textRef.current) {
-          const linkedEvent = events.find(ev => ev.id === linkedEventId);
-          if (!linkedEvent) {
-            setEventNotFoundOpen(true);
-            setInitialLoadingComplete(true);
-            return;
-          }
-          const warnText = linkedEvent.headline.replace("vor ", "vor\n");
-          textRef.current.value = warnText;
-          setText(warnText);
-          localText = warnText;
-        } else if (textRef && textRef.current) {
-          setText(localText);
-          textRef.current.value = localText;
-        }
-
-        doMapRefresh(events);
-
-        setInitialLoadingComplete(true);
-      };
-
-      fetchEvents();
+    if (!dateRef.current || !timeRef.current) {
+      return;
     }
+
+    const qs = queryString.parse(window.location.search);
+    let linkedEventId;
+
+    if (qs && qs.id && typeof qs.id === "string") {
+      linkedEventId = qs.id;
+    }
+
+    const now = moment();
+    const dateString = now.format("YYYY-MM-DD");
+    const timeString = now.format("HH:mm");
+
+    dateRef.current.value = dateString;
+    setDate(dateString);
+
+    timeRef.current.value = timeString;
+    setTime(timeString);
+
+    const fetchEvents = async () => {
+      const timestamp = now.format("X");
+      const events = (await (await fetch(
+        `/api/v1/events/current?at=${timestamp}`
+      )).json()) as any[];
+
+      setEvents(events);
+      setFilteredEvents(events);
+
+      // Draw initial map
+      let localText = "Bitte\nText\neinfügen";
+
+      if (linkedEventId && textRef.current) {
+        const linkedEvent = events.find(ev => ev.id === linkedEventId);
+        if (!linkedEvent) {
+          setEventNotFoundOpen(true);
+          return;
+        }
+        const warnText = linkedEvent.headline.replace("vor ", "vor\n");
+        textRef.current.value = warnText;
+        setText(warnText);
+        localText = warnText;
+      } else if (textRef && textRef.current) {
+        setText(localText);
+        textRef.current.value = localText;
+      }
+
+      doMapRefresh(events, localText);
+    };
+
+    setInitialLoadingComplete(true);
+    fetchEvents();
   }, [
     setDate,
     setTime,
-    linkedEventId,
     setText,
     setEventNotFoundOpen,
     initialLoadingComplete,
