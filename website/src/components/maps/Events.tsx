@@ -147,7 +147,7 @@ const Events: React.FC<RouteComponentProps> = () => {
         setFilteredEvents(events);
 
         // Draw initial map
-        let localText;
+        let localText = "Bitte\nText\neinfügen";
 
         if (linkedEventId && textRef.current) {
           const linkedEvent = events.find(ev => ev.id === linkedEventId);
@@ -160,6 +160,8 @@ const Events: React.FC<RouteComponentProps> = () => {
           textRef.current.value = warnText;
           setText(warnText);
           localText = warnText;
+        } else if (textRef && textRef.current) {
+          textRef.current.value = localText;
         }
 
         setMapQuery(
