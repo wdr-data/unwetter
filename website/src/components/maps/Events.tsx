@@ -170,6 +170,9 @@ const Events: React.FC<RouteComponentProps> = () => {
         const linkedEvent = events.find(ev => ev.id === linkedEventId);
         if (!linkedEvent) {
           setEventNotFoundOpen(true);
+          setText(localText);
+          textRef.current.value = localText;
+          doMapRefresh(events, localText);
           return;
         }
         const warnText = linkedEvent.headline.replace("vor ", "vor\n");
