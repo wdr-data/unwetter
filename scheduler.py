@@ -50,7 +50,7 @@ def update_db():
             else:
                 old_events = db.by_ids(event['references'])
 
-                if any(old_event['published'] for old_event in old_events):
+                if any((old_event['published'] and filter_event(old_event)) for old_event in old_events):
                     filtered.append(event)
 
                 elif not any(old_event['published'] for old_event in old_events):
