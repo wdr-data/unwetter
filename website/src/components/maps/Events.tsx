@@ -71,6 +71,33 @@ const Events: React.FC<RouteComponentProps> = () => {
     [mapQuery, text, corner, size]
   );
 
+  const doEventsRefresh = useCallback(
+    async at => {
+      setEventsLoading(true);
+
+      const headers = new Headers();
+      headers.append("Pragma", "no-cache");
+      headers.append("Cache-Control", "no-cache");
+
+      const init = {
+        method: "GET",
+        headers
+      };
+
+      const req = new Request(`/api/v1/events/current?at=${at}`, {
+        cache: "no-cache"
+      });
+
+      const events = await (await fetch(req, init)).json();
+
+      setEvents(events);
+      setFilteredEvents(events);
+      setEventsLoading(false);
+      return events;
+    },
+    [setEvents, setFilteredEvents, setEventsLoading]
+  );
+
   const isSelected = useCallback(
     event => filteredEvents.findIndex(fev => fev === event) !== -1,
     [filteredEvents]
@@ -98,18 +125,12 @@ const Events: React.FC<RouteComponentProps> = () => {
   ]);
 
   const refreshEvents = useCallback(async () => {
-    setEventsLoading(true);
     const m = moment(`${date}T${time}`, "");
-    const timestamp = m.format("X");
-    const events = await (await fetch(
-      `/api/v1/events/current?at=${timestamp}`
-    )).json();
+    const at = m.format("X");
+    const events = await doEventsRefresh(at);
 
-    setEvents(events);
-    setFilteredEvents(events);
-    setEventsLoading(false);
     doMapRefresh(events);
-  }, [date, time, doMapRefresh]);
+  }, [date, time, doMapRefresh, doEventsRefresh]);
 
   // Initial page setup
   useLayoutEffect(() => {
@@ -139,15 +160,8 @@ const Events: React.FC<RouteComponentProps> = () => {
     setTime(timeString);
 
     const fetchEvents = async () => {
-      setEventsLoading(true);
-      const timestamp = now.format("X");
-      const events = (await (await fetch(
-        `/api/v1/events/current?at=${timestamp}`
-      )).json()) as any[];
-
-      setEvents(events);
-      setFilteredEvents(events);
-      setEventsLoading(false);
+      const at = now.format("X");
+      const events = await doEventsRefresh(at);
 
       // Draw initial map
       let localText = "Bitte\nText\neinfügen";
@@ -179,7 +193,8 @@ const Events: React.FC<RouteComponentProps> = () => {
     setEventNotFoundOpen,
     initialLoadingComplete,
     setInitialLoadingComplete,
-    doMapRefresh
+    doMapRefresh,
+    doEventsRefresh
   ]);
 
   const handleEventNotFoundClose = useCallback(
