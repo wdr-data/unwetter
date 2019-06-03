@@ -1,0 +1,7 @@
+@import '../../util/variables';
+
+.loader {
+  display: flex;
+  justify-content: center;
+  padding: 4 * $unit;
+}

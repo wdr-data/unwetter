@@ -21,12 +21,22 @@
   }
 }
 
+a.downloadButton {
+  text: {
+    decoration: none;
+  }
+}
+
 .image {
   display: block;
 
   max: {
     width: 100%;
   }
+}
+
+.mapLoading {
+  display: none;
 }
 
 .error {

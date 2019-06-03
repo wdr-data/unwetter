@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useCallback,
-  useRef,
-  useLayoutEffect,
-  useEffect
-} from "react";
+import React, { useState, useCallback, useRef, useLayoutEffect } from "react";
 import Button from "@material-ui/core/es/Button";
 import Checkbox from "@material-ui/core/es/Checkbox";
 import Paper from "@material-ui/core/es/Paper";
@@ -21,6 +15,7 @@ import TableCell from "@material-ui/core/es/TableCell";
 import TableHead from "@material-ui/core/es/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import MenuItem from "@material-ui/core/es/MenuItem";
+import Typography from "@material-ui/core/es/Typography";
 import classNames from "classnames";
 import moment from "moment";
 import queryString from "query-string";
@@ -29,7 +24,7 @@ import { RouteComponentProps } from "@reach/router";
 
 import styles from "./Events.module.scss";
 import { useFormField } from "../hooks/form";
-import { Typography } from "@material-ui/core";
+import Loader from "../util/Loader";
 
 const Events: React.FC<RouteComponentProps> = () => {
   const [date, changeDateHandler, setDate] = useFormField("");
@@ -40,9 +35,10 @@ const Events: React.FC<RouteComponentProps> = () => {
   const [size, changeSizeHandler] = useFormField("100");
 
   const [mapQuery, setMapQuery] = useState("");
+  const [mapLoading, setMapLoading] = useState(true);
+  const [eventsLoading, setEventsLoading] = useState(false);
   const [initialLoadingComplete, setInitialLoadingComplete] = useState(false);
 
-  const [linkedEventId, setLinkedEventId] = useState("");
   const [eventNotFoundOpen, setEventNotFoundOpen] = React.useState(false);
 
   const dateRef = useRef<HTMLInputElement>();
@@ -51,6 +47,56 @@ const Events: React.FC<RouteComponentProps> = () => {
 
   const [events, setEvents] = useState<any[]>([]);
   const [filteredEvents, setFilteredEvents] = useState<any[]>([]);
+
+  const onMapLoad = useCallback(() => setMapLoading(false), [setMapLoading]);
+
+  const doMapRefresh = useCallback(
+    (theEvents, theText = null) => {
+      if (theText === null) {
+        theText = text;
+      }
+      const localMapQuery = queryString.stringify({
+        id: theEvents.map((ev: any) => ev.id),
+        text: theText,
+        corner,
+        size
+      });
+
+      setMapQuery(localMapQuery);
+
+      if (localMapQuery !== mapQuery) {
+        setMapLoading(true);
+      }
+    },
+    [mapQuery, text, corner, size]
+  );
+
+  const doEventsRefresh = useCallback(
+    async at => {
+      setEventsLoading(true);
+
+      const headers = new Headers();
+      headers.append("Pragma", "no-cache");
+      headers.append("Cache-Control", "no-cache");
+
+      const init = {
+        method: "GET",
+        headers
+      };
+
+      const req = new Request(`/api/v1/events/current?at=${at}`, {
+        cache: "no-cache"
+      });
+
+      const events = await (await fetch(req, init)).json();
+
+      setEvents(events);
+      setFilteredEvents(events);
+      setEventsLoading(false);
+      return events;
+    },
+    [setEvents, setFilteredEvents, setEventsLoading]
+  );
 
   const isSelected = useCallback(
     event => filteredEvents.findIndex(fev => fev === event) !== -1,
@@ -68,125 +114,90 @@ const Events: React.FC<RouteComponentProps> = () => {
       }
 
       setFilteredEvents(filteredEventsNew);
-
-      setMapQuery(
-        queryString.stringify({
-          id: filteredEventsNew.map((ev: any) => ev.id),
-          text,
-          corner,
-          size
-        })
-      );
+      doMapRefresh(filteredEventsNew);
     },
-    [filteredEvents, isSelected, text, corner, size]
+    [filteredEvents, isSelected, doMapRefresh]
   );
 
-  const refreshMap = useCallback(async () => {
-    setMapQuery(
-      queryString.stringify({
-        id: filteredEvents.map((ev: any) => ev.id),
-        text,
-        corner,
-        size
-      })
-    );
-  }, [filteredEvents, text, corner, size]);
+  const refreshMap = useCallback(async () => doMapRefresh(filteredEvents), [
+    filteredEvents,
+    doMapRefresh
+  ]);
 
   const refreshEvents = useCallback(async () => {
     const m = moment(`${date}T${time}`, "");
-    const timestamp = m.format("X");
-    const events = await (await fetch(
-      `/api/v1/events/current?at=${timestamp}`
-    )).json();
+    const at = m.format("X");
+    const events = await doEventsRefresh(at);
 
-    setEvents(events);
-    setFilteredEvents(events);
-
-    setMapQuery(
-      queryString.stringify({
-        id: events.map((ev: any) => ev.id),
-        text,
-        corner,
-        size
-      })
-    );
-  }, [date, time, text, corner, size]);
-
-  // Querystring parsing
-  useEffect(() => {
-    const qs = queryString.parse(window.location.search);
-
-    if (qs && qs.id && typeof qs.id === "string") {
-      setLinkedEventId(qs.id);
-    }
-  }, [setLinkedEventId]);
+    doMapRefresh(events);
+  }, [date, time, doMapRefresh, doEventsRefresh]);
 
   // Initial page setup
   useLayoutEffect(() => {
     if (initialLoadingComplete) {
       return;
     }
-    if (dateRef.current && timeRef.current) {
-      const now = moment();
-      const dateString = now.format("YYYY-MM-DD");
-      const timeString = now.format("HH:mm");
 
-      dateRef.current.value = dateString;
-      setDate(dateString);
-
-      timeRef.current.value = timeString;
-      setTime(timeString);
-
-      const fetchEvents = async () => {
-        const timestamp = now.format("X");
-        const events = (await (await fetch(
-          `/api/v1/events/current?at=${timestamp}`
-        )).json()) as any[];
-
-        setEvents(events);
-        setFilteredEvents(events);
-
-        // Draw initial map
-        let localText;
-
-        if (linkedEventId && textRef.current) {
-          const linkedEvent = events.find(ev => ev.id === linkedEventId);
-          if (!linkedEvent) {
-            setEventNotFoundOpen(true);
-            setInitialLoadingComplete(true);
-            return;
-          }
-          const warnText = linkedEvent.headline.replace("vor ", "vor\n");
-          textRef.current.value = warnText;
-          setText(warnText);
-          localText = warnText;
-        }
-
-        setMapQuery(
-          queryString.stringify({
-            id: events.map((ev: any) => ev.id),
-            text: localText,
-            corner,
-            size
-          })
-        );
-
-        setInitialLoadingComplete(true);
-      };
-
-      fetchEvents();
+    if (!dateRef.current || !timeRef.current) {
+      return;
     }
+
+    const qs = queryString.parse(window.location.search);
+    let linkedEventId;
+
+    if (qs && qs.id && typeof qs.id === "string") {
+      linkedEventId = qs.id;
+    }
+
+    const now = moment();
+    const dateString = now.format("YYYY-MM-DD");
+    const timeString = now.format("HH:mm");
+
+    dateRef.current.value = dateString;
+    setDate(dateString);
+
+    timeRef.current.value = timeString;
+    setTime(timeString);
+
+    const fetchEvents = async () => {
+      const at = now.format("X");
+      const events = await doEventsRefresh(at);
+
+      // Draw initial map
+      let localText = "Bitte\nText\neinfügen";
+
+      if (linkedEventId && textRef.current) {
+        const linkedEvent = events.find(ev => ev.id === linkedEventId);
+        if (!linkedEvent) {
+          setEventNotFoundOpen(true);
+          setText(localText);
+          textRef.current.value = localText;
+          doMapRefresh(events, localText);
+          return;
+        }
+        const warnText = linkedEvent.headline.replace("vor ", "vor\n");
+        textRef.current.value = warnText;
+        setText(warnText);
+        localText = warnText;
+      } else if (textRef && textRef.current) {
+        setText(localText);
+        textRef.current.value = localText;
+      }
+
+      doMapRefresh(events, localText);
+    };
+
+    setInitialLoadingComplete(true);
+    fetchEvents();
   }, [
     setDate,
     setTime,
-    linkedEventId,
-    corner,
-    size,
-    text,
     setText,
     setEventNotFoundOpen,
     initialLoadingComplete,
-    setInitialLoadingComplete
+    setInitialLoadingComplete,
+    doMapRefresh,
+    doEventsRefresh
   ]);
 
   const handleEventNotFoundClose = useCallback(
@@ -205,6 +216,11 @@ const Events: React.FC<RouteComponentProps> = () => {
       <Grid container spacing={3}>
         <Grid item xs={6}>
           <Paper className={styles.paper}>
+            <Typography variant="h5">Zeitpunkt der Meldung</Typography>
+            <Typography variant="subtitle1">
+              Zeigt alle Meldungen des DWD zum ausgewähltem Zeitpunkt mit Stufe
+              2, 3 oder 4 auf der Karte an
+            </Typography>
             <TextField
               label="Datum"
               margin="normal"
@@ -231,10 +247,15 @@ const Events: React.FC<RouteComponentProps> = () => {
               variant="contained"
               onClick={refreshEvents}
             >
-              Refresh
+              Anwenden
             </Button>
+            {eventsLoading ? <Loader /> : <></>}
           </Paper>
           <Paper className={styles.paper}>
+            <Typography variant="h5">Tafeltext anpassen</Typography>
+            <Typography variant="subtitle1">
+              Text bitte sinnvoll umbrechen und ausrichten
+            </Typography>
             <Grid container spacing={2}>
               <Grid item xs={9}>
                 <FormControl fullWidth>
@@ -276,10 +297,14 @@ const Events: React.FC<RouteComponentProps> = () => {
             </Grid>
             <br />
             <Button color="secondary" variant="contained" onClick={refreshMap}>
-              Refresh
+              Anwenden
             </Button>
           </Paper>
           <Paper className={styles.paper}>
+            <Typography variant="h5">Meldungen</Typography>
+            <Typography variant="subtitle1">
+              Einzelne Meldungen können aus der Karte ausgeschlossen werden
+            </Typography>
             <Table>
               <TableHead>
                 <TableRow>
@@ -320,23 +345,45 @@ const Events: React.FC<RouteComponentProps> = () => {
         <Grid item xs={6}>
           <Paper className={styles.paper}>
             <img
-              className={classNames(styles.image, styles.marginBottom)}
+              className={classNames(
+                styles.image,
+                styles.marginBottom,
+                mapLoading || !initialLoadingComplete ? styles.mapLoading : ""
+              )}
               src={`/map?${mapQuery}`}
               alt="Map of the event"
+              onLoad={onMapLoad}
             />
-            <a href={`/map?${mapQuery}`} download>
-              <Button color="primary" variant="contained">
-                Download
-              </Button>
-            </a>
+            {!mapLoading && initialLoadingComplete ? (
+              <a
+                href={`/map?${mapQuery}`}
+                download
+                className={styles.downloadButton}
+              >
+                <Button color="primary" variant="contained">
+                  Download
+                </Button>
+              </a>
+            ) : (
+              <Loader />
+            )}
           </Paper>
         </Grid>
         <Grid item xs={12}>
           <Paper className={styles.paper}>
-              <Typography variant="h6" component="h1">Unwetter-Warnassistent</Typography>
-              <Typography>Ein Produkt des Newsrooms, entwickelt vom HackingStudio <span role="img" aria-label="Rakete">🚀</span> — <a href="https://www.wdr.de/k/uwa">Informationen &amp; Kontakt</a></Typography>
+            <Typography variant="h6" component="h1">
+              Unwetter-Warnassistent
+            </Typography>
+            <Typography>
+              Ein Produkt des Newsrooms, entwickelt vom HackingStudio{" "}
+              <span role="img" aria-label="Rakete">
+                🚀
+              </span>{" "}
+              —{" "}
+              <a href="https://www.wdr.de/k/uwa">Informationen &amp; Kontakt</a>
+            </Typography>
           </Paper>
-          </Grid>
+        </Grid>
       </Grid>
       <Snackbar
         anchorOrigin={{
