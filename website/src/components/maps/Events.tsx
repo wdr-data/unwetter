@@ -56,7 +56,7 @@ const Events: React.FC<RouteComponentProps> = () => {
       }
       const localMapQuery = queryString.stringify({
         id: theEvents.map((ev: any) => ev.id),
-        text,
+        text: theText,
         corner,
         size
       });
