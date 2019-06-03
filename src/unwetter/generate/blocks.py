@@ -172,6 +172,21 @@ def changes(event, old_event):
     """
     text = ''
 
+    simple_fields = {
+        'event': 'Wetterphänomen',
+        'severity': 'Warnstufe',
+        'certainty': 'Wahrscheinlichkeit',
+    }
+
+    for field in simple_fields:
+        if old_event.get(field) != event.get(field):
+            if field == 'severity':
+                text += f'{simple_fields[field]}: {severities[event[field]]} ' \
+                        f'(zuvor "{severities[old_event[field]]}")\n'
+            else:
+                text += f'{simple_fields[field]}: {event[field]} ' \
+                        f'(zuvor "{old_event.get(field, "Nicht angegeben")}")\n'
+
     if dates(old_event) != dates(event):
         text += f'Gültigkeit: {dates(event)} (zuvor "{dates(old_event)}")\n\n'
 
@@ -203,19 +218,5 @@ def changes(event, old_event):
     elif commune_list(old_event) != commune_list(event):
         text += 'Regionale Zuordnung: Änderung der betroffenen Gemeinden\n\n'
 
-    simple_fields = {
-        'event': 'Wetterphänomen',
-        'severity': 'Warnstufe',
-        'certainty': 'Wahrscheinlichkeit',
-    }
-
-    for field in simple_fields:
-        if old_event.get(field) != event.get(field):
-            if field == 'severity':
-                text += f'{simple_fields[field]}: {severities[event[field]]} ' \
-                        f'(zuvor "{severities[old_event[field]]}")\n'
-            else:
-                text += f'{simple_fields[field]}: {event[field]} ' \
-                        f'(zuvor "{old_event.get(field, "Nicht angegeben")}")\n'
 
     return text
