@@ -21,6 +21,7 @@ import TableCell from "@material-ui/core/es/TableCell";
 import TableHead from "@material-ui/core/es/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import MenuItem from "@material-ui/core/es/MenuItem";
+import Typography from "@material-ui/core/es/Typography";
 import classNames from "classnames";
 import moment from "moment";
 import queryString from "query-string";
@@ -29,7 +30,7 @@ import { RouteComponentProps } from "@reach/router";
 
 import styles from "./Events.module.scss";
 import { useFormField } from "../hooks/form";
-import { Typography } from "@material-ui/core";
+import Loader from "../util/Loader";
 
 const Events: React.FC<RouteComponentProps> = () => {
   const [date, changeDateHandler, setDate] = useFormField("");
@@ -40,6 +41,7 @@ const Events: React.FC<RouteComponentProps> = () => {
   const [size, changeSizeHandler] = useFormField("100");
 
   const [mapQuery, setMapQuery] = useState("");
+  const [mapLoading, setMapLoading] = useState(true);
   const [initialLoadingComplete, setInitialLoadingComplete] = useState(false);
 
   const [linkedEventId, setLinkedEventId] = useState("");
@@ -51,6 +53,29 @@ const Events: React.FC<RouteComponentProps> = () => {
 
   const [events, setEvents] = useState<any[]>([]);
   const [filteredEvents, setFilteredEvents] = useState<any[]>([]);
+
+  const onMapLoad = useCallback(() => setMapLoading(false), [setMapLoading]);
+
+  const doMapRefresh = useCallback(
+    (theEvents, theText = null) => {
+      if (theText === null) {
+        theText = text;
+      }
+      const localMapQuery = queryString.stringify({
+        id: theEvents.map((ev: any) => ev.id),
+        text,
+        corner,
+        size
+      });
+
+      setMapQuery(localMapQuery);
+
+      if (localMapQuery !== mapQuery) {
+        setMapLoading(true);
+      }
+    },
+    [mapQuery, text, corner, size]
+  );
 
   const isSelected = useCallback(
     event => filteredEvents.findIndex(fev => fev === event) !== -1,
@@ -68,29 +93,15 @@ const Events: React.FC<RouteComponentProps> = () => {
       }
 
       setFilteredEvents(filteredEventsNew);
-
-      setMapQuery(
-        queryString.stringify({
-          id: filteredEventsNew.map((ev: any) => ev.id),
-          text,
-          corner,
-          size
-        })
-      );
+      doMapRefresh(filteredEventsNew);
     },
-    [filteredEvents, isSelected, text, corner, size]
+    [filteredEvents, isSelected, doMapRefresh]
   );
 
-  const refreshMap = useCallback(async () => {
-    setMapQuery(
-      queryString.stringify({
-        id: filteredEvents.map((ev: any) => ev.id),
-        text,
-        corner,
-        size
-      })
-    );
-  }, [filteredEvents, text, corner, size]);
+  const refreshMap = useCallback(async () => doMapRefresh(filteredEvents), [
+    filteredEvents,
+    doMapRefresh
+  ]);
 
   const refreshEvents = useCallback(async () => {
     const m = moment(`${date}T${time}`, "");
@@ -101,16 +112,8 @@ const Events: React.FC<RouteComponentProps> = () => {
 
     setEvents(events);
     setFilteredEvents(events);
-
-    setMapQuery(
-      queryString.stringify({
-        id: events.map((ev: any) => ev.id),
-        text,
-        corner,
-        size
-      })
-    );
-  }, [date, time, text, corner, size]);
+    doMapRefresh(events);
+  }, [date, time, doMapRefresh]);
 
   // Querystring parsing
   useEffect(() => {
@@ -161,17 +164,11 @@ const Events: React.FC<RouteComponentProps> = () => {
           setText(warnText);
           localText = warnText;
         } else if (textRef && textRef.current) {
+          setText(localText);
           textRef.current.value = localText;
         }
 
-        setMapQuery(
-          queryString.stringify({
-            id: events.map((ev: any) => ev.id),
-            text: localText,
-            corner,
-            size
-          })
-        );
+        doMapRefresh(events);
 
         setInitialLoadingComplete(true);
       };
@@ -182,13 +179,11 @@ const Events: React.FC<RouteComponentProps> = () => {
     setDate,
     setTime,
     linkedEventId,
-    corner,
-    size,
-    text,
     setText,
     setEventNotFoundOpen,
     initialLoadingComplete,
-    setInitialLoadingComplete
+    setInitialLoadingComplete,
+    doMapRefresh
   ]);
 
   const handleEventNotFoundClose = useCallback(
@@ -335,19 +330,28 @@ const Events: React.FC<RouteComponentProps> = () => {
         <Grid item xs={6}>
           <Paper className={styles.paper}>
             <img
-              className={classNames(styles.image, styles.marginBottom)}
+              className={classNames(
+                styles.image,
+                styles.marginBottom,
+                mapLoading || !initialLoadingComplete ? styles.mapLoading : ""
+              )}
               src={`/map?${mapQuery}`}
               alt="Map of the event"
+              onLoad={onMapLoad}
             />
-            <a
-              href={`/map?${mapQuery}`}
-              download
-              className={styles.downloadButton}
-            >
-              <Button color="primary" variant="contained">
-                Download
-              </Button>
-            </a>
+            {!mapLoading && initialLoadingComplete ? (
+              <a
+                href={`/map?${mapQuery}`}
+                download
+                className={styles.downloadButton}
+              >
+                <Button color="primary" variant="contained">
+                  Download
+                </Button>
+              </a>
+            ) : (
+              <Loader />
+            )}
           </Paper>
         </Grid>
         <Grid item xs={12}>
