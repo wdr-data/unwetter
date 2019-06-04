@@ -187,7 +187,9 @@ def changes(event, old_event):
                 text += f'{simple_fields[field]}: {event[field]} ' \
                         f'(zuvor "{old_event.get(field, "Nicht angegeben")}")\n'
 
-    if dates(old_event) != dates(event):
+    if dates(old_event)[-9:] != dates(event)[-9:]:
+        # Editorial request to check only, if expires time changed, since every update has new onset-time
+        # Format of dates : 'HH:MM Uhr'
         text += f'Gültigkeit: {dates(event)} (zuvor "{dates(old_event)}")\n\n'
 
     if district_list(old_event) != district_list(event):
@@ -215,8 +217,11 @@ def changes(event, old_event):
         else:
             text += f'Regionale Zuordnung unverändert: {upper_first(region_list(event))}\n\n'
 
+    '''
+    # Editorial choice --> No relevant information due to relatively small area --> Thus, no update
+
     elif commune_list(old_event) != commune_list(event):
         text += 'Regionale Zuordnung: Änderung der betroffenen Gemeinden\n\n'
-
+    '''
 
     return text
