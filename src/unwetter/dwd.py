@@ -217,9 +217,9 @@ def parse_xml(xml):
         event['special_type'] = special_type(event, old_events)
 
         if not any(t['published'] for t in event['has_changes']):
-            list_all_refs = [old_event['references'] for old_event in old_events if old_event['published']]
-            for refs in list_all_refs:
-                event['references'].extend(refs)
+            for old_event in old_events:
+                if 'references' in old_event:
+                    event['references'].extend(old_event['references'])
 
     event['published'] = False
 
