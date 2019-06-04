@@ -209,11 +209,17 @@ def parse_xml(xml):
             {
                 'id': old_event['id'],
                 'changed': bool(changes(event, old_event)),
+                'published': old_event['published'],
             }
             for old_event in old_events
         ]
 
         event['special_type'] = special_type(event, old_events)
+
+        if not any(t['published'] for t in event['has_changes']):
+            for old_event in old_events:
+                if 'references' in old_event:
+                    event['references'].extend(old_event['references'])
 
     event['published'] = False
 
