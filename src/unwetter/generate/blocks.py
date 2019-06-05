@@ -123,7 +123,7 @@ def title(event, variant='default'):
     if variant == 'default':
         return f'{extention}: {event["headline"]}'
     elif variant == 'wina_headline':
-        return f'Amtliche Unwetterwarnung des DWD {extention}'
+        return f'Amtliche Unwetterwarnung des DWD (UWA) {extention}'
 
 
 def dates(event):
