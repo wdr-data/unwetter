@@ -125,7 +125,7 @@ const Events: React.FC<RouteComponentProps> = () => {
   ]);
 
   const refreshEvents = useCallback(async () => {
-    const m = moment(`${date}T${time}`, "");
+    const m = moment(`${date}T${time}`);
     const at = m.format("X");
     const events = await doEventsRefresh(at);
 
