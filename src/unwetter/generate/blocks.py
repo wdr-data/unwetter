@@ -81,7 +81,7 @@ def title(event, variant='default'):
     variant can be 'default' or 'wina_headline'
     """
 
-    prefixes = {
+    extentions = {
         'default': {
             'new_event': '🚨 Neue Meldung',
             'event_relevant_again': '🚨 Erneut relevante Meldung',
@@ -93,37 +93,37 @@ def title(event, variant='default'):
         },
         'wina_headline': {
             'new_event': '',
-            'event_relevant_again': 'Erneut relevant: ',
-            'cancelled_prematurely': 'Vorzeitige Aufhebung: ',
-            'updated': 'Aktualisierung: ',
-            'cancelled_wrong': 'Meldung zurückgezogen: ',
-            'irrelevant': 'Aktualisierung: ',
-            'unknown': 'Unbekannter Meldungstyp - ',
+            'event_relevant_again': ' - Erneut relevant',
+            'cancelled_prematurely': ' - Vorzeitige Aufhebung',
+            'updated': ' - Aktualisierung',
+            'cancelled_wrong': ' - Meldung zurückgezogen',
+            'irrelevant': ' - Aktualisierung',
+            'unknown': ' - Unbekannter Meldungstyp',
         }
     }
 
     if event['msg_type'] == 'Alert':
-        prefix = prefixes[variant]['new_event']
+        extention = extentions[variant]['new_event']
     elif event['msg_type'] == 'Update':
         if event['response_type'] == 'AllClear':
-            prefix = prefixes[variant]['cancelled_prematurely']
+            extention = extentions[variant]['cancelled_prematurely']
         elif event['special_type'] == 'ReAlert':
-            prefix = prefixes[variant]['event_relevant_again']
+            extention = extentions[variant]['event_relevant_again']
         elif event['special_type'] == 'UpdateAlert':
-            prefix = prefixes[variant]['new_event']
+            extention = extentions[variant]['new_event']
         elif event['special_type'] == 'Irrelevant':
-            prefix = prefixes[variant]['irrelevant']
+            extention = extentions[variant]['irrelevant']
         else:
-            prefix = prefixes[variant]['updated']
+            extention = extentions[variant]['updated']
     elif event['msg_type'] == 'Cancel':
-        prefix = prefixes[variant]['cancelled_wrong']
+        extention = extentions[variant]['cancelled_wrong']
     else:
-        prefix = prefixes[variant]['unknown']
+        extention = extentions[variant]['unknown']
 
     if variant == 'default':
-        return f'{prefix}: {event["headline"]}'
+        return f'{extention}: {event["headline"]}'
     elif variant == 'wina_headline':
-        return f'{prefix}DETAILS zur amtlichen UNWETTERWARNUNG für NORDRHEIN-WESTFALEN des DWD'
+        return f'Amtliche Unwetterwarnung des DWD {extention}'
 
 
 def dates(event):
