@@ -146,7 +146,7 @@ def dates(event):
         else:
             expires_date = expires.strftime("%d.%m.%y")
 
-    if not expires: 
+    if not expires:
         return f'ab {onset_date}, {onset.strftime("%H:%M")} Uhr (kein Ende der Gültigkeit angegeben)'
     elif onset.date() == expires.date():
         return f'{onset_date}, von {onset.strftime("%H:%M")} Uhr ' \
@@ -154,6 +154,24 @@ def dates(event):
     else:
         return f'von {onset_date}, {onset.strftime("%H:%M")} Uhr ' \
                f'bis {expires_date}, {expires.strftime("%H:%M")} Uhr'
+
+
+def expires(event):
+    expires = event['expires'] and local_time(event['expires'])
+    today = local_time(datetime.utcnow()).date()
+
+    if expires:
+        if expires.date() == today:
+            expires_date = f'Heute ({expires.strftime("%d.%m.%y")})'
+        elif expires.date() == today + timedelta(days=1):
+            expires_date = f'Morgen ({expires.strftime("%d.%m.%y")})'
+        else:
+            expires_date = expires.strftime("%d.%m.%y")
+
+    if not expires:
+        return f'kein Ende der Gültigkeit angegeben'
+    else:
+        return f'{expires_date}, {expires.strftime("%H:%M")} Uhr'
 
 
 def parameters(event):
@@ -187,10 +205,11 @@ def changes(event, old_event):
                 text += f'{simple_fields[field]}: {event[field]} ' \
                         f'(zuvor "{old_event.get(field, "Nicht angegeben")}")\n'
 
-    if dates(old_event)[-9:] != dates(event)[-9:]:
-        # Editorial request to check only, if expires time changed, since every update has new onset-time
-        # Format of dates : 'HH:MM Uhr'
+    # Editorial request to check only, if expires time changed, since every update has new onset-time
+    if event['onset'] > datetime.utcnow() and dates(old_event) != dates(event):
         text += f'Gültigkeit: {dates(event)} (zuvor "{dates(old_event)}")\n\n'
+    elif expires(old_event) != expires(event):
+        text += f'Ende der Gültigkeit: {expires(event)} (zuvor "{expires(old_event)}")\n\n'
 
     if district_list(old_event) != district_list(event):
         districts_now = {
