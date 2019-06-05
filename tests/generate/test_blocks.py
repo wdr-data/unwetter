@@ -9,4 +9,4 @@ def test_title_alert_simple():
 
 def test_title_alert_simple_wina():
     assert (title(events['alert_1'], variant='wina_headline')
-            == 'Amtliche Unwetterwarnung des DWD')
+            == 'Amtliche Unwetterwarnung des DWD ')
