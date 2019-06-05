@@ -81,49 +81,49 @@ def title(event, variant='default'):
     variant can be 'default' or 'wina_headline'
     """
 
-    prefixes = {
+    extentions = {
         'default': {
             'new_event': '🚨 Neue Meldung',
             'event_relevant_again': '🚨 Erneut relevante Meldung',
             'cancelled_prematurely': '🚫 Meldung vorzeitig aufgehoben',
             'updated': '🔁 Meldung aktualisiert',
             'cancelled_wrong': '🚫 Meldung zurückgezogen',
-            'irrelevant': '🚫 Meldung nicht mehr relevant',
+            'irrelevant': '🔁  Meldung aktualisiert',
             'unknown': '⁉️ Unbekannter Meldungstyp',
         },
         'wina_headline': {
             'new_event': '',
-            'event_relevant_again': 'Erneut relevant: ',
-            'cancelled_prematurely': 'Vorzeitige Aufhebung: ',
-            'updated': 'Aktualisierung: ',
-            'cancelled_wrong': 'Meldung zurückgezogen: ',
-            'irrelevant': 'Aufhebung: ',
-            'unknown': 'Unbekannter Meldungstyp - ',
+            'event_relevant_again': '- Erneut relevant',
+            'cancelled_prematurely': '- Vorzeitige Aufhebung',
+            'updated': '- Aktualisierung',
+            'cancelled_wrong': '- Meldung zurückgezogen',
+            'irrelevant': '- Aktualisierung',
+            'unknown': '- Unbekannter Meldungstyp',
         }
     }
 
     if event['msg_type'] == 'Alert':
-        prefix = prefixes[variant]['new_event']
+        extention = extentions[variant]['new_event']
     elif event['msg_type'] == 'Update':
         if event['response_type'] == 'AllClear':
-            prefix = prefixes[variant]['cancelled_prematurely']
+            extention = extentions[variant]['cancelled_prematurely']
         elif event['special_type'] == 'ReAlert':
-            prefix = prefixes[variant]['event_relevant_again']
+            extention = extentions[variant]['event_relevant_again']
         elif event['special_type'] == 'UpdateAlert':
-            prefix = prefixes[variant]['new_event']
+            extention = extentions[variant]['new_event']
         elif event['special_type'] == 'Irrelevant':
-            prefix = prefixes[variant]['irrelevant']
+            extention = extentions[variant]['irrelevant']
         else:
-            prefix = prefixes[variant]['updated']
+            extention = extentions[variant]['updated']
     elif event['msg_type'] == 'Cancel':
-        prefix = prefixes[variant]['cancelled_wrong']
+        extention = extentions[variant]['cancelled_wrong']
     else:
-        prefix = prefixes[variant]['unknown']
+        extention = extentions[variant]['unknown']
 
     if variant == 'default':
-        return f'{prefix}: {event["headline"]}'
+        return f'{extention}: {event["headline"]}'
     elif variant == 'wina_headline':
-        return f'{prefix}DETAILS zur amtlichen UNWETTERWARNUNG für NORDRHEIN-WESTFALEN des DWD'
+        return f'Amtliche Unwetterwarnung des DWD (UWA) {extention}'
 
 
 def dates(event):
@@ -146,7 +146,7 @@ def dates(event):
         else:
             expires_date = expires.strftime("%d.%m.%y")
 
-    if not expires: 
+    if not expires:
         return f'ab {onset_date}, {onset.strftime("%H:%M")} Uhr (kein Ende der Gültigkeit angegeben)'
     elif onset.date() == expires.date():
         return f'{onset_date}, von {onset.strftime("%H:%M")} Uhr ' \
@@ -154,6 +154,24 @@ def dates(event):
     else:
         return f'von {onset_date}, {onset.strftime("%H:%M")} Uhr ' \
                f'bis {expires_date}, {expires.strftime("%H:%M")} Uhr'
+
+
+def expires(event):
+    expires = event['expires'] and local_time(event['expires'])
+    today = local_time(datetime.utcnow()).date()
+
+    if expires:
+        if expires.date() == today:
+            expires_date = f'Heute ({expires.strftime("%d.%m.%y")})'
+        elif expires.date() == today + timedelta(days=1):
+            expires_date = f'Morgen ({expires.strftime("%d.%m.%y")})'
+        else:
+            expires_date = expires.strftime("%d.%m.%y")
+
+    if not expires:
+        return f'kein Ende der Gültigkeit angegeben'
+    else:
+        return f'{expires_date}, {expires.strftime("%H:%M")} Uhr'
 
 
 def parameters(event):
@@ -187,8 +205,11 @@ def changes(event, old_event):
                 text += f'{simple_fields[field]}: {event[field]} ' \
                         f'(zuvor "{old_event.get(field, "Nicht angegeben")}")\n'
 
-    if dates(old_event) != dates(event):
+    # Editorial request to check only, if expires time changed, since every update has new onset-time
+    if abs(event['onset'] - event['sent']) > timedelta(minutes=2) and dates(old_event) != dates(event):
         text += f'Gültigkeit: {dates(event)} (zuvor "{dates(old_event)}")\n\n'
+    elif expires(old_event) != expires(event):
+        text += f'Ende der Gültigkeit: {expires(event)} (zuvor "{expires(old_event)}")\n\n'
 
     if district_list(old_event) != district_list(event):
         districts_now = {
@@ -215,8 +236,11 @@ def changes(event, old_event):
         else:
             text += f'Regionale Zuordnung unverändert: {upper_first(region_list(event))}\n\n'
 
+    '''
+    # Editorial choice --> No relevant information due to relatively small area --> Thus, no update
+
     elif commune_list(old_event) != commune_list(event):
         text += 'Regionale Zuordnung: Änderung der betroffenen Gemeinden\n\n'
-
+    '''
 
     return text

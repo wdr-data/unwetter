@@ -90,7 +90,7 @@ def parse_xml(xml):
     for field_xml, field_json in fields.items():
         event[field_json] = xml_dict.get(field_xml)
         if field_json in datetime_fields and event[field_json]:
-            event[field_json] = iso8601.parse_date(event[field_json]).astimezone(pytz.utc)
+            event[field_json] = iso8601.parse_date(event[field_json]).astimezone(pytz.utc).replace(tzinfo=None)
 
     info_fields = {
         'event': 'event',
@@ -111,7 +111,7 @@ def parse_xml(xml):
     for field_xml, field_json in info_fields.items():
         event[field_json] = xml_dict['info'].get(field_xml)
         if field_json in datetime_fields and event[field_json]:
-            event[field_json] = iso8601.parse_date(event[field_json]).astimezone(pytz.utc)
+            event[field_json] = iso8601.parse_date(event[field_json]).astimezone(pytz.utc).replace(tzinfo=None)
 
     for tag in ('area', 'parameter'):
         try:
@@ -209,11 +209,17 @@ def parse_xml(xml):
             {
                 'id': old_event['id'],
                 'changed': bool(changes(event, old_event)),
+                'published': old_event['published'],
             }
             for old_event in old_events
         ]
 
         event['special_type'] = special_type(event, old_events)
+
+        if not any(t['published'] for t in event['has_changes']):
+            for old_event in old_events:
+                if 'references' in old_event:
+                    event['references'].extend(old_event['references'])
 
     event['published'] = False
 
