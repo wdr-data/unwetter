@@ -206,7 +206,7 @@ def changes(event, old_event):
                         f'(zuvor "{old_event.get(field, "Nicht angegeben")}")\n'
 
     # Editorial request to check only, if expires time changed, since every update has new onset-time
-    if event['onset'] > datetime.utcnow() and dates(old_event) != dates(event):
+    if abs(event['onset'] - event['sent']) > timedelta(minutes=2) and dates(old_event) != dates(event):
         text += f'Gültigkeit: {dates(event)} (zuvor "{dates(old_event)}")\n\n'
     elif expires(old_event) != expires(event):
         text += f'Ende der Gültigkeit: {expires(event)} (zuvor "{expires(old_event)}")\n\n'
