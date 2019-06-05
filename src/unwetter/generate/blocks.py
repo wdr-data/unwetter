@@ -93,12 +93,12 @@ def title(event, variant='default'):
         },
         'wina_headline': {
             'new_event': '',
-            'event_relevant_again': ' - Erneut relevant',
-            'cancelled_prematurely': ' - Vorzeitige Aufhebung',
-            'updated': ' - Aktualisierung',
-            'cancelled_wrong': ' - Meldung zurückgezogen',
-            'irrelevant': ' - Aktualisierung',
-            'unknown': ' - Unbekannter Meldungstyp',
+            'event_relevant_again': '- Erneut relevant',
+            'cancelled_prematurely': '- Vorzeitige Aufhebung',
+            'updated': '- Aktualisierung',
+            'cancelled_wrong': '- Meldung zurückgezogen',
+            'irrelevant': '- Aktualisierung',
+            'unknown': '- Unbekannter Meldungstyp',
         }
     }
 
