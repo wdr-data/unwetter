@@ -81,6 +81,7 @@ DISTRICTS = {
     '105314000': 'Bundesstadt Bonn',
     '105315000': 'Stadt Köln',
     '105316000': 'Stadt Leverkusen',
+    '105334000': 'StädteRegion Aachen',
     '105354000': 'StädteRegion Aachen',
     '105358000': 'Kreis Düren',
     '105362000': 'Rhein-Erft-Kreis',
