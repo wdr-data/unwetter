@@ -12,7 +12,8 @@
     "moment": "^2.24.0",
     "query-string": "^6.5.0",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.7",
