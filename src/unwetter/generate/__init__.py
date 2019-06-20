@@ -50,7 +50,7 @@ Die Eilmeldung des DWD erreicht OpenMedia in der Regel wenige Minuten nach diese
 (In einigen Fällen, z.B. kurze Gültigkeit und/oder kleines Gebiet, kann eine Meldung des DWD entfallen!)
 
 Website des Deutschen Wetterdienstes:
-https://www.dwd.de/DE/wetter/warnungen_gemeinden/warnkarten/warnWetter_nrw_node.html?bundesland=nrw
+https://www.dwd.de/DE/wetter/warnungen/warnWetter_node.html
 
 Telefon DWD: 069-8062-6900
 
@@ -134,7 +134,7 @@ Die Eilmeldung des DWD erreicht OpenMedia in der Regel wenige Minuten nach diese
 (In einigen Fällen, z.B. kurze Gültigkeit und/oder kleines Gebiet, kann eine Meldung des DWD entfallen!)
 
 Website des Deutschen Wetterdienstes:
-https://www.dwd.de/DE/wetter/warnungen_gemeinden/warnkarten/warnWetter_nrw_node.html?bundesland=nrw
+https://www.dwd.de/DE/wetter/warnungen/warnWetter_node.html
 
 Telefon DWD: 069-8062-6900
 

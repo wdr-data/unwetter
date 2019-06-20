@@ -120,7 +120,7 @@ def slack_event():
 
             response = f'''
 Diese Meldung basiert auf offiziellen Informationen des Deutschen Wetterdienstes:
-https://www.dwd.de/DE/wetter/warnungen_gemeinden/warnkarten/warnWetter_nrw_node.html?bundesland=nrw
+https://www.dwd.de/DE/wetter/warnungen/warnWetter_node.html
 
 Die Bereitstellung dieser Information ist ein Projekt des Digitalen Wandels und wird aktiv weiterentwickelt.
 Informationen und Kontakt: {os.environ["WDR_PROJECT_INFO_URL"]}
