@@ -191,19 +191,21 @@ def changes(event, old_event):
     text = ''
 
     simple_fields = {
-        'event': 'Wetterphänomen',
         'severity': 'Warnstufe',
+        'event': 'Wetterphänomen',
         'certainty': 'Wahrscheinlichkeit',
     }
 
     for field in simple_fields:
         if old_event.get(field) != event.get(field):
-            if field == 'severity':
+            if field == 'severity' and event[field] in ['Minor', 'Moderate']:
+                text += f'{simple_fields[field]}: Herabstufung auf {severities[event[field]]}\n\n'
+            elif field == 'severity':
                 text += f'{simple_fields[field]}: {severities[event[field]]} ' \
-                        f'(zuvor "{severities[old_event[field]]}")\n'
+                        f'(zuvor "{severities[old_event[field]]}")\n\n'
             else:
                 text += f'{simple_fields[field]}: {event[field]} ' \
-                        f'(zuvor "{old_event.get(field, "Nicht angegeben")}")\n'
+                        f'(zuvor "{old_event.get(field, "Nicht angegeben")}")\n\n'
 
     # Editorial request to check only, if expires time changed, since every update has new onset-time
     if abs(event['onset'] - event['sent']) > timedelta(minutes=2) and dates(old_event) != dates(event):

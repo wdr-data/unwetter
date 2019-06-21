@@ -6,6 +6,7 @@ from .. import db
 from .blocks import *
 from .helpers import rreplace, upper_first
 from . import urls
+from ..config import SEVERITY_FILTER, STATES_FILTER
 
 
 def describe_new_event(event):
@@ -79,9 +80,15 @@ def describe_update(event):
         if event['msg_type'] == 'Cancel' or event['response_type'] == 'AllClear':
             change_title = 'Aufhebung von'
             the_changes = ''
-        elif event['special_type'] == 'Irrelevant':
-            change_title = 'Aufhebung von'
+        elif event['special_type'] == 'Irrelevant' and event['severity'] not in SEVERITY_FILTER:
+            change_title = 'Herabstufung von'
             the_changes = (changes(event, old_event) if old_event else 'Unbekannt')
+        elif event['special_type'] == 'Irrelevant' and not any(state in event['states'] for state in STATES_FILTER):
+            change_title = 'Änderungen zur'
+            the_changes = f'Die Unwetterregion befindet sich nicht ' \
+                          f'mehr im Bundesland {", ".join(STATES_FILTER)}.\n\n ' \
+                          f'Andere Unwetterregionen kônnen noch in NRW aktiv sein! ' \
+                          f'Vergleiche dazu die UWA und DWD Karten.'
         else:
             change_title = 'Änderungen zur'
             the_changes = (changes(event, old_event) if old_event else 'Unbekannt') + '\n'

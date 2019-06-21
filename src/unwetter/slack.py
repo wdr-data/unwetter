@@ -6,6 +6,8 @@ from slackclient import SlackClient
 from . import db, generate, config
 from .map import COLORS
 from .generate import helpers, urls
+from .config import SEVERITY_FILTER, STATES_FILTER
+
 
 # Set up Slack client
 # Based on https://www.fullstackpython.com/blog/build-first-slack-bot-python.html
@@ -31,10 +33,14 @@ def post_event(event):
             if event['msg_type'] == 'Cancel' or event['response_type'] == 'AllClear':
                 change_title = f'Aufhebung der Meldung von {old_time}\n'
                 the_changes = ''
-            elif event['special_type'] == 'Irrelevant':
-                change_title = f'Aufhebung der Meldung von {old_time}\n'
+            elif event['special_type'] == 'Irrelevant' and event['severity'] not in SEVERITY_FILTER:
+                change_title = f'Herabstufung der Meldung von {old_time}\n'
                 the_changes = '*Änderungen:*\n\n' + (generate.changes(event, old_event)
                                                      if old_event else 'Unbekannt')
+            elif event['special_type'] == 'Irrelevant' and not any(state in event['states'] for state in STATES_FILTER):
+                change_title = f'Änderung der Meldung von {old_time}\n'
+                the_changes = f'Die Unwetterregion befindet sich' \
+                              f' nicht mehr im Bundesland {", ".join(STATES_FILTER)}.\n\n'
             else:
                 change_title = f'Änderungen zur Meldung von {old_time}\n'
                 the_changes = '*Änderungen:*\n\n' + (generate.changes(event, old_event)
