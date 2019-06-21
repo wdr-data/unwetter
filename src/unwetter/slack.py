@@ -39,7 +39,7 @@ def post_event(event):
                                                      if old_event else 'Unbekannt')
             elif event['special_type'] == 'Irrelevant' and not any(state in event['states'] for state in STATES_FILTER):
                 change_title = f'Änderung der Meldung von {old_time}\n'
-                the_changes = f'Die Unwetterregion befindet sich' \
+                the_changes = f'Die Unwetterzelle befindet sich' \
                               f' nicht mehr im Bundesland {", ".join(STATES_FILTER)}.\n\n'
             else:
                 change_title = f'Änderungen zur Meldung von {old_time}\n'
