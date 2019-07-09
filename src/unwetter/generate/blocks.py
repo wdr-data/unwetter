@@ -99,6 +99,15 @@ def title(event, variant='default'):
             'cancelled_wrong': '- Meldung zurückgezogen',
             'irrelevant': '- Aktualisierung',
             'unknown': '- Unbekannter Meldungstyp',
+        },
+        'wina_body': {
+            'new_event': '',
+            'event_relevant_again': '- Erneut relevant',
+            'cancelled_prematurely': '- Vorzeitige Aufhebung',
+            'updated': '- Aktualisierung',
+            'cancelled_wrong': '- Meldung zurückgezogen',
+            'irrelevant': '- Aktualisierung',
+            'unknown': '- Unbekannter Meldungstyp',
         }
     }
 
@@ -122,6 +131,10 @@ def title(event, variant='default'):
 
     if variant == 'default':
         return f'{extention}: {event["headline"]}'
+    elif variant == 'wina_body':
+        return f'{extention}.capitalize()' \
+               f'' \
+               f'{event["headline"]}'
     elif variant == 'wina_headline':
         return f'Amtliche Unwetterwarnung des DWD (UWA) {extention}'
 

@@ -11,7 +11,7 @@ from ..config import SEVERITY_FILTER, STATES_FILTER
 
 def describe_new_event(event):
     text = f'''
-{title(event)}
+{title(event, variant='wina_body')}
 
 
 +++ Gültigkeit +++
@@ -102,7 +102,7 @@ def describe_update(event):
     all_changes = f'\n{joined}\n' if change_details else ''
 
     text = f'''
-{title(event)}
+{title(event, variant='wina_body')}
 {all_changes}
 +++ Gültigkeit +++
 
