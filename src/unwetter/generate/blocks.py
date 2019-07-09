@@ -132,9 +132,7 @@ def title(event, variant='default'):
     if variant == 'default':
         return f'{extention}: {event["headline"]}'
     elif variant == 'wina_body':
-        return f'{extention}.capitalize()' \
-               f'' \
-               f'{event["headline"]}'
+        return f'{extention.capitalize()}\n\n{event["headline"]}'
     elif variant == 'wina_headline':
         return f'Amtliche Unwetterwarnung des DWD (UWA) {extention}'
 
