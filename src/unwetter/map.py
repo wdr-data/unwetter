@@ -1,3 +1,4 @@
+from enum import Enum
 from functools import partial
 from math import tan, radians
 
@@ -12,6 +13,8 @@ from .config import STATES_FILTER
 
 
 TARGET_HEIGHT = 1080
+TARGET_WIDTH_SQUARE = TARGET_HEIGHT
+TARGET_WIDTH_WIDE = 1920
 
 
 COLORS = {
@@ -33,6 +36,12 @@ project = partial(
     TARGET_PROJECTION
 )
 
+
+class Mode(Enum):
+    WIDE = 'wide'
+    SQUARE = 'square'
+
+
 states = []  # fill with polys, then convert to multi-polygon
 
 # Create projected copy
@@ -45,7 +54,7 @@ states = MultiPolygon(states)
 
 bbox = states.bounds
 
-img_padding = 75000  # in meters
+img_padding = 75000
 bbox = (
     bbox[0] - img_padding,
     bbox[1] - img_padding,
@@ -59,28 +68,40 @@ img_width_ = int(dist_x / 250)
 img_height_ = int(dist_y / 250)
 img_height = max(img_height_, img_width_)
 img_width = max(img_height_, img_width_)
+img_width_wide = int(img_width * (16 / 9))
 ratio_x = img_width_ / dist_x
 ratio_y = img_height_ / dist_y
 
-vertical_offset = int(-0.07 * img_height)
+vertical_offset = int(-0.075 * img_height)
 
-def to_image_coords(x, y):
-    px = int(img_width - ((bbox[2] - x) * ratio_x) + abs(img_width_ - img_width) / 2)
+img_widths = {
+    Mode.SQUARE: img_width,
+    Mode.WIDE: img_width_wide,
+}
+
+
+def to_image_coords(x, y, mode):
+    px = int(img_width - ((bbox[2] - x) * ratio_x) + abs(img_width_ - img_widths[mode]) / 2)
     py = int((bbox[3] - y) * ratio_y + int(abs(img_height_ - img_height) / 2)) + vertical_offset
     return px, py
 
 
-def resize(img):
-    return img.resize((TARGET_HEIGHT, TARGET_HEIGHT), resample=Image.CUBIC)
+def resize(img, mode):
+    if mode is Mode.SQUARE:
+        return img.resize((TARGET_WIDTH_SQUARE, TARGET_HEIGHT), resample=Image.CUBIC)
+    elif mode is Mode.WIDE:
+        return img.resize((TARGET_WIDTH_WIDE, TARGET_HEIGHT), resample=Image.CUBIC)
 
 
-background_image = resize(Image.open('assets/images/bg_square.png').convert("RGBA"))
-studios = resize(Image.open('assets/images/overlay_square.png').convert("RGBA"))
-mask = resize(Image.open('assets/images/mask_square.png').convert("RGBA"))
-logo_wdra = resize(Image.open('assets/images/logo_wdra_square.png').convert("RGBA"))
+images = {}
 
-legend_nw = resize(Image.open('assets/images/legend_nw_square.png').convert("RGBA"))
-legend_se = resize(Image.open('assets/images/legend_se_square.png').convert("RGBA"))
+background_image = resize(Image.open('assets/images/bg_square.png').convert("RGBA"), Mode.SQUARE)
+studios = resize(Image.open('assets/images/overlay_square.png').convert("RGBA"), Mode.SQUARE)
+mask = resize(Image.open('assets/images/mask_square.png').convert("RGBA"), Mode.SQUARE)
+logo_wdra = resize(Image.open('assets/images/logo_wdra_square.png').convert("RGBA"), Mode.SQUARE)
+
+legend_nw = resize(Image.open('assets/images/legend_nw_square.png').convert("RGBA"), Mode.SQUARE)
+legend_se = resize(Image.open('assets/images/legend_se_square.png').convert("RGBA"), Mode.SQUARE)
 
 overlay = mask.copy()
 overlay.alpha_composite(studios)
@@ -92,34 +113,71 @@ overlay_se = overlay.copy()
 overlay_nw.alpha_composite(legend_nw)
 overlay_se.alpha_composite(legend_se)
 
+images[Mode.SQUARE] = {
+    'background': background_image,
+    'overlay': {
+        'nw': overlay_nw,
+        'se': overlay_se,
+    }
+}
 
-def generate_base_map():
-    img = Image.new("RGBA", (img_width, img_height), 'black')
+background_image = resize(Image.open('assets/images/bg_wide.png').convert("RGBA"), Mode.WIDE)
+studios = resize(Image.open('assets/images/overlay_wide.png').convert("RGBA"), Mode.WIDE)
+mask = resize(Image.open('assets/images/mask_wide.png').convert("RGBA"), Mode.WIDE)
+logo_wdra = resize(Image.open('assets/images/logo_wdra_wide.png').convert("RGBA"), Mode.WIDE)
+
+legend_nw = resize(Image.open('assets/images/legend_nw_wide.png').convert("RGBA"), Mode.WIDE)
+legend_se = resize(Image.open('assets/images/legend_se_wide.png').convert("RGBA"), Mode.WIDE)
+
+overlay = mask.copy()
+overlay.alpha_composite(studios)
+overlay.alpha_composite(logo_wdra)
+
+overlay_nw = overlay.copy()
+overlay_se = overlay.copy()
+
+overlay_nw.alpha_composite(legend_nw)
+overlay_se.alpha_composite(legend_se)
+
+images[Mode.WIDE] = {
+    'background': background_image,
+    'overlay': {
+        'nw': overlay_nw,
+        'se': overlay_se,
+    }
+}
+
+del studios, mask, logo_wdra, legend_nw, legend_se
+
+
+def generate_base_map(mode=Mode.SQUARE):
+    img = Image.new("RGBA", (img_widths[mode], img_height), 'black')
+
     draw = ImageDraw.Draw(img)
 
     for poly in states:
-        points = [to_image_coords(x, y) for x, y in poly.exterior.coords]
+        points = [to_image_coords(x, y, mode) for x, y in poly.exterior.coords]
         draw.polygon(points, outline=None, fill='white')
 
         for interior in poly.interiors:
-            points = [to_image_coords(x, y) for x, y in interior.coords]
+            points = [to_image_coords(x, y, mode) for x, y in interior.coords]
             draw.polygon(points, outline=None, fill='black')
 
     return img
 
 
-def draw_event(event, draw):
+def draw_event(event, draw, mode=Mode.SQUARE):
     for geo in event['geometry']:
         for poly in geo['polygons']:
-            projected = [to_image_coords(*TARGET_PROJECTION(lng, lat)) for lat, lng in poly]
+            projected = [to_image_coords(*TARGET_PROJECTION(lng, lat), mode) for lat, lng in poly]
             draw.polygon(projected, outline=None, fill=COLORS['SEVERITIES'][event['severity']])
 
         for poly in geo['exclude_polygons']:
-            projected = [to_image_coords(*TARGET_PROJECTION(lng, lat)) for lat, lng in poly]
+            projected = [to_image_coords(*TARGET_PROJECTION(lng, lat), mode) for lat, lng in poly]
             draw.polygon(projected, outline=None, fill='rgba(0, 0, 0, 0)')
 
 
-def draw_text(draw, text, corner, size):
+def draw_text(draw, text, corner, size, mode=Mode.SQUARE):
     align = 'left' if corner.endswith('w') else 'right'
     font = ImageFont.truetype('assets/fonts/WDR Sans Bold.ttf', size=size)
     spacing = int(size / 5)
@@ -127,9 +185,9 @@ def draw_text(draw, text, corner, size):
     calc_size = draw.textsize(text, font=font, spacing=spacing)
     y_offset = int(img_height * .054) + spacing
 
-    x0 = 0 if align == 'left' else img_width - calc_size[0] - spacing * 3
+    x0 = 0 if align == 'left' else img_widths[mode] - calc_size[0] - spacing * 3
     y0 = y_offset - spacing if corner.startswith('n') else img_height - calc_size[1] - y_offset - spacing * 2
-    x1 = calc_size[0] + spacing * 3 if align == 'left' else img_width
+    x1 = calc_size[0] + spacing * 3 if align == 'left' else img_widths[mode]
     y1 = y_offset + calc_size[1] + spacing * 2 if corner.startswith('n') else img_height - y_offset + spacing
 
     draw.rectangle(((x0, y0), (x1, y1)), fill=COLORS['WDRA_TEXT_BACKGROUND'])
@@ -143,7 +201,7 @@ def draw_text(draw, text, corner, size):
     else:
         draw.polygon(((x0, y0), (x0, y1), (x2, y2)), fill=COLORS['WDRA_TEXT_BACKGROUND'])
 
-    x = spacing * 2 if align == 'left' else img_width - calc_size[0] - spacing * 2
+    x = spacing * 2 if align == 'left' else img_widths[mode] - calc_size[0] - spacing * 2
     y = y_offset if corner.startswith('n') else img_height - calc_size[1] - spacing - y_offset
 
     draw.text((x, y), text, align='left', fill='white', font=font, spacing=spacing)
@@ -160,30 +218,30 @@ def severity_key(event):
     return mapped.get(event['severity'], 100)
 
 
-def generate_map(events, *, text=None, text_corner='se', text_size=50):
-    event_img = Image.new("RGBA", (img_width, img_height))
+def generate_map(events, *, mode=Mode.SQUARE, text=None, text_corner='se', text_size=50):
+    event_img = Image.new("RGBA", (img_widths[mode], img_height))
     draw = ImageDraw.Draw(event_img)
 
-    img = background_image.copy()
+    img = images[mode]['background'].copy()
 
     try:
         for event in sorted(events, key=severity_key):
-            draw_event(event, draw)
+            draw_event(event, draw, mode)
 
-        img.alpha_composite(resize(event_img))
+        img.alpha_composite(resize(event_img, mode))
     except TypeError:
         draw = ImageDraw.Draw(img)
         draw.text((90, TARGET_HEIGHT / 2 - 80), "Event not found", font=FONT_ERROR, fill='black')
     else:
         if text_corner.startswith('n'):
-            img.alpha_composite(overlay_se)
+            img.alpha_composite(images[mode]['overlay']['se'])
         else:
-            img.alpha_composite(overlay_nw)
+            img.alpha_composite(images[mode]['overlay']['nw'])
 
     if text:
-        text_img = Image.new("RGBA", (img_height, img_width))
+        text_img = Image.new("RGBA", (img_widths[mode], img_height))
         draw = ImageDraw.Draw(text_img)
         draw_text(draw, text, text_corner, text_size)
-        img.alpha_composite(resize(text_img))
+        img.alpha_composite(resize(text_img, mode))
 
     return img

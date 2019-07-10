@@ -67,16 +67,23 @@ def map_single(id):
 def map_multi():
     ids = request.args.getlist('id')
     text = request.args.get('text')
+    mode = request.args.get('mode', 'square')
     corner = request.args.get('corner', 'se')
     size = int(request.args.get('size', 50))
 
-    img = map.generate_map(db.by_ids(ids), text=text, text_corner=corner, text_size=size)
+    img = map.generate_map(db.by_ids(ids), mode=map.Mode(mode), text=text, text_corner=corner, text_size=size)
     return send_pil(img)
 
 
 @app.route('/basemap')
-def map_base():
-    img = map.generate_base_map()
+def map_base_square():
+    img = map.generate_base_map(mode=map.Mode.SQUARE)
+    return send_pil(img)
+
+
+@app.route('/basemap_wide')
+def map_base_wide():
+    img = map.generate_base_map(mode=map.Mode.WIDE)
     return send_pil(img)
 
 
