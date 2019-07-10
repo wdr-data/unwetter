@@ -62,10 +62,11 @@ img_width = max(img_height_, img_width_)
 ratio_x = img_width_ / dist_x
 ratio_y = img_height_ / dist_y
 
+vertical_offset = int(-0.07 * img_height)
 
 def to_image_coords(x, y):
     px = int(img_width - ((bbox[2] - x) * ratio_x) + abs(img_width_ - img_width) / 2)
-    py = int((bbox[3] - y) * ratio_y + int(abs(img_height_ - img_height) / 2))
+    py = int((bbox[3] - y) * ratio_y + int(abs(img_height_ - img_height) / 2)) + vertical_offset
     return px, py
 
 
