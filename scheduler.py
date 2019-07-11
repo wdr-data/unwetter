@@ -61,14 +61,20 @@ def update_db():
             slack.post_event(event)
             sleep(1)
 
+
+@sched.scheduled_job('interval', minutes=5)
+def post_clear_warning():
+
     currently_events = db.current_events(all_severities=False)
     if currently_events:
         db.set_warn_events_memo(True)
+        print('Active events: warn events memo ON')
     elif db.warn_events_memo() and not currently_events:
         db.set_warn_events_memo(False)
+
         slack.post_clear_warning()
 
-
+        print('No active events: warn_events_memo OFF')
 
 
 sched.start()
