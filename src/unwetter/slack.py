@@ -128,6 +128,12 @@ _Regionale Zuordnung_: {generate.region_list(event)}
                         "value": "crawl",
                     },
                     {
+                        "name": "radio",
+                        "text": ":radio: Radio",
+                        "type": "button",
+                        "value": "radio",
+                    },
+                    {
                         "name": "info",
                         "text": ":question: Infos zum Projekt",
                         "type": "button",
