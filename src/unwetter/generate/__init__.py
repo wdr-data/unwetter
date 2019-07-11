@@ -134,6 +134,9 @@ Verhaltenshinweise: {event['instruction'] or ''}
 
 
 +++ Textvorschläge +++
+HINWEIS: Textvorschläge werden nach redaktionellen Vorgaben automatisch generiert.
+Je nach Unwetterlage ist es nötig, sie noch einmal passgenau zu überarbeiten
+und dabei auch die eventuellen Warnungen vor verschiedenen Unwettergebieten zusammenzufassen.
 
 TWEET: {tweet(event)}
 
