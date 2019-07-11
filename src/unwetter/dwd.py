@@ -273,7 +273,7 @@ def parse_xml(xml):
 
             event['extended_references'] = sorted(extended_references, reverse=True)
 
-            old_events = list(db.by_ids(extended_references))
+            old_events = list(db.by_ids(event['extended_references']))
 
         event['has_changes'] = [
             {
