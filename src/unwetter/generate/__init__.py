@@ -74,7 +74,8 @@ def describe_update(event):
     old_events = list(db.by_ids([
         change_set['id'] for change_set
         in event['has_changes'] if change_set['published']
-    ])
+    ]))
+
     change_details = []
 
     for old_event in old_events:
