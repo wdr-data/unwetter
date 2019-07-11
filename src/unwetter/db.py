@@ -5,7 +5,7 @@ from functools import lru_cache
 
 import pymongo
 
-from . import sentry
+from . import sentry, config, map
 
 
 try:
@@ -150,6 +150,55 @@ def publish(ids):
 
     collection.update_many({"id": {"$in": ids}}, {"$set": {"published": True}})
 
+
+def current_events(at=None, all_severities=True):
+    if not at:
+        at = datetime.now()
+
+    filter = {
+        'expires': {'$gte': at},
+        'effective': {'$lte': at},
+    }
+
+    results = query(
+        ['Minor', 'Moderate', 'Severe', 'Extreme'],
+        config.STATES_FILTER,
+        ['Immediate'],
+        filter=filter,
+    )
+
+    results = list(results)
+
+    if not results:
+        return []
+
+    filteredResults = []
+
+    for result in results:
+
+        for other in results:
+            if result['id'] in other.get('references', []):
+                break
+
+            filter = {
+                'references': result['id'],
+                '$or': [
+                    {'expires': {'$lte': at}},
+                    {'msg_type': 'Cancel'}
+                ]
+            }
+
+            double_check = collection.find(filter).limit(1)
+            if double_check.count():
+                break
+
+        else:
+            if not all_severities and result['severity'] not in config.SEVERITY_FILTER:
+                continue
+
+            filteredResults.append(result)
+
+    return sorted(filteredResults, key=map.severity_key, reverse=True)
 
 
 def clear():
