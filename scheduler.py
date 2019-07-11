@@ -61,12 +61,11 @@ def update_db():
             slack.post_event(event)
             sleep(1)
 
-    if not db.warn_events_memo() and db.current_events(all_severities=False):
-        # Send notification
+    currently_events = db.current_events(all_severities=False)
+    if currently_events:
         db.set_warn_events_memo(True)
-    elif db.warn_events_memo():
+    elif db.warn_events_memo() and not currently_events:
         db.set_warn_events_memo(False)
-
         slack.post_clear_warning()
 
 
