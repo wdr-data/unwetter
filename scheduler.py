@@ -51,17 +51,19 @@ def update_db():
         else:
             sentry.sentry_sdk.capture_message(f'Event was not filtered: {event["id"]}')
 
-    if not filtered:
-        return
+    if filtered:
+        db.publish([event['id'] for event in filtered])
 
-    db.publish([event['id'] for event in filtered])
+        wina.upload([event['id'] for event in filtered])
 
-    wina.upload([event['id'] for event in filtered])
+        for event in filtered:
+            print(f'Sending event {event["id"]} to Slack')
+            slack.post_event(event)
+            sleep(1)
 
-    for event in filtered:
-        print(f'Sending event {event["id"]} to Slack')
-        slack.post_event(event)
-        sleep(1)
+    if db.warn_events_memo() and not db.current_events(all_severities=False):
+        # Send notification
+        db.set_warn_events_memo(False)
 
 
 sched.start()

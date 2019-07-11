@@ -44,6 +44,21 @@ def last_updated():
         return None
 
 
+def warn_events_memo():
+    try:
+        return collection_meta.find_one({'id': 'warn_events_memo'})['active']
+    except TypeError:
+        return None
+
+
+def set_warn_events_memo(active):
+    collection_meta.replace_one(
+        {'id': 'warn_events_memo'},
+        {'id': 'warn_events_memo', 'active': active},
+        upsert=True
+    )
+
+
 def update():
     """
     Download the latest events from the API and update the database, if necessary
