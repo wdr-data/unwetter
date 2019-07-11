@@ -5,6 +5,7 @@ from io import BytesIO
 import os
 import ssl
 from html import escape
+from datetime import datetime
 
 from . import db, generate
 
@@ -21,24 +22,51 @@ def from_id(id):
     event = db.by_id(id)
     sent = generate.local_time(event['sent']).strftime('%Y%m%dT%H%M%S,000')
 
+    sent = sent,
+    title = generate.title(event, variant='wina_headline'),
+    keywords = generate.keywords(event),
+    text = generate.description(event)
+
+    return wina_xml(sent, title, text, keywords)
+
+
+def wina_xml(sent, title, text, keywords):
+    """
+    Generate wina xml file in iso code 8859-1
+    :param sent: Sent time
+    :param title: headline of wina
+    :param text: body text
+    :param keywords:
+    :return:
+    """
+
     wina_xml = WINA_TEMPLATE.format(
-        sent=escape(sent),
-        title=escape(generate.title(event, variant='wina_headline')),
-        keywords=escape(generate.keywords(event)),
-        text=escape(generate.description(event)).replace('\n', '&#xD;&#xA;'),
-    )
+            sent=escape(sent),
+            title=escape(title),
+            keywords=escape(keywords),
+            text=escape(text).replace('\n', '&#xD;&#xA;'),
+        )
 
     return wina_xml.encode('iso-8859-1', errors='ignore')
 
 
-def upload(ids):
+def upload_text(title, text, keywords):
+
+    sent = generate.local_time(datetime.utcnow())
+    upload([BytesIO(wina_xml(sent, title, text, keywords))])
+
+
+def upload_ids(ids):
+    files = [BytesIO(from_id(id)) for id in ids]
+    return upload(files)
+
+
+def upload(files):
     """
     Uploads a WINA-XML file to a provided server via explicit FTP with TLS Protocol.
-    :param: ids: List of DWD IDs
+    :param: files: List of DWD BytesIO(from_id(id)
     :return: Status code
     """
-
-    files = [BytesIO(from_id(id)) for id in ids]
 
     logins = [
         ('NVS_FTP_URL', 'NVS_FTP_USER', 'NVS_FTP_PASS'),

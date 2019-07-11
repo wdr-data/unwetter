@@ -72,7 +72,24 @@ def post_clear_warning():
     elif db.warn_events_memo() and not currently_events:
         db.set_warn_events_memo(False)
 
-        slack.post_clear_warning()
+        title = 'Warnfplicht für NRW aufgehoben'
+        text = '''
+AKTUALISIERUNG:
+Der Deutsche Wetterdienst gibt für NRW zurzeit keine Warnungen der Kategorie 3 (rot) und 4 (violett) mehr aus -
+also vor Unwetter oder extremem Unwetter. Damit besteht keine Warnpflicht mehr. Es kann allerdings nach wie vor
+markante Wetterlagen geben - alle Informationen dazu auf einen Blick hier:
+
+UWA-Kartentool: www.wdr.de/k/unwetterkarte
+
+https://www.dwd.de/DE/wetter/warnungen/warnWetter_node.html
+(Vgl. NRW auf Website des Deutschen Wetterdienstes)
+'''.strip()
+
+        keywords = 'Unwetter, UWA, Keine Warnpflicht'
+
+        wina.upload_text(title, text, keywords)
+
+        slack.post_clear_warning(title, text)
 
         print('No active events: warn_events_memo OFF')
 
