@@ -1,8 +1,9 @@
 #!/user/bin/env python3.6
 
 from io import BytesIO
-from datetime import datetime
+from datetime import datetime, timedelta
 from os.path import splitext
+import re
 from zipfile import ZipFile
 
 import iso8601
@@ -71,6 +72,62 @@ def district_from_commune(commune):
     warn_cell_id = f'1{common_id}000'
     name = DISTRICTS[warn_cell_id]
     return name, warn_cell_id
+
+
+def is_changed(event, old_event):
+    """
+    Compares two events and discerns if it has changes that should trigger a push
+    :param event:
+    :param old_event:
+    :return: bool
+    """
+
+    # Simple changes
+    if any(event.get(field) != old_event.get(field) for field in ['severity', 'certainty']):
+        return True
+
+    # Notify about big hail sizes
+    if 'Hagel' not in event['parameters']:
+        if event['event'].replace(' und HAGEL', '') != old_event['event'].replace(' und HAGEL', ''):
+            return True
+    else:
+        hail_re = r'^.*?(\d+).*?cm'
+        hail_size_now = int(re.match(hail_re, event['parameters']['Hagel']).group(1))
+        hail_size_before = int(re.match(hail_re, old_event['parameters'].get('Hagel', '0 cm')).group(1))
+
+        if hail_size_now >= 3 > hail_size_before:
+            return True
+        elif event['event'].replace(' und HAGEL', '') != old_event['event'].replace(' und HAGEL', ''):
+            return True
+
+    # Changes in time
+    if (abs(event['onset'] - event['sent']) > timedelta(minutes=2)
+            and event['sent'] - event['onset'] < timedelta(minutes=2)
+            and old_event['onset'] != event['onset']):
+        return True
+
+    elif old_event['expires'] != event['expires']:
+        return True
+
+    # New regions
+    if len(set(r[0] for r in event['regions']) - set(r[0] for r in old_event['regions'])) > 0:
+        return True
+
+    # New districts
+    districts_now = {
+        district['name'] for district in event['districts']
+        if state_for_cell_id(district['warn_cell_id']) in config.STATES_FILTER
+    }
+    districts_before = {
+        district['name'] for district in old_event['districts']
+        if state_for_cell_id(district['warn_cell_id']) in config.STATES_FILTER
+    }
+    added = districts_now - districts_before
+
+    if len(districts_before) <= 3 and added:
+        return True
+
+    return False
 
 
 def parse_xml(xml):
@@ -202,22 +259,30 @@ def parse_xml(xml):
         event['references'] = [ref.split(',')[1] for ref in xml_dict['references'].split(' ')]
 
     if event['msg_type'] == 'Update':
-        old_events = list(db.by_ids(event['references']))
-        from .generate.blocks import changes  # Prevent circular dependency
+        old_events = list(db.by_ids(event.get('extended_references', event['references'])))
+
+        if not any(e['published'] for e in old_events):
+            extended_references = set()
+            extended_references.update(event.get('extended_references', event['references']))
+
+            for old_event in old_events:
+                if 'extended_references' in old_event:
+                    extended_references.update(old_event['extended_references'])
+                elif 'references' in old_event:
+                    extended_references.update(old_event['references'])
+
+            event['extended_references'] = sorted(extended_references, reverse=True)
+
+            old_events = list(db.by_ids(extended_references))
 
         event['has_changes'] = [
             {
                 'id': old_event['id'],
-                'changed': bool(changes(event, old_event)),
+                'changed': is_changed(event, old_event),
                 'published': old_event['published'],
             }
             for old_event in old_events
         ]
-
-        if not any(t['published'] for t in event['has_changes']):
-            for old_event in old_events:
-                if 'references' in old_event:
-                    event['references'].extend(old_event['references'])
 
         event['special_type'] = special_type(event, old_events)
 

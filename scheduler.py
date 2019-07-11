@@ -30,34 +30,26 @@ def update_db():
     # Filter new_events by SEVERITY_FILTER, URGENCY_FILTER and STATES_FILTER
     filtered = []
     for event in new_events:
-        if filter_event(event):
-            if event['msg_type'] in ['Alert', 'Cancel']:
-                filtered.append(event)
+        if event['msg_type'] == 'Cancel' and any(item['published'] for item in event['has_changes']):
+            filtered.append(event)
 
-            elif not any(t['changed'] for t in event['has_changes']):
-                continue
+        elif not filter_event(event):
+            continue
 
-            elif any(t['changed'] for t in event['has_changes']):
-                filtered.append(event)
+        elif event['msg_type'] == 'Alert':
+            filtered.append(event)
 
-            else:
-                sentry.sentry_sdk.capture_message(f'Event was not filtered: {event["id"]}')
+        elif any(item['changed'] and item['published'] for item in event['has_changes']):
+            filtered.append(event)
+
+        elif event['special_type'] == 'UpdateAlert':
+            filtered.append(event)
+
+        elif not any(item['changed'] and item['published'] for item in event['has_changes']):
+            continue
 
         else:
-            if event['msg_type'] in ['Alert', 'Cancel']:
-                continue
-
-            else:
-                old_events = db.by_ids(event['references'])
-
-                if any((old_event['published'] and filter_event(old_event)) for old_event in old_events):
-                    filtered.append(event)
-
-                elif not any(old_event['published'] for old_event in old_events):
-                    continue
-
-                else:
-                    sentry.sentry_sdk.capture_message(f'Event was not filtered: {event["id"]}')
+            sentry.sentry_sdk.capture_message(f'Event was not filtered: {event["id"]}')
 
     if not filtered:
         return

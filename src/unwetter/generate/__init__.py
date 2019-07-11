@@ -59,7 +59,7 @@ Telefon DWD: 069-8062-6900
 +++ Allgemeine Information +++
 Die aufgeführten Informationen dürfen als Quelle zur Abwicklung des Unwetter-Workflows genutzt werden.
 
-Die Bereitstellung dieser Information erfolgt durch den Unwetter-Warnassistenten (UWA), ein Produkt des Newsrooms. 
+Die Bereitstellung dieser Information erfolgt durch den Unwetter-Warnassistenten (UWA), ein Produkt des Newsrooms.
 Der UWA wird aktiv weiterentwickelt.
 Kontakt und weitere Informationen: {os.environ["WDR_PROJECT_INFO_URL"]}
 '''.strip()
@@ -71,7 +71,10 @@ Kontakt und weitere Informationen: {os.environ["WDR_PROJECT_INFO_URL"]}
 
 
 def describe_update(event):
-    old_events = [event for event in db.by_ids(event['references']) if event.get('published')]
+    old_events = list(db.by_ids([
+        change_set['id'] for change_set
+        in event['has_changes'] if change_set['published']
+    ])
     change_details = []
 
     for old_event in old_events:
@@ -149,7 +152,7 @@ Telefon DWD: 069-8062-6900
 +++ Allgemeine Information +++
 Die aufgeführten Informationen dürfen als Quelle zur Abwicklung des Unwetter-Workflows genutzt werden.
 
-Die Bereitstellung dieser Information erfolgt durch den Unwetter-Warnassistenten (UWA), ein Produkt des Newsrooms. 
+Die Bereitstellung dieser Information erfolgt durch den Unwetter-Warnassistenten (UWA), ein Produkt des Newsrooms.
 Der UWA wird aktiv weiterentwickelt.
 Kontakt und weitere Informationen: {os.environ["WDR_PROJECT_INFO_URL"]}
 '''.strip()
