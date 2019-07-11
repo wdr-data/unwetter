@@ -89,7 +89,7 @@ https://www.dwd.de/DE/wetter/warnungen/warnWetter_node.html
 
         wina.upload_text(title, text, keywords)
 
-        slack.post_clear_warning(title, text)
+        slack.post_text(title, text)
 
         print('No active events: warn_events_memo OFF')
 

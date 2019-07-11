@@ -139,7 +139,7 @@ _Regionale Zuordnung_: {generate.region_list(event)}
     )
 
 
-def post_clear_warning(title, text):
+def post_text(title, text):
 
     post_message(
         '', attachments=[
