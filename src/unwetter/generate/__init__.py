@@ -46,6 +46,7 @@ TWEET: {tweet(event)}
 
 TV-CRAWL: {crawl(event)}
 
+RADIO: {radio(event)}
 
 +++ DWD +++
 Die Eilmeldung des DWD erreicht OpenMedia in der Regel wenige Minuten nach dieser Meldung.
@@ -138,8 +139,7 @@ TWEET: {tweet(event)}
 
 TV-CRAWL: {crawl(event)}
 
-
-Hinweis: Textvorschläge werden nach redaktionellen Vorgaben automatisch generiert.
+RADIO: {radio(event)}
 
 +++ DWD +++
 Die Eilmeldung des DWD erreicht OpenMedia in der Regel wenige Minuten nach dieser Meldung.
