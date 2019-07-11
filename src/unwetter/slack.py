@@ -139,6 +139,31 @@ _Regionale Zuordnung_: {generate.region_list(event)}
     )
 
 
+def post_clear_warning():
+
+    text = '''
+AKTUALISIERUNG:
+Der Deutsche Wetterdienst gibt für NRW zurzeit keine Warnungen der Kategorie 3 und 4 mehr aus
+ - also vor Unwetter oder extremem Unwetter. Damit besteht keine Warnpflicht mehr. Es kann allerdings nach wie vor
+  markante Wetterlagen geben - alle Informationen dazu auf einen Blick hier:
+
+UWA-Kartentool: www.wdr.de/k/unwetterkarte
+
+Vgl. NRW auf Website des Deutschen Wetterdienstes:
+https://www.dwd.de/DE/wetter/warnungen/warnWetter_node.html
+    '''.strip()
+
+    post_message(
+        '', attachments=[
+            {
+                'fallback': 'Warnfplicht für NRW aufgehoben',
+                'title': 'Warnpflicht für NRW aufgehoben.',
+                'text': text,
+            }
+        ]
+    )
+
+
 def post_event_old(event):
     post_message(generate.description(event, short=True), attachments=[
         {
