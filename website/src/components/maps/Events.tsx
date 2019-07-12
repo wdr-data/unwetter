@@ -98,10 +98,7 @@ const Events: React.FC<RouteComponentProps> = () => {
     [setEvents, setFilteredEvents, setEventsLoading]
   );
 
-  const isSelected = useCallback(
-    event => filteredEvents.findIndex(fev => fev === event) !== -1,
-    [filteredEvents]
-  );
+  const isSelected = useCallback(event => filteredEvents.findIndex(fev => fev === event) !== -1, [filteredEvents]);
 
   const toggleEvent = useCallback(
     event => {
@@ -119,10 +116,7 @@ const Events: React.FC<RouteComponentProps> = () => {
     [filteredEvents, isSelected, doMapRefresh]
   );
 
-  const refreshMap = useCallback(async () => doMapRefresh(filteredEvents), [
-    filteredEvents,
-    doMapRefresh
-  ]);
+  const refreshMap = useCallback(async () => doMapRefresh(filteredEvents), [filteredEvents, doMapRefresh]);
 
   const refreshEvents = useCallback(async () => {
     const m = moment(`${date}T${time}`);
@@ -218,8 +212,7 @@ const Events: React.FC<RouteComponentProps> = () => {
           <Paper className={styles.paper}>
             <Typography variant="h5">Zeitpunkt der Meldung</Typography>
             <Typography variant="subtitle1">
-              Zeigt alle Meldungen des DWD zum ausgewähltem Zeitpunkt mit Stufe
-              2, 3 oder 4 auf der Karte an
+              Zeigt alle Meldungen des DWD zum ausgewähltem Zeitpunkt mit Stufe 2, 3 oder 4 auf der Karte an
             </Typography>
             <TextField
               label="Datum"
@@ -242,40 +235,25 @@ const Events: React.FC<RouteComponentProps> = () => {
               onChange={changeTimeHandler}
             />
             <br />
-            <Button
-              color="secondary"
-              variant="contained"
-              onClick={refreshEvents}
-            >
+            <Button color="secondary" variant="contained" onClick={refreshEvents}>
               Anwenden
             </Button>
             {eventsLoading ? <Loader /> : <></>}
           </Paper>
           <Paper className={styles.paper}>
             <Typography variant="h5">Tafeltext anpassen</Typography>
-            <Typography variant="subtitle1">
-              Text bitte sinnvoll umbrechen und ausrichten
-            </Typography>
+            <Typography variant="subtitle1">Text bitte sinnvoll umbrechen und ausrichten</Typography>
             <Grid container spacing={2}>
               <Grid item xs={9}>
                 <FormControl fullWidth>
-                  <TextField
-                    inputRef={textRef}
-                    margin="normal"
-                    multiline
-                    onChange={changeTextHandler}
-                  />
+                  <TextField inputRef={textRef} margin="normal" multiline onChange={changeTextHandler} />
                   <FormHelperText>Text</FormHelperText>
                 </FormControl>
               </Grid>
 
               <Grid item xs={3}>
                 <FormControl fullWidth>
-                  <Select
-                    label="Ecke"
-                    onChange={changeCornerHandler}
-                    value={corner}
-                  >
+                  <Select label="Ecke" onChange={changeCornerHandler} value={corner}>
                     <MenuItem value="nw">Oben Links</MenuItem>
                     <MenuItem value="sw">Unten Links</MenuItem>
                     <MenuItem value="se">Unten Rechts</MenuItem>
@@ -285,12 +263,7 @@ const Events: React.FC<RouteComponentProps> = () => {
                 <br />
 
                 <FormControl fullWidth>
-                  <TextField
-                    margin="normal"
-                    type="number"
-                    defaultValue={size}
-                    onChange={changeSizeHandler}
-                  />
+                  <TextField margin="normal" type="number" defaultValue={size} onChange={changeSizeHandler} />
                   <FormHelperText>Schriftgröße</FormHelperText>
                 </FormControl>
               </Grid>
@@ -302,9 +275,7 @@ const Events: React.FC<RouteComponentProps> = () => {
           </Paper>
           <Paper className={styles.paper}>
             <Typography variant="h5">Meldungen</Typography>
-            <Typography variant="subtitle1">
-              Einzelne Meldungen können aus der Karte ausgeschlossen werden
-            </Typography>
+            <Typography variant="subtitle1">Einzelne Meldungen können aus der Karte ausgeschlossen werden</Typography>
             <Table>
               <TableHead>
                 <TableRow>
@@ -332,8 +303,7 @@ const Events: React.FC<RouteComponentProps> = () => {
                         {event.headline}
                       </TableCell>
                       <TableCell>
-                        {moment.unix(event.onset).format("HH:mm")} -{" "}
-                        {moment.unix(event.expires).format("HH:mm")}
+                        {moment.unix(event.onset).format("HH:mm")} - {moment.unix(event.expires).format("HH:mm")}
                       </TableCell>
                     </TableRow>
                   );
@@ -355,11 +325,7 @@ const Events: React.FC<RouteComponentProps> = () => {
               onLoad={onMapLoad}
             />
             {!mapLoading && initialLoadingComplete ? (
-              <a
-                href={`/map?${mapQuery}`}
-                download
-                className={styles.downloadButton}
-              >
+              <a href={`/map?${mapQuery}`} download className={styles.downloadButton}>
                 <Button color="primary" variant="contained">
                   Download
                 </Button>
@@ -379,8 +345,7 @@ const Events: React.FC<RouteComponentProps> = () => {
               <span role="img" aria-label="Rakete">
                 🚀
               </span>{" "}
-              —{" "}
-              <a href="https://www.wdr.de/k/uwa">Informationen &amp; Kontakt</a>
+              — <a href="https://www.wdr.de/k/uwa">Informationen &amp; Kontakt</a>
             </Typography>
           </Paper>
         </Grid>
@@ -394,10 +359,7 @@ const Events: React.FC<RouteComponentProps> = () => {
         onClose={handleEventNotFoundClose}
         autoHideDuration={6000}
       >
-        <SnackbarContent
-          className={styles.error}
-          message={<span>Meldung nicht mehr gültig!</span>}
-        />
+        <SnackbarContent className={styles.error} message={<span>Meldung nicht mehr gültig!</span>} />
       </Snackbar>
     </div>
   );
