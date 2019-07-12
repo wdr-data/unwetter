@@ -146,7 +146,7 @@ def query(severities, states, urgencies, limit=50, filter=None):
 
     if len(states) == 1:
         filter['states'] = states[0]
-    else:
+    elif len(states) > 1:
         filter['$or'] = [{'states': state} for state in states]
 
     events = collection.find(filter).sort([('sent', pymongo.DESCENDING)]).limit(limit)
@@ -193,7 +193,7 @@ def current_events(at=None, all_severities=True):
 
     results = query(
         ['Minor', 'Moderate', 'Severe', 'Extreme'],
-        config.STATES_FILTER,
+        [],
         ['Immediate'],
         filter=filter,
     )
@@ -206,6 +206,11 @@ def current_events(at=None, all_severities=True):
     filteredResults = []
 
     for result in results:
+        if len(set(result['states']) - set(config.STATES_FILTER)) == len(result['states']):
+            continue
+
+        if not all_severities and result['severity'] not in config.SEVERITY_FILTER:
+            continue
 
         for other in results:
             if result['id'] in other.get('references', []):
@@ -213,6 +218,10 @@ def current_events(at=None, all_severities=True):
 
             filter = {
                 'references': result['id'],
+                '$or': [
+                    {'expires': {'$lte': at}},
+                    {'msg_type': 'Cancel'},
+                ]
             }
 
             double_check = collection.find(filter).limit(1)
@@ -220,9 +229,6 @@ def current_events(at=None, all_severities=True):
                 break
 
         else:
-            if not all_severities and result['severity'] not in config.SEVERITY_FILTER:
-                continue
-
             filteredResults.append(result)
 
     return sorted(filteredResults, key=map.severity_key, reverse=True)
