@@ -62,7 +62,7 @@ def upload_ids(ids):
 def upload(files):
     """
     Uploads a WINA-XML file to a provided server via explicit FTP with TLS Protocol.
-    :param: files: List of DWD BytesIO(from_id(id)
+    :param: files: List of DWD BytesIO(from_id(id))
     :return: Status code
     """
 
