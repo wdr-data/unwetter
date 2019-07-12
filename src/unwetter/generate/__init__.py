@@ -303,7 +303,7 @@ def radio(event):
     else:
         regions = regions_
 
-    kind = re.sub(r'.*vor ', '', event['event']).replace('SCHWERES', 'SCHWEREM')
+    kind = re.sub(r'.*vor ', '', event['headline'])
 
     if 'Freien!' in event['instruction']:
         instruction = '\nVermeiden Sie möglichst den Aufenthalt im Freien.\n'
@@ -311,27 +311,31 @@ def radio(event):
         instruction = ''
 
     if event['severity'] == 'Extreme':
-        start_indexes = [m.start() for m in re.finditer('EXT', event["event"])]
-        extreme_parameter = []
+        start_indexes = [m.start() for m in re.finditer('EXTREM', event["event"])]
+        extreme_parameters = []
         for index in start_indexes:
-            extreme_parameter.append(
-                event['event'][index:].split(',')[0].split('und')[0].strip().split(' ')[-1].lower().capitalize())
-        extreme_text = f'\nBei der Warnung vor {" und ".join(extreme_parameter)}' \
+            param = event['event'][index:]
+            for delim in [',', 'und', 'mit']:
+                param = param.split(delim)[0]
+            extreme_parameters.append(param.strip().split(' ')[-1])
+
+        extreme_text = f'\nBei der Warnung vor {" und ".join(extreme_parameters)}' \
                        f' gilt im Moment die HÖCHSTMÖGLICHE WARNSTUFE.\n'
     else:
         extreme_text = ''
+
     parameter_text = ''
 
-    params = [{param: (value.replace("[", "").replace("]", ""))} for param, value in event['parameters'].items()]
+    params = {param: (value.replace("[", "").replace("]", "")) for param, value in event['parameters'].items()}
 
-    for param in params:
-        if 'Niederschlag' in param:
-            rain = param['Niederschlag'].replace('in 1h', 'pro Stunde').replace('in 6h', 'in 6 Stunden')
+    for param, value in params.items():
+        if param == 'Niederschlag':
+            rain = value.replace('in 1h', 'pro Stunde').replace('in 6h', 'in 6 Stunden')
             parameter_text += f"\nEs kann bis zu {rain} regnen."
-        if 'Böen' in param:
-            parameter_text += f"\nDie Sturmböen können Geschwindigkeiten von bis zu {param['Böen']} erreichen."
-        if 'Schneefall' in param:
-            parameter_text += f"\nEs können bis zu {param['Schneefall']} Schnee pro Stunde fallen."
+        if param == 'Böen':
+            parameter_text += f"\nDie Sturmböen können Geschwindigkeiten von bis zu {value} erreichen."
+        if param == 'Schneefall':
+            parameter_text += f"\nEs können bis zu {value} Schnee pro Stunde fallen."
 
     radio_text = f'''
 Das Wetter in Nordrhein-Westfalen mit einer Unwetterwarnung des Deutschen Wetterdienstes – und zwar für {regions}.
