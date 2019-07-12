@@ -87,10 +87,10 @@ https://www.dwd.de/DE/wetter/warnungen/warnWetter_node.html
 
         keywords = 'Unwetter, UWA, Keine Warnpflicht'
 
-        title_wina = 'Amtliche Unwetterwarnung des DWD (UWA) - Keine Warnpflicht'
+        title_wina = 'Amtliche Unwetterwarnung des DWD (UWA) - Warnpflicht aufgehoben'
         wina.upload_text(title_wina, text, keywords)
 
-        title_slack = 'Warnfplicht für NRW aufgehoben'
+        title_slack = 'Warnpflicht für NRW aufgehoben'
         slack.post_text(title_slack, text)
 
         print('No active events: warn_events_memo OFF')
