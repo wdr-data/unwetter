@@ -184,7 +184,7 @@ def publish(ids):
 
 def current_events(at=None, all_severities=True):
     if not at:
-        at = datetime.now()
+        at = datetime.utcnow()
 
     filter = {
         'expires': {'$gte': at},
