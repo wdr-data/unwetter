@@ -6,7 +6,6 @@ SEVERITY_FILTER:
   - Severe
   - Extreme
 
-
 # Which states to track
 # Possible values: SH, HH, NI, HB, NW, HE, RP, BW, BY, SL, BE, BB, NV, SN, ST, TH
 STATES_FILTER:
@@ -16,4 +15,3 @@ STATES_FILTER:
 # Possible values: Future ("Vorabinformation") and Immediate ("Warnung")
 URGENCY_FILTER:
   - Immediate
-  - Future
