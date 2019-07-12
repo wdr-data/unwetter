@@ -54,7 +54,7 @@ def update_db():
     if filtered:
         db.publish([event['id'] for event in filtered])
 
-        wina.upload([event['id'] for event in filtered])
+        wina.upload_ids([event['id'] for event in filtered])
 
         for event in filtered:
             print(f'Sending event {event["id"]} to Slack')
@@ -72,7 +72,26 @@ def post_clear_warning():
     elif db.warn_events_memo() and not currently_events:
         db.set_warn_events_memo(False)
 
-        slack.post_clear_warning()
+        text = '''
+AKTUALISIERUNG:
+Der Deutsche Wetterdienst gibt für NRW zurzeit keine Warnungen der Kategorie 3 (rot) und 4 (violett) mehr aus -
+also vor Unwetter oder extremem Unwetter. Damit besteht keine Warnpflicht mehr. Es kann allerdings nach wie vor
+markante Wetterlagen geben - alle Informationen dazu auf einen Blick hier:
+
+UWA-Karten: www.wdr.de/k/unwetterkarte
+(Keine roten und violetten Unwettergebiete)
+
+https://www.dwd.de/DE/wetter/warnungen/warnWetter_node.html
+(Vgl. NRW auf Website des Deutschen Wetterdienstes)
+'''.strip()
+
+        keywords = 'Unwetter, UWA, Keine Warnpflicht'
+
+        title_wina = 'Amtliche Unwetterwarnung des DWD (UWA) - Warnpflicht aufgehoben'
+        wina.upload_text(title_wina, text, keywords)
+
+        title_slack = 'Warnpflicht für NRW aufgehoben'
+        slack.post_text(title_slack, text)
 
         print('No active events: warn_events_memo OFF')
 
