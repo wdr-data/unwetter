@@ -1,6 +1,7 @@
 #!/user/bin/env python3.6
 
-import os, re
+import os
+import re
 
 from .. import db
 from .blocks import *
