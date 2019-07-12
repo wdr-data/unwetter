@@ -51,7 +51,7 @@ def wina_xml(sent, title, text, keywords):
 
 def upload_text(title, text, keywords):
 
-    sent = generate.local_time(datetime.utcnow())
+    sent = generate.local_time(datetime.utcnow()).strftime('%Y%m%dT%H%M%S,000')
     upload([BytesIO(wina_xml(sent, title, text, keywords))])
 
 
