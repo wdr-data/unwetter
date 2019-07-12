@@ -198,10 +198,6 @@ def current_events(at=None, all_severities=True):
 
             filter = {
                 'references': result['id'],
-                '$or': [
-                    {'expires': {'$lte': at}},
-                    {'msg_type': 'Cancel'}
-                ]
             }
 
             double_check = collection.find(filter).limit(1)
