@@ -6,6 +6,7 @@ import os
 import ssl
 from html import escape
 from datetime import datetime
+from uuid import uuid4
 
 from . import db, generate
 
@@ -86,8 +87,8 @@ def upload(files):
 
         ftps.prot_p()
 
-        for id, file in zip(ids, files):
+        for file in files:
             file.seek(0)
-            print(ftps.storbinary(f'STOR {id}.xml', file))
+            print(ftps.storbinary(f'STOR uwa_{uuid4()}.xml', file))
 
         print(ftps.quit())
