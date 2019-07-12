@@ -56,6 +56,8 @@ def update_db():
 
         wina.upload_ids([event['id'] for event in filtered])
 
+        db.set_breaking_memo(True)
+
         for event in filtered:
             print(f'Sending event {event["id"]} to Slack')
             slack.post_event(event)
@@ -71,6 +73,7 @@ def post_clear_warning():
         print('Active events: warn events memo ON')
     elif db.warn_events_memo() and not currently_events:
         db.set_warn_events_memo(False)
+        db.set_breaking_memo(False)
 
         text = '''
 AKTUALISIERUNG:

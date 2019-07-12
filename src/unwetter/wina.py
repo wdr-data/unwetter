@@ -27,7 +27,7 @@ def from_id(id):
     keywords = generate.keywords(event)
 
     breaking = False
-    if not db.warn_events_memo():
+    if not db.breaking_memo():
         breaking = True
     elif event['severity'] == 'Extreme':
         breaking = True
