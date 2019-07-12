@@ -2,10 +2,11 @@
 
 import os
 from functools import lru_cache
+from datetime import datetime
 
 import pymongo
 
-from . import sentry
+from . import sentry, config, map
 
 
 try:
@@ -42,6 +43,36 @@ def last_updated():
         return collection_meta.find_one({'id': 'last_updated'})['at']
     except TypeError:
         return None
+
+
+def warn_events_memo():
+    try:
+        return collection_meta.find_one({'id': 'warn_events_memo'})['active']
+    except TypeError:
+        return None
+
+
+def set_warn_events_memo(active):
+    collection_meta.replace_one(
+        {'id': 'warn_events_memo'},
+        {'id': 'warn_events_memo', 'active': active},
+        upsert=True
+    )
+
+
+def breaking_memo():
+    try:
+        return collection_meta.find_one({'id': 'breaking_memo'})['active']
+    except TypeError:
+        return None
+
+
+def set_breaking_memo(active):
+    collection_meta.replace_one(
+        {'id': 'breaking_memo'},
+        {'id': 'breaking_memo', 'active': active},
+        upsert=True
+    )
 
 
 def update():
@@ -150,6 +181,51 @@ def publish(ids):
 
     collection.update_many({"id": {"$in": ids}}, {"$set": {"published": True}})
 
+
+def current_events(at=None, all_severities=True):
+    if not at:
+        at = datetime.now()
+
+    filter = {
+        'expires': {'$gte': at},
+        'effective': {'$lte': at},
+    }
+
+    results = query(
+        ['Minor', 'Moderate', 'Severe', 'Extreme'],
+        config.STATES_FILTER,
+        ['Immediate'],
+        filter=filter,
+    )
+
+    results = list(results)
+
+    if not results:
+        return []
+
+    filteredResults = []
+
+    for result in results:
+
+        for other in results:
+            if result['id'] in other.get('references', []):
+                break
+
+            filter = {
+                'references': result['id'],
+            }
+
+            double_check = collection.find(filter).limit(1)
+            if double_check.count():
+                break
+
+        else:
+            if not all_severities and result['severity'] not in config.SEVERITY_FILTER:
+                continue
+
+            filteredResults.append(result)
+
+    return sorted(filteredResults, key=map.severity_key, reverse=True)
 
 
 def clear():

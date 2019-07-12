@@ -108,6 +108,8 @@ def slack_event():
 
         if action['name'] == 'twitter':
             response = '*Vorschlag Tweet*:\n' + generate.tweet(event)
+        elif action['name'] == 'radio':
+            response = '*Vorschlag Radionachrichten*:\n' + generate.radio(event)
         elif action['name'] == 'crawl':
             response = '*Vorschlag TV-Crawl:*\n' + generate.crawl(event)
         elif action['name'] == 'dwd':
@@ -120,7 +122,7 @@ def slack_event():
 
             response = f'''
 Diese Meldung basiert auf offiziellen Informationen des Deutschen Wetterdienstes:
-https://www.dwd.de/DE/wetter/warnungen_gemeinden/warnkarten/warnWetter_nrw_node.html?bundesland=nrw
+https://www.dwd.de/DE/wetter/warnungen/warnWetter_node.html
 
 Die Bereitstellung dieser Information ist ein Projekt des Digitalen Wandels und wird aktiv weiterentwickelt.
 Informationen und Kontakt: {os.environ["WDR_PROJECT_INFO_URL"]}
@@ -175,61 +177,24 @@ def error():
 def api_v1_current_events():
     at = request.args.get("at")
 
-    if not at:
-        at = datetime.now()
-    else:
+    if at:
         at = datetime.utcfromtimestamp(int(at))
 
-    filter = {
-        'expires': {'$gte': at},
-        'effective': {'$lte': at},
-    }
+    current_events = db.current_events(at=at, all_severities=True)
+    filtered_events = []
 
-    results = db.query(
-        ['Minor', 'Moderate', 'Severe', 'Extreme'],
-        STATES_FILTER,
-        ['Immediate'],
-        filter=filter,
-    )
+    for event in current_events:
+        if event['severity'] == 'Minor':
+            continue
 
-    results = list(results)
+        del event['_id']
+        del event['geometry']
+        for field in ('sent', 'effective', 'onset', 'expires'):
+            event[field] = event[field].replace(tzinfo=timezone.utc).timestamp()
 
-    if not results:
-        return json.dumps([])
+        filtered_events.append(event)
 
-    filteredResults = []
-
-    for result in results:
-
-        for other in results:
-            if result['id'] in other.get('references', []):
-                break
-
-            filter = {
-                'references': result['id'],
-                '$or': [
-                    {'expires': {'$lte': at}},
-                    {'msg_type': 'Cancel'}
-                ]
-            }
-
-            double_check = db.collection.find(filter).limit(1)
-            if double_check.count():
-                break
-
-        else:
-
-            if result['severity'] == 'Minor':
-                continue
-
-            del result['_id']
-            del result['geometry']
-            for field in ('sent', 'effective', 'onset', 'expires'):
-                result[field] = result[field].replace(tzinfo=timezone.utc).timestamp()
-
-            filteredResults.append(result)
-
-    return json.dumps(sorted(filteredResults, key=map.severity_key, reverse=True))
+    return json.dumps(sorted(filtered_events, key=map.severity_key, reverse=True))
 
 
 # Serve React App
@@ -241,7 +206,3 @@ def serve(path):
         return send_from_directory(app.static_folder, path)
     else:
         return send_from_directory(app.static_folder, 'index.html')
-
-
-if __name__ == '__main__':
-    db.update()

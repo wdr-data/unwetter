@@ -5,6 +5,8 @@ from io import BytesIO
 import os
 import ssl
 from html import escape
+from datetime import datetime
+from uuid import uuid4
 
 from . import db, generate
 
@@ -21,24 +23,62 @@ def from_id(id):
     event = db.by_id(id)
     sent = generate.local_time(event['sent']).strftime('%Y%m%dT%H%M%S,000')
 
-    wina_xml = WINA_TEMPLATE.format(
+    title = generate.title(event, variant='wina_headline')
+    text = generate.description(event)
+    keywords = generate.keywords(event)
+
+    breaking = False
+    if not db.breaking_memo():
+        breaking = True
+    elif event['severity'] == 'Extreme':
+        breaking = True
+
+    return wina_xml(sent, title, text, keywords, breaking)
+
+
+def wina_xml(sent, title, text, keywords='', breaking=False):
+    """
+    Generate wina xml file in iso code 8859-1
+    :param sent: Sent time
+    :param title: headline of wina
+    :param text: body text
+    :param keywords:
+    :param breaking
+    :return:
+    """
+
+    if breaking:
+        priority_number = 1
+    else:
+        priority_number = 3
+
+    return WINA_TEMPLATE.format(
         sent=escape(sent),
-        title=escape(generate.title(event, variant='wina_headline')),
-        keywords=escape(generate.keywords(event)),
-        text=escape(generate.description(event)).replace('\n', '&#xD;&#xA;'),
-    )
+        title=escape(title),
+        keywords=escape(keywords),
+        text=escape(text).replace('\n', '&#xD;&#xA;'),
+        priority_number=priority_number,
+    ).encode('iso-8859-1', errors='ignore')
 
-    return wina_xml.encode('iso-8859-1', errors='ignore')
 
 
-def upload(ids):
+def upload_text(title, text, keywords):
+
+    sent = generate.local_time(datetime.utcnow()).strftime('%Y%m%dT%H%M%S,000')
+    upload([BytesIO(wina_xml(sent, title, text, keywords))])
+
+
+def upload_ids(ids):
+    files = [BytesIO(from_id(id)) for id in ids]
+    return upload(files)
+
+
+def upload(files):
     """
     Uploads a WINA-XML file to a provided server via explicit FTP with TLS Protocol.
-    :param: ids: List of DWD IDs
+    :param: files: List of DWD BytesIO(from_id(id))
     :return: Status code
     """
-
-    files = [BytesIO(from_id(id)) for id in ids]
 
     logins = [
         ('NVS_FTP_URL', 'NVS_FTP_USER', 'NVS_FTP_PASS'),
@@ -60,8 +100,8 @@ def upload(ids):
 
         ftps.prot_p()
 
-        for id, file in zip(ids, files):
+        for file in files:
             file.seek(0)
-            print(ftps.storbinary(f'STOR {id}.xml', file))
+            print(ftps.storbinary(f'STOR uwa_{uuid4()}.xml', file))
 
         print(ftps.quit())

@@ -99,6 +99,15 @@ def title(event, variant='default'):
             'cancelled_wrong': '- Meldung zurückgezogen',
             'irrelevant': '- Aktualisierung',
             'unknown': '- Unbekannter Meldungstyp',
+        },
+        'wina_body': {
+            'new_event': 'Neue Meldung',
+            'event_relevant_again': 'Erneut relevant',
+            'cancelled_prematurely': 'Vorzeitige Aufhebung',
+            'updated': 'Aktualisierung',
+            'cancelled_wrong': 'Meldung zurückgezogen',
+            'irrelevant': 'Aktualisierung',
+            'unknown': 'Unbekannter Meldungstyp',
         }
     }
 
@@ -122,8 +131,18 @@ def title(event, variant='default'):
 
     if variant == 'default':
         return f'{extention}: {event["headline"]}'
+    elif variant == 'wina_body':
+        if event['severity'] == 'Extreme':
+            extreme = '\nHÖCHSTE WARNSTUFE (Stufe 4, violett)\n'
+        else:
+            extreme = ''
+        return f'{extention.upper()}\n{extreme}\n{event["headline"]}'
     elif variant == 'wina_headline':
-        return f'Amtliche Unwetterwarnung des DWD (UWA) {extention}'
+        if event['severity'] == 'Extreme':
+            extreme = '- Höchste Warnstufe '
+        else:
+            extreme = ''
+        return f'Amtliche Unwetterwarnung des DWD (UWA) {extreme}{extention}'
 
 
 def dates(event):
@@ -191,19 +210,21 @@ def changes(event, old_event):
     text = ''
 
     simple_fields = {
-        'event': 'Wetterphänomen',
         'severity': 'Warnstufe',
+        'event': 'Wetterphänomen',
         'certainty': 'Wahrscheinlichkeit',
     }
 
     for field in simple_fields:
         if old_event.get(field) != event.get(field):
-            if field == 'severity':
+            if field == 'severity' and event[field] in ['Minor', 'Moderate']:
+                text += f'{simple_fields[field]}: Herabstufung auf {severities[event[field]]}\n\n'
+            elif field == 'severity':
                 text += f'{simple_fields[field]}: {severities[event[field]]} ' \
-                        f'(zuvor "{severities[old_event[field]]}")\n'
+                        f'(zuvor "{severities[old_event[field]]}")\n\n'
             else:
                 text += f'{simple_fields[field]}: {event[field]} ' \
-                        f'(zuvor "{old_event.get(field, "Nicht angegeben")}")\n'
+                        f'(zuvor "{old_event.get(field, "Nicht angegeben")}")\n\n'
 
     # Editorial request to check only, if expires time changed, since every update has new onset-time
     if abs(event['onset'] - event['sent']) > timedelta(minutes=2) and dates(old_event) != dates(event):

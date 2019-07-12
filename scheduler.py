@@ -30,46 +30,73 @@ def update_db():
     # Filter new_events by SEVERITY_FILTER, URGENCY_FILTER and STATES_FILTER
     filtered = []
     for event in new_events:
-        if filter_event(event):
-            if event['msg_type'] in ['Alert', 'Cancel']:
-                filtered.append(event)
+        if event['msg_type'] == 'Cancel' and any(item['published'] for item in event['has_changes']):
+            filtered.append(event)
 
-            elif not any(t['changed'] for t in event['has_changes']):
-                continue
+        elif not filter_event(event):
+            continue
 
-            elif any(t['changed'] for t in event['has_changes']):
-                filtered.append(event)
+        elif event['msg_type'] == 'Alert':
+            filtered.append(event)
 
-            else:
-                sentry.sentry_sdk.capture_message(f'Event was not filtered: {event["id"]}')
+        elif any(item['changed'] and item['published'] for item in event['has_changes']):
+            filtered.append(event)
+
+        elif event['special_type'] == 'UpdateAlert':
+            filtered.append(event)
+
+        elif not any(item['changed'] and item['published'] for item in event['has_changes']):
+            continue
 
         else:
-            if event['msg_type'] in ['Alert', 'Cancel']:
-                continue
+            sentry.sentry_sdk.capture_message(f'Event was not filtered: {event["id"]}')
 
-            else:
-                old_events = db.by_ids(event['references'])
+    if filtered:
+        db.publish([event['id'] for event in filtered])
 
-                if any((old_event['published'] and filter_event(old_event)) for old_event in old_events):
-                    filtered.append(event)
+        wina.upload_ids([event['id'] for event in filtered])
 
-                elif not any(old_event['published'] for old_event in old_events):
-                    continue
+        db.set_breaking_memo(True)
 
-                else:
-                    sentry.sentry_sdk.capture_message(f'Event was not filtered: {event["id"]}')
+        for event in filtered:
+            print(f'Sending event {event["id"]} to Slack')
+            slack.post_event(event)
+            sleep(1)
 
-    if not filtered:
-        return
 
-    db.publish([event['id'] for event in filtered])
+@sched.scheduled_job('interval', minutes=5)
+def post_clear_warning():
 
-    wina.upload([event['id'] for event in filtered])
+    currently_events = db.current_events(all_severities=False)
+    if currently_events:
+        db.set_warn_events_memo(True)
+        print('Active events: warn events memo ON')
+    elif db.warn_events_memo() and not currently_events:
+        db.set_warn_events_memo(False)
+        db.set_breaking_memo(False)
 
-    for event in filtered:
-        print(f'Sending event {event["id"]} to Slack')
-        slack.post_event(event)
-        sleep(1)
+        text = '''
+AKTUALISIERUNG:
+Der Deutsche Wetterdienst gibt für NRW zurzeit keine Warnungen der Kategorie 3 (rot) und 4 (violett) mehr aus -
+also vor Unwetter oder extremem Unwetter. Damit besteht keine Warnpflicht mehr. Es kann allerdings nach wie vor
+markante Wetterlagen geben - alle Informationen dazu auf einen Blick hier:
+
+UWA-Karten: www.wdr.de/k/unwetterkarte
+(Keine roten und violetten Unwettergebiete)
+
+https://www.dwd.de/DE/wetter/warnungen/warnWetter_node.html
+(Vgl. NRW auf Website des Deutschen Wetterdienstes)
+'''.strip()
+
+        keywords = 'Unwetter, UWA, Keine Warnpflicht'
+
+        title_wina = 'Amtliche Unwetterwarnung des DWD (UWA) - Warnpflicht aufgehoben'
+        wina.upload_text(title_wina, text, keywords)
+
+        title_slack = 'Warnpflicht für NRW aufgehoben'
+        slack.post_text(title_slack, text)
+
+        print('No active events: warn_events_memo OFF')
 
 
 sched.start()

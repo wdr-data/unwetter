@@ -1,16 +1,18 @@
 #!/user/bin/env python3.6
 
 import os
+import re
 
 from .. import db
 from .blocks import *
 from .helpers import rreplace, upper_first
 from . import urls
+from ..config import SEVERITY_FILTER, STATES_FILTER
 
 
 def describe_new_event(event):
     text = f'''
-{title(event)}
+{title(event, variant='wina_body')}
 
 
 +++ Gültigkeit +++
@@ -37,20 +39,22 @@ Verhaltenshinweise: {event['instruction'] or ''}
 
 
 +++ Textvorschläge +++
+HINWEIS: Textvorschläge werden nach redaktionellen Vorgaben automatisch generiert.
+Je nach Unwetterlage ist es nötig, sie noch einmal passgenau zu überarbeiten und 
+dabei auch die eventuellen Warnungen vor verschiedenen Unwettergebieten zusammenzufassen.
 
 TWEET: {tweet(event)}
 
 TV-CRAWL: {crawl(event)}
 
-Hinweis: Textvorschläge werden nach redaktionellen Vorgaben automatisch generiert.
-
+RADIO: {radio(event)}
 
 +++ DWD +++
 Die Eilmeldung des DWD erreicht OpenMedia in der Regel wenige Minuten nach dieser Meldung.
 (In einigen Fällen, z.B. kurze Gültigkeit und/oder kleines Gebiet, kann eine Meldung des DWD entfallen!)
 
 Website des Deutschen Wetterdienstes:
-https://www.dwd.de/DE/wetter/warnungen_gemeinden/warnkarten/warnWetter_nrw_node.html?bundesland=nrw
+https://www.dwd.de/DE/wetter/warnungen/warnWetter_node.html
 
 Telefon DWD: 069-8062-6900
 
@@ -58,7 +62,7 @@ Telefon DWD: 069-8062-6900
 +++ Allgemeine Information +++
 Die aufgeführten Informationen dürfen als Quelle zur Abwicklung des Unwetter-Workflows genutzt werden.
 
-Die Bereitstellung dieser Information erfolgt durch den Unwetter-Warnassistenten (UWA), ein Produkt des Newsrooms. 
+Die Bereitstellung dieser Information erfolgt durch den Unwetter-Warnassistenten (UWA), ein Produkt des Newsrooms.
 Der UWA wird aktiv weiterentwickelt.
 Kontakt und weitere Informationen: {os.environ["WDR_PROJECT_INFO_URL"]}
 '''.strip()
@@ -70,7 +74,11 @@ Kontakt und weitere Informationen: {os.environ["WDR_PROJECT_INFO_URL"]}
 
 
 def describe_update(event):
-    old_events = [event for event in db.by_ids(event['references']) if event.get('published')]
+    old_events = list(db.by_ids([
+        change_set['id'] for change_set
+        in event['has_changes'] if change_set['published']
+    ]))
+
     change_details = []
 
     for old_event in old_events:
@@ -79,9 +87,15 @@ def describe_update(event):
         if event['msg_type'] == 'Cancel' or event['response_type'] == 'AllClear':
             change_title = 'Aufhebung von'
             the_changes = ''
-        elif event['special_type'] == 'Irrelevant':
-            change_title = 'Aufhebung von'
+        elif event['special_type'] == 'Irrelevant' and event['severity'] not in SEVERITY_FILTER:
+            change_title = 'Herabstufung von'
             the_changes = (changes(event, old_event) if old_event else 'Unbekannt')
+        elif event['special_type'] == 'Irrelevant' and not any(state in event['states'] for state in STATES_FILTER):
+            change_title = 'Änderungen zur'
+            the_changes = f'Die Unwetterzelle befindet sich nicht ' \
+                          f'mehr im Bundesland {", ".join(STATES_FILTER)}.\n\n ' \
+                          f'Andere Unwetterregionen kônnen noch in NRW aktiv sein! ' \
+                          f'Vergleiche dazu die UWA und DWD Karten.'
         else:
             change_title = 'Änderungen zur'
             the_changes = (changes(event, old_event) if old_event else 'Unbekannt') + '\n'
@@ -95,7 +109,7 @@ def describe_update(event):
     all_changes = f'\n{joined}\n' if change_details else ''
 
     text = f'''
-{title(event)}
+{title(event, variant='wina_body')}
 {all_changes}
 +++ Gültigkeit +++
 
@@ -121,20 +135,22 @@ Verhaltenshinweise: {event['instruction'] or ''}
 
 
 +++ Textvorschläge +++
+HINWEIS: Textvorschläge werden nach redaktionellen Vorgaben automatisch generiert.
+Je nach Unwetterlage ist es nötig, sie noch einmal passgenau zu überarbeiten
+und dabei auch die eventuellen Warnungen vor verschiedenen Unwettergebieten zusammenzufassen.
 
 TWEET: {tweet(event)}
 
 TV-CRAWL: {crawl(event)}
 
-
-Hinweis: Textvorschläge werden nach redaktionellen Vorgaben automatisch generiert.
+RADIO: {radio(event)}
 
 +++ DWD +++
 Die Eilmeldung des DWD erreicht OpenMedia in der Regel wenige Minuten nach dieser Meldung.
 (In einigen Fällen, z.B. kurze Gültigkeit und/oder kleines Gebiet, kann eine Meldung des DWD entfallen!)
 
 Website des Deutschen Wetterdienstes:
-https://www.dwd.de/DE/wetter/warnungen_gemeinden/warnkarten/warnWetter_nrw_node.html?bundesland=nrw
+https://www.dwd.de/DE/wetter/warnungen/warnWetter_node.html
 
 Telefon DWD: 069-8062-6900
 
@@ -142,7 +158,7 @@ Telefon DWD: 069-8062-6900
 +++ Allgemeine Information +++
 Die aufgeführten Informationen dürfen als Quelle zur Abwicklung des Unwetter-Workflows genutzt werden.
 
-Die Bereitstellung dieser Information erfolgt durch den Unwetter-Warnassistenten (UWA), ein Produkt des Newsrooms. 
+Die Bereitstellung dieser Information erfolgt durch den Unwetter-Warnassistenten (UWA), ein Produkt des Newsrooms.
 Der UWA wird aktiv weiterentwickelt.
 Kontakt und weitere Informationen: {os.environ["WDR_PROJECT_INFO_URL"]}
 '''.strip()
@@ -273,3 +289,60 @@ def tweet(event):
         the_tweet = 'Tweet konnte nicht generiert werden, da zu lang'
 
     return upper_first(the_tweet)
+
+
+def radio(event):
+    districts = district_list(event)
+    districts = rreplace(districts, ', ', ' und ', 1)
+
+    regions_ = region_list(event, accusative=True)
+    regions_ = rreplace(regions_, ', ', ' und ', 1)
+
+    if len(district_list(event)) <= 3:
+        regions = districts
+    else:
+        regions = regions_
+
+    kind = re.sub(r'.*vor ', '', event['headline'])
+
+    if 'Freien!' in event['instruction']:
+        instruction = '\nVermeiden Sie möglichst den Aufenthalt im Freien.\n'
+    else:
+        instruction = ''
+
+    if event['severity'] == 'Extreme':
+        start_indexes = [m.start() for m in re.finditer('EXTREM', event["event"])]
+        extreme_parameters = []
+        for index in start_indexes:
+            param = event['event'][index:]
+            for delim in [',', 'und', 'mit']:
+                param = param.split(delim)[0]
+            extreme_parameters.append(param.strip().split(' ')[-1])
+
+        extreme_text = f'\nBei der Warnung vor {" und ".join(extreme_parameters)}' \
+                       f' gilt im Moment die HÖCHSTMÖGLICHE WARNSTUFE.\n'
+    else:
+        extreme_text = ''
+
+    parameter_text = ''
+
+    params = {param: (value.replace("[", "").replace("]", "")) for param, value in event['parameters'].items()}
+
+    for param, value in params.items():
+        if param == 'Niederschlag':
+            rain = value.replace('in 1h', 'pro Stunde').replace('in 6h', 'in 6 Stunden')
+            parameter_text += f"\nEs kann bis zu {rain} regnen."
+        if param == 'Böen':
+            parameter_text += f"\nDie Sturmböen können Geschwindigkeiten von bis zu {value} erreichen."
+        if param == 'Schneefall':
+            parameter_text += f"\nEs können bis zu {value} Schnee pro Stunde fallen."
+
+    radio_text = f'''
+Das Wetter in Nordrhein-Westfalen mit einer Unwetterwarnung des Deutschen Wetterdienstes – und zwar für {regions}.
+Dort kommt es zu {kind}.
+{extreme_text}{instruction}{parameter_text}
+
+Mehr Informationen zur Unwetterlage in NRW gibt es (hier entsprechenden Teaser einfügen (z.B. wdr.de, TV-Sondersendung.)
+    '''.strip()
+
+    return radio_text

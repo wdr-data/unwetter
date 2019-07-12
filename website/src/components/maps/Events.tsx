@@ -1,10 +1,11 @@
-import React, { useState, useCallback, useRef, useLayoutEffect } from "react";
+import React, { useState, useCallback, useRef, useLayoutEffect, useEffect } from "react";
 import Button from "@material-ui/core/es/Button";
 import Checkbox from "@material-ui/core/es/Checkbox";
 import Paper from "@material-ui/core/es/Paper";
 import TextField from "@material-ui/core/es/TextField";
 import FormHelperText from "@material-ui/core/es/FormHelperText";
 import FormControl from "@material-ui/core/es/FormControl";
+import FormControlLabel from "@material-ui/core/es/FormControlLabel";
 import Grid from "@material-ui/core/es/Grid";
 import Select from "@material-ui/core/es/Select";
 import Snackbar from "@material-ui/core/es/Snackbar";
@@ -27,8 +28,8 @@ import { useFormField } from "../hooks/form";
 import Loader from "../util/Loader";
 
 const Events: React.FC<RouteComponentProps> = () => {
-  const [date, changeDateHandler, setDate] = useFormField("");
-  const [time, changeTimeHandler, setTime] = useFormField("");
+  const [date, changeDateHandler_, setDate] = useFormField("");
+  const [time, changeTimeHandler_, setTime] = useFormField("");
 
   const [text, changeTextHandler, setText] = useFormField("");
   const [corner, changeCornerHandler] = useFormField("sw");
@@ -38,6 +39,25 @@ const Events: React.FC<RouteComponentProps> = () => {
   const [mapLoading, setMapLoading] = useState(true);
   const [eventsLoading, setEventsLoading] = useState(false);
   const [initialLoadingComplete, setInitialLoadingComplete] = useState(false);
+
+  const [autoRefresh, setAutoRefresh] = useState(true);
+  const changeAutoRefreshHandler = useCallback(ev => setAutoRefresh(JSON.parse(ev.target.value)), []);
+
+  const changeDateHandler = useCallback(
+    ev => {
+      setAutoRefresh(false);
+      changeDateHandler_(ev);
+    },
+    [changeDateHandler_]
+  );
+
+  const changeTimeHandler = useCallback(
+    ev => {
+      setAutoRefresh(false);
+      changeTimeHandler_(ev);
+    },
+    [changeTimeHandler_]
+  );
 
   const [eventNotFoundOpen, setEventNotFoundOpen] = React.useState(false);
 
@@ -72,7 +92,7 @@ const Events: React.FC<RouteComponentProps> = () => {
   );
 
   const doEventsRefresh = useCallback(
-    async at => {
+    async (at, notify = false) => {
       setEventsLoading(true);
 
       const headers = new Headers();
@@ -88,20 +108,41 @@ const Events: React.FC<RouteComponentProps> = () => {
         cache: "no-cache"
       });
 
-      const events = await (await fetch(req, init)).json();
+      const newEvents = await (await fetch(req, init)).json();
+      const existingIds = events.map(e => e.id);
 
-      setEvents(events);
-      setFilteredEvents(events);
+      if (notify) {
+        for (const newEvent of newEvents) {
+          if (existingIds.includes(newEvent.id)) {
+            continue;
+          }
+          if (["Minor", "Moderate"].includes(newEvent.severity)) {
+            continue;
+          }
+          if (newEvent["msg_type"] === "Alert" || newEvent["special_type"] === "UpdateAlert") {
+            new Notification(`Neue Meldung`, { body: newEvent["event"] });
+          } else if (newEvent["msg_type"] === "Cancel") {
+            new Notification(`Eine Meldung wurde zurückgezogen`, { body: newEvent.event });
+          } else {
+            for (const changeSet of newEvent["has_changes"]) {
+              if (changeSet["changed_minor"]) {
+                new Notification(`Aktualisierung`, { body: newEvent.event });
+                continue;
+              }
+            }
+          }
+        }
+      }
+
+      setEvents(newEvents);
+      setFilteredEvents(newEvents);
       setEventsLoading(false);
-      return events;
+      return newEvents;
     },
-    [setEvents, setFilteredEvents, setEventsLoading]
+    [events, setEvents, setFilteredEvents, setEventsLoading]
   );
 
-  const isSelected = useCallback(
-    event => filteredEvents.findIndex(fev => fev === event) !== -1,
-    [filteredEvents]
-  );
+  const isSelected = useCallback(event => filteredEvents.findIndex(fev => fev === event) !== -1, [filteredEvents]);
 
   const toggleEvent = useCallback(
     event => {
@@ -119,20 +160,50 @@ const Events: React.FC<RouteComponentProps> = () => {
     [filteredEvents, isSelected, doMapRefresh]
   );
 
-  const refreshMap = useCallback(async () => doMapRefresh(filteredEvents), [
-    filteredEvents,
-    doMapRefresh
-  ]);
+  const refreshMap = useCallback(async () => doMapRefresh(filteredEvents), [filteredEvents, doMapRefresh]);
 
-  const refreshEvents = useCallback(async () => {
-    const m = moment(`${date}T${time}`);
-    const at = m.format("X");
-    const events = await doEventsRefresh(at);
+  const refreshEvents = useCallback(
+    async (notify = false) => {
+      const m = moment(`${date}T${time}`);
+      const at = m.format("X");
+      const events = await doEventsRefresh(at, notify);
 
-    doMapRefresh(events);
-  }, [date, time, doMapRefresh, doEventsRefresh]);
+      doMapRefresh(events);
+    },
+    [date, time, doMapRefresh, doEventsRefresh]
+  );
+
+  // Auto refresh
+  useEffect(() => {
+    if (autoRefresh) {
+      const interval = setInterval(() => {
+        if (!dateRef.current || !timeRef.current) {
+          return;
+        }
+
+        const now = moment();
+        const dateString = now.format("YYYY-MM-DD");
+        const timeString = now.format("HH:mm");
+
+        dateRef.current.value = dateString;
+        setDate(dateString);
+
+        timeRef.current.value = timeString;
+        setTime(timeString);
+
+        refreshEvents(true);
+      }, 1000 * 60);
+      return () => {
+        clearInterval(interval);
+      };
+    }
+  }, [autoRefresh, dateRef, timeRef, setDate, setTime, refreshEvents]);
 
   // Initial page setup
+  useEffect(() => {
+    Notification.requestPermission();
+  }, []);
+
   useLayoutEffect(() => {
     if (initialLoadingComplete) {
       return;
@@ -218,8 +289,7 @@ const Events: React.FC<RouteComponentProps> = () => {
           <Paper className={styles.paper}>
             <Typography variant="h5">Zeitpunkt der Meldung</Typography>
             <Typography variant="subtitle1">
-              Zeigt alle Meldungen des DWD zum ausgewähltem Zeitpunkt mit Stufe
-              2, 3 oder 4 auf der Karte an
+              Zeigt alle Meldungen des DWD zum ausgewähltem Zeitpunkt mit Stufe 2, 3 oder 4 auf der Karte an
             </Typography>
             <TextField
               label="Datum"
@@ -241,41 +311,30 @@ const Events: React.FC<RouteComponentProps> = () => {
               }}
               onChange={changeTimeHandler}
             />
+            <FormControlLabel
+              control={<Checkbox checked={autoRefresh} onChange={changeAutoRefreshHandler} value={!autoRefresh} />}
+              label="Automatisch aktualisieren"
+            />
             <br />
-            <Button
-              color="secondary"
-              variant="contained"
-              onClick={refreshEvents}
-            >
+            <Button color="secondary" variant="contained" onClick={refreshEvents}>
               Anwenden
             </Button>
             {eventsLoading ? <Loader /> : <></>}
           </Paper>
           <Paper className={styles.paper}>
             <Typography variant="h5">Tafeltext anpassen</Typography>
-            <Typography variant="subtitle1">
-              Text bitte sinnvoll umbrechen und ausrichten
-            </Typography>
+            <Typography variant="subtitle1">Text bitte sinnvoll umbrechen und ausrichten</Typography>
             <Grid container spacing={2}>
               <Grid item xs={9}>
                 <FormControl fullWidth>
-                  <TextField
-                    inputRef={textRef}
-                    margin="normal"
-                    multiline
-                    onChange={changeTextHandler}
-                  />
+                  <TextField inputRef={textRef} margin="normal" multiline onChange={changeTextHandler} />
                   <FormHelperText>Text</FormHelperText>
                 </FormControl>
               </Grid>
 
               <Grid item xs={3}>
                 <FormControl fullWidth>
-                  <Select
-                    label="Ecke"
-                    onChange={changeCornerHandler}
-                    value={corner}
-                  >
+                  <Select label="Ecke" onChange={changeCornerHandler} value={corner}>
                     <MenuItem value="nw">Oben Links</MenuItem>
                     <MenuItem value="sw">Unten Links</MenuItem>
                     <MenuItem value="se">Unten Rechts</MenuItem>
@@ -285,12 +344,7 @@ const Events: React.FC<RouteComponentProps> = () => {
                 <br />
 
                 <FormControl fullWidth>
-                  <TextField
-                    margin="normal"
-                    type="number"
-                    defaultValue={size}
-                    onChange={changeSizeHandler}
-                  />
+                  <TextField margin="normal" type="number" defaultValue={size} onChange={changeSizeHandler} />
                   <FormHelperText>Schriftgröße</FormHelperText>
                 </FormControl>
               </Grid>
@@ -302,9 +356,7 @@ const Events: React.FC<RouteComponentProps> = () => {
           </Paper>
           <Paper className={styles.paper}>
             <Typography variant="h5">Meldungen</Typography>
-            <Typography variant="subtitle1">
-              Einzelne Meldungen können aus der Karte ausgeschlossen werden
-            </Typography>
+            <Typography variant="subtitle1">Einzelne Meldungen können aus der Karte ausgeschlossen werden</Typography>
             <Table>
               <TableHead>
                 <TableRow>
@@ -332,8 +384,7 @@ const Events: React.FC<RouteComponentProps> = () => {
                         {event.headline}
                       </TableCell>
                       <TableCell>
-                        {moment.unix(event.onset).format("HH:mm")} -{" "}
-                        {moment.unix(event.expires).format("HH:mm")}
+                        {moment.unix(event.onset).format("HH:mm")} - {moment.unix(event.expires).format("HH:mm")}
                       </TableCell>
                     </TableRow>
                   );
@@ -355,11 +406,7 @@ const Events: React.FC<RouteComponentProps> = () => {
               onLoad={onMapLoad}
             />
             {!mapLoading && initialLoadingComplete ? (
-              <a
-                href={`/map?${mapQuery}`}
-                download
-                className={styles.downloadButton}
-              >
+              <a href={`/map?${mapQuery}`} download className={styles.downloadButton}>
                 <Button color="primary" variant="contained">
                   Download
                 </Button>
@@ -379,8 +426,7 @@ const Events: React.FC<RouteComponentProps> = () => {
               <span role="img" aria-label="Rakete">
                 🚀
               </span>{" "}
-              —{" "}
-              <a href="https://www.wdr.de/k/uwa">Informationen &amp; Kontakt</a>
+              — <a href="https://www.wdr.de/k/uwa">Informationen &amp; Kontakt</a>
             </Typography>
           </Paper>
         </Grid>
@@ -394,10 +440,7 @@ const Events: React.FC<RouteComponentProps> = () => {
         onClose={handleEventNotFoundClose}
         autoHideDuration={6000}
       >
-        <SnackbarContent
-          className={styles.error}
-          message={<span>Meldung nicht mehr gültig!</span>}
-        />
+        <SnackbarContent className={styles.error} message={<span>Meldung nicht mehr gültig!</span>} />
       </Snackbar>
     </div>
   );

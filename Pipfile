@@ -27,6 +27,7 @@ pytest = "*"
 pytest-tap = "*"
 mongomock = "*"
 rope = "*"
+jupyter = "*"
 
 [requires]
 python_version = "3.6"
