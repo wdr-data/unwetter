@@ -130,6 +130,20 @@ def is_changed(event, old_event):
     return False
 
 
+def is_changed_minor(event, old_event):
+    """
+    Compares two events and discerns if it has changes that should trigger a
+    notification on the website
+    :param event:
+    :param old_event:
+    :return: bool
+    """
+    if is_changed(event, old_event):
+        return True
+
+    return False
+
+
 def parse_xml(xml):
     """
     Parse event from XML to dictionary
@@ -279,6 +293,7 @@ def parse_xml(xml):
             {
                 'id': old_event['id'],
                 'changed': is_changed(event, old_event),
+                'changed_minor': is_changed_minor(event, old_event),
                 'published': old_event['published'],
             }
             for old_event in old_events
