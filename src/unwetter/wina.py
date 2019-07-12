@@ -57,7 +57,7 @@ def wina_xml(sent, title, text, keywords='', breaking=False):
         title=escape(title),
         keywords=escape(keywords),
         text=escape(text).replace('\n', '&#xD;&#xA;'),
-        priority_number=escape(priority_number),
+        priority_number=priority_number,
     ).encode('iso-8859-1', errors='ignore')
 
 
