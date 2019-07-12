@@ -17,7 +17,7 @@
 <OM_FIELD FieldID = "20" FieldType = "2" FieldName = "Object type" IsEmpty = "no"><OM_INT32>7</OM_INT32></OM_FIELD>
 <OM_FIELD FieldID = "22" FieldType = "2" FieldName = "UpdateUser" IsEmpty = "no"><OM_INT32>18408</OM_INT32></OM_FIELD>
 <OM_FIELD FieldID = "28" FieldType = "3" FieldName = "Last time modifed" IsEmpty = "yes"><OM_DATETIME></OM_DATETIME></OM_FIELD>
-<OM_FIELD FieldID = "59" FieldType = "2" FieldName = "PrioritÃ¤tsnummer" IsEmpty = "no"><OM_INT32>3</OM_INT32></OM_FIELD>
+<OM_FIELD FieldID = "59" FieldType = "2" FieldName = "Prioritätsnummer" IsEmpty = "no"><OM_INT32>{priority_number}</OM_INT32></OM_FIELD>
 <OM_FIELD FieldID = "60" FieldType = "2" FieldName = "Teleprompter" IsEmpty = "yes"><OM_INT32></OM_INT32></OM_FIELD>
 <OM_FIELD FieldID = "61" FieldType = "2" FieldName = "OnAirTrigger" IsEmpty = "yes"><OM_INT32></OM_INT32></OM_FIELD>
 <OM_FIELD FieldID = "62" FieldType = "2" FieldName = "OnAirStatus" IsEmpty = "yes"><OM_INT32></OM_INT32></OM_FIELD>
@@ -28,7 +28,7 @@
 <OM_FIELD FieldID = "128" FieldType = "3" FieldName = "AiredTime" IsEmpty = "yes"><OM_DATETIME></OM_DATETIME></OM_FIELD>
 <OM_FIELD FieldID = "129" FieldType = "4" FieldName = "AiredDuration" IsEmpty = "yes"><OM_TIMESPAN></OM_TIMESPAN></OM_FIELD>
 <OM_FIELD FieldID = "184" FieldType = "3" FieldName = "ChangedDate" IsEmpty = "no"><OM_DATETIME>{sent}</OM_DATETIME></OM_FIELD>
-<OM_FIELD FieldID = "185" FieldType = "1" FieldName = "GeÃ¤ndert von" IsEmpty = "no"><OM_STRING>Bot, Unwetter</OM_STRING></OM_FIELD>
+<OM_FIELD FieldID = "185" FieldType = "1" FieldName = "Geändert von" IsEmpty = "no"><OM_STRING>Bot, Unwetter</OM_STRING></OM_FIELD>
 <OM_FIELD FieldID = "186" FieldType = "2" FieldName = "ChangedVersion" IsEmpty = "no"><OM_INT32>5</OM_INT32></OM_FIELD>
 <OM_FIELD FieldID = "191" FieldType = "2" FieldName = "IconIndex" IsEmpty = "yes"><OM_INT32></OM_INT32></OM_FIELD>
 <OM_FIELD FieldID = "205" FieldType = "3" FieldName = "Deletion Date" IsEmpty = "yes"><OM_DATETIME></OM_DATETIME></OM_FIELD>
