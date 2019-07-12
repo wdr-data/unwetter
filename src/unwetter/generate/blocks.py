@@ -101,13 +101,13 @@ def title(event, variant='default'):
             'unknown': '- Unbekannter Meldungstyp',
         },
         'wina_body': {
-            'new_event': '',
-            'event_relevant_again': '- Erneut relevant',
-            'cancelled_prematurely': '- Vorzeitige Aufhebung',
-            'updated': '- Aktualisierung',
-            'cancelled_wrong': '- Meldung zurückgezogen',
-            'irrelevant': '- Aktualisierung',
-            'unknown': '- Unbekannter Meldungstyp',
+            'new_event': 'Neue Meldung',
+            'event_relevant_again': 'Erneut relevant',
+            'cancelled_prematurely': 'Vorzeitige Aufhebung',
+            'updated': 'Aktualisierung',
+            'cancelled_wrong': 'Meldung zurückgezogen',
+            'irrelevant': 'Aktualisierung',
+            'unknown': 'Unbekannter Meldungstyp',
         }
     }
 
