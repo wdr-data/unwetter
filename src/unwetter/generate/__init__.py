@@ -298,7 +298,7 @@ def radio(event):
     regions_ = region_list(event, accusative=True)
     regions_ = rreplace(regions_, ', ', ' und ', 1)
 
-    if len(district_list(event)) <= 2:
+    if len(district_list(event)) <= 3:
         regions = districts
     else:
         regions = regions_
