@@ -72,16 +72,18 @@ const Events: React.FC<RouteComponentProps> = () => {
 
   const [events, setEvents] = useState<any[]>([]);
   const [filteredEvents, setFilteredEvents] = useState<any[]>([]);
+  const [disabledEvents, setDisabledEvents] = useState<any[]>([]);
 
   const onMapLoad = useCallback(() => setMapLoading(false), [setMapLoading]);
 
   const doMapRefresh = useCallback(
-    (theEvents, theSubtitle = null) => {
+    (theEvents, theDisabledEvents, theSubtitle = null) => {
       if (theSubtitle === null) {
         theSubtitle = subtitle;
       }
       const localMapQuery = queryString.stringify({
         id: theEvents.map((ev: any) => ev.id),
+        disabled: theDisabledEvents.map((ev: any) => ev.id),
         title,
         titleSize,
         subtitle: theSubtitle,
@@ -143,6 +145,7 @@ const Events: React.FC<RouteComponentProps> = () => {
 
       setEvents(newEvents);
       setFilteredEvents(newEvents);
+      setDisabledEvents([]);
       setEventsLoading(false);
       return newEvents;
     },
@@ -154,20 +157,32 @@ const Events: React.FC<RouteComponentProps> = () => {
   const toggleEvent = useCallback(
     event => {
       let filteredEventsNew;
+      let disabledEventsNew;
 
       if (isSelected(event)) {
         filteredEventsNew = filteredEvents.filter(fev => fev !== event);
+        if (["Severe", "Extreme"].includes(event.severity)) {
+          disabledEventsNew = disabledEvents.concat([event]);
+        }
       } else {
         filteredEventsNew = filteredEvents.concat([event]);
+        disabledEventsNew = disabledEvents.filter(fev => fev !== event);
       }
 
       setFilteredEvents(filteredEventsNew);
-      doMapRefresh(filteredEventsNew);
+      if (disabledEventsNew !== undefined) {
+        setDisabledEvents(disabledEventsNew);
+      }
+      doMapRefresh(filteredEventsNew, disabledEventsNew || []);
     },
-    [filteredEvents, isSelected, doMapRefresh]
+    [filteredEvents, disabledEvents, isSelected, doMapRefresh]
   );
 
-  const refreshMap = useCallback(async () => doMapRefresh(filteredEvents), [filteredEvents, doMapRefresh]);
+  const refreshMap = useCallback(async () => doMapRefresh(filteredEvents, disabledEvents), [
+    filteredEvents,
+    disabledEvents,
+    doMapRefresh
+  ]);
 
   const refreshEvents = useCallback(
     async (notify = false) => {
@@ -175,7 +190,7 @@ const Events: React.FC<RouteComponentProps> = () => {
       const at = m.format("X");
       const events = await doEventsRefresh(at, notify);
 
-      doMapRefresh(events);
+      doMapRefresh(events, []);
     },
     [date, time, doMapRefresh, doEventsRefresh]
   );
@@ -266,7 +281,7 @@ const Events: React.FC<RouteComponentProps> = () => {
         subtitleRef.current.value = localText;
       }
 
-      doMapRefresh(events, localText);
+      doMapRefresh(events, [], localText);
     };
 
     setInitialLoadingComplete(true);
