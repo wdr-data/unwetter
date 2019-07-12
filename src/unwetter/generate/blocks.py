@@ -101,13 +101,13 @@ def title(event, variant='default'):
             'unknown': '- Unbekannter Meldungstyp',
         },
         'wina_body': {
-            'new_event': '',
-            'event_relevant_again': '- Erneut relevant',
-            'cancelled_prematurely': '- Vorzeitige Aufhebung',
-            'updated': '- Aktualisierung',
-            'cancelled_wrong': '- Meldung zurückgezogen',
-            'irrelevant': '- Aktualisierung',
-            'unknown': '- Unbekannter Meldungstyp',
+            'new_event': 'Neue Meldung',
+            'event_relevant_again': 'Erneut relevant',
+            'cancelled_prematurely': 'Vorzeitige Aufhebung',
+            'updated': 'Aktualisierung',
+            'cancelled_wrong': 'Meldung zurückgezogen',
+            'irrelevant': 'Aktualisierung',
+            'unknown': 'Unbekannter Meldungstyp',
         }
     }
 
@@ -132,9 +132,17 @@ def title(event, variant='default'):
     if variant == 'default':
         return f'{extention}: {event["headline"]}'
     elif variant == 'wina_body':
-        return f'{extention.upper()}\n\n{event["headline"]}'
+        if event['severity'] == 'Extreme':
+            extreme = '\nHÖCHSTE WARNSTUFE (Stufe 4, violett)\n'
+        else:
+            extreme = ''
+        return f'{extention.upper()}\n{extreme}\n{event["headline"]}'
     elif variant == 'wina_headline':
-        return f'Amtliche Unwetterwarnung des DWD (UWA) {extention}'
+        if event['severity'] == 'Extreme':
+            extreme = '- Höchste Warnstufe '
+        else:
+            extreme = ''
+        return f'Amtliche Unwetterwarnung des DWD (UWA) {extreme}{extention}'
 
 
 def dates(event):

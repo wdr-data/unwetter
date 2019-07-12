@@ -17,7 +17,7 @@
 <OM_FIELD FieldID = "20" FieldType = "2" FieldName = "Object type" IsEmpty = "no"><OM_INT32>7</OM_INT32></OM_FIELD>
 <OM_FIELD FieldID = "22" FieldType = "2" FieldName = "UpdateUser" IsEmpty = "no"><OM_INT32>18408</OM_INT32></OM_FIELD>
 <OM_FIELD FieldID = "28" FieldType = "3" FieldName = "Last time modifed" IsEmpty = "yes"><OM_DATETIME></OM_DATETIME></OM_FIELD>
-<OM_FIELD FieldID = "59" FieldType = "2" FieldName = "Prioritätsnummer" IsEmpty = "no"><OM_INT32>3</OM_INT32></OM_FIELD>
+<OM_FIELD FieldID = "59" FieldType = "2" FieldName = "Prioritätsnummer" IsEmpty = "no"><OM_INT32>{priority_number}</OM_INT32></OM_FIELD>
 <OM_FIELD FieldID = "60" FieldType = "2" FieldName = "Teleprompter" IsEmpty = "yes"><OM_INT32></OM_INT32></OM_FIELD>
 <OM_FIELD FieldID = "61" FieldType = "2" FieldName = "OnAirTrigger" IsEmpty = "yes"><OM_INT32></OM_INT32></OM_FIELD>
 <OM_FIELD FieldID = "62" FieldType = "2" FieldName = "OnAirStatus" IsEmpty = "yes"><OM_INT32></OM_INT32></OM_FIELD>

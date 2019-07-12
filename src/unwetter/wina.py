@@ -27,24 +27,37 @@ def from_id(id):
     text = generate.description(event)
     keywords = generate.keywords(event)
 
-    return wina_xml(sent, title, text, keywords)
+    breaking = False
+    if not db.breaking_memo():
+        breaking = True
+    elif event['severity'] == 'Extreme':
+        breaking = True
+
+    return wina_xml(sent, title, text, keywords, breaking)
 
 
-def wina_xml(sent, title, text, keywords):
+def wina_xml(sent, title, text, keywords='', breaking=False):
     """
     Generate wina xml file in iso code 8859-1
     :param sent: Sent time
     :param title: headline of wina
     :param text: body text
     :param keywords:
+    :param breaking
     :return:
     """
+
+    if breaking:
+        priority_number = 1
+    else:
+        priority_number = 3
 
     return WINA_TEMPLATE.format(
         sent=escape(sent),
         title=escape(title),
         keywords=escape(keywords),
         text=escape(text).replace('\n', '&#xD;&#xA;'),
+        priority_number=escape(priority_number),
     ).encode('iso-8859-1', errors='ignore')
 
 
