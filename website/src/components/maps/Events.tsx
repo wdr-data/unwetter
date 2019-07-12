@@ -1,10 +1,11 @@
-import React, { useState, useCallback, useRef, useLayoutEffect } from "react";
+import React, { useState, useCallback, useRef, useLayoutEffect, useEffect } from "react";
 import Button from "@material-ui/core/es/Button";
 import Checkbox from "@material-ui/core/es/Checkbox";
 import Paper from "@material-ui/core/es/Paper";
 import TextField from "@material-ui/core/es/TextField";
 import FormHelperText from "@material-ui/core/es/FormHelperText";
 import FormControl from "@material-ui/core/es/FormControl";
+import FormControlLabel from "@material-ui/core/es/FormControlLabel";
 import Grid from "@material-ui/core/es/Grid";
 import Select from "@material-ui/core/es/Select";
 import Snackbar from "@material-ui/core/es/Snackbar";
@@ -27,8 +28,8 @@ import { useFormField } from "../hooks/form";
 import Loader from "../util/Loader";
 
 const Events: React.FC<RouteComponentProps> = () => {
-  const [date, changeDateHandler, setDate] = useFormField("");
-  const [time, changeTimeHandler, setTime] = useFormField("");
+  const [date, changeDateHandler_, setDate] = useFormField("");
+  const [time, changeTimeHandler_, setTime] = useFormField("");
 
   const [text, changeTextHandler, setText] = useFormField("");
   const [corner, changeCornerHandler] = useFormField("sw");
@@ -38,6 +39,25 @@ const Events: React.FC<RouteComponentProps> = () => {
   const [mapLoading, setMapLoading] = useState(true);
   const [eventsLoading, setEventsLoading] = useState(false);
   const [initialLoadingComplete, setInitialLoadingComplete] = useState(false);
+
+  const [autoRefresh, setAutoRefresh] = useState(true);
+  const changeAutoRefreshHandler = useCallback(ev => setAutoRefresh(JSON.parse(ev.target.value)), []);
+
+  const changeDateHandler = useCallback(
+    ev => {
+      setAutoRefresh(false);
+      changeDateHandler_(ev);
+    },
+    [changeDateHandler_]
+  );
+
+  const changeTimeHandler = useCallback(
+    ev => {
+      setAutoRefresh(false);
+      changeTimeHandler_(ev);
+    },
+    [changeTimeHandler_]
+  );
 
   const [eventNotFoundOpen, setEventNotFoundOpen] = React.useState(false);
 
@@ -125,6 +145,32 @@ const Events: React.FC<RouteComponentProps> = () => {
 
     doMapRefresh(events);
   }, [date, time, doMapRefresh, doEventsRefresh]);
+
+  // Auto refresh
+  useEffect(() => {
+    if (autoRefresh) {
+      const interval = setInterval(() => {
+        if (!dateRef.current || !timeRef.current) {
+          return;
+        }
+
+        const now = moment();
+        const dateString = now.format("YYYY-MM-DD");
+        const timeString = now.format("HH:mm");
+
+        dateRef.current.value = dateString;
+        setDate(dateString);
+
+        timeRef.current.value = timeString;
+        setTime(timeString);
+
+        refreshEvents();
+      }, 1000 * 60);
+      return () => {
+        clearInterval(interval);
+      };
+    }
+  }, [autoRefresh, dateRef, timeRef, setDate, setTime, refreshEvents]);
 
   // Initial page setup
   useLayoutEffect(() => {
@@ -233,6 +279,10 @@ const Events: React.FC<RouteComponentProps> = () => {
                 shrink: true
               }}
               onChange={changeTimeHandler}
+            />
+            <FormControlLabel
+              control={<Checkbox checked={autoRefresh} onChange={changeAutoRefreshHandler} value={!autoRefresh} />}
+              label="Automatisch aktualisieren"
             />
             <br />
             <Button color="secondary" variant="contained" onClick={refreshEvents}>
