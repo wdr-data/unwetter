@@ -40,14 +40,13 @@ def wina_xml(sent, title, text, keywords):
     :return:
     """
 
-    wina_xml = WINA_TEMPLATE.format(
-            sent=escape(sent),
-            title=escape(title),
-            keywords=escape(keywords),
-            text=escape(text).replace('\n', '&#xD;&#xA;'),
-        )
+    return WINA_TEMPLATE.format(
+        sent=escape(sent),
+        title=escape(title),
+        keywords=escape(keywords),
+        text=escape(text).replace('\n', '&#xD;&#xA;'),
+    ).encode('iso-8859-1', errors='ignore')
 
-    return wina_xml.encode('iso-8859-1', errors='ignore')
 
 
 def upload_text(title, text, keywords):
