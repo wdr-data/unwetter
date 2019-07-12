@@ -108,6 +108,8 @@ def slack_event():
 
         if action['name'] == 'twitter':
             response = '*Vorschlag Tweet*:\n' + generate.tweet(event)
+        elif action['name'] == 'radio':
+            response = '*Vorschlag Radionachrichten*:\n' + generate.radio(event)
         elif action['name'] == 'crawl':
             response = '*Vorschlag TV-Crawl:*\n' + generate.crawl(event)
         elif action['name'] == 'dwd':

@@ -1,6 +1,7 @@
 #!/user/bin/env python3.6
 
 import os
+import re
 
 from .. import db
 from .blocks import *
@@ -46,6 +47,7 @@ TWEET: {tweet(event)}
 
 TV-CRAWL: {crawl(event)}
 
+RADIO: {radio(event)}
 
 +++ DWD +++
 Die Eilmeldung des DWD erreicht OpenMedia in der Regel wenige Minuten nach dieser Meldung.
@@ -133,13 +135,15 @@ Verhaltenshinweise: {event['instruction'] or ''}
 
 
 +++ Textvorschläge +++
+HINWEIS: Textvorschläge werden nach redaktionellen Vorgaben automatisch generiert.
+Je nach Unwetterlage ist es nötig, sie noch einmal passgenau zu überarbeiten
+und dabei auch die eventuellen Warnungen vor verschiedenen Unwettergebieten zusammenzufassen.
 
 TWEET: {tweet(event)}
 
 TV-CRAWL: {crawl(event)}
 
-
-Hinweis: Textvorschläge werden nach redaktionellen Vorgaben automatisch generiert.
+RADIO: {radio(event)}
 
 +++ DWD +++
 Die Eilmeldung des DWD erreicht OpenMedia in der Regel wenige Minuten nach dieser Meldung.
@@ -285,3 +289,60 @@ def tweet(event):
         the_tweet = 'Tweet konnte nicht generiert werden, da zu lang'
 
     return upper_first(the_tweet)
+
+
+def radio(event):
+    districts = district_list(event)
+    districts = rreplace(districts, ', ', ' und ', 1)
+
+    regions_ = region_list(event, accusative=True)
+    regions_ = rreplace(regions_, ', ', ' und ', 1)
+
+    if len(district_list(event)) <= 3:
+        regions = districts
+    else:
+        regions = regions_
+
+    kind = re.sub(r'.*vor ', '', event['headline'])
+
+    if 'Freien!' in event['instruction']:
+        instruction = '\nVermeiden Sie möglichst den Aufenthalt im Freien.\n'
+    else:
+        instruction = ''
+
+    if event['severity'] == 'Extreme':
+        start_indexes = [m.start() for m in re.finditer('EXTREM', event["event"])]
+        extreme_parameters = []
+        for index in start_indexes:
+            param = event['event'][index:]
+            for delim in [',', 'und', 'mit']:
+                param = param.split(delim)[0]
+            extreme_parameters.append(param.strip().split(' ')[-1])
+
+        extreme_text = f'\nBei der Warnung vor {" und ".join(extreme_parameters)}' \
+                       f' gilt im Moment die HÖCHSTMÖGLICHE WARNSTUFE.\n'
+    else:
+        extreme_text = ''
+
+    parameter_text = ''
+
+    params = {param: (value.replace("[", "").replace("]", "")) for param, value in event['parameters'].items()}
+
+    for param, value in params.items():
+        if param == 'Niederschlag':
+            rain = value.replace('in 1h', 'pro Stunde').replace('in 6h', 'in 6 Stunden')
+            parameter_text += f"\nEs kann bis zu {rain} regnen."
+        if param == 'Böen':
+            parameter_text += f"\nDie Sturmböen können Geschwindigkeiten von bis zu {value} erreichen."
+        if param == 'Schneefall':
+            parameter_text += f"\nEs können bis zu {value} Schnee pro Stunde fallen."
+
+    radio_text = f'''
+Das Wetter in Nordrhein-Westfalen mit einer Unwetterwarnung des Deutschen Wetterdienstes – und zwar für {regions}.
+Dort kommt es zu {kind}.
+{extreme_text}{instruction}{parameter_text}
+
+Mehr Informationen zur Unwetterlage in NRW gibt es (hier entsprechenden Teaser einfügen (z.B. wdr.de, TV-Sondersendung.)
+    '''.strip()
+
+    return radio_text
