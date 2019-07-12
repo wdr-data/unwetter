@@ -9,6 +9,8 @@ import FormControlLabel from "@material-ui/core/es/FormControlLabel";
 import Grid from "@material-ui/core/es/Grid";
 import Snackbar from "@material-ui/core/es/Snackbar";
 import SnackbarContent from "@material-ui/core/es/SnackbarContent";
+import Select from "@material-ui/core/es/Select";
+import MenuItem from "@material-ui/core/es/MenuItem";
 import Table from "@material-ui/core/es/Table";
 import TableBody from "@material-ui/core/es/TableBody";
 import TableCell from "@material-ui/core/es/TableCell";
@@ -34,6 +36,8 @@ const Events: React.FC<RouteComponentProps> = () => {
 
   const [subtitle, changeSubtitleHandler, setSubtitle] = useFormField("");
   const [subtitleSize, changeSubtitleSizeHandler] = useFormField("100");
+
+  const [mode, changeModeHandler] = useFormField("wide");
 
   const [mapQuery, setMapQuery] = useState("");
   const [mapLoading, setMapLoading] = useState(true);
@@ -81,7 +85,8 @@ const Events: React.FC<RouteComponentProps> = () => {
         title,
         titleSize,
         subtitle: theSubtitle,
-        subtitleSize
+        subtitleSize,
+        mode
       });
 
       setMapQuery(localMapQuery);
@@ -90,7 +95,7 @@ const Events: React.FC<RouteComponentProps> = () => {
         setMapLoading(true);
       }
     },
-    [mapQuery, title, titleSize, subtitle, subtitleSize]
+    [mapQuery, title, titleSize, subtitle, subtitleSize, mode]
   );
 
   const doEventsRefresh = useCallback(
@@ -363,6 +368,10 @@ const Events: React.FC<RouteComponentProps> = () => {
             <Button color="secondary" variant="contained" onClick={refreshMap}>
               Anwenden
             </Button>
+            <Select label="Format" onChange={changeModeHandler} value={mode}>
+              <MenuItem value="wide">16:9</MenuItem>
+              <MenuItem value="square">Quadratisch</MenuItem>
+            </Select>
           </Paper>
           <Paper className={styles.paper}>
             <Typography variant="h5">Meldungen</Typography>
