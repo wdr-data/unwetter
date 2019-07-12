@@ -22,10 +22,9 @@ def from_id(id):
     event = db.by_id(id)
     sent = generate.local_time(event['sent']).strftime('%Y%m%dT%H%M%S,000')
 
-    sent = sent,
-    title = generate.title(event, variant='wina_headline'),
-    keywords = generate.keywords(event),
+    title = generate.title(event, variant='wina_headline')
     text = generate.description(event)
+    keywords = generate.keywords(event)
 
     return wina_xml(sent, title, text, keywords)
 
