@@ -92,7 +92,7 @@ const Events: React.FC<RouteComponentProps> = () => {
   );
 
   const doEventsRefresh = useCallback(
-    async at => {
+    async (at, notify = false) => {
       setEventsLoading(true);
 
       const headers = new Headers();
@@ -108,14 +108,38 @@ const Events: React.FC<RouteComponentProps> = () => {
         cache: "no-cache"
       });
 
-      const events = await (await fetch(req, init)).json();
+      const newEvents = await (await fetch(req, init)).json();
+      const existingIds = events.map(e => e.id);
 
-      setEvents(events);
-      setFilteredEvents(events);
+      if (notify) {
+        for (const newEvent of newEvents) {
+          if (existingIds.includes(newEvent.id)) {
+            continue;
+          }
+          if (["Minor", "Moderate"].includes(newEvent.severity)) {
+            continue;
+          }
+          if (newEvent["msg_type"] === "Alert" || newEvent["special_type"] === "UpdateAlert") {
+            new Notification(`Neue Meldung`, { body: newEvent["event"] });
+          } else if (newEvent["msg_type"] === "Cancel") {
+            new Notification(`Eine Meldung wurde zurückgezogen`, { body: newEvent.event });
+          } else {
+            for (const changeSet of newEvent["has_changes"]) {
+              if (changeSet["changed_minor"]) {
+                new Notification(`Aktualisierung`, { body: newEvent.event });
+                continue;
+              }
+            }
+          }
+        }
+      }
+
+      setEvents(newEvents);
+      setFilteredEvents(newEvents);
       setEventsLoading(false);
-      return events;
+      return newEvents;
     },
-    [setEvents, setFilteredEvents, setEventsLoading]
+    [events, setEvents, setFilteredEvents, setEventsLoading]
   );
 
   const isSelected = useCallback(event => filteredEvents.findIndex(fev => fev === event) !== -1, [filteredEvents]);
@@ -138,13 +162,16 @@ const Events: React.FC<RouteComponentProps> = () => {
 
   const refreshMap = useCallback(async () => doMapRefresh(filteredEvents), [filteredEvents, doMapRefresh]);
 
-  const refreshEvents = useCallback(async () => {
-    const m = moment(`${date}T${time}`);
-    const at = m.format("X");
-    const events = await doEventsRefresh(at);
+  const refreshEvents = useCallback(
+    async (notify = false) => {
+      const m = moment(`${date}T${time}`);
+      const at = m.format("X");
+      const events = await doEventsRefresh(at, notify);
 
-    doMapRefresh(events);
-  }, [date, time, doMapRefresh, doEventsRefresh]);
+      doMapRefresh(events);
+    },
+    [date, time, doMapRefresh, doEventsRefresh]
+  );
 
   // Auto refresh
   useEffect(() => {
@@ -164,7 +191,7 @@ const Events: React.FC<RouteComponentProps> = () => {
         timeRef.current.value = timeString;
         setTime(timeString);
 
-        refreshEvents();
+        refreshEvents(true);
       }, 1000 * 60);
       return () => {
         clearInterval(interval);
@@ -173,6 +200,10 @@ const Events: React.FC<RouteComponentProps> = () => {
   }, [autoRefresh, dateRef, timeRef, setDate, setTime, refreshEvents]);
 
   // Initial page setup
+  useEffect(() => {
+    Notification.requestPermission();
+  }, []);
+
   useLayoutEffect(() => {
     if (initialLoadingComplete) {
       return;
