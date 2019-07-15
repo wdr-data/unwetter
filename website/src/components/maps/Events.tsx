@@ -344,7 +344,7 @@ const Events: React.FC<RouteComponentProps> = () => {
               label="Automatisch aktualisieren"
             />
             <br />
-            <Button color="secondary" variant="contained" onClick={refreshEvents}>
+            <Button color="secondary" variant="contained" onClick={() => refreshEvents()}>
               Anwenden
             </Button>
             {eventsLoading ? <Loader /> : <></>}
