@@ -24,7 +24,7 @@ COLORS = {
         'Minor': '#ffcc00a0',
         'Moderate': '#ff6600a0',
         'Severe': '#ff0000a0',
-        'Extreme': '#8f0072a8',
+        'Extreme': '#b00087a3',
         'Disabled': '#999999e0',
     },
     'WDR_BLUE': '#00345e',
@@ -248,6 +248,9 @@ def severity_key(event):
 
 
 def generate_map(events, *, mode=Mode.SQUARE, disabled_events=None, title=None, title_size=130, subtitle=None, subtitle_size=110):
+    if disabled_events is None:
+        disabled_events = []
+    
     event_img = Image.new("RGBA", (img_widths[mode], img_height))
     draw = ImageDraw.Draw(event_img)
 
