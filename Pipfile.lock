@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "7816e98ed71cbd4d45d03983529389b81a02e87f3487e7ca0f5297a0fb3d23f0"
+            "sha256": "07f55e71c2afed3395f76f4930f8131479c1ba639898fb05f694f8ce1d46f33c"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -44,6 +44,13 @@
                 "sha256:5b94b49521f6456670fdb30cd82a4eca9412788a93fa6dd6df72c94d5a8ff2d7"
             ],
             "version": "==7.0"
+        },
+        "colorutils": {
+            "hashes": [
+                "sha256:c08d08411b11fa2a5e38f729a23f6ab84a6c92971d76443f575c66a4c308aba6"
+            ],
+            "index": "pypi",
+            "version": "==0.2.1"
         },
         "feedgen": {
             "hashes": [
@@ -301,11 +308,11 @@
         },
         "sentry-sdk": {
             "hashes": [
-                "sha256:14cfbc61e44f7acb18c91b27a0912249c7bf941ecd7e248646e81492464faee0",
-                "sha256:ff50be281cebb77525f0a7ad43aabaf04ee61131ba09885be2544acf959e0451"
+                "sha256:1db9c4653e71d39ff3557c0981d5fb5f43a43e3a830fcf5e21a37c97f7bce6bb",
+                "sha256:7e24f3ec1f4c909306d1b97373fe5caa942f54009acdcfa4d1ee6671f626bbe9"
             ],
             "index": "pypi",
-            "version": "==0.10.0"
+            "version": "==0.10.1"
         },
         "shapely": {
             "hashes": [
@@ -497,10 +504,10 @@
         },
         "jupyter-client": {
             "hashes": [
-                "sha256:11168db0695776d7f6131dbede538435893c94a0c4b51b0206d5ab27e3df6915",
-                "sha256:7bd4bd1baac00e21aa171d2b5f61e709e80810ff43eafe0c266ff2ebe4a5c734"
+                "sha256:73a809a2964afa07adcc1521537fddb58c2ffbb7e84d53dc5901cf80480465b3",
+                "sha256:98e8af5edff5d24e4d31e73bc21043130ae9d955a91aa93fc0bc3b1d0f7b5880"
             ],
-            "version": "==5.3.0"
+            "version": "==5.3.1"
         },
         "jupyter-console": {
             "hashes": [
@@ -679,8 +686,7 @@
         },
         "pyrsistent": {
             "hashes": [
-                "sha256:50cffebc87ca91b9d4be2dcc2e479272bcb466b5a0487b6c271f7ddea6917e14",
-                "sha256:ef7d01d0d9c3655832099fb4f6c6f63734c33cc88c80fdb0c7f554bb25723152"
+                "sha256:50cffebc87ca91b9d4be2dcc2e479272bcb466b5a0487b6c271f7ddea6917e14"
             ],
             "version": "==0.15.3"
         },

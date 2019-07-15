@@ -7,15 +7,15 @@ import FormHelperText from "@material-ui/core/es/FormHelperText";
 import FormControl from "@material-ui/core/es/FormControl";
 import FormControlLabel from "@material-ui/core/es/FormControlLabel";
 import Grid from "@material-ui/core/es/Grid";
-import Select from "@material-ui/core/es/Select";
 import Snackbar from "@material-ui/core/es/Snackbar";
 import SnackbarContent from "@material-ui/core/es/SnackbarContent";
+import Select from "@material-ui/core/es/Select";
+import MenuItem from "@material-ui/core/es/MenuItem";
 import Table from "@material-ui/core/es/Table";
 import TableBody from "@material-ui/core/es/TableBody";
 import TableCell from "@material-ui/core/es/TableCell";
 import TableHead from "@material-ui/core/es/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import MenuItem from "@material-ui/core/es/MenuItem";
 import Typography from "@material-ui/core/es/Typography";
 import classNames from "classnames";
 import moment from "moment";
@@ -31,9 +31,13 @@ const Events: React.FC<RouteComponentProps> = () => {
   const [date, changeDateHandler_, setDate] = useFormField("");
   const [time, changeTimeHandler_, setTime] = useFormField("");
 
-  const [text, changeTextHandler, setText] = useFormField("");
-  const [corner, changeCornerHandler] = useFormField("sw");
-  const [size, changeSizeHandler] = useFormField("100");
+  const [title, changeTitleHandler] = useFormField("Unwetterwarnung in NRW");
+  const [titleSize, changeTitleSizeHandler] = useFormField("125");
+
+  const [subtitle, changeSubtitleHandler, setSubtitle] = useFormField("");
+  const [subtitleSize, changeSubtitleSizeHandler] = useFormField("100");
+
+  const [mode, changeModeHandler] = useFormField("wide");
 
   const [mapQuery, setMapQuery] = useState("");
   const [mapLoading, setMapLoading] = useState(true);
@@ -63,23 +67,28 @@ const Events: React.FC<RouteComponentProps> = () => {
 
   const dateRef = useRef<HTMLInputElement>();
   const timeRef = useRef<HTMLInputElement>();
-  const textRef = useRef<HTMLTextAreaElement>();
+  const titleRef = useRef<HTMLTextAreaElement>();
+  const subtitleRef = useRef<HTMLTextAreaElement>();
 
   const [events, setEvents] = useState<any[]>([]);
   const [filteredEvents, setFilteredEvents] = useState<any[]>([]);
+  const [disabledEvents, setDisabledEvents] = useState<any[]>([]);
 
   const onMapLoad = useCallback(() => setMapLoading(false), [setMapLoading]);
 
   const doMapRefresh = useCallback(
-    (theEvents, theText = null) => {
-      if (theText === null) {
-        theText = text;
+    (theEvents, theDisabledEvents, theSubtitle = null) => {
+      if (theSubtitle === null) {
+        theSubtitle = subtitle;
       }
       const localMapQuery = queryString.stringify({
         id: theEvents.map((ev: any) => ev.id),
-        text: theText,
-        corner,
-        size
+        disabled: theDisabledEvents.map((ev: any) => ev.id),
+        title,
+        titleSize,
+        subtitle: theSubtitle,
+        subtitleSize,
+        mode
       });
 
       setMapQuery(localMapQuery);
@@ -88,7 +97,7 @@ const Events: React.FC<RouteComponentProps> = () => {
         setMapLoading(true);
       }
     },
-    [mapQuery, text, corner, size]
+    [mapQuery, title, titleSize, subtitle, subtitleSize, mode]
   );
 
   const doEventsRefresh = useCallback(
@@ -136,6 +145,7 @@ const Events: React.FC<RouteComponentProps> = () => {
 
       setEvents(newEvents);
       setFilteredEvents(newEvents);
+      setDisabledEvents([]);
       setEventsLoading(false);
       return newEvents;
     },
@@ -147,20 +157,32 @@ const Events: React.FC<RouteComponentProps> = () => {
   const toggleEvent = useCallback(
     event => {
       let filteredEventsNew;
+      let disabledEventsNew;
 
       if (isSelected(event)) {
         filteredEventsNew = filteredEvents.filter(fev => fev !== event);
+        if (["Severe", "Extreme"].includes(event.severity)) {
+          disabledEventsNew = disabledEvents.concat([event]);
+        }
       } else {
         filteredEventsNew = filteredEvents.concat([event]);
+        disabledEventsNew = disabledEvents.filter(fev => fev !== event);
       }
 
       setFilteredEvents(filteredEventsNew);
-      doMapRefresh(filteredEventsNew);
+      if (disabledEventsNew !== undefined) {
+        setDisabledEvents(disabledEventsNew);
+      }
+      doMapRefresh(filteredEventsNew, disabledEventsNew || []);
     },
-    [filteredEvents, isSelected, doMapRefresh]
+    [filteredEvents, disabledEvents, isSelected, doMapRefresh]
   );
 
-  const refreshMap = useCallback(async () => doMapRefresh(filteredEvents), [filteredEvents, doMapRefresh]);
+  const refreshMap = useCallback(async () => doMapRefresh(filteredEvents, disabledEvents), [
+    filteredEvents,
+    disabledEvents,
+    doMapRefresh
+  ]);
 
   const refreshEvents = useCallback(
     async (notify = false) => {
@@ -168,7 +190,7 @@ const Events: React.FC<RouteComponentProps> = () => {
       const at = m.format("X");
       const events = await doEventsRefresh(at, notify);
 
-      doMapRefresh(events);
+      doMapRefresh(events, []);
     },
     [date, time, doMapRefresh, doEventsRefresh]
   );
@@ -235,27 +257,31 @@ const Events: React.FC<RouteComponentProps> = () => {
       const events = await doEventsRefresh(at);
 
       // Draw initial map
-      let localText = "Bitte\nText\neinfügen";
+      let localText = "Bitte Text einfügen";
 
-      if (linkedEventId && textRef.current) {
+      if (titleRef.current) {
+        titleRef.current.value = title;
+      }
+
+      if (linkedEventId && subtitleRef.current) {
         const linkedEvent = events.find(ev => ev.id === linkedEventId);
         if (!linkedEvent) {
           setEventNotFoundOpen(true);
-          setText(localText);
-          textRef.current.value = localText;
+          setSubtitle(localText);
+          subtitleRef.current.value = localText;
           doMapRefresh(events, localText);
           return;
         }
         const warnText = linkedEvent.headline.replace("vor ", "vor\n");
-        textRef.current.value = warnText;
-        setText(warnText);
+        subtitleRef.current.value = warnText;
+        setSubtitle(warnText);
         localText = warnText;
-      } else if (textRef && textRef.current) {
-        setText(localText);
-        textRef.current.value = localText;
+      } else if (subtitleRef && subtitleRef.current) {
+        setSubtitle(localText);
+        subtitleRef.current.value = localText;
       }
 
-      doMapRefresh(events, localText);
+      doMapRefresh(events, [], localText);
     };
 
     setInitialLoadingComplete(true);
@@ -263,7 +289,9 @@ const Events: React.FC<RouteComponentProps> = () => {
   }, [
     setDate,
     setTime,
-    setText,
+    titleRef,
+    title,
+    setSubtitle,
     setEventNotFoundOpen,
     initialLoadingComplete,
     setInitialLoadingComplete,
@@ -323,29 +351,31 @@ const Events: React.FC<RouteComponentProps> = () => {
           </Paper>
           <Paper className={styles.paper}>
             <Typography variant="h5">Tafeltext anpassen</Typography>
-            <Typography variant="subtitle1">Text bitte sinnvoll umbrechen und ausrichten</Typography>
             <Grid container spacing={2}>
               <Grid item xs={9}>
                 <FormControl fullWidth>
-                  <TextField inputRef={textRef} margin="normal" multiline onChange={changeTextHandler} />
-                  <FormHelperText>Text</FormHelperText>
+                  <TextField inputRef={titleRef} margin="normal" onChange={changeTitleHandler} />
+                  <FormHelperText>Titel</FormHelperText>
+                </FormControl>
+                <FormControl fullWidth>
+                  <TextField inputRef={subtitleRef} margin="normal" onChange={changeSubtitleHandler} />
+                  <FormHelperText>Untertitel</FormHelperText>
                 </FormControl>
               </Grid>
 
               <Grid item xs={3}>
                 <FormControl fullWidth>
-                  <Select label="Ecke" onChange={changeCornerHandler} value={corner}>
-                    <MenuItem value="nw">Oben Links</MenuItem>
-                    <MenuItem value="sw">Unten Links</MenuItem>
-                    <MenuItem value="se">Unten Rechts</MenuItem>
-                  </Select>
-                  <FormHelperText>Ausrichtung</FormHelperText>
+                  <TextField margin="normal" type="number" defaultValue={titleSize} onChange={changeTitleSizeHandler} />
+                  <FormHelperText>Schriftgröße Titel</FormHelperText>
                 </FormControl>
-                <br />
-
                 <FormControl fullWidth>
-                  <TextField margin="normal" type="number" defaultValue={size} onChange={changeSizeHandler} />
-                  <FormHelperText>Schriftgröße</FormHelperText>
+                  <TextField
+                    margin="normal"
+                    type="number"
+                    defaultValue={subtitleSize}
+                    onChange={changeSubtitleSizeHandler}
+                  />
+                  <FormHelperText>Schriftgröße Untertitel</FormHelperText>
                 </FormControl>
               </Grid>
             </Grid>
@@ -353,6 +383,10 @@ const Events: React.FC<RouteComponentProps> = () => {
             <Button color="secondary" variant="contained" onClick={refreshMap}>
               Anwenden
             </Button>
+            <Select label="Format" onChange={changeModeHandler} value={mode}>
+              <MenuItem value="wide">16:9</MenuItem>
+              <MenuItem value="square">Quadratisch</MenuItem>
+            </Select>
           </Paper>
           <Paper className={styles.paper}>
             <Typography variant="h5">Meldungen</Typography>
@@ -399,13 +433,13 @@ const Events: React.FC<RouteComponentProps> = () => {
               className={classNames(
                 styles.image,
                 styles.marginBottom,
-                mapLoading || !initialLoadingComplete ? styles.mapLoading : ""
+                mapLoading || eventsLoading || !initialLoadingComplete ? styles.mapLoading : ""
               )}
               src={`/map?${mapQuery}`}
               alt="Map of the event"
               onLoad={onMapLoad}
             />
-            {!mapLoading && initialLoadingComplete ? (
+            {!mapLoading && !eventsLoading && initialLoadingComplete ? (
               <a href={`/map?${mapQuery}`} download className={styles.downloadButton}>
                 <Button color="primary" variant="contained">
                   Download

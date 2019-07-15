@@ -21,6 +21,7 @@ pyproj = "*"
 shapely = "*"
 unwetter = {editable = true,path = "."}
 sentry-sdk = "*"
+colorutils = "*"
 
 [dev-packages]
 pytest = "*"
