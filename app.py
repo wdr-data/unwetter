@@ -66,17 +66,36 @@ def map_single(id):
 @app.route('/map')
 def map_multi():
     ids = request.args.getlist('id')
-    text = request.args.get('text')
-    corner = request.args.get('corner', 'se')
-    size = int(request.args.get('size', 50))
+    disabled_ids = request.args.getlist('disabled')
 
-    img = map.generate_map(db.by_ids(ids), text=text, text_corner=corner, text_size=size)
+    mode = request.args.get('mode', 'square')
+
+    title = request.args.get('title')
+    title_size = int(request.args.get('titleSize', 130))
+    subtitle = request.args.get('subtitle')
+    subtitle_size = int(request.args.get('subtitleSize', 110))
+
+    img = map.generate_map(
+        list(db.by_ids(ids)),
+        mode=map.Mode(mode),
+        disabled_events=list(db.by_ids(disabled_ids)),
+        title=title,
+        title_size=title_size,
+        subtitle=subtitle,
+        subtitle_size=subtitle_size,
+    )
     return send_pil(img)
 
 
 @app.route('/basemap')
-def map_base():
-    img = map.generate_base_map()
+def map_base_square():
+    img = map.generate_base_map(mode=map.Mode.SQUARE)
+    return send_pil(img)
+
+
+@app.route('/basemap_wide')
+def map_base_wide():
+    img = map.generate_base_map(mode=map.Mode.WIDE)
     return send_pil(img)
 
 
