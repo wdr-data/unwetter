@@ -24,7 +24,7 @@ COLORS = {
         'Minor': '#ffcc00a0',
         'Moderate': '#ff6600a0',
         'Severe': '#ff0000a0',
-        'Extreme': '#8f0072a8',
+        'Extreme': '#b00087a3',
         'Disabled': '#999999e0',
     },
     'WDR_BLUE': '#00345e',
