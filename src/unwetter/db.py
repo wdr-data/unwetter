@@ -207,7 +207,7 @@ def current_events(at=None, all_severities=True):
     all_refs = set()
 
     for result in results:
-        all_refs.update(set(result.get('references', []))
+        all_refs.update(set(result.get('references', [])))
 
     for result in results:
         if len(set(result['states']) - set(config.STATES_FILTER)) == len(result['states']):
