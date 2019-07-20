@@ -204,6 +204,10 @@ def current_events(at=None, all_severities=True):
         return []
 
     filteredResults = []
+    all_refs = set()
+
+    for result in results:
+        all_refs.update(set(result.get('references', []))
 
     for result in results:
         if len(set(result['states']) - set(config.STATES_FILTER)) == len(result['states']):
@@ -212,24 +216,22 @@ def current_events(at=None, all_severities=True):
         if not all_severities and result['severity'] not in config.SEVERITY_FILTER:
             continue
 
-        for other in results:
-            if result['id'] in other.get('references', []):
-                break
+        if result['id'] in all_refs:
+            continue
 
-            filter = {
-                'references': result['id'],
-                '$or': [
-                    {'expires': {'$lte': at}},
-                    {'msg_type': 'Cancel'},
-                ]
-            }
+        filter = {
+            'references': result['id'],
+            '$or': [
+                {'expires': {'$lte': at}},
+                {'msg_type': 'Cancel'},
+            ]
+        }
 
-            double_check = collection.find(filter).limit(1)
-            if double_check.count():
-                break
+        double_check = collection.find(filter).limit(1)
+        if double_check.count():
+            continue
 
-        else:
-            filteredResults.append(result)
+        filteredResults.append(result)
 
     return sorted(filteredResults, key=map.severity_key, reverse=True)
 
