@@ -31,7 +31,7 @@ const Events: React.FC<RouteComponentProps> = () => {
   const [date, changeDateHandler_, setDate] = useFormField("");
   const [time, changeTimeHandler_, setTime] = useFormField("");
 
-  const [title, changeTitleHandler] = useFormField("Unwetterwarnung in NRW");
+  const [title, changeTitleHandler] = useFormField("Amtliche Unwetterwarnung");
   const [titleSize, changeTitleSizeHandler] = useFormField("125");
 
   const [subtitle, changeSubtitleHandler, setSubtitle] = useFormField("");
