@@ -272,7 +272,7 @@ const Events: React.FC<RouteComponentProps> = () => {
           doMapRefresh(events, localText);
           return;
         }
-        const warnText = linkedEvent.headline.replace("vor ", "vor\n");
+        const warnText = "vor " + linkedEvent.headline.split(" vor ")[1];
         subtitleRef.current.value = warnText;
         setSubtitle(warnText);
         localText = warnText;
