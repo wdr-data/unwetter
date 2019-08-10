@@ -31,8 +31,8 @@ const Events: React.FC<RouteComponentProps> = () => {
   const [date, changeDateHandler_, setDate] = useFormField("");
   const [time, changeTimeHandler_, setTime] = useFormField("");
 
-  const [title, changeTitleHandler] = useFormField("Unwetterwarnung in NRW");
-  const [titleSize, changeTitleSizeHandler] = useFormField("125");
+  const [title, changeTitleHandler] = useFormField("Amtliche Unwetterwarnung");
+  const [titleSize, changeTitleSizeHandler] = useFormField("160");
 
   const [subtitle, changeSubtitleHandler, setSubtitle] = useFormField("");
   const [subtitleSize, changeSubtitleSizeHandler] = useFormField("100");
@@ -272,7 +272,7 @@ const Events: React.FC<RouteComponentProps> = () => {
           doMapRefresh(events, localText);
           return;
         }
-        const warnText = linkedEvent.headline.replace("vor ", "vor\n");
+        const warnText = "vor " + linkedEvent.headline.split(" vor ")[1];
         subtitleRef.current.value = warnText;
         setSubtitle(warnText);
         localText = warnText;
