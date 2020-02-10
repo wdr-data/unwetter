@@ -305,7 +305,7 @@ def radio(event):
 
     kind = re.sub(r'.*vor ', '', event['headline'])
 
-    if 'instruction' in event and 'Freien!' in event['instruction']:
+    if event['instruction'] and 'Freien!' in event['instruction']:
         instruction = '\nVermeiden Sie dann möglichst den Aufenthalt im Freien.\n'
     else:
         instruction = ''
