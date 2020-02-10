@@ -37,10 +37,10 @@ COLORS = {
 
 FONT_ERROR = ImageFont.truetype('assets/fonts/VT323-Regular.ttf', 150)
 
-TARGET_PROJECTION = pyproj.Proj('epsg:3857')
+TARGET_PROJECTION = pyproj.Proj(init='epsg:3857')
 project = partial(
     pyproj.transform,
-    pyproj.Proj('epsg:4326'),  # source coordinate system
+    pyproj.Proj(init='epsg:4326'),  # source coordinate system
     TARGET_PROJECTION
 )
 
