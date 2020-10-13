@@ -1,2 +1,2 @@
-web: gunicorn app:app
+web: gunicorn app:app -k sync
 clock: python scheduler.py
