@@ -10,9 +10,19 @@ from . import sentry, config, map
 
 
 try:
-    MONGODB_URI = os.environ['MONGODB_URI']
-    mongo_client = pymongo.MongoClient(MONGODB_URI)
-    mongo_db = mongo_client.get_database()
+    MONGODB_URI = os.environ['ORMONGO_RS_URL']
+    MONGODB_DATABASE = 'uwa'
+    MONGODB_USER = 'uwa'
+    MONGODB_PASSWORD = os.environ['ORMONGO_PASSWORD']
+    mongo_client = pymongo.MongoClient(
+        MONGODB_URI,
+        username=MONGODB_USER,
+        password=MONGODB_PASSWORD,
+        authSource=MONGODB_DATABASE,
+        authMechanism='SCRAM-SHA-256',
+        ssl=True,
+    )
+    mongo_db = mongo_client.get_database(MONGODB_DATABASE)
 except KeyError:
     mongo_db = pymongo.MongoClient().unwetter
 

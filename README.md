@@ -16,6 +16,10 @@ The WDR Sans fonts, map design and source images are proprietary and not license
 
 ## Deployment
 
+### Database
+
+We use the ObjectRocket MongoDB Heroku Add-On. Provision the Add-On and create a database called `uwa` with the user `uwa`.
+
 ### Environment variables
 
 ```yaml
@@ -31,6 +35,7 @@ TWITTER_CONSUMER_KEY:
 TWITTER_CONSUMER_SECRET:
 TWITTER_DEMO_HANDLE: # Twitter handle that should be mentioned in demo tweets
 WDR_PROJECT_INFO_URL: https://unser.wdr.de/sites/DWDUnwetterwarnungen94e47adr/SitePages/Details%20Unwetterwarnungen.aspx
+ORMONGO_PASSWORD: # The password you set for the MongoDB database
 ```
 
 ### Heroku Labs
