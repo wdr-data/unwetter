@@ -10,7 +10,7 @@ from . import alert_1
 events = {}
 xmls = {}
 
-for filename in glob(f'{dirname(__file__)}/*.xml'):
+for filename in glob(f"{dirname(__file__)}/*.xml"):
     filename = basename(filename)
     name = splitext(filename)[0]
 

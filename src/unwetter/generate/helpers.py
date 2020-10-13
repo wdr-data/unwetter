@@ -23,10 +23,10 @@ def upper_first(s):
 
 
 def pad(text):
-    return f'\n{text}\n'
+    return f"\n{text}\n"
 
 
 def local_time(dt):
     if not dt.tzinfo:
         dt = dt.replace(tzinfo=pytz.UTC)
-    return dt.astimezone(pytz.timezone('Europe/Berlin'))
+    return dt.astimezone(pytz.timezone("Europe/Berlin"))

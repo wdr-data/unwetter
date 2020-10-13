@@ -2,11 +2,15 @@
 
 import yaml
 
-with open('config/regions.yml', 'r') as fp:
-    REGIONS = {key: value for key, value in yaml.safe_load(fp.read()).items() if value.get('districts')}
+with open("config/regions.yml", "r") as fp:
+    REGIONS = {
+        key: value
+        for key, value in yaml.safe_load(fp.read()).items()
+        if value.get("districts")
+    }
 
-for name, region in REGIONS.items(): 
-    region['name'] = name
+for name, region in REGIONS.items():
+    region["name"] = name
 
 
 def best_match(districts):
@@ -19,14 +23,14 @@ def best_match(districts):
     districts_set = set(districts)
 
     def key_function(region):
-        size = len(region[1]['districts'])
-        not_covered = len(districts_set - set(region[1]['districts']))
+        size = len(region[1]["districts"])
+        not_covered = len(districts_set - set(region[1]["districts"]))
         return not_covered, size
 
     match = sorted(REGIONS.items(), key=key_function)[0]
-    
-    not_covered = len(districts_set - set(match[1]['districts']))
-    relevance = (len(districts) - not_covered) / len(match[1]['districts'])
+
+    not_covered = len(districts_set - set(match[1]["districts"]))
+    relevance = (len(districts) - not_covered) / len(match[1]["districts"])
 
     if not_covered == 0:
         return [(match[0], relevance)]
@@ -34,4 +38,6 @@ def best_match(districts):
         print(f'Unkown districts "{list(districts)}"')
         return []
     else:
-        return [(match[0], relevance)] + best_match(districts_set - set(match[1]['districts']))
+        return [(match[0], relevance)] + best_match(
+            districts_set - set(match[1]["districts"])
+        )

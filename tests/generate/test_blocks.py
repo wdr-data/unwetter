@@ -4,9 +4,11 @@ from ..assets import events
 
 
 def test_title_alert_simple():
-    assert title(events['alert_1']) == '🚨 Neue Meldung: Amtliche WARNUNG vor GLÄTTE'
+    assert title(events["alert_1"]) == "🚨 Neue Meldung: Amtliche WARNUNG vor GLÄTTE"
 
 
 def test_title_alert_simple_wina():
-    assert (title(events['alert_1'], variant='wina_headline')
-            == 'Amtliche Unwetterwarnung des DWD (UWA) ')
+    assert (
+        title(events["alert_1"], variant="wina_headline")
+        == "Amtliche Unwetterwarnung des DWD (UWA) "
+    )

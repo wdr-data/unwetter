@@ -9,10 +9,10 @@ from .grammar import *
 from .helpers import upper_first, local_time
 
 severities = {
-    'Minor': 'Wetterwarnung',
-    'Moderate': 'Markante Wetterwarnung',
-    'Severe': '🔴 Amtliche Unwetterwarnung',
-    'Extreme': '🔴 Amtliche Extreme Unwetterwarnung',
+    "Minor": "Wetterwarnung",
+    "Moderate": "Markante Wetterwarnung",
+    "Severe": "🔴 Amtliche Unwetterwarnung",
+    "Extreme": "🔴 Amtliche Extreme Unwetterwarnung",
 }
 
 
@@ -20,61 +20,65 @@ def qualify_region(region_tuple, accusative=False):
     name, relevance = region_tuple[:2]
 
     if relevance < 0.2:
-        prefix = 'einzelne Teile'
+        prefix = "einzelne Teile"
     elif relevance < 0.6:
-        prefix = 'Teile'
+        prefix = "Teile"
     elif relevance < 0.8:
-        prefix = 'weite Teile'
+        prefix = "weite Teile"
     elif relevance < 1.0:
-        prefix = 'den Großteil' if accusative else 'der Großteil'
+        prefix = "den Großteil" if accusative else "der Großteil"
     else:
-        return definite_article(REGIONS[name], 'gesamte', 'ganz')
+        return definite_article(REGIONS[name], "gesamte", "ganz")
 
-    return f'{prefix} {genitive(REGIONS[name])}'
+    return f"{prefix} {genitive(REGIONS[name])}"
 
 
 def region_list(event, accusative=False):
-    return ', '.join(qualify_region(region, accusative=accusative) for region in event['regions'])
+    return ", ".join(
+        qualify_region(region, accusative=accusative) for region in event["regions"]
+    )
 
 
 def filter_districts(event):
     return [
-        district for district in event['districts']
-        if state_for_cell_id(district['warn_cell_id']) in STATES_FILTER
+        district
+        for district in event["districts"]
+        if state_for_cell_id(district["warn_cell_id"]) in STATES_FILTER
     ]
 
 
 def filter_communes(event):
     return [
-        commune for commune in event['areas']
-        if state_for_cell_id(commune['warn_cell_id']) in STATES_FILTER
+        commune
+        for commune in event["areas"]
+        if state_for_cell_id(commune["warn_cell_id"]) in STATES_FILTER
     ]
 
 
 def district_list(event, all=False):
-    return ', '.join(
-        district['name'] for district in
-        (event['districts'] if all else filter_districts(event))
+    return ", ".join(
+        district["name"]
+        for district in (event["districts"] if all else filter_districts(event))
     )
 
 
 def commune_list(event, all=False):
-    return ', '.join(
-        commune['name'] for commune in
-        (event['areas'] if all else filter_communes(event))
+    return ", ".join(
+        commune["name"]
+        for commune in (event["areas"] if all else filter_communes(event))
     )
 
 
 def keywords(event):
     # f'{severities[event["severity"]]}, {region_list(event) or "Nicht NRW"}'
-    parameter_keys = ', '.join(
-        f'{param}' for param, value in event['parameters'].items()
+    parameter_keys = ", ".join(
+        f"{param}" for param, value in event["parameters"].items()
     )
 
-    return f'Unwetter, UWA, Warnung, {parameter_keys}'
+    return f"Unwetter, UWA, Warnung, {parameter_keys}"
 
 
-def title(event, variant='default'):
+def title(event, variant="default"):
     """
     Return first sentence of main body text
 
@@ -82,72 +86,72 @@ def title(event, variant='default'):
     """
 
     extentions = {
-        'default': {
-            'new_event': '🚨 Neue Meldung',
-            'event_relevant_again': '🚨 Erneut relevante Meldung',
-            'cancelled_prematurely': '🚫 Meldung vorzeitig aufgehoben',
-            'updated': '🔁 Meldung aktualisiert',
-            'cancelled_wrong': '🚫 Meldung zurückgezogen',
-            'irrelevant': '🔁  Meldung aktualisiert',
-            'unknown': '⁉️ Unbekannter Meldungstyp',
+        "default": {
+            "new_event": "🚨 Neue Meldung",
+            "event_relevant_again": "🚨 Erneut relevante Meldung",
+            "cancelled_prematurely": "🚫 Meldung vorzeitig aufgehoben",
+            "updated": "🔁 Meldung aktualisiert",
+            "cancelled_wrong": "🚫 Meldung zurückgezogen",
+            "irrelevant": "🔁  Meldung aktualisiert",
+            "unknown": "⁉️ Unbekannter Meldungstyp",
         },
-        'wina_headline': {
-            'new_event': '',
-            'event_relevant_again': '- Erneut relevant',
-            'cancelled_prematurely': '- Vorzeitige Aufhebung',
-            'updated': '- Aktualisierung',
-            'cancelled_wrong': '- Meldung zurückgezogen',
-            'irrelevant': '- Aktualisierung',
-            'unknown': '- Unbekannter Meldungstyp',
+        "wina_headline": {
+            "new_event": "",
+            "event_relevant_again": "- Erneut relevant",
+            "cancelled_prematurely": "- Vorzeitige Aufhebung",
+            "updated": "- Aktualisierung",
+            "cancelled_wrong": "- Meldung zurückgezogen",
+            "irrelevant": "- Aktualisierung",
+            "unknown": "- Unbekannter Meldungstyp",
         },
-        'wina_body': {
-            'new_event': 'Neue Meldung',
-            'event_relevant_again': 'Erneut relevant',
-            'cancelled_prematurely': 'Vorzeitige Aufhebung',
-            'updated': 'Aktualisierung',
-            'cancelled_wrong': 'Meldung zurückgezogen',
-            'irrelevant': 'Aktualisierung',
-            'unknown': 'Unbekannter Meldungstyp',
-        }
+        "wina_body": {
+            "new_event": "Neue Meldung",
+            "event_relevant_again": "Erneut relevant",
+            "cancelled_prematurely": "Vorzeitige Aufhebung",
+            "updated": "Aktualisierung",
+            "cancelled_wrong": "Meldung zurückgezogen",
+            "irrelevant": "Aktualisierung",
+            "unknown": "Unbekannter Meldungstyp",
+        },
     }
 
-    if event['msg_type'] == 'Alert':
-        extention = extentions[variant]['new_event']
-    elif event['msg_type'] == 'Update':
-        if event['response_type'] == 'AllClear':
-            extention = extentions[variant]['cancelled_prematurely']
-        elif event['special_type'] == 'ReAlert':
-            extention = extentions[variant]['event_relevant_again']
-        elif event['special_type'] == 'UpdateAlert':
-            extention = extentions[variant]['new_event']
-        elif event['special_type'] == 'Irrelevant':
-            extention = extentions[variant]['irrelevant']
+    if event["msg_type"] == "Alert":
+        extention = extentions[variant]["new_event"]
+    elif event["msg_type"] == "Update":
+        if event["response_type"] == "AllClear":
+            extention = extentions[variant]["cancelled_prematurely"]
+        elif event["special_type"] == "ReAlert":
+            extention = extentions[variant]["event_relevant_again"]
+        elif event["special_type"] == "UpdateAlert":
+            extention = extentions[variant]["new_event"]
+        elif event["special_type"] == "Irrelevant":
+            extention = extentions[variant]["irrelevant"]
         else:
-            extention = extentions[variant]['updated']
-    elif event['msg_type'] == 'Cancel':
-        extention = extentions[variant]['cancelled_wrong']
+            extention = extentions[variant]["updated"]
+    elif event["msg_type"] == "Cancel":
+        extention = extentions[variant]["cancelled_wrong"]
     else:
-        extention = extentions[variant]['unknown']
+        extention = extentions[variant]["unknown"]
 
-    if variant == 'default':
+    if variant == "default":
         return f'{extention}: {event["headline"]}'
-    elif variant == 'wina_body':
-        if event['severity'] == 'Extreme':
-            extreme = '\nHÖCHSTE WARNSTUFE (Stufe 4, violett)\n'
+    elif variant == "wina_body":
+        if event["severity"] == "Extreme":
+            extreme = "\nHÖCHSTE WARNSTUFE (Stufe 4, violett)\n"
         else:
-            extreme = ''
+            extreme = ""
         return f'{extention.upper()}\n{extreme}\n{event["headline"]}'
-    elif variant == 'wina_headline':
-        if event['severity'] == 'Extreme':
-            extreme = '- Höchste Warnstufe '
+    elif variant == "wina_headline":
+        if event["severity"] == "Extreme":
+            extreme = "- Höchste Warnstufe "
         else:
-            extreme = ''
-        return f'Amtliche Unwetterwarnung des DWD (UWA) {extreme}{extention}'
+            extreme = ""
+        return f"Amtliche Unwetterwarnung des DWD (UWA) {extreme}{extention}"
 
 
 def dates(event):
-    onset = local_time(event['onset'])
-    expires = event['expires'] and local_time(event['expires'])
+    onset = local_time(event["onset"])
+    expires = event["expires"] and local_time(event["expires"])
     today = local_time(datetime.utcnow()).date()
 
     if onset.date() == today:
@@ -168,15 +172,19 @@ def dates(event):
     if not expires:
         return f'ab {onset_date}, {onset.strftime("%H:%M")} Uhr (kein Ende der Gültigkeit angegeben)'
     elif onset.date() == expires.date():
-        return f'{onset_date}, von {onset.strftime("%H:%M")} Uhr ' \
-               f'bis {expires.strftime("%H:%M")} Uhr'
+        return (
+            f'{onset_date}, von {onset.strftime("%H:%M")} Uhr '
+            f'bis {expires.strftime("%H:%M")} Uhr'
+        )
     else:
-        return f'von {onset_date}, {onset.strftime("%H:%M")} Uhr ' \
-               f'bis {expires_date}, {expires.strftime("%H:%M")} Uhr'
+        return (
+            f'von {onset_date}, {onset.strftime("%H:%M")} Uhr '
+            f'bis {expires_date}, {expires.strftime("%H:%M")} Uhr'
+        )
 
 
 def expires(event):
-    expires = event['expires'] and local_time(event['expires'])
+    expires = event["expires"] and local_time(event["expires"])
     today = local_time(datetime.utcnow()).date()
 
     if expires:
@@ -188,15 +196,15 @@ def expires(event):
             expires_date = expires.strftime("%d.%m.%y")
 
     if not expires:
-        return f'kein Ende der Gültigkeit angegeben'
+        return f"kein Ende der Gültigkeit angegeben"
     else:
         return f'{expires_date}, {expires.strftime("%H:%M")} Uhr'
 
 
 def parameters(event):
-    return ', '.join(
+    return ", ".join(
         f'{param} ({value.replace("[", "").replace("]", "")})'
-        for param, value in event['parameters'].items()
+        for param, value in event["parameters"].items()
     )
 
 
@@ -207,39 +215,49 @@ def changes(event, old_event):
     :param old_event:
     :return: str
     """
-    text = ''
+    text = ""
 
     simple_fields = {
-        'severity': 'Warnstufe',
-        'event': 'Wetterphänomen',
-        'certainty': 'Wahrscheinlichkeit',
+        "severity": "Warnstufe",
+        "event": "Wetterphänomen",
+        "certainty": "Wahrscheinlichkeit",
     }
 
     for field in simple_fields:
         if old_event.get(field) != event.get(field):
-            if field == 'severity' and event[field] in ['Minor', 'Moderate']:
-                text += f'{simple_fields[field]}: Herabstufung auf {severities[event[field]]}\n\n'
-            elif field == 'severity':
-                text += f'{simple_fields[field]}: {severities[event[field]]} ' \
-                        f'(zuvor "{severities[old_event[field]]}")\n\n'
+            if field == "severity" and event[field] in ["Minor", "Moderate"]:
+                text += f"{simple_fields[field]}: Herabstufung auf {severities[event[field]]}\n\n"
+            elif field == "severity":
+                text += (
+                    f"{simple_fields[field]}: {severities[event[field]]} "
+                    f'(zuvor "{severities[old_event[field]]}")\n\n'
+                )
             else:
-                text += f'{simple_fields[field]}: {event[field]} ' \
-                        f'(zuvor "{old_event.get(field, "Nicht angegeben")}")\n\n'
+                text += (
+                    f"{simple_fields[field]}: {event[field]} "
+                    f'(zuvor "{old_event.get(field, "Nicht angegeben")}")\n\n'
+                )
 
     # Editorial request to check only, if expires time changed, since every update has new onset-time
-    if abs(event['onset'] - event['sent']) > timedelta(minutes=2) and dates(old_event) != dates(event):
+    if abs(event["onset"] - event["sent"]) > timedelta(minutes=2) and dates(
+        old_event
+    ) != dates(event):
         text += f'Gültigkeit: {dates(event)} (zuvor "{dates(old_event)}")\n\n'
     elif expires(old_event) != expires(event):
-        text += f'Ende der Gültigkeit: {expires(event)} (zuvor "{expires(old_event)}")\n\n'
+        text += (
+            f'Ende der Gültigkeit: {expires(event)} (zuvor "{expires(old_event)}")\n\n'
+        )
 
     if district_list(old_event) != district_list(event):
         districts_now = {
-            district['name'] for district in event['districts']
-            if state_for_cell_id(district['warn_cell_id']) in STATES_FILTER
+            district["name"]
+            for district in event["districts"]
+            if state_for_cell_id(district["warn_cell_id"]) in STATES_FILTER
         }
         districts_before = {
-            district['name'] for district in old_event['districts']
-            if state_for_cell_id(district['warn_cell_id']) in STATES_FILTER
+            district["name"]
+            for district in old_event["districts"]
+            if state_for_cell_id(district["warn_cell_id"]) in STATES_FILTER
         }
 
         added = districts_now - districts_before
@@ -249,19 +267,23 @@ def changes(event, old_event):
             text += f'Neue Kreise/Städte: {", ".join(sorted(added))}\n'
 
         if removed:
-            text += f'Nicht mehr betroffene Kreise/Städte: {", ".join(sorted(removed))}\n'
+            text += (
+                f'Nicht mehr betroffene Kreise/Städte: {", ".join(sorted(removed))}\n'
+            )
 
         if region_list(old_event) != region_list(event):
-            text += f'Regionale Zuordnung: {upper_first(region_list(event))} ' \
-                    f'(zuvor: "{upper_first(region_list(old_event))}")\n\n'
+            text += (
+                f"Regionale Zuordnung: {upper_first(region_list(event))} "
+                f'(zuvor: "{upper_first(region_list(old_event))}")\n\n'
+            )
         else:
-            text += f'Regionale Zuordnung unverändert: {upper_first(region_list(event))}\n\n'
+            text += f"Regionale Zuordnung unverändert: {upper_first(region_list(event))}\n\n"
 
-    '''
+    """
     # Editorial choice --> No relevant information due to relatively small area --> Thus, no update
 
     elif commune_list(old_event) != commune_list(event):
         text += 'Regionale Zuordnung: Änderung der betroffenen Gemeinden\n\n'
-    '''
+    """
 
     return text
