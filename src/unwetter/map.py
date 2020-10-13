@@ -37,13 +37,9 @@ COLORS = {
 
 FONT_ERROR = ImageFont.truetype("assets/fonts/VT323-Regular.ttf", 150)
 
-SOURCE_PROJECTION = pyproj.Proj("epsg:4326")
-TARGET_PROJECTION = pyproj.Proj("epsg:3857")
-project = partial(
-    pyproj.transform,
-    SOURCE_PROJECTION,
-    TARGET_PROJECTION,
-)
+SOURCE_PROJECTION = pyproj.CRS("epsg:4326")
+TARGET_PROJECTION = pyproj.CRS("epsg:3857")
+transformer = pyproj.Transformer.from_crs(SOURCE_PROJECTION, TARGET_PROJECTION)
 
 
 class Mode(Enum):
@@ -56,7 +52,7 @@ states = []  # fill with polys, then convert to multi-polygon
 # Create projected copy
 for name, shape in STATE_SHAPES.items():
     if name in STATES_FILTER:
-        projected = transform(project, shape)
+        projected = transform(transformer.transform, shape)
         states.extend(projected.geoms)
 
 states = MultiPolygon(states)
@@ -204,7 +200,8 @@ def draw_event(event, draw, mode):
     for geo in event["geometry"]:
         for poly in geo["polygons"]:
             projected = [
-                to_image_coords(*TARGET_PROJECTION(lng, lat), mode) for lat, lng in poly
+                to_image_coords(*transformer.transform(lat, lng), mode)
+                for lat, lng in poly
             ]
             draw.polygon(
                 projected, outline=None, fill=COLORS["SEVERITIES"][event["severity"]]
@@ -212,7 +209,8 @@ def draw_event(event, draw, mode):
 
         for poly in geo["exclude_polygons"]:
             projected = [
-                to_image_coords(*TARGET_PROJECTION(lng, lat), mode) for lat, lng in poly
+                to_image_coords(*transformer.transform(lat, lng), mode)
+                for lat, lng in poly
             ]
             draw.polygon(projected, outline=None, fill="rgba(0, 0, 0, 0)")
 
