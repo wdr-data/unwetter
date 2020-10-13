@@ -4,15 +4,17 @@
 Contains regular jobs like updating the DB
 """
 from time import sleep
+import datetime as dt
 
 from apscheduler.schedulers.blocking import BlockingScheduler
+import pytz
 
 from unwetter import db, slack, wina, sentry
 from unwetter.config import filter_event
 
 
 sentry.init()
-sched = BlockingScheduler()
+sched = BlockingScheduler(timezone=pytz.UTC)
 
 
 @sched.scheduled_job("interval", minutes=1)
@@ -103,6 +105,18 @@ https://www.dwd.de/DE/wetter/warnungen/warnWetter_node.html
         slack.post_text(title_slack, text)
 
         print("No active events: warn_events_memo OFF")
+
+
+@sched.scheduled_job("cron", hour=1)
+def clean_old_events():
+    cutoff = dt.datetime.now() - dt.timedelta(days=30)
+    print("Deleting events from before", cutoff)
+    print("Number of events currently in DB:", db.collection.count())
+
+    res = db.collection.delete_many({"sent": {"$lt": cutoff}})
+    print("Deleted", res.deleted_count, "events")
+
+    print("Number of events left in DB:", db.collection.count())
 
 
 sched.start()
