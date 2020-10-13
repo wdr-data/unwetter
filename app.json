@@ -2,7 +2,7 @@
   "name": "unwetter-bot",
   "description": "Automatically notify newsroom about weather warnings from DWD",
   "repository": "https://github.com/wdr-data/unwetter",
-  "addons": ["mongolab:sandbox"],
+  "addons": [],
   "buildpacks": [
     {
       "url": "heroku/nodejs"
