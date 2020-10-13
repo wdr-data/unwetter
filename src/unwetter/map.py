@@ -37,11 +37,12 @@ COLORS = {
 
 FONT_ERROR = ImageFont.truetype('assets/fonts/VT323-Regular.ttf', 150)
 
-TARGET_PROJECTION = pyproj.Proj(init='epsg:3857')
+SOURCE_PROJECTION = pyproj.Proj('epsg:4326')
+TARGET_PROJECTION = pyproj.Proj('epsg:3857')
 project = partial(
     pyproj.transform,
-    pyproj.Proj(init='epsg:4326'),  # source coordinate system
-    TARGET_PROJECTION
+    SOURCE_PROJECTION,
+    TARGET_PROJECTION,
 )
 
 
@@ -250,7 +251,7 @@ def severity_key(event):
 def generate_map(events, *, mode=Mode.SQUARE, disabled_events=None, title=None, title_size=130, subtitle=None, subtitle_size=110):
     if disabled_events is None:
         disabled_events = []
-    
+
     event_img = Image.new("RGBA", (img_widths[mode], img_height))
     draw = ImageDraw.Draw(event_img)
 

@@ -22,6 +22,7 @@ shapely = "*"
 unwetter = {editable = true,path = "."}
 sentry-sdk = "*"
 colorutils = "*"
+blinker = "*"
 
 [dev-packages]
 pytest = "*"
@@ -31,4 +32,4 @@ rope = "*"
 jupyter = "*"
 
 [requires]
-python_version = "3.6"
+python_version = "3.8"
