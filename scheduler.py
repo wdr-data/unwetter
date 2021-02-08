@@ -72,7 +72,7 @@ def update_db():
             sleep(1)
 
 
-@sched.scheduled_job("interval", minutes=5)
+# @sched.scheduled_job("interval", minutes=5)
 def post_clear_warning():
 
     currently_events = db.current_events(all_severities=False)
