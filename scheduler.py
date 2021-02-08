@@ -71,7 +71,7 @@ def update_db():
             slack.post_event(event)
             sleep(1)
 
-
+'''
 @sched.scheduled_job("interval", minutes=5)
 def post_clear_warning():
 
@@ -117,6 +117,6 @@ def clean_old_events():
     print("Deleted", res.deleted_count, "events")
 
     print("Number of events left in DB:", db.collection.count())
-
+'''
 
 sched.start()
