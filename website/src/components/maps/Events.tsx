@@ -427,7 +427,7 @@ const Events: React.FC<RouteComponentProps> = () => {
             <Table>
               <TableHead>
                 <TableRow>
-                  B<TableCell padding="checkbox">Sichtbar</TableCell>
+                  <TableCell padding="checkbox">Sichtbar</TableCell>
                   <TableCell>Titel</TableCell>
                   <TableCell>Gültig von</TableCell>
                   <TableCell>bis</TableCell>
