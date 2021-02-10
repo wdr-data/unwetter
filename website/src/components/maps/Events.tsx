@@ -27,6 +27,14 @@ import styles from "./Events.module.scss";
 import { useFormField } from "../hooks/form";
 import Loader from "../util/Loader";
 
+const formatDate = (m: moment.Moment, searchDate: moment.Moment) => {
+  if (m.isSame(searchDate, "date")) {
+    return m.format("HH:mm [Uhr]");
+  } else {
+    return m.format("HH:mm [Uhr], DD.MM.");
+  }
+};
+
 const Events: React.FC<RouteComponentProps> = () => {
   const [date, changeDateHandler_, setDate] = useFormField("");
   const [time, changeTimeHandler_, setTime] = useFormField("");
@@ -419,9 +427,10 @@ const Events: React.FC<RouteComponentProps> = () => {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell padding="checkbox">Sichtbar</TableCell>
+                  B<TableCell padding="checkbox">Sichtbar</TableCell>
                   <TableCell>Titel</TableCell>
-                  <TableCell>Gültigkeit</TableCell>
+                  <TableCell>Gültig von</TableCell>
+                  <TableCell>bis</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -442,15 +451,8 @@ const Events: React.FC<RouteComponentProps> = () => {
                       <TableCell scope="row" padding="none">
                         {event.headline}
                       </TableCell>
-                      <TableCell>
-                        {moment.unix(event.onset).date() == moment().date()
-                          ? moment.unix(event.onset).format("HH:mm")
-                          : moment.unix(event.onset).format("DD.MM. HH:mm")}{" "}
-                        -{" "}
-                        {moment.unix(event.expires).date() == moment().date()
-                          ? moment.unix(event.expires).format("HH:mm")
-                          : moment.unix(event.expires).format("DD.MM. HH:mm")}
-                      </TableCell>
+                      <TableCell>{formatDate(moment.unix(event.onset), moment(date))}</TableCell>
+                      <TableCell>{formatDate(moment.unix(event.expires), moment(date))}</TableCell>
                     </TableRow>
                   );
                 })}
