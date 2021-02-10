@@ -138,7 +138,7 @@ def update():
     return new_events
 
 
-def query(severities, states, urgencies, limit=50, filter=None):
+def query(severities, states, urgencies, filter=None):
     """
 
     :param severities: List of severities allowed (eg. ['Severe', 'Extreme'])
@@ -163,7 +163,7 @@ def query(severities, states, urgencies, limit=50, filter=None):
     elif len(states) > 1:
         filter["$or"] = [{"states": state} for state in states]
 
-    events = collection.find(filter).sort([("sent", pymongo.DESCENDING)]).limit(limit)
+    events = collection.find(filter).sort([("sent", pymongo.DESCENDING)])
 
     for event in events:
         if "special_type" not in event:

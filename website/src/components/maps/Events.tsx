@@ -27,6 +27,14 @@ import styles from "./Events.module.scss";
 import { useFormField } from "../hooks/form";
 import Loader from "../util/Loader";
 
+const formatDate = (m: moment.Moment, searchDate: moment.Moment) => {
+  if (m.isSame(searchDate, "date")) {
+    return m.format("HH:mm [Uhr]");
+  } else {
+    return m.format("HH:mm [Uhr], DD.MM.");
+  }
+};
+
 const Events: React.FC<RouteComponentProps> = () => {
   const [date, changeDateHandler_, setDate] = useFormField("");
   const [time, changeTimeHandler_, setTime] = useFormField("");
@@ -45,7 +53,10 @@ const Events: React.FC<RouteComponentProps> = () => {
   const [initialLoadingComplete, setInitialLoadingComplete] = useState(false);
 
   const [autoRefresh, setAutoRefresh] = useState(true);
-  const changeAutoRefreshHandler = useCallback(ev => setAutoRefresh(JSON.parse(ev.target.value)), []);
+  const changeAutoRefreshHandler = useCallback(
+    ev => setAutoRefresh(JSON.parse(ev.target.value)),
+    []
+  );
 
   const changeDateHandler = useCallback(
     ev => {
@@ -131,7 +142,9 @@ const Events: React.FC<RouteComponentProps> = () => {
           if (newEvent["msg_type"] === "Alert" || newEvent["special_type"] === "UpdateAlert") {
             new Notification(`Neue Meldung`, { body: newEvent["event"] });
           } else if (newEvent["msg_type"] === "Cancel") {
-            new Notification(`Eine Meldung wurde zurückgezogen`, { body: newEvent.event });
+            new Notification(`Eine Meldung wurde zurückgezogen`, {
+              body: newEvent.event
+            });
           } else {
             for (const changeSet of newEvent["has_changes"]) {
               if (changeSet["changed_minor"]) {
@@ -152,7 +165,9 @@ const Events: React.FC<RouteComponentProps> = () => {
     [events, setEvents, setFilteredEvents, setEventsLoading]
   );
 
-  const isSelected = useCallback(event => filteredEvents.findIndex(fev => fev === event) !== -1, [filteredEvents]);
+  const isSelected = useCallback(event => filteredEvents.findIndex(fev => fev === event) !== -1, [
+    filteredEvents
+  ]);
 
   const toggleEvent = useCallback(
     event => {
@@ -317,7 +332,8 @@ const Events: React.FC<RouteComponentProps> = () => {
           <Paper className={styles.paper}>
             <Typography variant="h5">Zeitpunkt der Meldung</Typography>
             <Typography variant="subtitle1">
-              Zeigt alle Meldungen des DWD zum ausgewähltem Zeitpunkt mit Stufe 2, 3 oder 4 auf der Karte an
+              Zeigt alle Meldungen des DWD zum ausgewähltem Zeitpunkt mit Stufe 2, 3 oder 4 auf der
+              Karte an
             </Typography>
             <TextField
               label="Datum"
@@ -340,7 +356,13 @@ const Events: React.FC<RouteComponentProps> = () => {
               onChange={changeTimeHandler}
             />
             <FormControlLabel
-              control={<Checkbox checked={autoRefresh} onChange={changeAutoRefreshHandler} value={!autoRefresh} />}
+              control={
+                <Checkbox
+                  checked={autoRefresh}
+                  onChange={changeAutoRefreshHandler}
+                  value={!autoRefresh}
+                />
+              }
               label="Automatisch aktualisieren"
             />
             <br />
@@ -358,14 +380,23 @@ const Events: React.FC<RouteComponentProps> = () => {
                   <FormHelperText>Titel</FormHelperText>
                 </FormControl>
                 <FormControl fullWidth>
-                  <TextField inputRef={subtitleRef} margin="normal" onChange={changeSubtitleHandler} />
+                  <TextField
+                    inputRef={subtitleRef}
+                    margin="normal"
+                    onChange={changeSubtitleHandler}
+                  />
                   <FormHelperText>Untertitel</FormHelperText>
                 </FormControl>
               </Grid>
 
               <Grid item xs={3}>
                 <FormControl fullWidth>
-                  <TextField margin="normal" type="number" defaultValue={titleSize} onChange={changeTitleSizeHandler} />
+                  <TextField
+                    margin="normal"
+                    type="number"
+                    defaultValue={titleSize}
+                    onChange={changeTitleSizeHandler}
+                  />
                   <FormHelperText>Schriftgröße Titel</FormHelperText>
                 </FormControl>
                 <FormControl fullWidth>
@@ -390,13 +421,16 @@ const Events: React.FC<RouteComponentProps> = () => {
           </Paper>
           <Paper className={styles.paper}>
             <Typography variant="h5">Meldungen</Typography>
-            <Typography variant="subtitle1">Einzelne Meldungen können aus der Karte ausgeschlossen werden</Typography>
+            <Typography variant="subtitle1">
+              Einzelne Meldungen können aus der Karte ausgeschlossen werden
+            </Typography>
             <Table>
               <TableHead>
                 <TableRow>
                   <TableCell padding="checkbox">Sichtbar</TableCell>
                   <TableCell>Titel</TableCell>
-                  <TableCell>Gültigkeit</TableCell>
+                  <TableCell>Gültig von</TableCell>
+                  <TableCell>bis</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -417,9 +451,8 @@ const Events: React.FC<RouteComponentProps> = () => {
                       <TableCell scope="row" padding="none">
                         {event.headline}
                       </TableCell>
-                      <TableCell>
-                        {moment.unix(event.onset).format("HH:mm")} - {moment.unix(event.expires).format("HH:mm")}
-                      </TableCell>
+                      <TableCell>{formatDate(moment.unix(event.onset), moment(date))}</TableCell>
+                      <TableCell>{formatDate(moment.unix(event.expires), moment(date))}</TableCell>
                     </TableRow>
                   );
                 })}
@@ -474,7 +507,10 @@ const Events: React.FC<RouteComponentProps> = () => {
         onClose={handleEventNotFoundClose}
         autoHideDuration={6000}
       >
-        <SnackbarContent className={styles.error} message={<span>Meldung nicht mehr gültig!</span>} />
+        <SnackbarContent
+          className={styles.error}
+          message={<span>Meldung nicht mehr gültig!</span>}
+        />
       </Snackbar>
     </div>
   );
