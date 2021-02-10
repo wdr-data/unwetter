@@ -443,11 +443,11 @@ const Events: React.FC<RouteComponentProps> = () => {
                         {event.headline}
                       </TableCell>
                       <TableCell>
-                        {moment.unix(event.onset).date == moment().date
+                        {moment.unix(event.onset).date() == moment().date()
                           ? moment.unix(event.onset).format("HH:mm")
                           : moment.unix(event.onset).format("DD.MM. HH:mm")}{" "}
                         -{" "}
-                        {moment.unix(event.expires).date == moment().date
+                        {moment.unix(event.expires).date() == moment().date()
                           ? moment.unix(event.expires).format("HH:mm")
                           : moment.unix(event.expires).format("DD.MM. HH:mm")}
                       </TableCell>
