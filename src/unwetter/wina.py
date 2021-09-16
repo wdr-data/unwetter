@@ -33,6 +33,10 @@ def from_id(id):
     elif event["severity"] == "Extreme":
         breaking = True
 
+    # Set all to breaking if event is "Severe" or "Extreme"
+    if event["severity"] == "Extreme" or event["severity"] == "Severe":
+        breaking = True
+
     return wina_xml(sent, title, text, keywords, breaking)
 
 
