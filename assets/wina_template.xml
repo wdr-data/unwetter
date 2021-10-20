@@ -7,8 +7,8 @@
 <OM_FIELD FieldID = "5" FieldType = "1" FieldName = "Autor" IsEmpty = "no"><OM_STRING>Bot, Unwetter</OM_STRING></OM_FIELD>
 <OM_FIELD FieldID = "7" FieldType = "1" FieldName = "CompletionStatus" IsEmpty = "yes"><OM_STRING></OM_STRING></OM_FIELD>
 <OM_FIELD FieldID = "8" FieldType = "1" FieldName = "Titel" IsEmpty = "no"><OM_STRING>{title}</OM_STRING></OM_FIELD>
-<OM_FIELD FieldID = "9" FieldType = "1" FieldName = "Letzte Worte" IsEmpty = "no"><OM_STRING>Testmeldung bitte ignorieren. Hier steht der Text.</OM_STRING></OM_FIELD>
-<OM_FIELD FieldID = "10" FieldType = "1" FieldName = "First Words" IsEmpty = "no"><OM_STRING>Testmeldung bitte ignorieren. Hier steht...</OM_STRING></OM_FIELD>
+<OM_FIELD FieldID = "9" FieldType = "1" FieldName = "Letzte Worte" IsEmpty = "no"><OM_STRING></OM_STRING></OM_FIELD>
+<OM_FIELD FieldID = "10" FieldType = "1" FieldName = "First Words" IsEmpty = "no"><OM_STRING></OM_STRING></OM_FIELD>
 <OM_FIELD FieldID = "11" FieldType = "1" FieldName = "Stichworte" IsEmpty = "no"><OM_STRING>{keywords}</OM_STRING></OM_FIELD>
 <OM_FIELD FieldID = "13" FieldType = "1" FieldName = "Anchor" IsEmpty = "no"><OM_STRING>Bot, Unwetter</OM_STRING></OM_FIELD>
 <OM_FIELD FieldID = "14" FieldType = "1" FieldName = "Klartext" IsEmpty = "no"><OM_STRING>{text}</OM_STRING></OM_FIELD>
