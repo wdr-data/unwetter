@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no" ?>
 <!DOCTYPE OPENMEDIA SYSTEM "ann_objects.dtd"><OPENMEDIA><OM_SERVER>WINA</OM_SERVER>
 <OM_OBJECT SystemID = "1fc8e208-b05a-4e83-a6b9-1ada17fcb0b5" ObjectID = "0000000100027073" DocumentURN = "urn:openmedia:1fc8e208-b05a-4e83-a6b9-1ada17fcb0b5:0000000100027073" DirectoryID = "0000000100006d66" InternalType = "1" TemplateID = "fffffffa00003bb5" TemplateType = "2" TemplateName = "WINA Meldung">
-<OM_HEADER><OM_FIELD FieldID = "1" FieldType = "3" FieldName = "Erstellt" IsEmpty = "no"><OM_DATETIME>20180827T130446,000</OM_DATETIME></OM_FIELD>
+<OM_HEADER><OM_FIELD FieldID = "1" FieldType = "3" FieldName = "Erstellt" IsEmpty = "no"><OM_DATETIME>{sent}</OM_DATETIME></OM_FIELD>
 <OM_FIELD FieldID = "2" FieldType = "3" FieldName = "Stand" IsEmpty = "no"><OM_DATETIME>{sent}</OM_DATETIME></OM_FIELD>
 <OM_FIELD FieldID = "3" FieldType = "1" FieldName = "OwnerName" IsEmpty = "no"><OM_STRING>Bot, Unwetter</OM_STRING></OM_FIELD>
 <OM_FIELD FieldID = "5" FieldType = "1" FieldName = "Autor" IsEmpty = "no"><OM_STRING>Bot, Unwetter</OM_STRING></OM_FIELD>
@@ -22,7 +22,7 @@
 <OM_FIELD FieldID = "61" FieldType = "2" FieldName = "OnAirTrigger" IsEmpty = "yes"><OM_INT32></OM_INT32></OM_FIELD>
 <OM_FIELD FieldID = "62" FieldType = "2" FieldName = "OnAirStatus" IsEmpty = "yes"><OM_INT32></OM_INT32></OM_FIELD>
 <OM_FIELD FieldID = "84" FieldType = "2" FieldName = "AutomationStatus" IsEmpty = "yes"><OM_INT32></OM_INT32></OM_FIELD>
-<OM_FIELD FieldID = "86" FieldType = "1" FieldName = "Agentur" IsEmpty = "no"><OM_STRING>WINA</OM_STRING></OM_FIELD>
+<OM_FIELD FieldID = "86" FieldType = "1" FieldName = "Agentur" IsEmpty = "no"><OM_STRING>UWA</OM_STRING></OM_FIELD>
 <OM_FIELD FieldID = "100" FieldType = "2" FieldName = "Erstellt von" IsEmpty = "no"><OM_INT32>18408</OM_INT32></OM_FIELD>
 <OM_FIELD FieldID = "101" FieldType = "2" FieldName = "Break" IsEmpty = "yes"><OM_INT32></OM_INT32></OM_FIELD>
 <OM_FIELD FieldID = "128" FieldType = "3" FieldName = "AiredTime" IsEmpty = "yes"><OM_DATETIME></OM_DATETIME></OM_FIELD>
