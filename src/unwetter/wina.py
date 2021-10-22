@@ -8,7 +8,7 @@ from html import escape
 from datetime import datetime
 from uuid import uuid4
 
-from . import db, generate
+from . import db, generate, sentry
 
 with open("assets/wina_template.xml", "r") as fp:
     WINA_TEMPLATE = fp.read()
@@ -76,6 +76,36 @@ def upload_ids(ids):
     return upload(files)
 
 
+def _ftp_connect(login_info):
+    url, user, passw = login_info
+
+    context = ssl.create_default_context()
+    context.set_ciphers("ALL:@SECLEVEL=1")
+
+    ftps = FTP_TLS(
+        host=os.environ[url],
+        user=os.environ[user],
+        passwd=os.environ[passw],
+        context=context,
+    )
+
+    return ftps
+
+
+def _directory_exists(ftps, dir_name):
+    """
+    https://stackoverflow.com/a/10695959
+    """
+    filelist = []
+    ftps.retrlines("LIST", filelist.append)
+
+    for f in filelist:
+        if f.split()[-1] == dir_name and f.upper().startswith("D"):
+            return True
+
+    return False
+
+
 def upload(files):
     """
     Uploads a WINA-XML file to a provided server via explicit FTP with TLS Protocol.
@@ -88,25 +118,34 @@ def upload(files):
         ("NVS_FTP_URL_SECONDARY", "NVS_FTP_USER_SECONDARY", "NVS_FTP_PASS_SECONDARY"),
     ]
 
-    for url, user, passw in logins:
+    named_files = {f"uwa_{uuid4()}.xml": file for file in files}
 
-        try:
-            ftps = FTP_TLS(
-                host=os.environ[url],
-                user=os.environ[user],
-                passwd=os.environ[passw],
-                context=ssl.create_default_context(),
-            )
-        except KeyError:
-            print(
-                f"Environment variable {url}, {user}, {passw} for ftp connection not found"
-            )
+    for login_info in logins:
+
+        if any(var not in os.environ for var in login_info):
+            print("Missing environment variable for FTP login")
+            continue
+
+        # Retry 5 times
+        last_exception = None
+        for i in range(5):
+            try:
+                ftps = _ftp_connect(login_info)
+                break
+            except Exception as e:
+                last_exception = e
+                print(e)
+                print(f"[{i + 1}/5] Retrying FTP connection...")
+                continue
+        else:
+            print("Failed FTP connection")
+            sentry.sentry_sdk.capture_exception(last_exception)
             continue
 
         ftps.prot_p()
 
-        for file in files:
+        for name, file in named_files.items():
             file.seek(0)
-            print(ftps.storbinary(f"STOR uwa_{uuid4()}.xml", file))
+            print(ftps.storbinary(f"STOR {name}", file))
 
         print(ftps.quit())
