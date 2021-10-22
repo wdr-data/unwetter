@@ -88,19 +88,26 @@ def upload(files):
         ("NVS_FTP_URL_SECONDARY", "NVS_FTP_USER_SECONDARY", "NVS_FTP_PASS_SECONDARY"),
     ]
 
-    for url, user, passw in logins:
+    for login_info in logins:
 
-        try:
-            ftps = FTP_TLS(
-                host=os.environ[url],
-                user=os.environ[user],
-                passwd=os.environ[passw],
-                context=ssl.create_default_context(),
-            )
-        except KeyError:
-            print(
-                f"Environment variable {url}, {user}, {passw} for ftp connection not found"
-            )
+        if any(var not in os.environ for var in login_info):
+            print("Missing environment variable for FTP login")
+            continue
+
+        # Retry 5 times
+        last_exception = None
+        for i in range(5):
+            try:
+                ftps = _ftp_connect(login_info)
+                break
+            except Exception as e:
+                last_exception = e
+                print(e)
+                print(f"[{i + 1}/5] Retrying FTP connection...")
+                continue
+        else:
+            print("Failed FTP connection")
+            sentry.sentry_sdk.capture_exception(last_exception)
             continue
 
         ftps.prot_p()
