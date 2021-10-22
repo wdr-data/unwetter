@@ -8,7 +8,7 @@ from html import escape
 from datetime import datetime
 from uuid import uuid4
 
-from . import db, generate
+from . import db, generate, sentry
 
 with open("assets/wina_template.xml", "r") as fp:
     WINA_TEMPLATE = fp.read()
@@ -76,6 +76,36 @@ def upload_ids(ids):
     return upload(files)
 
 
+def _ftp_connect(login_info):
+    url, user, passw = login_info
+
+    context = ssl.create_default_context()
+    context.set_ciphers("ALL:@SECLEVEL=1")
+
+    ftps = FTP_TLS(
+        host=os.environ[url],
+        user=os.environ[user],
+        passwd=os.environ[passw],
+        context=context,
+    )
+
+    return ftps
+
+
+def _directory_exists(ftps, dir_name):
+    """
+    https://stackoverflow.com/a/10695959
+    """
+    filelist = []
+    ftps.retrlines("LIST", filelist.append)
+
+    for f in filelist:
+        if f.split()[-1] == dir_name and f.upper().startswith("D"):
+            return True
+
+    return False
+
+
 def upload(files):
     """
     Uploads a WINA-XML file to a provided server via explicit FTP with TLS Protocol.
@@ -87,6 +117,8 @@ def upload(files):
         ("NVS_FTP_URL", "NVS_FTP_USER", "NVS_FTP_PASS"),
         ("NVS_FTP_URL_SECONDARY", "NVS_FTP_USER_SECONDARY", "NVS_FTP_PASS_SECONDARY"),
     ]
+
+    named_files = {f"uwa_{uuid4()}.xml": file for file in files}
 
     for login_info in logins:
 
@@ -112,8 +144,8 @@ def upload(files):
 
         ftps.prot_p()
 
-        for file in files:
+        for name, file in named_files.items():
             file.seek(0)
-            print(ftps.storbinary(f"STOR uwa_{uuid4()}.xml", file))
+            print(ftps.storbinary(f"STOR {name}", file))
 
         print(ftps.quit())
