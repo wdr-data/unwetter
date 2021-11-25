@@ -131,6 +131,11 @@ def upload(files):
         for i in range(5):
             try:
                 ftps = _ftp_connect(login_info)
+                ftps.prot_p()
+
+                # Test connection
+                ftps.pwd()
+
                 break
             except Exception as e:
                 last_exception = e
@@ -142,10 +147,12 @@ def upload(files):
             sentry.sentry_sdk.capture_exception(last_exception)
             continue
 
-        ftps.prot_p()
-
         for name, file in named_files.items():
             file.seek(0)
-            print(ftps.storbinary(f"STOR {name}", file))
+            try:
+                print(ftps.storbinary(f"STOR {name}", file))
+            except Exception as e:
+                print(e)
+                sentry.sentry_sdk.capture_exception(e)
 
         print(ftps.quit())
