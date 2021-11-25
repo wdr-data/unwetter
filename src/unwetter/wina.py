@@ -131,7 +131,11 @@ def upload(files):
         for i in range(5):
             try:
                 ftps = _ftp_connect(login_info)
-                ftps.prot_p()
+
+                # Can't use this, causes
+                # ConnectionResetError: [Errno 104] Connection reset by peer
+                # when trying to list directory
+                # ftps.prot_p()
 
                 # Test connection
                 ftps.pwd()
