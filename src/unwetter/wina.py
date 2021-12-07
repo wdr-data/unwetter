@@ -135,7 +135,7 @@ def upload(files):
                 # Can't use this, causes
                 # ConnectionResetError: [Errno 104] Connection reset by peer
                 # when trying to list directory
-                # ftps.prot_p()
+                ftps.prot_p()
 
                 # Test connection
                 ftps.pwd()
@@ -151,7 +151,9 @@ def upload(files):
             sentry.sentry_sdk.capture_exception(last_exception)
             continue
 
+        print(f"Current directory: {ftps.pwd()}")
         for name, file in named_files.items():
+            print(f"Uploading {name}")
             file.seek(0)
             try:
                 print(ftps.storbinary(f"STOR {name}", file))
