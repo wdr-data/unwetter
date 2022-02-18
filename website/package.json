@@ -2,6 +2,9 @@
   "name": "website",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "15.x"
+  },
   "dependencies": {
     "@material-ui/core": "^4.0.1",
     "@material-ui/icons": "^4.0.1",
