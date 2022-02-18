@@ -210,7 +210,6 @@ def draw_event(event, image, draw, mode):
                     for lat, lng in poly
                 ]
                 exclude_mask_draw.polygon(projected, outline=None, fill="white")
-                print("drawing exclude poly:", projected)
 
             # Create copy of original
             original = image.copy()
