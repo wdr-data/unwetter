@@ -1,6 +1,4 @@
 from enum import Enum
-from functools import partial
-from math import tan, radians
 import re
 
 from colorutils import Color
@@ -8,7 +6,6 @@ import pyproj
 from shapely.geometry import MultiPolygon
 from shapely.ops import transform
 from PIL import Image, ImageDraw, ImageFont
-import yaml
 
 from .data.shapes import STATE_SHAPES
 from .config import STATES_FILTER
@@ -196,8 +193,28 @@ def generate_base_map(mode=Mode.SQUARE):
     return img
 
 
-def draw_event(event, draw, mode):
+def draw_event(event, image, draw, mode):
     for geo in event["geometry"]:
+
+        original = None
+        exclude_mask = None
+
+        if geo["exclude_polygons"]:
+            # Make mask from exclude_polygons
+            exclude_mask = Image.new("L", (image.width, image.height), "black")
+            exclude_mask_draw = ImageDraw.Draw(exclude_mask)
+
+            for poly in geo["exclude_polygons"]:
+                projected = [
+                    to_image_coords(*transformer.transform(lat, lng), mode)
+                    for lat, lng in poly
+                ]
+                exclude_mask_draw.polygon(projected, outline=None, fill="white")
+
+            # Create copy of original
+            original = image.copy()
+
+        # Draw event poly
         for poly in geo["polygons"]:
             projected = [
                 to_image_coords(*transformer.transform(lat, lng), mode)
@@ -207,12 +224,9 @@ def draw_event(event, draw, mode):
                 projected, outline=None, fill=COLORS["SEVERITIES"][event["severity"]]
             )
 
-        for poly in geo["exclude_polygons"]:
-            projected = [
-                to_image_coords(*transformer.transform(lat, lng), mode)
-                for lat, lng in poly
-            ]
-            draw.polygon(projected, outline=None, fill="rgba(0, 0, 0, 0)")
+        # Fill holes with original pixels if there are any
+        if geo["exclude_polygons"]:
+            image.paste(original, mask=exclude_mask)
 
 
 def draw_text(draw, title, title_size, subtitle, subtitle_size):
@@ -316,10 +330,10 @@ def generate_map(
     try:
         for event in disabled_events:
             event["severity"] = "Disabled"
-            draw_event(event, draw, mode)
+            draw_event(event, event_img, draw, mode)
 
         for event in sorted(events, key=severity_key):
-            draw_event(event, draw, mode)
+            draw_event(event, event_img, draw, mode)
 
         img.alpha_composite(resize(event_img, mode))
     except TypeError:

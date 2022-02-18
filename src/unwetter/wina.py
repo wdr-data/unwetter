@@ -132,9 +132,7 @@ def upload(files):
             try:
                 ftps = _ftp_connect(login_info)
 
-                # Can't use this, causes
-                # ConnectionResetError: [Errno 104] Connection reset by peer
-                # when trying to list directory
+                # Enable encryption of data channel
                 ftps.prot_p()
 
                 # Test connection

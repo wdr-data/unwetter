@@ -1,6 +1,9 @@
 {
   "name": "dummy",
   "version": "0.1.0",
+  "engines": {
+    "node": "15.x"
+  },
   "scripts": {
     "heroku-postbuild": "yarn --cwd website install --dev && yarn --cwd website build"
   },
