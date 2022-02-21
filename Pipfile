@@ -7,7 +7,7 @@ name = "pypi"
 requests = "*"
 xmltodict = "*"
 "iso8601" = "*"
-pymongo = "*"
+pymongo = "<4"
 feedgen = "*"
 flask = "*"
 gunicorn = "*"
@@ -23,6 +23,7 @@ unwetter = {editable = true,path = "."}
 sentry-sdk = "*"
 colorutils = "*"
 blinker = "*"
+flask-httpauth = "*"
 
 [dev-packages]
 pytest = "*"

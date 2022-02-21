@@ -7,6 +7,8 @@ from datetime import datetime, timezone
 import pytz
 from feedgen.feed import FeedGenerator
 from flask import Flask, Response, request, json, send_file, send_from_directory
+from flask_httpauth import HTTPBasicAuth
+from werkzeug.security import generate_password_hash, check_password_hash
 
 from unwetter import db, generate, wina as wina_gen, slack, map, sentry
 from unwetter.config import SEVERITY_FILTER, STATES_FILTER, URGENCY_FILTER
@@ -15,6 +17,18 @@ from unwetter.generate import urls
 
 sentry.init()
 app = Flask(__name__, static_folder="website/build")
+auth = HTTPBasicAuth()
+
+users = {
+    "wdr": generate_password_hash(os.environ.get("BASIC_AUTH_PASSWORD", "")),
+    "uwa": generate_password_hash(os.environ.get("BASIC_AUTH_PASSWORD", "")),
+}
+
+
+@auth.verify_password
+def verify_password(username, password):
+    if username in users and check_password_hash(users.get(username), password):
+        return username
 
 
 @app.route("/feed.rss")
@@ -67,6 +81,7 @@ def map_single(id):
 
 
 @app.route("/map")
+@auth.login_required
 def map_multi():
     ids = request.args.getlist("id")
     disabled_ids = request.args.getlist("disabled")
@@ -222,9 +237,14 @@ def api_v1_current_events():
 # Serve React App
 @app.route("/", defaults={"path": ""})
 @app.route("/<path:path>")
+@auth.login_required
 def serve(path):
     full_path = os.path.join(app.static_folder, path)
     if path != "" and os.path.exists(full_path):
         return send_from_directory(app.static_folder, path)
     else:
         return send_from_directory(app.static_folder, "index.html")
+
+
+if __name__ == "__main__":
+    app.run()
