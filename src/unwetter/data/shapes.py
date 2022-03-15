@@ -5,7 +5,7 @@ from shapely.geometry import shape, MultiPolygon
 
 from unwetter.dwd import state_for_cell_id
 
-with open("assets/shapes/map.json", "r") as fp:
+with open("assets/shapes/map.json", "r", encoding="utf-8") as fp:
     collection = json.load(fp)
 
 # One polygon or multi-polygon per district, sorted by state

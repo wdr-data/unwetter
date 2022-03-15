@@ -3,7 +3,7 @@
 import yaml
 
 
-with open("config/config.yml", "r") as fp:
+with open("config/config.yml", "r", encoding="utf-8") as fp:
     CONFIG = yaml.safe_load(fp.read())
 
 SEVERITY_FILTER = CONFIG["SEVERITY_FILTER"]

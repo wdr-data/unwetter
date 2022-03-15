@@ -2,7 +2,7 @@
 
 import yaml
 
-with open("config/regions.yml", "r") as fp:
+with open("config/regions.yml", "r", encoding="utf-8") as fp:
     REGIONS = {
         key: value
         for key, value in yaml.safe_load(fp.read()).items()

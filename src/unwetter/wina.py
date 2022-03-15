@@ -10,7 +10,7 @@ from uuid import uuid4
 
 from . import db, generate, sentry
 
-with open("assets/wina_template.xml", "r") as fp:
+with open("assets/wina_template.xml", "r", encoding="utf-8") as fp:
     WINA_TEMPLATE = fp.read()
 
 
