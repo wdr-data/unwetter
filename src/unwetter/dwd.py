@@ -279,7 +279,7 @@ def parse_xml(xml):
         try:
             name, warn_cell_id = district_from_commune(area)
         except KeyError:
-            # Some areas don't have a related district
+            print("Could not find district for commune {}".format(area["name"]))
             continue
 
         if warn_cell_id in found_districts:
