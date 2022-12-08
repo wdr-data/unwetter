@@ -10,7 +10,7 @@
 apscheduler==3.9.1
 backports.zoneinfo==0.2.1; python_version < '3.9'
 blinker==1.4
-certifi==2021.10.8
+certifi==2022.12.7
 charset-normalizer==2.0.12; python_version >= '3'
 click==8.0.4; python_version >= '3.6'
 colorutils==0.3.0
